@@ -43,3 +43,10 @@ If there are any improvements, questions or anything at all then please get in t
 * As a **user**, I want to be able to navigate and find a skin easily.
 * As a **user**, I want to be able to see an image of the skin.
 * As a **user**, I want to see if that skin is on the steam marketplace.
+
+### **Site Owners Goals**
+
+* To have a website which feels famillar to CSGO players.
+* To have a website which helps users find CSGO skins they're interested in.
+* To make a website where it is easy to add content and maintain content.
+
