@@ -20,3 +20,15 @@ If there are any improvements, questions or anything at all then please get in t
     * User Requirements and Expectations
         * Requirements
         * Expectations
+
+## User Experience
+---
+### **User Goals**
+
+* The website to be responsive on as many possible devices such as Laptops, Tablets, Mobile Phones and PCs.
+* I want to have a clear dashboard where the user can create, read, update and delete skins from the website.
+* I want to have a clear dashboard which shows skins that have been added, updated or deleted.
+* I would like to have the option to add multiple skins.
+* The website has to be easy to navigate and easy to update content.
+* To be CSGO themed.
+* To have the latest skins sh
