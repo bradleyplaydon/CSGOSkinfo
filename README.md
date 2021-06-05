@@ -32,3 +32,14 @@ If there are any improvements, questions or anything at all then please get in t
 * The website has to be easy to navigate and easy to update content.
 * To be CSGO themed.
 * I want to have the latest skins what rarity they're and how it looks.
+
+### **User Stories**
+
+* As a **user**, I would like to be able to register for the website so I can create, read, update and delete skins.
+* As a **user**, I want to be able to see my account information.
+* As a **user**, I want to be able to see what skins there are for different gun types.
+* As a **user**, I want to be able to search for skins.
+* As a **user**, I want to be able to see what rarity a skin is.
+* As a **user**, I want to be able to navigate and find a skin easily.
+* As a **user**, I want to be able to see an image of the skin.
+* As a **user**, I want to see if that skin is on the steam marketplace.
