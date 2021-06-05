@@ -31,4 +31,4 @@ If there are any improvements, questions or anything at all then please get in t
 * I would like to have the option to add multiple skins.
 * The website has to be easy to navigate and easy to update content.
 * To be CSGO themed.
-* To have the latest skins sh
+* I want to have the latest skins what rarity they're and how it looks.
