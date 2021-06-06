@@ -50,3 +50,11 @@ If there are any improvements, questions or anything at all then please get in t
 * To have a website which helps users find CSGO skins they're interested in.
 * To make a website where it is easy to add content and maintain content.
 
+### **User Requirements and Expectations**
+#### Requirements
+  * To be able to Add/Update/Remove/Delete Skins.
+  * Be responsive across different devices.
+  * To be able to contact and be connected.
+  * To be able to see the latest new skins.
+  * To be able to see the rarity of a skin.
+  * To be able to see an image of the skin.
