@@ -81,3 +81,6 @@ If there are any improvements, questions or anything at all then please get in t
 
 #### Fonts
   To decide which fonts I want to use I used [dafont](https://www.dafont.com/) to find a font which was similar to the kind of website I wanted something which had game aspects to it I have chose to use [Gameplay](https://www.dafont.com/gameplay.font) for titles, subtitles and links as for body text I chose [Game Over Cre](https://www.dafont.com/game-over-cre.font) as this is similar but also includes lowercase fonts.
+
+#### Structure
+  I have decided to use [Bootstrap](https://getbootstrap.com/) so that I can create a structured grid using the Boostrap flexbox column system. It also has useful features such as a card component and alerts.
