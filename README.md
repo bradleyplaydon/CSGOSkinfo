@@ -58,3 +58,10 @@ If there are any improvements, questions or anything at all then please get in t
   * To be able to see the latest new skins.
   * To be able to see the rarity of a skin.
   * To be able to see an image of the skin.
+#### Expectations
+  * It should be easy to navigate and find the skin you're looking for.
+  * To have a dashboard where all the necessary information is shown.
+  * It should be easy to add another skin.
+  * To be able to filter on rarity of skin.
+  * To be able to upvote or downvote a skin.
+  * To be able to login.
