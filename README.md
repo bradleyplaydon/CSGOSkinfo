@@ -20,7 +20,7 @@ If there are any improvements, questions or anything at all then please get in t
     * User Requirements and Expectations
         * Requirements
         * Expectations
-
+    * Design Choices
 ## User Experience
 ---
 ### **User Goals**
@@ -65,3 +65,7 @@ If there are any improvements, questions or anything at all then please get in t
   * To be able to filter on rarity of skin.
   * To be able to upvote or downvote a skin.
   * To be able to login.
+
+### Design Choices
+   I have used CSGO (Counter Strike Global Offensive) custom maps to come up with a colour scheme that creates a CSGO feel. For this website, I want to bring familiarity to CSGO users that it was CSGO themed one thing came to mind as a CSGO player myself this was a Orange and white themed website with dark accents for example a dark background navigation bars with white text with a orange with white boxes background for the body to create the CSGO feel. The reason for this is to bring familiarity as soon as you enter the website.
+   
