@@ -68,4 +68,13 @@ If there are any improvements, questions or anything at all then please get in t
 
 ### Design Choices
    I have used CSGO (Counter Strike Global Offensive) custom maps to come up with a colour scheme that creates a CSGO feel. For this website, I want to bring familiarity to CSGO users that it was CSGO themed one thing came to mind as a CSGO player myself this was a Orange and white themed website with dark accents for example a dark background navigation bars with white text with a orange with white boxes background for the body to create the CSGO feel. The reason for this is to bring familiarity as soon as you enter the website.
-   
+
+#### Colours
+  I have decided to use colours which bring familiarity from CSGO players but also capture attention of users which aren't familar to CSGO with dark backgrounds with dark accents as when I ran the background colour through [Coolors](https://coolors.co/) color picker to get information for colour blindess, contrast checker and more I discovered that the background colour **#ED7F00** I wanted to use to bring familiarity was not a poor choice for contrast therefore I will use **#212529** backgrounds within a **#ED7F00** background with **EEFFEE** for text this gives a super 14.82 rating within the contrast checker.
+
+  ![CSGO Skinfo Colour Scheme](/wireframes/CSGOSkinfo-colour-scheme.png "CSGO Skinfo Colours")
+
+  * **#ED7F00** with white boxes created with **FFFFFF**.
+  * **212529** secondary backgrounds that content sits inside.
+  * **EEFFEE** for text within secondary backgrounds.
+  * **FFAE51** for hovering over white links.
