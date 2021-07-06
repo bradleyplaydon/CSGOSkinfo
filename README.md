@@ -21,6 +21,7 @@ If there are any improvements, questions or anything at all then please get in t
         * Requirements
         * Expectations
     * Design Choices
+    * Wireframes & Flow diagrams
 ## User Experience
 ---
 ### **User Goals**
@@ -66,7 +67,7 @@ If there are any improvements, questions or anything at all then please get in t
   * To be able to upvote or downvote a skin.
   * To be able to login.
 
-### Design Choices
+### **Design Choices**
    I have used CSGO (Counter Strike Global Offensive) custom maps to come up with a colour scheme that creates a CSGO feel. For this website, I want to bring familiarity to CSGO users that it was CSGO themed one thing came to mind as a CSGO player myself this was a Orange and white themed website with dark accents for example a dark background navigation bars with white text with a orange with white boxes background for the body to create the CSGO feel. The reason for this is to bring familiarity as soon as you enter the website.
 
 #### Colours
@@ -84,3 +85,6 @@ If there are any improvements, questions or anything at all then please get in t
 
 #### Structure
   I have decided to use [Bootstrap](https://getbootstrap.com/) so that I can create a structured grid using the Boostrap flexbox column system. It also has useful features such as a card component and alerts.
+---
+### **Wireframes & Flow diagrams**
+  For building the Wireframes I have used [Balsamiq Wireframes](https://balsamiq.com/) as it allows for easy website Wireframes and easy to get across a general flow of the website.
