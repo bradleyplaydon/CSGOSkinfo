@@ -88,3 +88,16 @@ If there are any improvements, questions or anything at all then please get in t
 ---
 ### **Wireframes & Flow diagrams**
   For building the Wireframes I have used [Balsamiq Wireframes](https://balsamiq.com/) as it allows for easy website Wireframes and easy to get across a general flow of the website.
+
+  Here I will list a few of my wireframes however there are more within the wireframes directory inside this repository:
+
+  ### Home Wireframe Desktop/Tablet & Mobile
+  * [Home](wireframes/CSGOSkinfo-Home-Page.png)
+
+  ### Skin Collection Page Desktop/Tablet & Mobile
+  * [Pistols](wireframes/CSGOSkinfo-Pistols-Page.png)
+
+  ### Admin Dashboard Page Desktop/Tablet & Mobile
+  * [Dashboard](wireframes/CSGOSkinfo-Admin-Dashboard.png)
+
+  
