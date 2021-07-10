@@ -15,3 +15,11 @@
   font-family: 'gameovercre1';
   src: url('../fonts/gameovercre1.ttf');
 }
+
+:root {
+  --site-dark: #131517;
+  --site-orange: #ee7f00;
+  --body-text-color: #EEFFEE;
+  --orange-color-1: #fac491;
+  --body-font: gameovercre1;
+}
