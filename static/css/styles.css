@@ -23,3 +23,14 @@
   --orange-color-1: #fac491;
   --body-font: gameovercre1;
 }
+
+header, h1, h2, h3 {
+  font-family: Gameplay;
+}
+
+body, main {
+  font-family: var(--body-font);
+  background-image: linear-gradient(white 1px, #ffffff00 1px),linear-gradient(to right, white 1px, #ffffff00 1px);
+  background-color: var(--site-orange);
+  background-size: 20vh 20vh;
+}
