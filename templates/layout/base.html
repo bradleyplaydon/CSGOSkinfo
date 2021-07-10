@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="h-100">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% include 'layout/header-links.html' %}
+    <title>{{ page_title }}</title>
+</head>
+
+<body class="d-flex flex-column h-100">
+    {% include 'layout/nav.html' %}
+    <div class="container">
+    <div class="bg-dark p-3 mt-2 mb-2 d-inline-block">
+    {% block pagetitle %}
+    {% endblock %}
+    </div> 
+    {% block content %}
+    {% endblock %}
+    </div>
+    {% include 'layout/footer.html' %}
+    {% include 'layout/scripts.html' %}
+</body>
+
+</html>
