@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'Gameplay';
+  src: url('../fonts/Gameplay.eot');
+  src: url('../fonts/Gameplay.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Gameplay.woff2') format('woff2'),
+    url('../fonts/Gameplay.woff') format('woff'),
+    url('../fonts/Gameplay.ttf') format('truetype'),
+    url('../fonts/Gameplay.svg#Gameplay') format('svg');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'gameovercre1';
+  src: url('../fonts/gameovercre1.ttf');
+}
