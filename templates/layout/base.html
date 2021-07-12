@@ -12,13 +12,15 @@
 <body class="d-flex flex-column h-100">
     {% include 'layout/nav.html' %}
     <div class="container">
-    <div class="bg-dark p-3 mt-2 mb-2 d-inline-block">
-    {% block pagetitle %}
-    {% endblock %}
-    </div> 
+        <div class="bg-dark p-3 mt-2 mb-2 d-inline-block">
+            {% block pagetitle %}
+            {% endblock %}
+        </div> 
+    </div>
+
     {% block content %}
     {% endblock %}
-    </div>
+    
     {% include 'layout/footer.html' %}
     {% include 'layout/scripts.html' %}
 </body>
