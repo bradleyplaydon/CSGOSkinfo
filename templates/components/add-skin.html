@@ -1,0 +1,104 @@
+<!-- THIS IS FOR WEAPON SKINS I.E type=weapon -->
+<form id="skinForm" class="d-flex flex-wrap justify-content-center" method="post">
+    <label for="skin_name">Skin Name</label>
+    <input type="text" placeholder="Skin Name" name="skin_name" required>
+    <input type="text" placeholder="Skin Description" name="skin_description" required>
+    <select placeholder="Type" name="type" disabled>
+        <option value="weapon">Weapon</option>
+    </select>
+    <select placeholder="Weapon Type" name="weapon-type">
+      <option value="Pistol">Pistol</option>
+      <option value="Rifle">Rifle</option>
+      <option value="SMG">SMG</option>
+      <option value="Heavy">Heavy</option>
+      <option value="Knife">Knife</option>
+  </select>
+    <select placeholder="Weapon Name" name="wepaon-name">
+      <option value="AK-47">AK-47</option>
+      <option value="AUG">AUG</option>
+      <option value="CZ75">CZ75</option>
+      <option value="Desert-Eagle">Desert Eagle</option>
+      <option value="Dual-Berettas">AWP</option>
+      <option value="FAMAS">FAMAS</option>
+      <option value="Five-Seven">Five-Seven</option>
+      <option value="G3SG1">G3SG1</option>
+      <option value="Galil-AR">Galil AR</option>
+      <option value="Glock-18">Glock 18</option>
+      <option value="P2000">P2000</option>
+      <option value="P250">P250</option>
+      <option value="R8">R8 Revolver</option>
+      <option value="Tec-9">Tec-9</option>
+      <option value="USP-S">USP-S</option>
+      <option value="Mac-10">MAC-10</option>
+      <option value="MP5-SD">MP5-SD</option>
+      <option value="MP7">MP7</option>
+      <option value="MP9">MP9</option>
+      <option value="PP-Bizon">PP-Bizon</option>
+      <option value="P90">P90</option>
+      <option value="UMP-45">UMP-45</option>
+      <option value="MAG-7">MAG-7</option>
+      <option value="Nova">Nova</option>
+      <option value="Sawed-Off">Sawed-Off</option>
+      <option value="XM1014">XM1014</option>
+      <option value="PP-Bizon">PP-Bizon</option>
+      <option value="Galil-AR">Galil AR</option>
+      <option value="M4A1-S">M4A1-S</option>
+      <option value="M4A4">M4A4</option>
+      <option value="SCAR-20">SCAR 20</option>
+      <option value="SG-553">SG 553</option>
+      <option value="SSG-08">SSG 08</option>
+  </select>
+  <select name="knife-options" name="knife-options">
+    <option value="Nomad">Nomad Knife</option>
+    <option value="Skeleton">Skeleton Knife</option>
+    <option value="Survival">Survival Knife</option>
+    <option value="Paracord">Paracord Knife</option>
+    <option value="Classic">Classic Knife</option>
+    <option value="Bayonet">Bayonet</option>
+    <option value="Bowie">Bowie Knife</option>
+    <option value="Butterfly">Butterfly Knife</option>
+    <option value="Falchion">Falchion Knife</option>
+    <option value="Flip">Flip Knife</option>
+    <option value="Gut">Gut Knife</option>
+    <option value="Huntsman">Huntsman Knife</option>
+    <option value="Karambit">Karambit</option>
+    <option value="M9">M9 Bayonet</option>
+    <option value="Navaja">Navaja Knife</option>
+    <option value="Shadow">Shadow Daggers</option>
+    <option value="Stilleto">Stilleto Knife</option>
+    <option value="Talon">Talon Knife</option>
+    <option value="Ursus">Ursus Knife</option>
+  </select>
+    <select placeholder="Rarity" name="rarity" required>
+        <option value="Covert">Covert</option>
+        <option value="Classified">Classified</option>
+        <option value="Restricted">Restricted</option>
+        <option value="CoMil-Spec Gradevert">Mil-Spec Grade</option>
+        <option value="Industrial Grade">Industrial Grade</option>
+        <option value="Consumer Grade">Consumer Grade</option>
+    </select>
+    <label for="release-date" class="text-center">Skin Release Date</span>
+    <input type="date" id="start" name="release-date" value="2021-07-13" min="2013-08-13">
+    <input type="url" name="fnimage" placeholder="Factory New Image Url">
+    <input type="url" name="mwimage" placeholder="Minimal Wear Image Url">
+    <input type="url" name="ftimage" placeholder="Field-Tested Image Url">
+    <input type="url" name="wwimage" placeholder="Well Worn Image Url">
+    <input type="url" name="bsimage" placeholder="Battle Scarred Image Url">
+    <input type="radio" name="hasFactoryNew" id="hasFactoryNew">
+    <label for="hasFactoryNew">Factory New</label>
+    <input type="radio" name="hasMinimalWear" id="hasMinimalWear">
+    <label for="hasMinimalWear">Minimal Wear</label>
+    <input type="radio" name="hasFieldTested" id="hasFieldTested">
+    <label for="hasFieldTested">Field-Tested</label>
+    <input type="radio" name="hasWellWorn" id="hasWellWorn">
+    <label for="hasWellWorn">Well-Worn</label>
+    <input type="radio" name="hasBattleScarred" id="hasBattleScarred">
+    <label for="hasBattleScarred">Battle-Scarred</label>
+    <input class="form-check-input" type="checkbox" id="isKnife">
+    <label class="form-check-label" for="isKnife">Knife</label>
+    <input class="form-check-input" type="checkbox" id="hasStattrak">
+    <label class="form-check-label" for="hasStattrak">StatTrak</label>
+    <input class="form-check-input" type="checkbox" id="hasSouvenir">
+    <label class="form-check-label" for="hasSouvenir">Souvenir</label>
+    <button type="submit" class="btn btn-primary">Add Skin</button>
+</form>
