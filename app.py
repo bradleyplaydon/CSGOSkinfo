@@ -12,6 +12,7 @@ app = Flask(__name__)
 
 app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
@@ -56,6 +57,35 @@ def signup():
         return redirect(url_for("account", user=session["user"]))
 
     return render_template("pages/signup.html", login=False, page_title="Sign Up")
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        existing_user = mongo.db.users.find_one(
+            {"username": request.form.get("username").lower()})
+
+        if existing_user:
+            if check_password_hash(
+                existing_user["password"], request.form.get("password")):
+                    session["user"] = { "username": existing_user["username"],
+                                        "is_admin": existing_user["is_admin"] 
+                                      }
+
+                    flash("Welcome, {}".format(
+                        request.form.get("username")))
+                        
+                    return redirect(url_for(
+                            "account", username="test"))
+            else:
+                flash("Incorrect Username and/or Password")
+                return redirect(url_for("login"))
+        
+        else:
+            flash("Incorrect Username and/or Password")
+            return redirect(url_for("login"))
+
+    return render_template("pages/login.html", page_title="Login")
 
 @app.route("/account/<username>", methods=["POST", "GET"])
 def account(username):
