@@ -1,0 +1,32 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ page_title }}</title>
+    {% include 'layout/header-links.html' %}
+</head>
+<body>
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-2 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{{ url_for('index') }}">CSGO:Skinfo</a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+                <a class="nav-link px-3 text-white" href="{{ url_for('logout', username=session['user'])}}">Sign out<i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    {% include 'layout/scripts.html' %}
+</body>
+
+</html>
