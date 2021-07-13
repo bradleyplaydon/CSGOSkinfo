@@ -3,26 +3,28 @@
     <h2>{{ page_title }}</h2>
 {% endblock %}
 {% block content %}
-<form method="POST" class="bg-dark mt-4 p-5" id="contactForm">
-    <input type="text" class="form-control mb-3" placeholder="First Name" name="firstName" required>
-    <input type="text" class="form-control mb-3" placeholder="Last Name" name="lastName" required>
-    <input type="text" class="form-control mb-3" placeholder="Username" name="username" required>
-    <input type="email" class="form-control mb-3" placeholder="Email Address" name="email" required>
-    <input type="password" class="form-control mb-3" placeholder="Password" name="password" required>
-    <input type="password" class="form-control mb-3" placeholder="Confirm Password" name="confirmpassword" required>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <div class="error-message bg-danger p-4 text-center">
-        {% for message in messages %}
-        {% if message == "Password doesn't match" %}
-        <div class="alert alert-danger" role="alert">
-            A simple danger alert—check it out!
+<div class="container">
+    <form method="POST" class="bg-dark mt-4 p-5" id="contactForm">
+        <input type="text" class="form-control mb-3" placeholder="First Name" name="firstName" required>
+        <input type="text" class="form-control mb-3" placeholder="Last Name" name="lastName" required>
+        <input type="text" class="form-control mb-3" placeholder="Username" name="username" required>
+        <input type="email" class="form-control mb-3" placeholder="Email Address" name="email" required>
+        <input type="password" class="form-control mb-3" placeholder="Password" name="password" required>
+        <input type="password" class="form-control mb-3" placeholder="Confirm Password" name="confirmpassword" required>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="error-message bg-danger p-4 text-center">
+            {% for message in messages %}
+            {% if message == "Password doesn't match" %}
+            <div class="alert alert-danger" role="alert">
+                A simple danger alert—check it out!
+            </div>
+            {% endif %}
+            {% endfor %}
         </div>
         {% endif %}
-        {% endfor %}
-    </div>
-    {% endif %}
-    {% endwith %}
-    <button type="submit" name="button"  class="btn bg-white p-3 w-100" id="formSubmit">Submit</button>
-</form>
+        {% endwith %}
+        <button type="submit" name="button" class="btn bg-white p-3 w-100" id="formSubmit">Submit</button>
+    </form>
+</div>
 {% endblock %}

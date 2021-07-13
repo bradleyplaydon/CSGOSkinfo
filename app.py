@@ -20,7 +20,8 @@ skins = skinColl.find()
 
 @app.route('/')
 def index():
-    return render_template("pages/index.html", page_title="Latest Skins", skins=skins)
+    latest_skins = skinColl.find().sort(([("release_date", -1), ("rarity_precedence", -1)])).limit(17)
+    return render_template("pages/index.html", page_title="Latest Skins", skins=latest_skins)
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -49,12 +50,20 @@ def signup():
         }    
 
         mongo.db.users.insert_one(register)
-
-        session["user"] = request.form.get("username").lower()
+        user = mongo.db.users.find_one({"username": request.form.get("username").lower()})
+        session["user"] = user
         flash("Registration Succesful")
-        return redirect(url_for("account", username=session["user"]))
+        return redirect(url_for("account", user=session["user"]))
 
     return render_template("pages/signup.html", login=False, page_title="Sign Up")
+
+@app.route("/account/<username>", methods=["POST", "GET"])
+def account(username):
+    if session["user"]:
+        return render_template("pages/account.html", username=username)
+
+    return redirect(url_for("index"))
+
 
 @app.route('/add/skin', methods=["GET", "POST"])
 def add_skin():
