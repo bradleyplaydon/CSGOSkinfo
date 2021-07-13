@@ -64,12 +64,16 @@ def login():
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
-
+        skins_liked = list(map(str, existing_user["skins_liked"]))
+        skins_disliked = list(map(str, existing_user["skins_disliked"]))
+        
         if existing_user:
             if check_password_hash(
                 existing_user["password"], request.form.get("password")):
                     session["user"] = { "username": existing_user["username"],
-                                        "is_admin": existing_user["is_admin"] 
+                                        "is_admin": existing_user["is_admin"],
+                                        "skins_liked": skins_liked,
+                                        "skins_disliked": skins_disliked
                                       }
 
                     flash("Welcome, {}".format(
@@ -87,9 +91,17 @@ def login():
 
     return render_template("pages/login.html", page_title="Login")
 
+
+@app.route("/logout")
+def logout():
+    flash("You have been logged out.")
+    session.pop("user")
+    return redirect(url_for("login"))
+
+
 @app.route("/account/<username>", methods=["POST", "GET"])
 def account(username):
-    if session["user"]:
+    if session:
         return render_template("pages/account.html", username=username)
 
     return redirect(url_for("index"))
