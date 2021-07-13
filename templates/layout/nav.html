@@ -11,7 +11,7 @@
                 {% if session.user["is_admin"] %}
                 <li class="list-group p-3"><a href="#">Admin</a></li>
                 {% endif %}
-                <li class="list-group p-3"><a href="#">Log Out</a></li>
+                <li class="list-group p-3"><a href="{{ url_for('logout') }}">Log Out</a></li>
                 {% else %}
                 <li class="list-group p-3"><a href="{{ url_for('login') }}">Sign In</a></li>
                 {% endif %}
