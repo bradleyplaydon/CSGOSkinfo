@@ -57,3 +57,35 @@ nav>ul.list-group.list-group-horizontal.justify-content-center>li, #mobile-nav >
 #copyright {
   font-family: gameovercre1;
 }
+
+.contraband {
+  background: #e4ae39;
+}
+
+.covert {
+  background: #eb4b4b;
+}
+
+.classified {
+  background: #d32ce6;
+}
+
+.restricted {
+  background: #8847ff;
+}
+
+.mil-spec-grade {
+  background: #4b69ff;
+}
+
+.industrial-grade {
+  background: #5e98d9;
+}
+
+.consumer-grade {
+  background: #b0c3d9;
+}
+
+.extraordinary {
+  background: #eb4b4b;
+}
