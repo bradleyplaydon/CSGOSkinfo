@@ -6,9 +6,11 @@
             <ul class="list-group list-group-horizontal justify-content-center">
                 <li class="list-group p-3"><a href="#">About</a></li>
                 <li class="list-group p-3"><a href="#">Contact</a></li>
+                {% if session.user %}
                 <li class="list-group p-3"><a href="#">Account</a></li>
                 <li class="list-group p-3"><a href="#">Log Out</a></li>
                 <li class="list-group p-3"><a href="#">Admin</a></li>
+                {% endif %}
                 <li class="list-group p-3"><a href="#">Sign In</a></li>
             </ul>
         </div>
