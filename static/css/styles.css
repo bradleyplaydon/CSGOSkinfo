@@ -34,3 +34,26 @@ body, main {
   background-color: var(--site-orange);
   background-size: 20vh 20vh;
 }
+
+body,
+a,
+p,
+span {
+  color: var(--body-text-color);
+}
+
+a:hover {
+  color: #FFAE51 !important;
+}
+
+a.active {
+  color: var(--orange-color-1) !important;
+}
+
+nav>ul.list-group.list-group-horizontal.justify-content-center>li, #mobile-nav > ul > li {
+  background: var(--site-dark);
+}
+
+#copyright {
+  font-family: gameovercre1;
+}
