@@ -8,11 +8,43 @@
             <div class="row">
                 {% for skin in skins %}
                     {% set skinname = skin.name %}
-                    <div class="col-lg-3">
-                        <div class="card">
+                    <div class="col-lg-3 mb-2">
+                        <div class="card border bg-dark">
                             <a href="#">
-                                <img src="{{ skin.image_urls.factory_new }}" alt="">
+                                {% if skin.image_urls.factory_new is not none %}
+                                    <img src="{{ skin.image_urls.factory_new }}" 
+                                    class="card-img-top" alt="{{ skin.name }} image">
+                                {% else %}
+                                    <img src="{{ skin.image_urls.min_wear }}" 
+                                    class="card-img-top" alt="{{ skin.name }} image">
+                                {% endif %}
                             </a>
+                            <div class="card-body p-0">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item text-white border bg-dark">
+                                        {{ skin.name }}
+                                    </li>
+                                    <li class="list-group-item text-white bg-dark">
+                                        <p class="{{ skin.rarity | replace(' ', '-') | lower }} text-center p-2">{{ skin.rarity }}</p>
+                                    </li>
+                                    <li class="list-group-item text-white bg-dark">
+                                        <p>{{ skin.skin_description }}</p>
+                                    </li>
+                                </ul>
+
+                                {% if session.user %}
+                                  <div class="like-buttons text-center mb-3">
+                                      <button id="{{ skin._id }}" data-collection="skins" {{ 'already-liked=true' if skin._id in session.user.skins_liked }} class="like-btn btn btn-light fs-2 p-3" name="like-btn" type="submit">
+                                        <i class="fas fa-thumbs-up"></i>
+                                        <strong id="up_votes">{{ skin.up_votes }}</strong>
+                                      </button>
+                                      <button id="{{ skin._id }}" data-collection="skins" {{ 'disliked=true' if skin._id in session.user.skins_disliked }} class="dislike-btn btn btn-light fs-2 p-3" name="dislike-btn" type="submit">
+                                        <i class="fas fa-thumbs-down"></i>
+                                        <strong id="up_votes">{{ skin.down_votes }}</strong>
+                                      </button>
+                                  </div>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
