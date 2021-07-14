@@ -56,7 +56,7 @@ def signup():
         flash("Registration Succesful")
         return redirect(url_for("account", user=session["user"]))
 
-    return render_template("components/signup.html", login=False, page_title="Sign Up")
+    return render_template("components/auth.html", login=False, page_title="Sign Up")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -90,7 +90,7 @@ def login():
             flash("Incorrect Username and/or Password")
             return redirect(url_for("login"))
 
-    return render_template("components/login.html", page_title="Login")
+    return render_template("components/auth.html", login=True, page_title="Login")
 
 
 @app.route("/logout")

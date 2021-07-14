@@ -1,0 +1,24 @@
+{% extends "layout/base.html" %}
+{% block pagetitle %}
+    <h2>{{ page_title }}</h2>
+{% endblock %}
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+	    {% if messages %}
+            <div class="error-message bg-danger p-4 text-center">
+				{% for message in messages %}
+					<strong class="fs-4">{{ message }}</strong>
+				{% endfor %}
+            </div>
+		{% endif %}
+	{% endwith %}
+    <div class="container p-4 bg-dark">
+        {% if login %}
+            <p class="text-center">Not Registered? <a href="{{ url_for('signup') }}">Sign Up</a></p>
+            {% include 'components/login.html' %}
+        {% else %}
+            <p class="text-center">Already Registered? <a href="{{ url_for('login') }}">Login</a></p>
+            {% include 'components/signup.html' %}
+        {% endif %}
+    </div>
+{% endblock %}
