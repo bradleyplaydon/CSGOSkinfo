@@ -1,110 +1,196 @@
 {% extends 'layout/dashboard-base.html' %}
-{% block content  %}
-<form class="d-flex flex-wrap justify-content-center" method="post">
-    <input name="weaponskin" hidden>
-    <label for="skin_name">Skin Name</label>
-    <input type="text" placeholder="Skin Name" name="name" required>
-    <input type="text" placeholder="Skin Description" name="skin_description" required>
-    <select placeholder="Type" name="type" disabled>
-        <option value="weapon">Weapon</option>
-    </select>
-    <select placeholder="Weapon Type" name="weapon_type">
-      <option value="Pistol">Pistol</option>
-      <option value="Rifle">Rifle</option>
-      <option value="SMG">SMG</option>
-      <option value="Heavy">Heavy</option>
+{% block content %}
+<meta id="weapons" data-weapons="{{ weapons }}">
+<div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+  <div class="accordion-item bg-dark text-white">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse"
+        data-bs-target="#add-weapon" aria-expanded="true" aria-controls="add-weapon">
+        Add Weapon
+      </button>
+    </h2>
+    <div id="add-weapon" class="accordion-collapse collapse show" aria-labelledby="add-weapon" data-bs-parent="#add-weapon">
+      <div class="accordion-body">
+        <form class="d-flex flex-column flex-wrap justify-content-center mx-auto" method="post">
+          <label for="skin_name" class="label">Skin Name</label>
+          <input type="text" placeholder="Skin Name" class="form-control rounded-0 mb-3" name="skin_name" required>
+          <input type="text" placeholder="Skin Description" class="form-control rounded-0 mb-3" name="skin_description"
+            required>
+          <select placeholder="Type" class="form-control rounded-0 mb-3" name="type" disabled>
+            <option value="weapon">Weapon</option>
+          </select>
+          <select class="form-select rounded-0 mb-3" placeholder="Weapon Type" name="weapon_type">
+            {% for type in weaponTypes %}
+              {% if not type == "Knife" %}
+                <option value="{{ type }}">{{ type | capitalize }}</option>
+              {% endif %}
+            {% endfor %}
+          </select>
+          <select placeholder="Weapon Name" name="weapon_name">
+          </select>
+          <select placeholder="Rarity" class="form-select rounded-0 mb-3" name="rarity" required>
+            <option value="Covert">Covert</option>
+            <option value="Covert">Classified</option>
+            <option value="Covert">Restricted</option>
+            <option value="Covert">Mil-Spec Grade</option>
+            <option value="Covert">Industrial Grade</option>
+            <option value="Covert">Consumer Grade</option>
+          </select>
+          <label for="release-date">Skin Release Date (DD / MM / YYYY)</label>
+          <input type="date" id="release-date" name="release-date" value="2018-07-22" min="2013-01-01" max="2018-12-31">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Factory New
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Minimal Wear
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Field Tested
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Well Worn
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Battle Scarred
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="statorsouv" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+              StatTrak
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="statorsouv" id="flexRadioDefault2" checked>
+            <label class="form-check-label" for="flexRadioDefault2">
+              Souvenir
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary">Add Skin</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<form class="d-flex flex-column" method="post">
+  <input name="weaponskin" hidden>
+  <label for="skin_name">Skin Name</label>
+  <input type="text" placeholder="Skin Name" name="name" required>
+  <input type="text" placeholder="Skin Description" name="skin_description" required>
+  <select placeholder="Type" name="type" disabled>
+    <option value="weapon">Weapon</option>
   </select>
-    <select placeholder="Weapon Name" name="weapon_name">
-      <option value="AK-47">AK-47</option>
-      <option value="AUG">AUG</option>
-      <option value="CZ75">CZ75</option>
-      <option value="Desert-Eagle">Desert Eagle</option>
-      <option value="Dual-Berettas">AWP</option>
-      <option value="FAMAS">FAMAS</option>
-      <option value="Five-Seven">Five-Seven</option>
-      <option value="G3SG1">G3SG1</option>
-      <option value="Galil-AR">Galil AR</option>
-      <option value="Glock-18">Glock 18</option>
-      <option value="P2000">P2000</option>
-      <option value="P250">P250</option>
-      <option value="R8">R8 Revolver</option>
-      <option value="Tec-9">Tec-9</option>
-      <option value="USP-S">USP-S</option>
-      <option value="Mac-10">MAC-10</option>
-      <option value="MP5-SD">MP5-SD</option>
-      <option value="MP7">MP7</option>
-      <option value="MP9">MP9</option>
-      <option value="PP-Bizon">PP-Bizon</option>
-      <option value="P90">P90</option>
-      <option value="UMP-45">UMP-45</option>
-      <option value="MAG-7">MAG-7</option>
-      <option value="Nova">Nova</option>
-      <option value="Sawed-Off">Sawed-Off</option>
-      <option value="XM1014">XM1014</option>
-      <option value="PP-Bizon">PP-Bizon</option>
-      <option value="Galil-AR">Galil AR</option>
-      <option value="M4A1-S">M4A1-S</option>
-      <option value="M4A4">M4A4</option>
-      <option value="SCAR-20">SCAR 20</option>
-      <option value="SG-553">SG 553</option>
-      <option value="SSG-08">SSG 08</option>
+  <select placeholder="Weapon Type" name="weapon_type">
+    <option value="Pistol">Pistol</option>
+    <option value="Rifle">Rifle</option>
+    <option value="SMG">SMG</option>
+    <option value="Heavy">Heavy</option>
   </select>
-    <select placeholder="Rarity" name="rarity" required>
-        <option value="Covert">Covert</option>
-        <option value="Classified">Classified</option>
-        <option value="Restricted">Restricted</option>
-        <option value="CoMil-Spec Gradevert">Mil-Spec Grade</option>
-        <option value="Industrial Grade">Industrial Grade</option>
-        <option value="Consumer Grade">Consumer Grade</option>
-    </select>
-    <div class="input-wrapper">
-      <label for="release-date" class="text-center">Skin Release Date</span>
+  <select placeholder="Weapon Name" name="weapon_name">
+    <option value="AK-47">AK-47</option>
+    <option value="AUG">AUG</option>
+    <option value="CZ75">CZ75</option>
+    <option value="Desert-Eagle">Desert Eagle</option>
+    <option value="Dual-Berettas">AWP</option>
+    <option value="FAMAS">FAMAS</option>
+    <option value="Five-Seven">Five-Seven</option>
+    <option value="G3SG1">G3SG1</option>
+    <option value="Galil-AR">Galil AR</option>
+    <option value="Glock-18">Glock 18</option>
+    <option value="P2000">P2000</option>
+    <option value="P250">P250</option>
+    <option value="R8">R8 Revolver</option>
+    <option value="Tec-9">Tec-9</option>
+    <option value="USP-S">USP-S</option>
+    <option value="Mac-10">MAC-10</option>
+    <option value="MP5-SD">MP5-SD</option>
+    <option value="MP7">MP7</option>
+    <option value="MP9">MP9</option>
+    <option value="PP-Bizon">PP-Bizon</option>
+    <option value="P90">P90</option>
+    <option value="UMP-45">UMP-45</option>
+    <option value="MAG-7">MAG-7</option>
+    <option value="Nova">Nova</option>
+    <option value="Sawed-Off">Sawed-Off</option>
+    <option value="XM1014">XM1014</option>
+    <option value="PP-Bizon">PP-Bizon</option>
+    <option value="Galil-AR">Galil AR</option>
+    <option value="M4A1-S">M4A1-S</option>
+    <option value="M4A4">M4A4</option>
+    <option value="SCAR-20">SCAR 20</option>
+    <option value="SG-553">SG 553</option>
+    <option value="SSG-08">SSG 08</option>
+  </select>
+  <select placeholder="Rarity" name="rarity" required>
+    <option value="Covert">Covert</option>
+    <option value="Classified">Classified</option>
+    <option value="Restricted">Restricted</option>
+    <option value="CoMil-Spec Gradevert">Mil-Spec Grade</option>
+    <option value="Industrial Grade">Industrial Grade</option>
+    <option value="Consumer Grade">Consumer Grade</option>
+  </select>
+  <div class="input-wrapper">
+    <label for="release-date" class="text-center">Skin Release Date</span>
       <input type="date" id="start" name="release-date" value="2021-07-13" min="2013-08-13">
-    </div>
-    <div class="input-wrapper">
-      <input type="url" name="fnimage" placeholder="Factory New Image Url">
+  </div>
+  <div class="input-wrapper">
+    <input type="url" name="fnimage" placeholder="Factory New Image Url">
 
-    </div>
-    <div class="input-wrapper">
-      <input type="url" name="mwimage" placeholder="Minimal Wear Image Url">
+  </div>
+  <div class="input-wrapper">
+    <input type="url" name="mwimage" placeholder="Minimal Wear Image Url">
 
-    </div>
-    <div class="input-wrapper">
-      <input type="url" name="ftimage" placeholder="Field-Tested Image Url">
+  </div>
+  <div class="input-wrapper">
+    <input type="url" name="ftimage" placeholder="Field-Tested Image Url">
 
-    </div>
-    <div class="input-wrapper">
+  </div>
+  <div class="input-wrapper">
     <input type="url" name="wwimage" placeholder="Well Worn Image Url">
 
-    </div>
-    <div class="input-wrapper">
+  </div>
+  <div class="input-wrapper">
     <input type="url" name="bsimage" placeholder="Battle Scarred Image Url">
 
-    </div>
-    <div class="input-wrapper">
-      <input type="checkbox" name="hasFactoryNew" id="hasFactoryNew">
+  </div>
+  <div class="input-wrapper">
+    <input type="checkbox" name="hasFactoryNew" id="hasFactoryNew">
     <label for="hasFactoryNew">Factory New</label>
-    </div>
-    <div class="input-wrapper">
-      <input type="checkbox" name="hasMinimalWear" id="hasMinimalWear">
+  </div>
+  <div class="input-wrapper">
+    <input type="checkbox" name="hasMinimalWear" id="hasMinimalWear">
     <label for="hasMinimalWear">Minimal Wear</label>
-    </div>
-    <div class="input-wrapper"></div>
-    
-    
-    <input type="checkbox" name="hasFieldTested" id="hasFieldTested">
-    <label for="hasFieldTested">Field-Tested</label>
-    <input type="checkbox" name="hasWellWorn" id="hasWellWorn">
-    <label for="hasWellWorn">Well-Worn</label>
-    <input type="checkbox" name="hasBattleScarred" id="hasBattleScarred">
-    <label for="hasBattleScarred">Battle-Scarred</label>
-    <input class="form-check-input" type="checkbox" id="isKnife">
-    <label class="form-check-label" for="isKnife">Knife</label>
-    <input class="form-check-input" type="radio" id="hasStattrak" name="statorsouv">
-    <label class="form-check-label" for="hasStattrak">StatTrak</label>
-    <input class="form-check-input" type="radio" id="hasSouvenir" name="statorsouv">
-    <label class="form-check-label" for="hasSouvenir">Souvenir</label>
-    <button type="submit" class="btn btn-primary">Add Skin</button>
+  </div>
+  <div class="input-wrapper"></div>
+
+
+  <input type="checkbox" name="hasFieldTested" id="hasFieldTested">
+  <label for="hasFieldTested">Field-Tested</label>
+  <input type="checkbox" name="hasWellWorn" id="hasWellWorn">
+  <label for="hasWellWorn">Well-Worn</label>
+  <input type="checkbox" name="hasBattleScarred" id="hasBattleScarred">
+  <label for="hasBattleScarred">Battle-Scarred</label>
+  <input class="form-check-input" type="checkbox" id="isKnife">
+  <label class="form-check-label" for="isKnife">Knife</label>
+  <input class="form-check-input" type="radio" id="hasStattrak" name="statorsouv">
+  <label class="form-check-label" for="hasStattrak">StatTrak</label>
+  <input class="form-check-input" type="radio" id="hasSouvenir" name="statorsouv">
+  <label class="form-check-label" for="hasSouvenir">Souvenir</label>
+  <button type="submit" class="btn btn-primary">Add Skin</button>
 </form>
   
 {% endblock %}

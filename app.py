@@ -119,10 +119,20 @@ def admin():
 @app.route('/add/skin', methods=["GET", "POST"])
 def add_skin():
     if session and session["user"]["is_admin"]:
+        weaponTypes = skinColl.distinct('weapon_type')
+        weapons = {
+            "pistols": skinColl.distinct("weapon_name", {"weapon_type": "Pistol" }),
+            "rifles": skinColl.distinct("weapon_name", {"weapon_type": "Rifle" }),
+            "heavies": skinColl.distinct("weapon_name", {"weapon_type": "Heavy" }),
+            "smgs": skinColl.distinct("weapon_name", {"weapon_type": "SMG" }),
+            "shotguns": skinColl.distinct("weapon_name", {"weapon_type": "Shotgun" })
+        }
+
+        weaponRarities = skinColl.distinct('rarity')
         if request.method == "POST":
             if "weaponskin" in request.form:
                 skinColl.insert_one(request.form.to_dict())
-        return render_template("components/add-skin.html", page_title="Latest Skins")
+        return render_template("components/add-skin.html", page_title="Latest Skins", weaponTypes=weaponTypes, weapons=weapons, weaponRarities=weaponRarities)
     return render_template("error-pages/404.html")
 
 
