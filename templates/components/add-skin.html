@@ -1,20 +1,20 @@
-<!-- THIS IS FOR WEAPON SKINS I.E type=weapon -->
+{% extends 'layout/dashboard-base.html' %}
+{% block content  %}
 <form class="d-flex flex-wrap justify-content-center" method="post">
     <input name="weaponskin" hidden>
     <label for="skin_name">Skin Name</label>
-    <input type="text" placeholder="Skin Name" name="skin_name" required>
+    <input type="text" placeholder="Skin Name" name="name" required>
     <input type="text" placeholder="Skin Description" name="skin_description" required>
     <select placeholder="Type" name="type" disabled>
         <option value="weapon">Weapon</option>
     </select>
-    <select placeholder="Weapon Type" name="weapon-type">
+    <select placeholder="Weapon Type" name="weapon_type">
       <option value="Pistol">Pistol</option>
       <option value="Rifle">Rifle</option>
       <option value="SMG">SMG</option>
       <option value="Heavy">Heavy</option>
-      <option value="Knife">Knife</option>
   </select>
-    <select placeholder="Weapon Name" name="wepaon-name">
+    <select placeholder="Weapon Name" name="weapon_name">
       <option value="AK-47">AK-47</option>
       <option value="AUG">AUG</option>
       <option value="CZ75">CZ75</option>
@@ -48,27 +48,6 @@
       <option value="SCAR-20">SCAR 20</option>
       <option value="SG-553">SG 553</option>
       <option value="SSG-08">SSG 08</option>
-  </select>
-  <select name="knife-options" name="knife-options">
-    <option value="Nomad">Nomad Knife</option>
-    <option value="Skeleton">Skeleton Knife</option>
-    <option value="Survival">Survival Knife</option>
-    <option value="Paracord">Paracord Knife</option>
-    <option value="Classic">Classic Knife</option>
-    <option value="Bayonet">Bayonet</option>
-    <option value="Bowie">Bowie Knife</option>
-    <option value="Butterfly">Butterfly Knife</option>
-    <option value="Falchion">Falchion Knife</option>
-    <option value="Flip">Flip Knife</option>
-    <option value="Gut">Gut Knife</option>
-    <option value="Huntsman">Huntsman Knife</option>
-    <option value="Karambit">Karambit</option>
-    <option value="M9">M9 Bayonet</option>
-    <option value="Navaja">Navaja Knife</option>
-    <option value="Shadow">Shadow Daggers</option>
-    <option value="Stilleto">Stilleto Knife</option>
-    <option value="Talon">Talon Knife</option>
-    <option value="Ursus">Ursus Knife</option>
   </select>
     <select placeholder="Rarity" name="rarity" required>
         <option value="Covert">Covert</option>
@@ -127,3 +106,5 @@
     <label class="form-check-label" for="hasSouvenir">Souvenir</label>
     <button type="submit" class="btn btn-primary">Add Skin</button>
 </form>
+  
+{% endblock %}

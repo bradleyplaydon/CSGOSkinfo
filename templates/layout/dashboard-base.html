@@ -23,8 +23,10 @@
     <div class="container-fluid">
         <div class="row">
             {% include 'layout/dashboard-nav.html' %}
+            <div class="col-lg-9 col-md-9 bg-dark mx-sm-auto mt-5">
             {% block content %}
             {% endblock %}
+            </div>
         </div>
     </div>
     {% include 'layout/scripts.html' %}
