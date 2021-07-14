@@ -1,0 +1,44 @@
+{% extends 'layout/dashboard-base.html' %}
+{% block content %}
+            <div class="col-lg-9 col-md-9 bg-dark mx-sm-auto mt-5">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h2 class="h2">{{ session.user.username }} Dashboard</h2>
+                </div>
+                <div class="row justify-content-center text-center mt-5 mb-5">
+                    <div class="col-lg-3">
+                        <p class="h2">Weapon Skins Listed</h2>
+                        <h2 class="mt-4">2</h2>
+                    </div>
+                    <div class="col-lg-3">
+                        <p class="h2">Total Users</h2>
+                        <h2 class="mt-4">2</h2>
+                    </div>
+                    <div class="col-lg-3">
+                        <p class="h2">Total Admins</h2>
+                        <h2 class="mt-4">2</h2>
+                    </div>
+                </div>
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h2 class="h2">Skins</h1>
+                </div>
+                <div class="row justify-content-center text-center mt-5 mb-5">
+                    <div class="col-lg-3">
+                        <p class="h2">Total Skins Liked</h2>
+                        <h2 class="mt-4">2</h2>
+                    </div>
+                    <div class="col-lg-3">
+                        <p class="h2">Total Skins Disiked</h2>
+                        <h2 class="mt-4">2</h2>
+                    </div>
+                    <div class="col-lg-3">
+                        <p class="h2">Most Popular Skin</h2>
+                        <div class="most-popular">
+                            test
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+           
