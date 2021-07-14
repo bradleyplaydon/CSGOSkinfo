@@ -64,9 +64,10 @@ def login():
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
+
         skins_liked = list(map(str, existing_user["skins_liked"]))
         skins_disliked = list(map(str, existing_user["skins_disliked"]))
-        
+       
         if existing_user:
             if check_password_hash(
                 existing_user["password"], request.form.get("password")):
@@ -105,6 +106,14 @@ def account(username):
         return render_template("pages/account.html", username=username)
 
     return redirect(url_for("index"))
+
+
+@app.route("/admin")
+def admin():
+    if session and session["user"]["is_admin"]:
+        return render_template("pages/dashboard.html", page_title="Admin Dashboard")
+       
+    return render_template("error-pages/404.html", page_title="404 Page Not Found")
 
 
 @app.route('/add/skin', methods=["GET", "POST"])

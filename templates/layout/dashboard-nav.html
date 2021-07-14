@@ -1,0 +1,119 @@
+<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+    <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">
+                    <i class="fas fa-users-cog"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ url_for('index') }}">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+            </li>
+            <h6
+                class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 pb-2 border-bottom">
+                Pages
+                <i class="fas fa-link"></i>
+            </h6>
+            <ul class="nav flex-column mb-2">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Pistols
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Rifles
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Smgs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Shotguns
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Heavy
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Knives
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Gloves
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Cases
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Stickers
+                    </a>
+                </li>
+            </ul>
+            <h6
+                class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 pb-2 text-white border-bottom">
+                Skins
+                <i class="fas fa-database"></i>
+            </h6>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('add_skin') }}">
+                    <i class="far fa-plus-square"></i>
+                    Create A Skin
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#">
+                    <i class="fas fa-pencil-alt"></i>
+                    Update A Skin
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#">
+                    <i class="far fa-trash-alt"></i>
+                    Delete A Skin
+                </a>
+            </li>
+        </ul>
+
+        <h6
+            class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 pb-2 text-white border-bottom">
+            Users
+            <i class="fas fa-user-alt"></i>
+        </h6>
+        <ul class="nav flex-column mb-2">
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#">
+                    <i class="far fa-plus-square"></i>
+                    Create A User
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#">
+                    <i class="fas fa-pencil-alt"></i>
+                    Update User Details
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" href="#">
+                    <i class="far fa-trash-alt"></i>
+                    Delete A User
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
