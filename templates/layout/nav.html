@@ -9,7 +9,7 @@
                 {% if session.user %}
                 <li class="list-group p-3"><a href="{{ url_for('account', username=session['user'].username) }}">Account</a></li>
                 {% if session.user["is_admin"] %}
-                <li class="list-group p-3"><a href="#">Admin</a></li>
+                <li class="list-group p-3"><a href="{{ url_for('admin', username=session['user'].username) }}">Admin</a></li>
                 {% endif %}
                 <li class="list-group p-3"><a href="{{ url_for('logout') }}">Log Out</a></li>
                 {% else %}
