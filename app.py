@@ -118,9 +118,10 @@ def admin():
 
 @app.route('/add/skin', methods=["GET", "POST"])
 def add_skin():
-
     if session and session["user"]["is_admin"]:
-        skinColl.insert_one(request.form.to_dict())
+        if request.method == "POST":
+            if "weaponskin" in request.form:
+                skinColl.insert_one(request.form.to_dict())
         return render_template("components/add-skin.html", page_title="Latest Skins")
     return render_template("error-pages/404.html")
 

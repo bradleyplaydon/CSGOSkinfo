@@ -1,5 +1,6 @@
 <!-- THIS IS FOR WEAPON SKINS I.E type=weapon -->
-<form id="skinForm" class="d-flex flex-wrap justify-content-center" method="post">
+<form class="d-flex flex-wrap justify-content-center" method="post">
+    <input name="weaponskin" hidden>
     <label for="skin_name">Skin Name</label>
     <input type="text" placeholder="Skin Name" name="skin_name" required>
     <input type="text" placeholder="Skin Description" name="skin_description" required>
@@ -77,28 +78,52 @@
         <option value="Industrial Grade">Industrial Grade</option>
         <option value="Consumer Grade">Consumer Grade</option>
     </select>
-    <label for="release-date" class="text-center">Skin Release Date</span>
-    <input type="date" id="start" name="release-date" value="2021-07-13" min="2013-08-13">
-    <input type="url" name="fnimage" placeholder="Factory New Image Url">
-    <input type="url" name="mwimage" placeholder="Minimal Wear Image Url">
-    <input type="url" name="ftimage" placeholder="Field-Tested Image Url">
+    <div class="input-wrapper">
+      <label for="release-date" class="text-center">Skin Release Date</span>
+      <input type="date" id="start" name="release-date" value="2021-07-13" min="2013-08-13">
+    </div>
+    <div class="input-wrapper">
+      <input type="url" name="fnimage" placeholder="Factory New Image Url">
+
+    </div>
+    <div class="input-wrapper">
+      <input type="url" name="mwimage" placeholder="Minimal Wear Image Url">
+
+    </div>
+    <div class="input-wrapper">
+      <input type="url" name="ftimage" placeholder="Field-Tested Image Url">
+
+    </div>
+    <div class="input-wrapper">
     <input type="url" name="wwimage" placeholder="Well Worn Image Url">
+
+    </div>
+    <div class="input-wrapper">
     <input type="url" name="bsimage" placeholder="Battle Scarred Image Url">
-    <input type="radio" name="hasFactoryNew" id="hasFactoryNew">
+
+    </div>
+    <div class="input-wrapper">
+      <input type="checkbox" name="hasFactoryNew" id="hasFactoryNew">
     <label for="hasFactoryNew">Factory New</label>
-    <input type="radio" name="hasMinimalWear" id="hasMinimalWear">
+    </div>
+    <div class="input-wrapper">
+      <input type="checkbox" name="hasMinimalWear" id="hasMinimalWear">
     <label for="hasMinimalWear">Minimal Wear</label>
-    <input type="radio" name="hasFieldTested" id="hasFieldTested">
+    </div>
+    <div class="input-wrapper"></div>
+    
+    
+    <input type="checkbox" name="hasFieldTested" id="hasFieldTested">
     <label for="hasFieldTested">Field-Tested</label>
-    <input type="radio" name="hasWellWorn" id="hasWellWorn">
+    <input type="checkbox" name="hasWellWorn" id="hasWellWorn">
     <label for="hasWellWorn">Well-Worn</label>
-    <input type="radio" name="hasBattleScarred" id="hasBattleScarred">
+    <input type="checkbox" name="hasBattleScarred" id="hasBattleScarred">
     <label for="hasBattleScarred">Battle-Scarred</label>
     <input class="form-check-input" type="checkbox" id="isKnife">
     <label class="form-check-label" for="isKnife">Knife</label>
-    <input class="form-check-input" type="checkbox" id="hasStattrak">
+    <input class="form-check-input" type="radio" id="hasStattrak" name="statorsouv">
     <label class="form-check-label" for="hasStattrak">StatTrak</label>
-    <input class="form-check-input" type="checkbox" id="hasSouvenir">
+    <input class="form-check-input" type="radio" id="hasSouvenir" name="statorsouv">
     <label class="form-check-label" for="hasSouvenir">Souvenir</label>
     <button type="submit" class="btn btn-primary">Add Skin</button>
 </form>
