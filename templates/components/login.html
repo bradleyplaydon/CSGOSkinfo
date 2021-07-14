@@ -1,8 +1,5 @@
-{% extends 'layout/base.html' %}
-{% block content %}
 <form method="POST" class="bg-dark col-9 mx-auto" id="contactForm">
     <input type="text" minlength="5" maxlength="30" class="form-control mb-4 rounded-0" pattern="^[a-zA-Z0-9]{5,15}$" placeholder="Username" name="username" required>
     <input type="password" class="form-control mb-4 rounded-0" placeholder="Password" name="password" required>
     <button type="submit" name="button" class="btn bg-white p-2 text-center rounded-0" id="formSubmit">Log In</button>
 </form>
-{% endblock %}

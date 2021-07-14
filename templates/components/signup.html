@@ -1,8 +1,3 @@
-{% extends 'layout/base.html' %}
-{% block pagetitle %}
-    <h2>{{ page_title }}</h2>
-{% endblock %}
-{% block content %}
 <div class="container">
     <form method="POST" class="bg-dark mt-4 p-5" id="contactForm">
         <input type="text" class="form-control mb-3" placeholder="First Name" name="firstName" required>
@@ -27,4 +22,3 @@
         <button type="submit" name="button" class="btn bg-white p-3 w-100" id="formSubmit">Submit</button>
     </form>
 </div>
-{% endblock %}
