@@ -118,9 +118,10 @@ def admin():
 
 @app.route('/add/skin', methods=["GET", "POST"])
 def add_skin():
-    skinColl.insert_one(request.form.to_dict())
-    return render_template("components/add-skin.html", page_title="Latest Skins")
-
+    if session and session["user"]["is_admin"]:
+        skinColl.insert_one(request.form.to_dict())
+        return render_template("components/add-skin.html", page_title="Latest Skins")
+    return render_template("pages/404.html")
 if __name__ == '__main__':
     app.run(
         host=os.environ.get("IP", "0.0.0.0"),
