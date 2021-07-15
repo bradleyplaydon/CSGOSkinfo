@@ -119,7 +119,8 @@ def admin():
         skinDownVotes = skinColl.find({ "down_votes": { "$gt": 0 } })
         totSkinUpVotes = 0
         totSkinDownVotes = 0
-
+        highestLikes = skinColl.find_one(sort=[("up_votes", -1)])["up_votes"]
+        mostLikedSkin = skinColl.find({"up_votes": highestLikes})
         for skin in skinUpVotes:
             totSkinUpVotes =  totSkinUpVotes + skin["up_votes"]
 
@@ -127,7 +128,7 @@ def admin():
             totSkinDownVotes =  totSkinDownVotes + skin["down_votes"]
         
         return render_template("pages/dashboard.html", page_title="Admin Dashboard", 
-        totalUsers=totalUsers, totalSkins=totalSkins, totalAdmins=totalAdmins, skinUpVotes=totSkinUpVotes, skinDownVotes=totSkinDownVotes)
+        totalUsers=totalUsers, totalSkins=totalSkins, totalAdmins=totalAdmins, skinUpVotes=totSkinUpVotes, skinDownVotes=totSkinDownVotes, mostLikedSkin=mostLikedSkin)
        
     return render_template("error-pages/404.html", page_title="404 Page Not Found")
 
