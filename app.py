@@ -138,6 +138,40 @@ def add_skin():
     return render_template("error-pages/404.html")
 
 
+@app.route("/pistols")
+def pistols():
+    return render_template("pages/pistols.html")
+
+
+@app.route("/rifles")
+def rifles():
+    return render_template("pages/rifles.html")
+
+
+@app.route("/sniper-rifles")
+def sniper_rifles():
+    return render_template("pages/sniper-rifles.html")
+
+
+@app.route("/smgs")
+def smgs():
+    return render_template("pages/smgs.html")
+
+
+@app.route("/shotguns")
+def shotguns():
+    return render_template("pages/shotguns.html")
+
+
+@app.route("/heavies")
+def heavies():
+    return render_template("pages/heavies.html")
+
+
+@app.route("/knives")
+def knives():
+    return render_template("pages/knives.html")
+
 if __name__ == '__main__':
     app.run(
         host=os.environ.get("IP", "0.0.0.0"),
