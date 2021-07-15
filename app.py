@@ -172,6 +172,24 @@ def heavies():
 def knives():
     return render_template("pages/knives.html")
 
+
+@app.route("/gloves")
+def gloves():
+    return render_template("pages/gloves.html")
+
+
+@app.route("/stickers")
+def stickers():
+    return render_template("pages/stickers.html")
+
+
+@app.route("/cases")
+def cases():
+    return render_template("pages/cases.html")
+
+
+    
+
 if __name__ == '__main__':
     app.run(
         host=os.environ.get("IP", "0.0.0.0"),
