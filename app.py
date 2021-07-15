@@ -121,6 +121,7 @@ def admin():
 def add_skin():
     if session and session["user"]["is_admin"]:
         weaponTypes = skinColl.distinct('weapon_type')
+        knifeTypes = skinColl.distinct('knife_type')
         weapons = {
             "pistol": skinColl.distinct("weapon_name", {"weapon_type": "Pistol" }),
             "rifle": skinColl.distinct("weapon_name", {"weapon_type": "Rifle" }),
@@ -131,11 +132,44 @@ def add_skin():
         }
 
         weaponRarities = skinColl.distinct('rarity')
-        if request.method == "POST":
-            if "weaponskin" in request.form:
-                skinColl.insert_one(request.form.to_dict())
-        return render_template("components/add-skin.html", page_title="Latest Skins", weaponTypes=weaponTypes, weapons=json.dumps(weapons), weaponRarities=weaponRarities)
+        return render_template("components/add-skin.html", page_title="Add A Skin", weaponTypes=weaponTypes,
+         weapons=json.dumps(weapons), weaponRarities=weaponRarities, knifeTypes=knifeTypes)
     return render_template("error-pages/404.html")
+
+
+@app.route('/insert/weapon', methods=["GET", "POST"])
+def insert_weapon_skin():
+    if session and session["user"]["is_admin"]:
+        if request.method == "POST":
+            return render_template("components/add_skin.html")
+
+
+@app.route('/insert/knife', methods=["GET", "POST"])
+def insert_knife_skin():
+    if session and session["user"]["is_admin"]:
+        if request.method == "POST":
+            return render_template("components/add_skin.html")
+
+
+@app.route('/insert/gloves', methods=["GET", "POST"])
+def insert_gloves_skin():
+    if session and session["user"]["is_admin"]:
+        if request.method == "POST":
+            return render_template("components/add_skin.html")
+
+
+@app.route('/insert/sticker', methods=["GET", "POST"])
+def insert_sticker_skin():
+    if session and session["user"]["is_admin"]:
+        if request.method == "POST":
+            return render_template("components/add_skin.html")
+
+
+@app.route('/insert/case', methods=["GET", "POST"])
+def insert_case_skin():
+    if session and session["user"]["is_admin"]:
+        if request.method == "POST":
+            return render_template("components/add_skin.html")           
 
 
 @app.route('/add/user', methods=["GET", "POST"])
