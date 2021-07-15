@@ -4,3 +4,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css">
 <link rel="stylesheet" href="{{ url_for('static', filename='slick/slick.css') }}" type="text/css"/>
 <link rel="stylesheet" href="{{ url_for('static', filename='slick/slick-theme.css') }}" type="text/css"/>
+{% if active_page == "addskin" %}
+<link rel="stylesheet" href="{{ url_for('static', filename='datepicker/mc-calendar.min.css') }}" type="text/css"/>
+{% endif %}
