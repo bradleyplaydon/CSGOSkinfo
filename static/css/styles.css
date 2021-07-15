@@ -20,6 +20,7 @@
   --site-dark: #131517;
   --site-orange: #ee7f00;
   --body-text-color: #EEFFEE;
+  --orange-hover: #FFAE51;
   --orange-color-1: #fac491;
   --body-font: gameovercre1;
 }
@@ -43,7 +44,7 @@ span {
 }
 
 a:hover {
-  color: #FFAE51 !important;
+  color: var(--orange-hover) !important;
 }
 
 a.active {
@@ -88,4 +89,19 @@ nav>ul.list-group.list-group-horizontal.justify-content-center>li, #mobile-nav >
 
 .extraordinary {
   background: #eb4b4b;
+}
+
+.input-bg-disabled {
+  background: repeating-linear-gradient( 
+    45deg
+    , #000000, #000000 10px, #131517 10px, #131517 20px );
+}
+
+.btn-orange {
+  background: var(--site-orange);
+  color: var(--body-text-color);
+}
+
+.btn-orange:hover {
+  background: var(--orange-hover);
 }
