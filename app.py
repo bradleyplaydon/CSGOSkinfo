@@ -138,6 +138,10 @@ def add_skin():
     return render_template("error-pages/404.html")
 
 
+@app.route('/add/user', methods=["GET", "POST"])
+def add_user():
+    return render_template("components/add-user.html")
+
 @app.route("/pistols")
 def pistols():
     return render_template("pages/pistols.html")
