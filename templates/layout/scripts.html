@@ -2,3 +2,6 @@
 <script src="{{ url_for('static', filename='slick/slick.min.js') }}"></script>
 <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% if page_title == 'addskin' %}
+    <script src="{{ url_for('static', filename='js/addskin.js') }}"></script>
+{% endif %}
