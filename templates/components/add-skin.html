@@ -35,44 +35,81 @@
           <select class="form-select rounded-0 mb-3" placeholder="Weapon Name" name="weapon_name">
           </select>
           <select placeholder="Rarity" class="form-select rounded-0 mb-3" name="rarity" required>
-            <option value="Covert">Covert</option>
-            <option value="Covert">Classified</option>
-            <option value="Covert">Restricted</option>
-            <option value="Covert">Mil-Spec Grade</option>
-            <option value="Covert">Industrial Grade</option>
-            <option value="Covert">Consumer Grade</option>
+            {% for rarity in weaponRarities %}
+              <option value="{{ rarity | lower }}">{{ rarity }}</option>
+            {% endfor %}
           </select>
-          <label for="release-date">Skin Release Date (DD / MM / YYYY)</label>
-          <input type="date" id="release-date" name="release-date" value="2018-07-22" min="2013-01-01" max="2018-12-31">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Factory New
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Minimal Wear
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Field Tested
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Well Worn
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Battle Scarred
-            </label>
+          <label for="release-date" class="label">Skin Release Date (Click the calendar icon)</label>
+          <input class="col-2" type="date" id="release-date" name="release-date" value="2018-07-22" min="2013-01-01" max="2018-12-31">
+          <div class="d-flex justfiy-content-center mt-3">
+            <ul>
+              <label class="label">Conditions</label>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Factory New
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Minimal Wear
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Field Tested
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Well Worn
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Battle Scarred
+                </label>
+              </div>
+  
+            </ul>
+            <ul>
+              <label class="label">StatTrak Conditions</label>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Factory New
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Minimal Wear
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Field Tested
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Well Worn
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Battle Scarred
+                </label>
+              </div>
+  
+            </ul>
           </div>
           <div class="form-check">
             <input class="form-check-input" type="radio" name="statorsouv" id="flexRadioDefault1">
@@ -86,7 +123,7 @@
               Souvenir
             </label>
           </div>
-          <button type="submit" class="btn btn-primary">Add Skin</button>
+          <button type="submit" class="btn btn-primary p-3 w-50 mx-auto">Add Skin</button>
         </form>
       </div>
     </div>
