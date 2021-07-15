@@ -5,7 +5,7 @@
 <div class="accordion accordion-flush mt-5" id="accordionFlushExample">
   <div class="accordion-item bg-dark text-white">
     <h2 class="accordion-header">
-      <button class="accordion-button collapsed bg-dark text-white" type="button" data-bs-toggle="collapse"
+      <button class="accordion-button collapsed bg-dark text-white border" type="button" data-bs-toggle="collapse"
         data-bs-target="#add-weapon" aria-expanded="true" aria-controls="add-weapon">
         Add Weapon
       </button>
@@ -40,6 +40,35 @@
               <option value="{{ rarity | lower }}">{{ rarity }}</option>
             {% endfor %}
           </select>
+          <table class="table table-dark table-striped">
+            <thead>
+              <tr>
+                <th scope="col" colspan="4">Images</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Factory New</th>
+                <td><input class="form-control" placeholder="Factory New Image URL" name="fnimage" type="text" required></td>
+              </tr>
+              <tr>
+                <th scope="row">Minimal Wear</th>
+                <td><input class="form-control" placeholder="Minimal Wear Image URL" name="mwimage" type="text" required></td>
+              </tr>
+              <tr>
+                <th scope="row">Field-Tested</th>
+                <td><input class="form-control" placeholder="Field Tested Image URL" name="ftimage" type="text" required></td>
+              </tr>
+              <tr>
+                <th scope="row">Well-Worn</th>
+                <td><input class="form-control" placeholder="Well-Worn Image URL" name="wwimage" type="text" required></td>
+              </tr>
+              <tr>
+                <th scope="row">Battle-Scarred</th>
+                <td><input class="form-control" placeholder="Battle-Scarred Image URL" name="bsimage" type="text" required></td>
+              </tr>
+            </tbody>
+          </table>
           <label for="release-date" class="label">Skin Release Date (Click the calendar icon)</label>
           <input class="col-2" type="date" id="release-date" name="release-date" value="2018-07-22" min="2013-01-01" max="2018-12-31">
           <div class="d-flex justfiy-content-center mt-3">
