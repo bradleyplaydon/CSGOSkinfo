@@ -1,17 +1,18 @@
-$(document).ready(function () {
+$(document).ready(function() {
     let weaponTypeSelectEl = $("select[name='weapon_type']");
     let weaponNameSelectEl = $("select[name='weapon_name']");
-    var pistols = $("#weapons").attr("data-weapons");
-    setWeaponSelectOptions(weaponTypeSelectEl.val())    
+    var weapons = JSON.parse($("#weapons").attr("data-weapons"));
+    setWeaponSelectOptions(weaponTypeSelectEl.val().toLowerCase());    
     $(weaponTypeSelectEl).change(function(){
-        setWeaponSelectOptions(weaponTypeSelectEl.val())
-    })
+        $(weaponNameSelectEl).empty()
+        setWeaponSelectOptions(weaponTypeSelectEl.val().toLowerCase());
+    });
     function setWeaponSelectOptions(selectVal){
-        for(var p in pistols){
-            var o = new Option(p, p.toLowerCase());
-            $(o).html(p);
-            $(weaponNameSelectEl).append(o);            
-        }
+        weapons[selectVal].map((w, index) => { 
+           o = new Option(w, w);
+           $(o).html(w);
+           $(weaponNameSelectEl).append(o);
+        });
     }
-})
+});
 

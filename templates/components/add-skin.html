@@ -22,11 +22,17 @@
           <select class="form-select rounded-0 mb-3" placeholder="Weapon Type" name="weapon_type">
             {% for type in weaponTypes %}
               {% if not type == "Knife" %}
-                <option value="{{ type }}">{{ type | capitalize }}</option>
+                {% if type == 'Machinegun' %}
+                  <option value="{{ type | replace('Machinegun', 'Heavy') }}">{{ type | replace('Machinegun', 'Heavy') | capitalize }}</option>
+                {% elif type == 'Sniper Rifle' %}
+                  <option value="{{ type | replace(' ', '-') }}">{{ type | replace(' ', '-') }}</option>
+                {% else %}
+                  <option value="{{ type }}">{{ type }}</option>
+                {% endif %}
               {% endif %}
             {% endfor %}
           </select>
-          <select placeholder="Weapon Name" name="weapon_name">
+          <select class="form-select rounded-0 mb-3" placeholder="Weapon Name" name="weapon_name">
           </select>
           <select placeholder="Rarity" class="form-select rounded-0 mb-3" name="rarity" required>
             <option value="Covert">Covert</option>
