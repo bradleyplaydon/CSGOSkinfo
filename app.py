@@ -160,7 +160,6 @@ def add_skin():
             "sniper-rifle": skinColl.distinct("weapon_name",
                                               {"weapon_type": "Sniper Rifle"})
         }
-
         weaponRarities = skinColl.distinct('rarity')
         return render_template(
             "components/add-skin.html", page_title="Add A Skin",
