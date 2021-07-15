@@ -112,7 +112,22 @@ def account(username):
 @app.route("/admin")
 def admin():
     if session and session["user"]["is_admin"]:
-        return render_template("pages/dashboard.html", page_title="Admin Dashboard")
+        totalUsers = mongo.db.users.find().count()
+        totalSkins = skinColl.count()
+        totalAdmins = mongo.db.users.find({"is_admin": True}).count()
+        skinUpVotes = skinColl.find({ "up_votes": { "$gt": 0 } })
+        skinDownVotes = skinColl.find({ "down_votes": { "$gt": 0 } })
+        totSkinUpVotes = 0
+        totSkinDownVotes = 0
+
+        for skin in skinUpVotes:
+            totSkinUpVotes =  totSkinUpVotes + skin["up_votes"]
+
+        for skin in skinDownVotes:
+            totSkinDownVotes =  totSkinDownVotes + skin["down_votes"]
+        
+        return render_template("pages/dashboard.html", page_title="Admin Dashboard", 
+        totalUsers=totalUsers, totalSkins=totalSkins, totalAdmins=totalAdmins, skinUpVotes=totSkinUpVotes, skinDownVotes=totSkinDownVotes)
        
     return render_template("error-pages/404.html", page_title="404 Page Not Found")
 
