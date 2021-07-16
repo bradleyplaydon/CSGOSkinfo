@@ -48,6 +48,11 @@ $(document).ready(function () {
         conditionEls.not(this).prop('required', !$(this).val().length);
     });
 
+    const myDatePicker = MCDatepicker.create({ 
+        el: '#release-date',
+        dateFormat: 'YYYY-MM-DD', 
+    })
+
     $("#weapon-skin-form").submit(function (e) {
         e.preventDefault();
         var data = $(this).serializeArray();
