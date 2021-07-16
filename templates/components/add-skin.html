@@ -19,9 +19,9 @@
           <div class="col-8">
             <label for="skin_name" class="label">Skin Name</label>
             <input type="text" placeholder="Skin Name" class="form-control bg-dark text-white rounded-0 mb-3"
-              name="name" required>
+              name="name" minlength="10" maxlength="35" required>
             <input type="text" placeholder="Skin Description" class="form-control bg-dark text-white rounded-0 mb-3"
-              name="skin_description" required>
+              name="skin_description" minlength="20" maxlength="100" required>
             <select id="skin-weapon-type" class="form-select bg-dark text-white rounded-0 mb-3"
               placeholder="Weapon Type" name="weapon_type">
               {% for type in weaponTypes %}

@@ -25,12 +25,6 @@ $(document).ready(function () {
         } else {
             checkedCount -= 1;
         }
-        if (checkedCount < 3) {
-            $("#invalid-error").text("Please tick 3 conditions in order to add the skin and add images");
-            $("#invalid-error").addClass("d-block");
-        } else {
-            $("#invalid-error").addClass("d-none");
-        }
         conditionEls.each(function (i) {
             if (conditionEls[i].checked) {
                 $(imageEls[i]).removeAttr("disabled");
@@ -59,8 +53,16 @@ $(document).ready(function () {
 
     $("#weapon-skin-form").submit(function (e) {
         e.preventDefault();
+        if (checkedCount < 3) {
+            $("#invalid-error").text("Please tick 3 conditions in order to add the skin and add images");
+            $('#invalid-error').fadeIn('slow', function(){
+                $('#invalid-error').delay(2000).fadeOut(); 
+             });
+        } else {
+            $("#invalid-error").addClass("d-none");
+            insertSkin($(this))
+        }
         var data = $(this).serializeArray();
-        insertSkin($(this))
     })
 
 });
