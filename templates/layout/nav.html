@@ -40,10 +40,10 @@
             </div>
             <div class="col-3">
                 {% if session.user %}
-                    <a href="{{ url_for('account', username=session['user']) }}" class="mx-md-4 mx-sm-3"><i class="fas fa-user-alt fs-1"></i></a>
-                    <a href="{{ url_for('logout', username=session['user']) }}"><i class="fas fa-sign-out-alt fs-1"></i></a>
+                    <a href="{{ url_for('account', username=session['user'].username) }}" class="mx-md-4 mx-sm-3"><i class="fas fa-user-alt fs-1"></i></a>
+                    <a href="{{ url_for('logout', username=session['user'].username) }}"><i class="fas fa-sign-out-alt fs-1"></i></a>
                 {% if isAdmin %}
-                    <li class="list-group p-3"><a href="{{ url_for('admin', username=session['user']) }}">Admin</a></li>
+                    <li class="list-group p-3"><a href="{{ url_for('admin', username=session['user'].username) }}">Admin</a></li>
                 {% endif %}
                 {% else %}
                     <li class="list-group p-3"><a href="{{ url_for('login') }}"><i class="fas fa-user-alt"></i></a></li>
