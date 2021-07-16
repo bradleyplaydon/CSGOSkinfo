@@ -1,5 +1,4 @@
 <header class="sticky-top w-100">
-    <!-- Navbar -->
     <nav class="navbar d-none d-lg-block d-md-block">
         <div class="container-fluid px-4 bg-dark p-1">
             <a href="{{ url_for('index') }}" class="navbar-brand bg-dark">CSGO: Skinfo</a>
@@ -30,4 +29,39 @@
             <li class="list-group-item p-3"><a href="#">STICKERS</a></li>
         </ul>
     </nav>
+    <nav class="navbar d-lg-none d-md-block bg-dark mobile-nav">
+        <div class="container-fluid px-2 text-center">
+            <div class="col-3">
+                <button type="button" class="btn" data-bs-toggle="collapse" data-bs-target="#mobile-nav"
+                    aria-expanded="false" aria-controls="mobile-nav"><i class="fas fa-bars fs-1 text-white"></i></button>
+            </div>
+            <div class="col-6">
+                <a href="#" class="navbar-brand">CSGO: Skinfo</a>
+            </div>
+            <div class="col-3">
+                {% if session.user %}
+                    <a href="{{ url_for('account', username=session['user']) }}" class="mx-md-4 mx-sm-3"><i class="fas fa-user-alt fs-1"></i></a>
+                    <a href="{{ url_for('logout', username=session['user']) }}"><i class="fas fa-sign-out-alt fs-1"></i></a>
+                {% if isAdmin %}
+                    <li class="list-group p-3"><a href="{{ url_for('admin', username=session['user']) }}">Admin</a></li>
+                {% endif %}
+                {% else %}
+                    <li class="list-group p-3"><a href="{{ url_for('login') }}"><i class="fas fa-user-alt"></i></a></li>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div id="mobile-nav" class="collapse position-absolute w-100 bg-dark">
+        <ul class="list-unstyled list-group text-center">
+            <li class="list-group-item p-3"><a href="{{ url_for('index') }}" class="active">HOME</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('pistols') }}">PISTOLS</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('rifles') }}">RIFLES</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('smgs') }}">SMGs</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('shotguns') }}">SHOTGUNS</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('heavies') }}">HEAVY</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('knives') }}">KNIVES</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('cases') }}">CASES</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('stickers') }}">STICKERS</a></li>
+        </ul>
+    </div>
 </header>
