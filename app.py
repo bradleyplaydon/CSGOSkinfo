@@ -1,4 +1,5 @@
 import os
+import re
 from flask import (Flask, render_template,
                    request, redirect, url_for, flash, session)
 from flask_pymongo import PyMongo
@@ -172,14 +173,16 @@ def add_skin():
 def insert_weapon_skin():
     if session and session["user"]["is_admin"]:
         if request.method == "POST":
-            print(request.form)
-            return render_template("components/add_skin.html")
+            reqJson = request.json
+            print(reqJson)
+            return redirect(url_for('add_skin'))
 
 
 @app.route('/insert/knife', methods=["GET", "POST"])
 def insert_knife_skin():
     if session and session["user"]["is_admin"]:
         if request.method == "POST":
+            print(request.data)
             return render_template("components/add_skin.html")
 
 
