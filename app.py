@@ -207,6 +207,20 @@ def insert_case_skin():
             return render_template("components/add_skin.html")
 
 
+@app.route('/get/skin', methods=["GET", "POST"])
+def get_skin_by_name():
+    if session and session["user"]["is_admin"]:  
+        if request.method == "POST":
+            reqJson = request.json
+            skin_name = str(reqJson["name"])
+            skinExists = skinColl.find({"name": skin_name}).count()
+            if skinExists > 0:
+                return "True"
+            else: 
+                return "False"
+            
+        
+
 @app.route('/add/user', methods=["GET", "POST"])
 def add_user():
     return render_template("components/add-user.html")
