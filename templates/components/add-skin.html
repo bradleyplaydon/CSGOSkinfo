@@ -16,7 +16,7 @@
     <div id="add-weapon" class="accordion-collapse collapse" aria-labelledby="add-weapon" data-bs-parent="#add-weapon">
       <div class="accordion-body">
         <form id="weapon-skin-form" class="d-flex " method="post" validate>
-          <div class="col-8">
+          <div class="col-9">
             <label for="skin_name" class="label">Skin Name</label>
             <input type="text" placeholder="Skin Name" class="form-control bg-dark text-white rounded-0 mb-3"
               name="name" minlength="10" maxlength="35" required>
@@ -68,11 +68,12 @@
                     </div>
                   </th>
                   <td>
+                    <label for="fnurl" class="form-label float-end">Icon URL</label>
                     <div class="input-group mb-3">
                       <span class="input-group-text"
-                        id="steamimageurl">https://community.cloudflare.steamstatic.com</span>
+                        id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
                       <input class="form-control bg-dark text-white input-bg-disabled"
-                        placeholder="Factory New Icon URL" name="fnimage" type="text" aria-describedby="steamimageurl"
+                        placeholder="Factory New Icon URL" name="fnimage" id="fnurl" type="text" aria-describedby="steamimageurl"
                         disabled>
                     </div>
                   </td>
@@ -88,9 +89,10 @@
                   </th>
                   </th>
                   <td>
+                    <label for="mwurl" class="form-label float-end">Icon URL</label>
                     <div class="input-group mb-3"><span class="input-group-text"
-                        id="steamimageurl">https://community.cloudflare.steamstatic.com</span><input
-                        class="form-control bg-dark text-white input-bg-disabled" placeholder="Minimal Wear Icon URL"
+                        id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span><input
+                        class="form-control bg-dark text-white input-bg-disabled" id="mwurl" placeholder="Minimal Wear Icon URL"
                         name="mwimage" type="text" disabled>
                   </td>
                 </tr>
@@ -104,10 +106,11 @@
                     </div>
                   </th>
                   <td>
+                    <label for="fturl" class="form-label float-end">Icon URL</label>
                     <div class="input-group mb-3">
                       <span class="input-group-text"
-                        id="steamimageurl">https://community.cloudflare.steamstatic.com</span><input
-                        class="form-control bg-dark text-white input-bg-disabled" placeholder="Field Tested Icon URL"
+                        id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span><input
+                        class="form-control bg-dark text-white input-bg-disabled" id="fturl" placeholder="Field Tested Icon URL"
                         name="ftimage" type="text" disabled>
                     </div>
                   </td>
@@ -122,9 +125,10 @@
                     </div>
                   </th>
                   <td>
+                    <label for="wwurl" class="form-label float-end">Icon URL</label>
                     <div class="input-group mb-3"><span class="input-group-text"
-                        id="steamimageurl">https://community.cloudflare.steamstatic.com</span><input
-                        class="form-control bg-dark text-white input-bg-disabled" placeholder="Well-Worn Icon URL"
+                        id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span><input
+                        class="form-control bg-dark text-white input-bg-disabled" id="wwurl" placeholder="Well-Worn Icon URL"
                         name="wwimage" type="text" disabled>
                     </div>
                   </td>
@@ -139,9 +143,11 @@
                     </div>
                   </th>
                   <td>
-                    <div class="input-group mb-3"><span class="input-group-text"
-                        id="steamimageurl">https://community.cloudflare.steamstatic.com</span><input
-                        class="form-control bg-dark text-white input-bg-disabled" placeholder="Battle-Scarred Icon URL"
+                    <label for="bsurl" class="form-label float-end">Icon URL</label>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text"
+                        id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span><input
+                        class="form-control bg-dark text-white input-bg-disabled" id="bsurl" placeholder="Battle-Scarred Icon URL"
                         name="bsimage" type="text" disabled>
                     </div>
                   </td>
@@ -151,7 +157,7 @@
             <label for="release-date" class="label">Skin Release Date (Click)</label>
             <div class="input-group flex-nowrap">
               <span class="input-group-text" id="addon-wrapping"><i class="fas fa-calendar-alt"></i></span>
-              <input class="form-select" id="release-date" value="Pick A Date" name="release-date" required>
+              <input class="form-select" id="release-date" placeholder="Pick A Date" name="release-date" required>
             </div>
             <div class="d-flex justfiy-content-center mt-3 border p-3">
               <strong>StatTrak / Souvenir</strong>
@@ -178,7 +184,7 @@
               </div>
             </div>
           </div>
-          <div class="col-4 text-center">
+          <div class="col-3 text-center">
             <button type="submit" class="btn btn-orange p-5 mt-4">
               <i class="far fa-plus-square fs-4 align-middle"></i> Add Skin
             </button>
