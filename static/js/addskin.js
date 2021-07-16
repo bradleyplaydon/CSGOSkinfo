@@ -44,7 +44,7 @@ $(document).ready(function () {
 
     const myDatePicker = MCDatepicker.create({
         el: '#release-date',
-        dateFormat: 'YYYY-MM-DD',
+        dateFormat: 'YYYY-MM-DD'
     })
 
     $("#weapon-skin-form").on("change", function () {
