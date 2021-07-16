@@ -36,22 +36,15 @@
                     aria-expanded="false" aria-controls="mobile-nav"><i class="fas fa-bars fs-1 text-white"></i></button>
             </div>
             <div class="col-6">
-                <a href="#" class="navbar-brand">CSGO: Skinfo</a>
+                <a href="#" class="navbar-brand mx-auto">CSGO: Skinfo</a>
             </div>
             <div class="col-3">
-                {% if session.user %}
-                    <a href="{{ url_for('account', username=session['user'].username) }}" class="mx-md-4 mx-sm-3"><i class="fas fa-user-alt fs-1"></i></a>
-                    <a href="{{ url_for('logout', username=session['user'].username) }}"><i class="fas fa-sign-out-alt fs-1"></i></a>
-                {% if isAdmin %}
-                    <li class="list-group p-3"><a href="{{ url_for('admin', username=session['user'].username) }}">Admin</a></li>
-                {% endif %}
-                {% else %}
-                    <li class="list-group p-3"><a href="{{ url_for('login') }}"><i class="fas fa-user-alt"></i></a></li>
-                {% endif %}
+                <button type="button" class="btn" data-bs-toggle="collapse" data-bs-target="#mobile-nav-account"
+                    aria-expanded="false" aria-controls="mobile-nav-account"><i class="fas fa-user-alt fs-1 text-white"></i></button>
             </div>
         </div>
     </nav>
-    <div id="mobile-nav" class="collapse position-absolute w-100 bg-dark">
+    <div id="mobile-nav" class="mobile-nav collapse position-absolute w-100 bg-dark">
         <ul class="list-unstyled list-group text-center">
             <li class="list-group-item p-3"><a href="{{ url_for('index') }}" class="active">HOME</a></li>
             <li class="list-group-item p-3"><a href="{{ url_for('pistols') }}">PISTOLS</a></li>
@@ -62,6 +55,12 @@
             <li class="list-group-item p-3"><a href="{{ url_for('knives') }}">KNIVES</a></li>
             <li class="list-group-item p-3"><a href="{{ url_for('cases') }}">CASES</a></li>
             <li class="list-group-item p-3"><a href="{{ url_for('stickers') }}">STICKERS</a></li>
+        </ul>
+    </div>
+    <div id="mobile-nav-account" class="mobile-nav collapse position-absolute w-100 bg-dark">
+        <ul class="list-unstyled list-group text-center">
+            <li class="list-group-item p-3"><a href="{{ url_for('index') }}" class="active"><i class="fas fa-user-alt fs-5 mx-1"></i>Account</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('admin') }}"><i class="fas fa-users-cog fs-5 mx-1"></i>Admin Dashboard</a></li>
         </ul>
     </div>
 </header>

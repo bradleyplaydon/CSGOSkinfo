@@ -51,7 +51,7 @@ a.active {
   color: var(--orange-color-1) !important;
 }
 
-nav>ul.list-group.list-group-horizontal.justify-content-center>li, #mobile-nav > ul > li {
+nav>ul.list-group.list-group-horizontal.justify-content-center>li, .mobile-nav > ul > li {
   background: var(--site-dark);
 }
 
