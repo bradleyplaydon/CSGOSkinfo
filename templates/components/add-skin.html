@@ -42,9 +42,9 @@
             </select>
             <select placeholder="Rarity" class="form-select bg-dark text-white rounded-0 mb-3" name="rarity" required>
               {% for rarity in weaponRarities %}
-                {% if not rarity == "Extraordinary" %}
-                  <option value="{{ rarity | lower }}">{{ rarity }}</option>
-                {% endif %}
+              {% if not rarity == "Extraordinary" %}
+              <option value="{{ rarity | lower }}">{{ rarity }}</option>
+              {% endif %}
               {% endfor %}
             </select>
             <div class="invalid-feedback" id="invalid-error">
@@ -67,8 +67,15 @@
                       </label>
                     </div>
                   </th>
-                  <td><input class="form-control bg-dark text-white input-bg-disabled"
-                      placeholder="Factory New Image URL" name="fnimage" type="text" disabled></td>
+                  <td>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text"
+                        id="steamimageurl">https://community.cloudflare.steamstatic.com</span>
+                      <input class="form-control bg-dark text-white input-bg-disabled"
+                        placeholder="Factory New Icon URL" name="fnimage" type="text" aria-describedby="steamimageurl"
+                        disabled>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">
@@ -80,8 +87,12 @@
                     </div>
                   </th>
                   </th>
-                  <td><input class="form-control bg-dark text-white input-bg-disabled"
-                      placeholder="Minimal Wear Image URL" name="mwimage" type="text" disabled></td>
+                  <td>
+                    <div class="input-group mb-3"><span class="input-group-text"
+                        id="steamimageurl">https://community.cloudflare.steamstatic.com</span><input
+                        class="form-control bg-dark text-white input-bg-disabled" placeholder="Minimal Wear Icon URL"
+                        name="mwimage" type="text" disabled>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">
@@ -92,8 +103,14 @@
                       </label>
                     </div>
                   </th>
-                  <td><input class="form-control bg-dark text-white input-bg-disabled"
-                      placeholder="Field Tested Image URL" name="ftimage" type="text" disabled></td>
+                  <td>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text"
+                        id="steamimageurl">https://community.cloudflare.steamstatic.com</span><input
+                        class="form-control bg-dark text-white input-bg-disabled" placeholder="Field Tested Icon URL"
+                        name="ftimage" type="text" disabled>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">
@@ -104,8 +121,13 @@
                       </label>
                     </div>
                   </th>
-                  <td><input class="form-control bg-dark text-white input-bg-disabled" placeholder="Well-Worn Image URL"
-                      name="wwimage" type="text" disabled></td>
+                  <td>
+                    <div class="input-group mb-3"><span class="input-group-text"
+                        id="steamimageurl">https://community.cloudflare.steamstatic.com</span><input
+                        class="form-control bg-dark text-white input-bg-disabled" placeholder="Well-Worn Icon URL"
+                        name="wwimage" type="text" disabled>
+                    </div>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row">
@@ -116,8 +138,13 @@
                       </label>
                     </div>
                   </th>
-                  <td><input class="form-control bg-dark text-white input-bg-disabled"
-                      placeholder="Battle-Scarred Image URL" name="bsimage" type="text" disabled></td>
+                  <td>
+                    <div class="input-group mb-3"><span class="input-group-text"
+                        id="steamimageurl">https://community.cloudflare.steamstatic.com</span><input
+                        class="form-control bg-dark text-white input-bg-disabled" placeholder="Battle-Scarred Icon URL"
+                        name="bsimage" type="text" disabled>
+                    </div>
+                  </td>
                 </tr>
               </tbody>
             </table>
