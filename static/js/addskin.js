@@ -36,20 +36,31 @@ $(document).ready(function () {
                 $(imageEls[i]).attr("disabled", "disabled");
             }
         });
+        if(checkedCount >= 3){
+            $('[name=stat_or_souv]').each(function(index, element){
+                $(element).attr("required", "required")
+                $(element).on("input", function(){
+                    $("#release-date").attr("required", "required")
+                })
+            })
+        } else {
+            $('[name=stat_or_souv]').each(function(index, element){
+                $(element).removeAttr("required")
+            })
+        }
     });
 
     conditionEls.on('input', function () {
         conditionEls.not(this).prop('required', !$(this).val().length);
     });
 
-    const myDatePicker = MCDatepicker.create({
+    const weaponDatePicker = MCDatepicker.create({
         el: '#release-date',
         dateFormat: 'YYYY-MM-DD'
     })
 
     $("#weapon-skin-form").submit(function (e) {
         e.preventDefault();
-
         if (checkedCount < 3) {
             $("#invalid-error").text("Please tick 3 conditions in order to add the skin and add atleast 3 Steam icon URLs");
             $('#invalid-error').fadeIn('slow', function () {
@@ -57,14 +68,13 @@ $(document).ready(function () {
             });
         } else {
             $("#invalid-error").addClass("d-none");
-            myDatePicker.getFullDate();
-            checkSkinInsert($(this))
+            checkSkinInsert($(this), weaponDatePicker.getFullDate())
         }
     })
 
 });
 
-function checkSkinInsert(thisObj) {
+function checkSkinInsert(thisObj, reldate) {
     var skinName = thisObj.find("[name=name]").val()
     fetch("/get/skin", {
             headers: {
@@ -77,7 +87,7 @@ function checkSkinInsert(thisObj) {
         }).then(res => res.text())
         .then(data => {
             if (data == "False") {
-                insertSkin(thisObj)
+                insertSkin(thisObj, reldate)
             } else {
                 alert("Sorry this couldn't be added as a search was made and this skin has already been added.")
             }
@@ -88,7 +98,7 @@ function checkSkinInsert(thisObj) {
 
 
 
-function insertSkin(thisObj) {
+function insertSkin(thisObj, reldate) {
 
     var rarity = thisObj.find("[name=rarity]").val();
     var rariryPrecedence = rarity == "Contraband" ? 6 :
@@ -112,8 +122,8 @@ function insertSkin(thisObj) {
                 weapon_name: thisObj.find("[name=weapon_name]").val(),
                 rarity: rarity,
                 rarity_precedence: rariryPrecedence,
-                souvenir_available: thisObj.find("[name=stat_or_souv]").val() == "Souvenir" ? true : false,
-                stattrak_available: thisObj.find("[name=stat_or_souv]").val() == "StatTrak" ? true : false,
+                souvenir_available: thisObj.find("#souvenir").prop("checked") == true ? true : false,
+                stattrak_available: thisObj.find("#statTrak").prop("checked") == true ? true : false,
                 statrak_conditions: {
                     factory_new: thisObj.find("[name=fn]").prop("checked") == true ? true : false,
                     min_wear: thisObj.find("[name=mw]").prop("checked") == true ? true : false,
@@ -128,6 +138,7 @@ function insertSkin(thisObj) {
                     well_worn: thisObj.find("[name=ww]").prop("checked") == true ? true : false,
                     battle_scarred: thisObj.find("[name=bs]").prop("checked") == true ? true : false
                 },
+                release_date: reldate,
                 image_urls: {
                     factory_new: thisObj.find('input[name=fnimage]').val() == "" ? null : "https://community.cloudflare.steamstatic.com/economy/image/" + thisObj.find('input[name=fnimage]').val(),
                     min_wear: thisObj.find('input[name=mwimage]').val() == "" ? null : "https://community.cloudflare.steamstatic.com/economy/image/" + thisObj.find('input[name=mwimage]').val(),
@@ -140,7 +151,7 @@ function insertSkin(thisObj) {
             })
         }).then(res => {
             var formSubmitted = thisObj;
-            formSubmitted.prev(`<h4 class='text-center bg-success p-3'>The ${thisObj.find("[name=name]").val()} has been succesfully added }}'</h4><button class='btn btn-orange'>Add Another</button>`)
+            formSubmitted.insertBefore(`<h4 class='text-center bg-success p-3'>The ${thisObj.find("[name=name]").val()} has been succesfully added }}'</h4><button class='btn btn-orange'>Add Another</button>`)
             formSubmitted.remove();
 
         })
