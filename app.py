@@ -20,7 +20,6 @@ app.secret_key = os.environ.get("SECRET_KEY")
 mongo = PyMongo(app)
 
 skinColl = mongo.db.skins
-skins = skinColl.find()
 
 
 @app.route('/')
@@ -167,6 +166,17 @@ def add_skin():
             "components/add-skin.html", page_title="Add A Skin",
             weaponTypes=weaponTypes, weapons=json.dumps(weapons),
             weaponRarities=weaponRarities, knifeTypes=knifeTypes)
+    return render_template("error-pages/404.html")
+
+
+@app.route('/edit/skin', methods=["GET", "POST"])
+def edit_skin():
+    if session and session["user"]["is_admin"]:
+        skins = list(skinColl.find( { "weapon_type": { "$ne": "Knife" }, "type": { "$ne": "Gloves"} }))
+        print(skins)
+        return render_template(
+            "components/edit-skin.html", page_title="Edit A Skin",
+            skins=skins)
     return render_template("error-pages/404.html")
 
 
