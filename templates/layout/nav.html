@@ -1,7 +1,7 @@
 <header class="sticky-top w-100">
-    <nav class="navbar d-none d-lg-block d-md-block">
+    <nav class="navbar d-none d-lg-block p-0">
         <div class="container-fluid px-4 bg-dark p-1">
-            <a href="{{ url_for('index') }}" class="navbar-brand bg-dark">CSGO: Skinfo</a>
+            <a href="{{ url_for('index') }}" class="navbar-brand bg-dark">CSGO:Skinfo</a>
             <ul class="list-group list-group-horizontal justify-content-center">
                 <li class="list-group p-3"><a href="#">About</a></li>
                 <li class="list-group p-3"><a href="#">Contact</a></li>
@@ -16,7 +16,7 @@
                 {% endif %}
             </ul>
         </div>
-        <ul class="list-group list-group-horizontal justify-content-center">
+        <ul class="list-group list-group-horizontal justify-content-center flex-wrap">
             <li class="list-group-item p-3"><a href="{{ url_for('index') }}" class="active">HOME</a></li>
             <li class="list-group-item p-3"><a href="#">PISTOLS</a></li>
             <li class="list-group-item p-3"><a href="#">RIFLES</a></li>
@@ -36,7 +36,7 @@
                     aria-expanded="false" aria-controls="mobile-nav"><i class="fas fa-bars fs-1 text-white"></i></button>
             </div>
             <div class="col-6">
-                <a href="#" class="navbar-brand mx-auto">CSGO: Skinfo</a>
+                <a href="#" class="navbar-brand mx-auto">CSGO:Skinfo</a>
             </div>
             <div class="col-3">
                 <button type="button" class="btn" data-bs-toggle="collapse" data-bs-target="#mobile-nav-account"
