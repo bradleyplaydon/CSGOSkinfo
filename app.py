@@ -224,7 +224,8 @@ def get_skin_by_name():
     if session and session["user"]["is_admin"]:  
         if request.method == "POST":
             reqJson = request.json
-            skin_name = str(reqJson["name"])
+            skin_name = str(f'{reqJson["name"]} ')
+
             skinExists = skinColl.find({"name": skin_name}).count()
             if skinExists > 0:
                 return "True"
