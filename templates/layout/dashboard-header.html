@@ -1,13 +1,15 @@
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-2 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{{ url_for('index') }}">CSGO:Skinfo</a>
-    <button class="navbar-toggler d-md-none collapsed" type="button" data-bs-toggle="collapse"
-        data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+<header class="navbar sticky-top bg-dark flex-md-nowrap p-2 shadow px-md-2 px-sm-5">
+    <button class="btn d-md-none collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars fs-1 text-white"></i>
     </button>
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{{ url_for('index') }}">CSGO:Skinfo</a>
     <div class="navbar-nav">
-        <div class="nav-item text-nowrap">
-            <a class="nav-link px-3 text-white" href="{{ url_for('logout', username=session['user'])}}">Sign out<i class="fas fa-sign-out-alt"></i></a>
+        <div class="nav-item text-nowrap d-md-block d-none">
+            <a class="nav-link px-3 text-white" href="{{ url_for('logout', username=session['user'])}}">Sign out<i
+                    class="fas fa-sign-out-alt"></i></a>
         </div>
+        <button type="button" class="btn d-sm-block d-md-none" data-bs-toggle="collapse" data-bs-target="#mobile-nav-account"
+                    aria-expanded="false" aria-controls="mobile-nav-account"><i class="fas fa-user-alt fs-1 text-white"></i></button>
     </div>
 </header>

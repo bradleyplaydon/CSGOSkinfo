@@ -55,7 +55,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         if (checkedCount < 3) {
-            $("#invalid-error").text("Please tick 3 conditions in order to add the skin and add images");
+            $("#invalid-error").text("Please tick 3 conditions in order to add the skin and add atleast 3 Steam icon URLs");
             $('#invalid-error').fadeIn('slow', function () {
                 $('#invalid-error').delay(2000).fadeOut();
             });
