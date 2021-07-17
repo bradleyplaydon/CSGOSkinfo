@@ -88,14 +88,12 @@
                     Delete A Skin
                 </a>
             </li>
-        </ul>
 
         <h6
             class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 pb-2 text-white border-bottom">
             Users
             <i class="fas fa-user-alt"></i>
         </h6>
-        <ul class="nav flex-column mb-2">
             <li class="nav-item">
                 <a class="nav-link text-white {% if active_page == "adduser" %} active {% endif %}" href="{{ url_for('add_user') }}">
                     <i class="far fa-plus-square"></i>
@@ -115,5 +113,6 @@
                 </a>
             </li>
         </ul>
+
     </div>
 </nav>
