@@ -117,7 +117,7 @@ function insertSkin(thisObj, reldate) {
             body: JSON.stringify({
                 name: thisObj.find("[name=name]").val(),
                 skin_description: thisObj.find("[name=skin_description]").val(),
-                type: thisObj.find("[name=type]").val(),
+                type: "Weapon",
                 weapon_type: thisObj.find("[name=weapon_type]").val(),
                 weapon_name: thisObj.find("[name=weapon_name]").val(),
                 rarity: rarity,

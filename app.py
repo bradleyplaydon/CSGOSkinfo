@@ -5,6 +5,7 @@ from flask import (Flask, render_template,
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+from dateutil import parser
 import json
 if os.path.exists("env.py"):
     import env
@@ -174,7 +175,8 @@ def insert_weapon_skin():
     if session and session["user"]["is_admin"]:
         if request.method == "POST":
             reqJson = request.json
-            print(reqJson)
+            reqJson["release_date"] = parser.parse(reqJson["release_date"])
+            skinColl.insert_one(reqJson)
             return redirect(url_for('add_skin'))
 
 
