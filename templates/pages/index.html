@@ -3,12 +3,11 @@
     <h2>Latest Skins</h2>
 {% endblock %}
 {% block content %}
-    <div class="container">
         <div class="col-lg-12 bg-dark mx-auto p-3 mt-4">
             <div class="row">
                 {% for skin in skins %}
                     {% set skinname = skin.name %}
-                    <div class="col-lg-3 mb-2">
+                    <div class="col-lg-3 col-sm-6 mb-2">
                         <div class="card border bg-dark">
                             <a href="#">
                                 {% if skin.image_urls.factory_new is not none %}
@@ -50,5 +49,4 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
 {% endblock %} 
