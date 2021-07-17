@@ -15,6 +15,12 @@
     </h2>
     <div id="Edit-weapon" class="accordion-collapse collapse" aria-labelledby="Edit-weapon" data-bs-parent="#Edit-weapon">
       <div class="accordion-body row">
+        <div class="input-group">
+            <form class="form-control d-flex bg-dark p-3" action="/get/skin" method="GET">
+                <input class="form-control" id="searchSkin" placeholder="Enter the Skin Name" aria-label="Example select with button addon">
+                <button class="btn btn-orange px-5 pt-3 pb-3" type="submit"><i class="fas fa-search text-white fs-4"></i></button>
+            </form>
+          </div>
         {% for skin in skins %}
                     {% set skinname = skin.name %}
                     <div class="col-lg-3 col-sm-6 mb-2">
@@ -40,19 +46,6 @@
                                         <p>{{ skin.skin_description }}</p>
                                     </li>
                                 </ul>
-
-                                {% if session.user %}
-                                  <div class="like-buttons text-center mb-3">
-                                      <button id="{{ skin._id }}" data-collection="skins" {{ 'already-liked=true' if skin._id in session.user.skins_liked }} class="like-btn btn btn-light fs-2 p-3" name="like-btn" type="submit">
-                                        <i class="fas fa-thumbs-up"></i>
-                                        <strong id="up_votes">{{ skin.up_votes }}</strong>
-                                      </button>
-                                      <button id="{{ skin._id }}" data-collection="skins" {{ 'disliked=true' if skin._id in session.user.skins_disliked }} class="dislike-btn btn btn-light fs-2 p-3" name="dislike-btn" type="submit">
-                                        <i class="fas fa-thumbs-down"></i>
-                                        <strong id="up_votes">{{ skin.down_votes }}</strong>
-                                      </button>
-                                  </div>
-                                {% endif %}
                             </div>
                         </div>
                     </div>
