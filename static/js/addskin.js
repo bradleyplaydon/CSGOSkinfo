@@ -36,15 +36,15 @@ $(document).ready(function () {
                 $(imageEls[i]).attr("disabled", "disabled");
             }
         });
-        if(checkedCount >= 3){
-            $('[name=stat_or_souv]').each(function(index, element){
+        if (checkedCount >= 3) {
+            $('[name=stat_or_souv]').each(function (index, element) {
                 $(element).attr("required", "required")
-                $(element).on("input", function(){
+                $(element).on("input", function () {
                     $("#release-date").attr("required", "required")
                 })
             })
         } else {
-            $('[name=stat_or_souv]').each(function(index, element){
+            $('[name=stat_or_souv]').each(function (index, element) {
                 $(element).removeAttr("required")
             })
         }
@@ -155,5 +155,5 @@ function insertSkin(thisObj, reldate) {
             formSubmitted.trigger("reset")
         })
         .catch(err => console.log(err))
-        
+
 }
