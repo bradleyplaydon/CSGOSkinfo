@@ -47,10 +47,6 @@ $(document).ready(function () {
         dateFormat: 'YYYY-MM-DD'
     })
 
-    $("#weapon-skin-form").on("change", function () {
-        console.log($("#weapon-skin-form").find("[name=name]").val())
-    })
-
     $("#weapon-skin-form").submit(function (e) {
         e.preventDefault();
 
@@ -64,7 +60,6 @@ $(document).ready(function () {
             myDatePicker.getFullDate();
             checkSkinInsert($(this))
         }
-        var data = $(this).serializeArray();
     })
 
 });
@@ -103,7 +98,8 @@ function insertSkin(thisObj) {
         rarity == "Mil-Spec Grade" ? 2 :
         rarity == "Industrial Grade" ? 1 :
         "Consumer Grade"
-
+    var facnew = thisObj.find("input[name=factory_new]")
+    console.log(facnew)
     fetch("/insert/weapon", {
             headers: {
                 "Content-Type": "application/json"
@@ -120,18 +116,18 @@ function insertSkin(thisObj) {
                 souvenir_available: thisObj.find("[name=stat_or_souv]").val() == "Souvenir" ? true : false,
                 stattrak_available: thisObj.find("[name=stat_or_souv]").val() == "StatTrak" ? true : false,
                 statrak_conditions: {
-                    factory_new: thisObj.find("[name=factory_new]").checked == true ? true : false,
-                    min_wear: thisObj.find("[name=min_wear]").checked == true ? true : false,
-                    field_tested: thisObj.find("[name=field_tested]").checked == true ? true : false,
-                    well_worn: thisObj.find("[name=well_worn]").checked == true ? true : false,
-                    battle_scarred: thisObj.find("[name=battle_scarred]").checked == true ? true : false
+                    factory_new: thisObj.find("[name=fn]").prop("checked") == true ? true : false,
+                    min_wear: thisObj.find("[name=mw]").prop("checked") == true ? true : false,
+                    field_tested: thisObj.find("[name=ft]").prop("checked") == true ? true : false,
+                    well_worn: thisObj.find("[name=ww]").prop("checked") == true ? true : false,
+                    battle_scarred: thisObj.find("[name=bs]").prop("checked") == true ? true : false
                 },
                 conditions: {
-                    factory_new: thisObj.find("[name=factory_new]").checked == true ? true : false,
-                    min_wear: thisObj.find("[name=min_wear]").checked == true ? true : false,
-                    field_tested: thisObj.find("[name=field_tested]").checked == true ? true : false,
-                    well_worn: thisObj.find("[name=well_worn]").checked == true ? true : false,
-                    battle_scarred: thisObj.find("[name=battle_scarred]").checked == true ? true : false
+                    factory_new: thisObj.find("[name=fn]").prop("checked") == true ? true : false,
+                    min_wear: thisObj.find("[name=mw]").prop("checked") == true ? true : false,
+                    field_tested: thisObj.find("[name=ft]").prop("checked") == true ? true : false,
+                    well_worn: thisObj.find("[name=ww]").prop("checked") == true ? true : false,
+                    battle_scarred: thisObj.find("[name=bs]").prop("checked") == true ? true : false
                 },
                 image_urls: {
                     factory_new: thisObj.find('input[name=fnimage]').val() == "" ? null : "https://community.cloudflare.steamstatic.com/economy/image/" + thisObj.find('input[name=fnimage]').val(),
