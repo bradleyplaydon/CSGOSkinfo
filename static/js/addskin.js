@@ -98,8 +98,7 @@ function insertSkin(thisObj) {
         rarity == "Mil-Spec Grade" ? 2 :
         rarity == "Industrial Grade" ? 1 :
         "Consumer Grade"
-    var facnew = thisObj.find("input[name=factory_new]")
-    console.log(facnew)
+
     fetch("/insert/weapon", {
             headers: {
                 "Content-Type": "application/json"
