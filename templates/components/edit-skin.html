@@ -1,0 +1,59 @@
+{% extends 'layout/dashboard-base.html' %}
+{% set active_page = "editskin" %}
+{% block content %}
+<meta id="weapons" data-weapons="{{ weapons }}">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h2 class="h2">{{ page_title }}</h2>
+</div>
+<div class="accordion accordion-flush mt-5" id="accordionFlushExample">
+  <div class="accordion-item bg-dark text-white">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed bg-dark text-white border" type="button" data-bs-toggle="collapse"
+        data-bs-target="#Edit-weapon" aria-expanded="true" aria-controls="Edit-weapon">
+        Edit Weapon
+      </button>
+    </h2>
+    <div id="Edit-weapon" class="accordion-collapse collapse" aria-labelledby="Edit-weapon" data-bs-parent="#Edit-weapon">
+      <div class="accordion-body">
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item bg-dark text-white mt-5">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed bg-dark text-white border" type="button" data-bs-toggle="collapse"
+        data-bs-target="#Edit-knife" aria-expanded="false" aria-controls="Edit-knife">
+        Edit Knife
+      </button>
+    </h2>
+    <div id="Edit-knife" class="accordion-collapse collapse" aria-labelledby="Edit-knife" data-bs-parent="#Edit-knife">
+      <div class="accordion-body">
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item bg-dark text-white mt-5">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed bg-dark text-white border" type="button" data-bs-toggle="collapse"
+        data-bs-target="#Edit-gloves" aria-expanded="false" aria-controls="Edit-gloves">
+        Edit Gloves
+      </button>
+    </h2>
+    <div id="Edit-gloves" class="accordion-collapse collapse" aria-labelledby="Edit-gloves" data-bs-parent="#Edit-gloves">
+      <div class="accordion-body">
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item bg-dark text-white mt-5">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed bg-dark text-white border" type="button" data-bs-toggle="collapse"
+        data-bs-target="#Edit-case" aria-expanded="false" aria-controls="Edit-case">
+        Edit Case
+      </button>
+    </h2>
+    <div id="Edit-case" class="accordion-collapse collapse" aria-labelledby="Edit-case" data-bs-parent="#Edit-case">
+      <div class="accordion-body">
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}
