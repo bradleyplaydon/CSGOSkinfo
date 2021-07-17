@@ -59,7 +59,7 @@
     </div>
     <div id="mobile-nav-account" class="mobile-nav collapse position-absolute w-100 bg-dark">
         <ul class="list-unstyled list-group text-center">
-            <li class="list-group-item p-3"><a href="{{ url_for('index') }}" class="active"><i class="fas fa-user-alt fs-5 mx-1"></i>Account</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('account', username=session['user'].username) }}" class="active"><i class="fas fa-user-alt fs-5 mx-1"></i>Account</a></li>
             <li class="list-group-item p-3"><a href="{{ url_for('admin') }}"><i class="fas fa-users-cog fs-5 mx-1"></i>Admin Dashboard</a></li>
         </ul>
     </div>
