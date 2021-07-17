@@ -151,9 +151,9 @@ function insertSkin(thisObj, reldate) {
             })
         }).then(res => {
             var formSubmitted = thisObj;
-            formSubmitted.insertBefore(`<h4 class='text-center bg-success p-3'>The ${thisObj.find("[name=name]").val()} has been succesfully added }}'</h4><button class='btn btn-orange'>Add Another</button>`)
-            formSubmitted.remove();
-
+            var successMessage = formSubmitted.before(`<h4 class='text-center bg-success p-3'>The ${thisObj.find("[name=name]").val()} has been succesfully added</h4>`)
+            formSubmitted.trigger("reset")
         })
         .catch(err => console.log(err))
+        
 }

@@ -45,7 +45,7 @@
               <select placeholder="Rarity" class="form-select bg-dark text-white rounded-0 mb-3" name="rarity" required>
                 {% for rarity in weaponRarities %}
                 {% if not rarity == "Extraordinary" %}
-                <option value="{{ rarity | lower }}">{{ rarity }}</option>
+                <option value="{{ rarity }}">{{ rarity }}</option>
                 {% endif %}
                 {% endfor %}
               </select>
