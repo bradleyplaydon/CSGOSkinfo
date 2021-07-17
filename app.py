@@ -1,5 +1,4 @@
 import os
-import re
 from flask import (Flask, render_template,
                    request, redirect, url_for, flash, session)
 from flask_pymongo import PyMongo
@@ -173,7 +172,6 @@ def add_skin():
 def edit_skin():
     if session and session["user"]["is_admin"]:
         skins = list(skinColl.find( { "weapon_type": { "$ne": "Knife" }, "type": { "$ne": "Gloves"} }))
-        print(skins)
         return render_template(
             "components/edit-skin.html", page_title="Edit A Skin",
             skins=skins)
@@ -231,6 +229,14 @@ def get_skin_by_name():
                 return "True"
             else: 
                 return "False"
+
+        if request.method == "GET":
+            searchOptions = { "weapon_type": { "$ne": "Knife" }, "type": { "$ne": "Gloves"} }
+            if request.values["searchskin"] != None and request.values["searchskin"] != '':
+                searchOptions["name"] = { "$regex": request.values["searchskin"], "$options": "i" }
+            foundSkins = skinColl.find(searchOptions).sort("rarity_precedence", -1)
+          
+            return render_template("components/edit-skin.html", foundSkins=foundSkins)
             
         
 
