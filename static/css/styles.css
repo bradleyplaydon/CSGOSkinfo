@@ -63,28 +63,56 @@ nav>ul.list-group.list-group-horizontal.justify-content-center>li, .mobile-nav >
   background: #e4ae39;
 }
 
+.contraband-text {
+  color: #e4ae39 !important;
+}
+
 .covert {
   background: #eb4b4b;
+}
+
+.covert-text {
+  color: #eb4b4b !important
 }
 
 .classified {
   background: #d32ce6;
 }
 
+.classified-text {
+  color: #d32ce6 !important;
+}
+
 .restricted {
   background: #8847ff;
+}
+
+.restricted-text {
+  color: #8847ff !important;
 }
 
 .mil-spec-grade {
   background: #4b69ff;
 }
 
+.mil-spec-grade-text {
+  color: #4b69ff !important;
+}
+
 .industrial-grade {
   background: #5e98d9;
 }
 
+.industrial-grade-text {
+  color: #5e98d9 !important;
+}
+
 .consumer-grade {
   background: #b0c3d9;
+}
+
+.consumer-grade-text {
+  color: #b0c3d9 !important;
 }
 
 .extraordinary {
