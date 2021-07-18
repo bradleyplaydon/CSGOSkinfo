@@ -55,9 +55,18 @@ def signup():
         }
 
         mongo.db.users.insert_one(register)
+
         user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
-        session["user"] = user
+
+        skins_liked = list(map(str, user["skins_liked"]))
+        skins_disliked = list(map(str, user["skins_disliked"]))
+
+        session["user"] = {
+                        "username": user["username"],
+                        "is_admin": user["is_admin"],
+                        "skins_liked": skins_liked,
+                        "skins_disliked": skins_disliked}
         flash("Registration Succesful")
         return redirect(url_for("account", user=session["user"]))
 
@@ -81,11 +90,12 @@ def login():
                         "is_admin": existing_user["is_admin"],
                         "skins_liked": skins_liked,
                         "skins_disliked": skins_disliked}
+
                     flash("Welcome, {}".format(
                         request.form.get("username")))
 
                     return redirect(url_for(
-                            "account", username="test"))
+                            "account", username=session["user"]["username"]))
             else:
                 flash("Incorrect Username and/or Password")
                 return redirect(url_for("login"))
