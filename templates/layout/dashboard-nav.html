@@ -2,7 +2,7 @@
     <div class="position-sticky pt-3">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
+                <a class="nav-link text-white {% if active_page == "dashboard" %} active {% endif %}" href="{{ url_for('add_skin') }}" aria-current="page" href="#">
                     <i class="fas fa-users-cog"></i>
                     Dashboard
                 </a>
