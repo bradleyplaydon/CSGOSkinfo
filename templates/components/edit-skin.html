@@ -1,7 +1,6 @@
 {% extends 'layout/dashboard-base.html' %}
 {% set active_page = "editskin" %}
 {% block content %}
-<meta id="weapons" data-weapons="{{ weapons }}">
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h2 class="h2">{{ page_title }}</h2>
 </div>
@@ -33,7 +32,7 @@
                 {% set skinname = skin.name %}
                 <div class="col-lg-3 col-sm-6 mb-2">
                     <div class="card border bg-dark">
-                        <a href="#">
+                        <a href="{{ url_for('edit_selected_skin', skinname=skinname )}}">
                             {% if skin.image_urls.factory_new is not none %}
                             <img src="{{ skin.image_urls.factory_new }}" class="card-img-top"
                                 alt="{{ skin.name }} image">
