@@ -85,19 +85,29 @@ If there are any improvements, questions or anything at all then please get in t
 
 #### Structure
   I have decided to use [Bootstrap](https://getbootstrap.com/) so that I can create a structured grid using the Boostrap flexbox column system. It also has useful features such as a card component and alerts.
----
+
 ### **Wireframes & Flow diagrams**
   For building the Wireframes I have used [Balsamiq Wireframes](https://balsamiq.com/) as it allows for easy website Wireframes and easy to get across a general flow of the website.
 
   Here I will list a few of my wireframes however there are more within the wireframes directory inside this repository:
 
-  ### Home Wireframe Desktop/Tablet & Mobile
+  #### Home Wireframe Desktop/Tablet & Mobile
   * [Home](wireframes/CSGOSkinfo-Home-Page.png)
 
-  ### Skin Collection Page Desktop/Tablet & Mobile
+  #### Skin Collection Page Desktop/Tablet & Mobile
   * [Pistols](wireframes/CSGOSkinfo-Pistols-Page.png)
 
-  ### Admin Dashboard Page Desktop/Tablet & Mobile
+  #### Admin Dashboard Page Desktop/Tablet & Mobile
   * [Dashboard](wireframes/CSGOSkinfo-Admin-Dashboard.png)
+
+  ### Flowcharts
+  I decided to create a flowchart using [Lucidchart](https://lucid.app/) to document the flow when it comes to signing up/logging in process and also the process for liking and disliking a skin see here:
+
+  #### Signup and logging in process
+  * [Flow](wireframes/CSGO_Skinfo-Sign-up-process.png)
+
+  #### Like and dislike skin process
+  * [Flow](wireframes/CSGO_SKINFO-LIKE-DISLIKE-FLOW.png)
+
 
   
