@@ -109,5 +109,78 @@ If there are any improvements, questions or anything at all then please get in t
   #### Like and dislike skin process
   * [Flow](wireframes/CSGO_SKINFO-LIKE-DISLIKE-FLOW.png)
 
+  ### Database structure
+  For this project mongodb has been used to store all relevant data.
 
-  
+  #### **Users**
+  Key | Value | 
+  --- | --- | 
+  __id | ObjectId | 
+  first_name | String | 
+  last_name | String | 
+  email_address | String |
+  password | String |
+  is_admin | Boolean |
+  skins_liked | Array |
+  skins_disliked | Array |
+
+  #### **Skins**
+  Key | Value | 
+  --- | --- | 
+  __id | ObjectId | 
+  name | String |
+  skin_description | String | 
+  type | String | 
+  weapon_type | String |
+  weapon_name | String |
+  rarity | String |
+  rarity_precedence | Int32 |
+  souvenir_available | Boolean |
+  stattrak_available | Boolean |
+  stattrak_conditions | Object of 5 Booleans |
+  conditions | Object of 5 Booleans |
+  release_date | Date |
+  image_urls | Object of 5 Strings |
+  up_votes | Int |
+  down_votes | Int |
+
+  #### **Stickers**
+  Key | Value | 
+  --- | --- | 
+  __id | ObjectId | 
+  name | String | 
+  skin_description | String | 
+  type | String |
+  rarity | String |
+  rarity_precedence | Int32 |
+  image_url | String |
+  release_date | Date |
+  up_votes | Int |
+  down_votes | Int |
+
+  #### **Cases**
+  Key | Value | 
+  --- | --- | 
+  __id | ObjectId | 
+  name | String | 
+  skin_description | String | 
+  type | String |
+  rarity | String |
+  image_url | String |
+  release_date | Date |
+  up_votes | Int |
+  down_votes | Int |
+
+  #### **Gloves**
+  Key | Value | 
+  --- | --- | 
+  __id | ObjectId | 
+  name | String | 
+  skin_description | String | 
+  type | String |
+  rarity | String |
+  conditions | Object of 5 Booleans |
+  release_date | Date |
+  image_urls | Object of 5 Strings |
+  up_votes | Int |
+  down_votes | Int |
