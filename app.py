@@ -37,11 +37,11 @@ def signup():
 
         if existing_user:
             flash("Username already exists")
-            return redirect(url_for("register"))
+            return redirect(url_for("signup"))
 
         if request.form.get("password") != request.form.get("confirmpassword"):
             flash("Passwords doesn't match")
-            return redirect(url_for("register"))
+            return redirect(url_for("signup"))
 
         register = {
             "first_name": request.form.get("firstName").capitalize(),
