@@ -3,4 +3,187 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h2 class="h2">Edit {{ skin.name }}</h2>
 </div>
+<form id="weapon-skin-form" class="container-fluid" method="post" validate>
+    <div class="row">
+
+      <div class="col-md-9 col-sm-12">
+        <label for="skin_name" class="label">Skin Name</label>
+        <input type="text" placeholder="Skin Name" value="{{ skin.name }}" class="form-control bg-dark text-white rounded-0 mb-3"
+          name="name" minlength="10" maxlength="35" required>
+        <input type="text" placeholder="Skin Description" value="{{ skin.skin_description }}" class="form-control bg-dark text-white rounded-0 mb-3"
+          name="skin_description" minlength="20" maxlength="100" required>
+        <select id="skin-weapon-type" class="form-select bg-dark text-white rounded-0 mb-3"
+          placeholder="Weapon Type" name="weapon_type">
+          {% for type in weaponTypes %}
+          {% if type == skin.weapon_type %}
+          <option value="{{ type }}" selected>{{ type }}</option>
+          {% endif %}
+          {% if not type == "Knife" %}
+          {% if type == 'Machinegun' %}
+          <option value="{{ type | replace('Machinegun', 'Heavy') }}">{{ type | replace('Machinegun', 'Heavy') |
+            capitalize }}</option>
+          {% elif type == 'Sniper Rifle' %}
+          <option value="{{ type | replace(' ', '-') }}">{{ type | replace(' ', '-') }}</option>
+          {% else %}
+          <option value="{{ type }}">{{ type }}</option>
+          {% endif %}
+          {% endif %}
+          {% endfor %}
+        </select>
+        <select placeholder="Rarity" class="form-select bg-dark text-white rounded-0 mb-3" name="rarity" required>
+          {% for rarity in weaponRarities %}
+          {% if not rarity == "Extraordinary" %}
+          <option value="{{ rarity }}">{{ rarity }}</option>
+          {% endif %}
+          {% endfor %}
+        </select>
+        <div class="invalid-feedback border border-danger p-3 fs-5 mb-2" id="invalid-error">
+
+        </div>
+        <div class="table-responsive">
+          <table class="table table-dark table-striped">
+            <thead>
+              <tr>
+                <th scope="col" colspan="1">Conditions</th>
+                <th scope="col" colspan="1">Images</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" autocomplete="off" name="fn" id="factory_new" {% if skin.conditions.factory_new %} checked {% endif %}>
+                    <label class="form-check-label" for="factory_new">
+                      Factory New
+                    </label>
+                  </div>
+                </th>
+                <td>
+                  <label for="fnurl" class="form-label float-end">Icon URL</label>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                      id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
+                    <input class="form-control bg-dark text-white input-bg-disabled"
+                      placeholder="Factory New Icon URL" name="fnimage" id="fnurl" type="text"
+                      aria-describedby="steamimageurl" disabled>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" autocomplete="off" name="mw" id="min_wear" {% if skin.conditions.min_wear %} checked {% endif %}>
+                    <label class="form-check-label" for="min_wear">
+                      Minimal Wear
+                    </label>
+                  </div>
+                </th>
+                </th>
+                <td>
+                  <label for="mwurl" class="form-label float-end">Icon URL</label>
+                  <div class="input-group mb-3"><span class="input-group-text"
+                      id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span><input
+                      class="form-control bg-dark text-white input-bg-disabled" id="mwurl"
+                      placeholder="Minimal Wear Icon URL" name="mwimage" type="text" disabled>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" autocomplete="off" name="ft" id="field_tested" {% if skin.conditions.field_tested %} checked {% endif %}>
+                    <label class="form-check-label" for="field_tested">
+                      Field-Tested
+                    </label>
+                  </div>
+                </th>
+                <td>
+                  <label for="fturl" class="form-label float-end">Icon URL</label>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                      id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span><input
+                      class="form-control bg-dark text-white input-bg-disabled" id="fturl"
+                      placeholder="Field Tested Icon URL" name="ftimage" type="text" disabled>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" autocomplete="off" name="ww" id="well_worn" {% if skin.conditions.well_worn %} checked {% endif %}>
+                    <label class="form-check-label" for="well_worn">
+                      Well-Worn
+                    </label>
+                  </div>
+                </th>
+                <td>
+                  <label for="wwurl" class="form-label float-end">Icon URL</label>
+                  <div class="input-group mb-3"><span class="input-group-text"
+                      id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
+                      {% if skin.image_urls.well_worn %}
+                      <input class="form-control bg-dark text-white" id="wwurl"
+                      placeholder="Well-Worn Icon URL" value="{{ skin.image_urls.well_worn }}" name="wwimage" type="text">   
+                      {% else %}
+                      <input class="form-control bg-dark input-bg-disabled text-white" id="wwurl"
+                      placeholder="Well-Worn Icon URL" name="wwimage" type="text">
+                      {% endif %}
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" autocomplete="off" name="bs" id="battle_scarred" {% if skin.conditions.battle_scarred %} checked {% endif %}>
+                    <label class="form-check-label" for="battle_scarred">
+                      Battle-Scarred
+                    </label>
+                  </div>
+                </th>
+                <td>
+                  <label for="bsurl" class="form-label float-end">Icon URL</label>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text"
+                      id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span><input
+                      class="form-control bg-dark text-white input-bg-disabled" id="bsurl"
+                      placeholder="Battle-Scarred Icon URL" name="bsimage" type="text" disabled>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="d-flex flex-wrap justfiy-content-center mt-3 mb-3 border p-3">
+          <strong>StatTrak / Souvenir</strong>
+          <div class="form-check mx-3">
+            <input class="form-check-input" type="radio" name="stat_or_souv">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Neither
+            </label>
+          </div>
+          <div class="form-check mx-3">
+            <input class="form-check-input" type="radio" name="stat_or_souv" id="statTrak">
+            <label class="form-check-label" for="statTrak">
+              StatTrak
+            </label>
+          </div>
+          <div class="form-check mx-3">
+            <input class="form-check-input" type="radio" name="stat_or_souv" id="souvenir">
+            <label class="form-check-label" for="souvenir">
+              Souvenir
+            </label>
+          </div>
+        </div>
+        <label for="release-date" class="label">Skin Release Date (Click)</label>
+        <div class="input-group flex-nowrap">
+          <span class="input-group-text" id="addon-wrapping"><i class="fas fa-calendar-alt"></i></span>
+          <input class="form-select" role="button" id="release-date" placeholder="Pick A Date"
+            name="release-date">
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12 text-center">
+        <button type="submit" class="btn btn-orange p-5 h-75 mt-4">
+          <i class="far fa-plus-square fs-4 align-middle"></i> Add Skin
+        </button>
+      </div>
+    </div>
+  </form>
 {% endblock %}
