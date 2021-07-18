@@ -178,6 +178,17 @@ def edit_skin():
     return render_template("error-pages/404.html")
 
 
+@app.route('/edit/skin/<skinname>', methods=["GET", "POST"])
+def edit_selected_skin(skinname):
+    if session and session["user"]["is_admin"]:
+        skin = skinColl.find_one({ "name": skinname })
+        weaponTypes = skinColl.distinct('weapon_type')
+        weaponRarities = skinColl.distinct('rarity')
+
+        return render_template("components/edit-selected-skin.html", skin=skin, weaponTypes=weaponTypes, weaponRarities=weaponRarities)
+    return render_template("error-pages/404.html")
+
+
 @app.route('/insert/weapon', methods=["GET", "POST"])
 def insert_weapon_skin():
     if session and session["user"]["is_admin"]:
