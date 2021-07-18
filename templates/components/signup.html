@@ -8,15 +8,13 @@
         <input type="password" class="form-control mb-3" placeholder="Confirm Password" name="confirmpassword" required>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-        <div class="error-message bg-danger p-4 text-center">
-            {% for message in messages %}
-            {% if message == "Password doesn't match" %}
-            <div class="alert alert-danger" role="alert">
-                A simple danger alert—check it out!
+            {% if "Password doesn't match" in messages %}
+            <div class="error-message bg-danger p-4 text-center">
+                <div class="alert alert-danger" role="alert">
+                    A simple danger alert—check it out!
+                </div>
             </div>
             {% endif %}
-            {% endfor %}
-        </div>
         {% endif %}
         {% endwith %}
         <button type="submit" name="button" class="btn bg-white p-3 w-100" id="formSubmit">Submit</button>

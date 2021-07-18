@@ -49,7 +49,7 @@ def signup():
             "username": request.form.get("username").lower(),
             "email_address": request.form.get("email"),
             "password": generate_password_hash(request.form.get("password")),
-            "is_admin": "false",
+            "is_admin": False,
             "skins_liked": list(),
             "skins_disliked": list()
         }
