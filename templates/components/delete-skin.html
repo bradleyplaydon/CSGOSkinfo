@@ -32,7 +32,7 @@
                 {% set skin_id = skin._id %}
                 <div class="col-lg-3 col-sm-6 mb-2">
                     <div class="card border bg-dark">
-                        <a href="{{ url_for('Delete_selected_skin', skin_id=skin_id )}}">
+                        <a href="{{ url_for('delete_selected_skin', skin_id=skin_id )}}">
                             {% if skin.image_urls.factory_new is not none %}
                             <img src="{{ skin.image_urls.factory_new }}" class="card-img-top"
                                 alt="{{ skin.name }} image">

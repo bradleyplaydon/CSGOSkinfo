@@ -285,6 +285,14 @@ def delete_skin():
     return render_template("error-pages/404.html")
 
 
+@app.route('/delete/skin/<skin_id>', methods=["GET", "POST"])
+def delete_selected_skin(skin_id):
+    if session and session["user"]["is_admin"]:
+        skin = skinColl.find_one({"_id": ObjectId(skin_id)})
+        return render_template("components/delete-selected-skin.html")
+    return render_template("error-pages/404.html")
+    
+
 @app.route('/insert/knife', methods=["GET", "POST"])
 def insert_knife_skin():
     if session and session["user"]["is_admin"]:
