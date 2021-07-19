@@ -136,7 +136,7 @@ def admin():
         totSkinUpVotes = 0
         totSkinDownVotes = 0
         highestLikes = skinColl.find_one(sort=[("up_votes", -1)])["up_votes"]
-        mostLikedSkin = skinColl.find({"up_votes": highestLikes})
+        mostLikedSkin = list(skinColl.find({"up_votes": highestLikes}))
         for skin in skinUpVotes:
             totSkinUpVotes = totSkinUpVotes + skin["up_votes"]
 
