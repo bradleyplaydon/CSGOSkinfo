@@ -377,13 +377,21 @@ def get_skin_by_name():
                   
 @app.route("/pistols")
 def pistols():
+    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
+    per_page = 20
+    offset = (page - 1) * per_page
+
     total = skinColl.find({"weapon_type": "Pistol"}).sort("rarity_precedence", -1).count()
     pistols = skinColl.find({"weapon_type": "Pistol"}).sort("rarity_precedence", -1)
 
-    if session:
-        return render_template("pages/pistols.html", page_title="Pistols",  pistols=pistols)
+    pistols_paginated = pistols[offset: offset + per_page]
 
-    return render_template("pages/pistols.html", page_title="Pistols", pistols=pistols)
+    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+
+    if session:
+        return render_template("pages/pistols.html", page_title="Pistols",  pistols=pistols_paginated, pagination=pagination)
+
+    return render_template("pages/pistols.html", page_title="Pistols", pistols=pistols_paginated)
 
 
 @app.route("/rifles")
