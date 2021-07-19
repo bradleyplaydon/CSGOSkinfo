@@ -81,7 +81,7 @@
                   <div class="input-group mb-3">
                     <span class="input-group-text"
                       id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
-                    {% if skin.image_urls.factory_new %}
+                    {% if skin.image_urls.factory_new and skin.conditions.factory_new %}
                     <input class="form-control bg-dark text-white" id="fnurl"
                       placeholder="Factory New Icon URL" value="{{ skin.image_urls.factory_new[59:] }}" name="fnimage" type="text">   
                     {% else %}
@@ -105,7 +105,7 @@
                   <label for="mwurl" class="form-label float-end">Icon URL</label>
                   <div class="input-group mb-3"><span class="input-group-text"
                       id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
-                      {% if skin.image_urls.min_wear %}
+                      {% if skin.image_urls.min_wear and skin.conditions.min_wear %}
                       <input class="form-control bg-dark text-white" id="mwurl"
                       placeholder="Minimal Wear Icon URL" value="{{ skin.image_urls.min_wear[59:] }}" name="mwimage" type="text">   
                       {% else %}
@@ -128,11 +128,11 @@
                   <div class="input-group mb-3">
                     <span class="input-group-text"
                       id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
-                      {% if skin.image_urls.field_tested %}
+                      {% if skin.image_urls.field_tested and skin.conditions.field_tested %}
                       <input class="form-control bg-dark text-white" id="wwurl"
                       placeholder="Field Tested Icon URL" value="{{ skin.image_urls.field_tested[59:] }}" name="ftimage" type="text">   
                       {% else %}
-                      <input class="form-control bg-dark input-bg-disabled text-white" id="wwurl"
+                      <input class="form-control bg-dark text-white" id="wwurl"
                       placeholder="Field Tested Icon URL" name="ftimage" type="text">
                       {% endif %}
                   </div>
@@ -151,7 +151,7 @@
                   <label for="wwurl" class="form-label float-end">Icon URL</label>
                   <div class="input-group mb-3"><span class="input-group-text"
                       id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
-                      {% if skin.image_urls.well_worn %}
+                      {% if skin.image_urls.well_worn and skin.conditions.well_worn %}
                       <input class="form-control bg-dark text-white" id="wwurl"
                       placeholder="Well-Worn Icon URL" value="{{ skin.image_urls.well_worn[59:] }}" name="wwimage" type="text">   
                       {% else %}
@@ -175,7 +175,7 @@
                   <div class="input-group mb-3">
                     <span class="input-group-text"
                       id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
-                      {% if skin.image_urls.battle_scarred %}
+                      {% if skin.image_urls.battle_scarred and skin.conditions.battle_scarred %}
                       <input class="form-control bg-dark text-white" id="bsurl"
                       placeholder="Battle Scarred Icon URL" value="{{ skin.image_urls.battle_scarred[59:] }}" name="bsimage" type="text">   
                       {% else %}
