@@ -443,6 +443,7 @@ def cases():
 def like():
     if request.method == "POST":
         print("liked")
+        return "liked"
     if request.method == "GET":
         return render_template("error-pages/404.html")
 
@@ -451,6 +452,7 @@ def like():
 def dislike():
     if request.method == "POST":
         print("disliked")
+        return "disliked"
     if request.method == "GET":
         return render_template("error-pages/404.html")
 
