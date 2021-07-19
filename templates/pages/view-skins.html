@@ -8,4 +8,93 @@
     <input class="form-control" id="searchSkin" name="searchallskins" placeholder="Enter the Skin Name">
     <button class="btn btn-orange px-5 pt-3 pb-3" type="submit"><i class="fas fa-search text-white fs-4"></i></button>
 </form>
+{% if foundSkins %}
+<div class="col-12">
+    Skins Found:
+</div>
+<div class="container-fluid">
+    <div class="row">
+        {% for skin in foundSkins %}
+        {% set skin_id = skin._id %}
+        <div class="col-lg-3 col-sm-6 mb-2">
+            <div class="card border bg-dark">
+                {% if skin.image_urls.factory_new is not none %}
+                <img src="{{ skin.image_urls.factory_new }}" class="card-img-top" alt="{{ skin.name }} image">
+                {% else %}
+                <img src="{{ skin.image_urls.min_wear }}" class="card-img-top" alt="{{ skin.name }} image">
+                {% endif %}
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-white border bg-dark">
+                            {{ skin.name }}
+                        </li>
+                        <li class="list-group-item text-white bg-dark">
+                            <p class="{{ skin.rarity | replace(' ', '-') | lower }} text-center p-2">{{
+                                skin.rarity }}</p>
+                        </li>
+                        <li class="list-group-item text-white bg-dark">
+                            <p>{{ skin.skin_description }}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% if cases %}
+<div class="container-fluid">
+    <div class="row">
+        {% for skin in cases %}
+        <div class="col-lg-3 col-sm-6 mb-2">
+            <div class="card border bg-dark">
+                <img src="{{ skin.image_url }}" class="card-img-top" alt="{{ skin.name }} image">
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-white border bg-dark">
+                            {{ skin.name }}
+                        </li>
+                        <li class="list-group-item text-white bg-dark">
+                            <p class="{{ skin.rarity | replace(' ', '-') | lower }} text-center p-2">{{
+                                skin.rarity }}</p>
+                        </li>
+                        <li class="list-group-item text-white bg-dark">
+                            <p>{{ skin.skin_description }}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% if stickers %}
+<div class="container-fluid">
+    <div class="row">
+        {% for skin in stickers %}
+        <div class="col-lg-3 col-sm-6 mb-2">
+            <div class="card border bg-dark">
+                <img src="{{ skin.image_url }}" class="card-img-top" alt="{{ skin.name }} image">
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-white border bg-dark">
+                            {{ skin.name }}
+                        </li>
+                        <li class="list-group-item text-white bg-dark">
+                            <p class="{{ skin.rarity | replace(' ', '-') | lower }} text-center p-2">{{
+                                skin.rarity }}</p>
+                        </li>
+                        <li class="list-group-item text-white bg-dark">
+                            <p>{{ skin.skin_description }}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 {% endblock %}
