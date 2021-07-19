@@ -251,8 +251,8 @@ def edit_selected_skin(skin_id):
                     "well_worn": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("ftimage") if request.form.get("wwimage") else None,
                     "battle_scarred": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("bsimage") if request.form.get("bsimage") else None
                 },
-                "up_votes": 0,
-                "down_votes": 0
+                "up_votes": skinColl.find_one("_id", skin_id)["up_votes"],
+                "down_votes": skinColl.find_one("_id", skin_id)["down_votes"]
             }
             submit["release_date"] = parser.parse(request.form.get("release-date"))
          
