@@ -51,6 +51,7 @@ $(document).ready(function () {
                 $(this).find("#edit-skin").removeAttr("disabled")
                 $('#invalid-error').hide();
             } else {
+                $(this).find("#edit-skin").attr("disabled","disabled")
                 $("#invalid-error").text("Please tick 2 conditions in order to add the skin and add atleast 2 Steam icon URLs");
                 $('#invalid-error').show();
             }
