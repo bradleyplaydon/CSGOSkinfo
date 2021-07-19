@@ -157,8 +157,8 @@ def admin():
 @app.route('/view/skins', methods=["GET", "POST"])
 def view_skins():
     if session and session["user"]["is_admin"]:
-        return render_template("pages/view-skins.html")
-
+        return render_template("pages/view-skins.html", page_title="View Skins")
+    return render_template("error-pages/404.html")
 
 @app.route('/add/skin', methods=["GET", "POST"])
 def add_skin():
@@ -343,12 +343,21 @@ def get_skin_by_name():
                 return "False"
 
         if request.method == "GET":
-            searchOptions = { "weapon_type": { "$ne": "Knife" }, "type": { "$ne": "Gloves"} }
-            if request.values["searchskin"] != None and request.values["searchskin"] != '':
-                searchOptions["name"] = { "$regex": request.values["searchskin"], "$options": "i" }
+            searchOptions = {}
             foundSkins = skinColl.find(searchOptions).sort("rarity_precedence", -1)
-          
-            return render_template("components/edit-skin.html", foundSkins=foundSkins)
+
+            if "searchweaponskin" in request.args and request.values["searchweaponskin"] != None and request.values["searchweaponskin"] != '':
+                searchOptions = { "weapon_type": { "$ne": "Knife" }, "type": { "$ne": "Gloves"} }
+                searchOptions["name"] = { "$regex": request.values["searchweaponskin"], "$options": "i" }
+                return render_template("components/edit-skin.html", foundSkins=foundSkins)
+
+
+            if "searchallskins" in request.args and request.values["searchallskins"] != None and request.values["searchallskins"] != '':
+                searchOptions["name"] = { "$regex": request.values["searchallskins"], "$options": "i" }
+                cases = mongo.db.cases.find(searchOptions).sort("rarity_precedence", -1)
+                stickers = mongo.db.stickers.find(searchOptions).sort("rarity_precedence", -1)
+                return render_template("pages/view-skins.html", foundSkins=foundSkins, cases=cases, stickers=stickers)
+
             
         
 
