@@ -205,7 +205,20 @@ def edit_selected_skin(skin_id):
     if session and session["user"]["is_admin"]:
         weaponTypes = skinColl.distinct('weapon_type')
         weaponRarities = skinColl.distinct('rarity')
-        
+        weapons = {
+            "pistol": skinColl.distinct("weapon_name",
+                                        {"weapon_type": "Pistol"}),
+            "rifle": skinColl.distinct("weapon_name",
+                                       {"weapon_type": "Rifle"}),
+            "heavy": skinColl.distinct("weapon_name",
+                                       {"weapon_type": "Machinegun"}),
+            "smg": skinColl.distinct("weapon_name",
+                                     {"weapon_type": "SMG"}),
+            "shotgun": skinColl.distinct("weapon_name",
+                                         {"weapon_type": "Shotgun"}),
+            "sniper-rifle": skinColl.distinct("weapon_name",
+                                              {"weapon_type": "Sniper Rifle"})
+        }
         skin = skinColl.find_one({"_id": ObjectId(skin_id)})
         return render_template("components/edit-selected-skin.html", skin=skin, weaponTypes=weaponTypes, weapons=json.dumps(weapons), weaponRarities=weaponRarities)
     return render_template("error-pages/404.html")
