@@ -7,6 +7,7 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from dateutil import parser
+from datetime import date 
 import json
 if os.path.exists("env.py"):
     import env
@@ -169,7 +170,7 @@ def add_skin():
                                      {"weapon_type": "SMG"}),
             "shotgun": skinColl.distinct("weapon_name",
                                          {"weapon_type": "Shotgun"}),
-            "sniper-rifle": skinColl.distinct("weapon_name",
+            "sniper rifle": skinColl.distinct("weapon_name",
                                               {"weapon_type": "Sniper Rifle"})
         }
         weaponRarities = skinColl.distinct('rarity')
@@ -233,22 +234,23 @@ def edit_selected_skin(skin_id):
                 },
                 "conditions": {
                     "factory_new": True if request.form.get("fn") else False,
-                    "min_wear": True if request.form.get("ww") else False,
+                    "min_wear": True if request.form.get("mw") else False,
                     "field_tested": True if request.form.get("ft") else False,
                     "well_worn": True if request.form.get("ww") else False,
                     "battle_scarred": True if request.form.get("bs") else False
                 },
-                "release_date": parser.parse(request.form.get("release-date")),
                 "image_urls": {
-                    "factory_new": request.form.get("fnimage") if request.form.get("fnimage") else None,
-                    "min_wear": request.form.get("mwimage") if request.form.get("mwimage") else None,
-                    "field_tested": request.form.get("ftimage") if request.form.get("ftimage") else None,
-                    "well_worn": request.form.get("ftimage") if request.form.get("wwimage") else None,
-                    "battle_scarred": request.form.get("bsimage") if request.form.get("bsimage") else None
+                    "factory_new": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("fnimage") if request.form.get("fnimage") else None,
+                    "min_wear": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("mwimage") if request.form.get("mwimage") else None,
+                    "field_tested": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("ftimage") if request.form.get("ftimage") else None,
+                    "well_worn": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("ftimage") if request.form.get("wwimage") else None,
+                    "battle_scarred": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("bsimage") if request.form.get("bsimage") else None
                 },
                 "up_votes": 0,
                 "down_votes": 0
             }
+            submit["release_date"] = parser.parse(request.form.get("release-date"))
+         
             skinColl.update({"_id": ObjectId(skin_id)}, submit)
             flash("The {} has been successfully updated".format(
                         request.form.get("name")))
@@ -267,7 +269,7 @@ def edit_selected_skin(skin_id):
                                      {"weapon_type": "SMG"}),
             "shotgun": skinColl.distinct("weapon_name",
                                          {"weapon_type": "Shotgun"}),
-            "sniper-rifle": skinColl.distinct("weapon_name",
+            "sniper rifle": skinColl.distinct("weapon_name",
                                               {"weapon_type": "Sniper Rifle"})
         }
         skin = skinColl.find_one({"_id": ObjectId(skin_id)})

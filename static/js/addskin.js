@@ -36,7 +36,7 @@ $(document).ready(function () {
                 $(imageEls[i]).attr("disabled", "disabled");
             }
         });
-        if (checkedCount >= 3) {
+        if (checkedCount >= 2) {
             $('[name=stat_or_souv]').each(function (index, element) {
                 $(element).attr("required", "required")
                 $(element).on("input", function () {
@@ -61,8 +61,8 @@ $(document).ready(function () {
 
     $("#weapon-skin-form").submit(function (e) {
         e.preventDefault();
-        if (checkedCount < 3) {
-            $("#invalid-error").text("Please tick 3 conditions in order to add the skin and add atleast 3 Steam icon URLs");
+        if (checkedCount < 2) {
+            $("#invalid-error").text("Please tick 2 conditions in order to add the skin and add atleast 2 Steam icon URLs");
             $('#invalid-error').fadeIn('slow', function () {
                 $('#invalid-error').delay(2000).fadeOut();
             });

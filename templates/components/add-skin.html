@@ -31,8 +31,6 @@
                 {% if type == 'Machinegun' %}
                 <option value="{{ type | replace('Machinegun', 'Heavy') }}">{{ type | replace('Machinegun', 'Heavy') |
                   capitalize }}</option>
-                {% elif type == 'Sniper Rifle' %}
-                <option value="{{ type | replace(' ', '-') }}">{{ type | replace(' ', '-') }}</option>
                 {% else %}
                 <option value="{{ type }}">{{ type }}</option>
                 {% endif %}
