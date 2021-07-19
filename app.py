@@ -442,7 +442,18 @@ def cases():
 @app.route("/api/like-skin", methods=["POST", "GET"])
 def like():
     if request.method == "POST":
-        print("liked")
+        reqJson = request.json
+        skin_id = ObjectId(reqJson["__id"])
+        collection = str(reqJson["collection"])
+
+        mongo.db.users.update(
+        {"username": session["user"]}, {"$push": {"skins_liked": ObjectId(reqJson["_id"])}})
+
+        skin_upvotes = mongo.db[collection].find_one({"_id": ObjectId(reqJson["_id"])})["up_votes"] + 1
+
+        mongo.db[collection].update(
+            {"_id": ObjectId(reqJson["_id"])}, {"$set": {"up_votes": skin_upvotes}})
+            
         return "liked"
     if request.method == "GET":
         return render_template("error-pages/404.html")
