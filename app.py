@@ -275,6 +275,16 @@ def edit_selected_skin(skin_id):
     return render_template("error-pages/404.html")
 
 
+@app.route('/delete/skin', methods=["GET", "POST"])
+def delete_skin():
+    if session and session["user"]["is_admin"]:
+        skins = list(skinColl.find( { "weapon_type": { "$ne": "Knife" }, "type": { "$ne": "Gloves"} }))
+        return render_template(
+            "components/delete-skin.html", page_title="Delete A Skin",
+            skins=skins)
+    return render_template("error-pages/404.html")
+
+
 @app.route('/insert/knife', methods=["GET", "POST"])
 def insert_knife_skin():
     if session and session["user"]["is_admin"]:
