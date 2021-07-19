@@ -1,7 +1,7 @@
 {% extends 'layout/dashboard-base.html' %}
 {% set active_page = 'edit-selected-skin' %}
 {% block content %}
-<meta id="weapons" data-weapons="{{ weapons }}">
+<meta id="weapons" data-weapons="{{ jsonweapons }}">
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h2 class="h2">Edit {{ skin.name }}</h2>
 </div>
@@ -32,8 +32,6 @@
           {% if type == 'Machinegun' %}
           <option value="{{ type | replace('Machinegun', 'Heavy') }}">{{ type | replace('Machinegun', 'Heavy') |
             capitalize }}</option>
-          {% elif type == 'Sniper Rifle' %}
-          <option value="{{ type | replace(' ', '-') }}">{{ type | replace(' ', '-') }}</option>
           {% else %}
           <option value="{{ type }}">{{ type }}</option>
           {% endif %}
@@ -43,6 +41,14 @@
         </select>
         <select id="skin-weapon-name" class="form-select bg-dark text-white rounded-0 mb-3"
                 placeholder="Weapon Name" name="weapon_name">
+                {% set weaponType = skin.weapon_type.lower() %}
+                {% for name in weapons[weaponType] %}
+                  {% if name == skin.weapon_name %}
+                  <option value="{{ name }}" selected>{{ name }}</option>
+                  {% else %}
+                  <option value="{{ name }}">{{ name }}</option>
+                  {% endif %}
+                {% endfor %}
               </select>
         <select placeholder="Rarity" class="form-select bg-dark text-white rounded-0 mb-3" name="rarity" required>
           {% for rarity in weaponRarities %}

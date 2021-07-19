@@ -271,7 +271,7 @@ def edit_selected_skin(skin_id):
                                               {"weapon_type": "Sniper Rifle"})
         }
         skin = skinColl.find_one({"_id": ObjectId(skin_id)})
-        return render_template("components/edit-selected-skin.html", skin=skin, weaponTypes=weaponTypes, weapons=json.dumps(weapons), weaponRarities=weaponRarities)
+        return render_template("components/edit-selected-skin.html", skin=skin, weaponTypes=weaponTypes, weapons=weapons, jsonweapons=json.dumps(weapons), weaponRarities=weaponRarities)
     return render_template("error-pages/404.html")
 
 
