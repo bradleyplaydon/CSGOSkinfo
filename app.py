@@ -295,8 +295,11 @@ def delete_skin():
 @app.route('/delete/skin/<skin_id>', methods=["GET", "POST"])
 def delete_selected_skin(skin_id):
     if session and session["user"]["is_admin"]:
-        skin = skinColl.find_one({"_id": ObjectId(skin_id)})
-        return render_template("components/delete-selected-skin.html")
+        skinColl.remove({"_id": ObjectId(skin_id)}) if skinColl.find_one({"_id": ObjectId(skin_id)}) != None else False
+        mongo.db.cases.remove({"_id": ObjectId(skin_id)}) if mongo.db.cases.find_one({"_id": ObjectId(skin_id)}) != None else False
+        mongo.db.stickers.remove({"_id": ObjectId(skin_id)}) if mongo.db.stickers.find_one({"_id": ObjectId(skin_id)}) != None else False
+
+        return redirect(url_for("view_skins"))
     return render_template("error-pages/404.html")
     
 
@@ -349,6 +352,13 @@ def get_skin_by_name():
                 searchOptions["name"] = { "$regex": request.values["searchweaponskin"], "$options": "i" }
                 foundSkins = skinColl.find(searchOptions).sort("rarity_precedence", -1)
                 return render_template("components/edit-skin.html", foundSkins=foundSkins)
+
+
+            if "deleteweaponskins" in request.args and request.values["deleteweaponskins"] != None and request.values["deleteweaponskins"] != '':
+                searchOptions = { "weapon_type": { "$ne": "Knife" }, "type": { "$ne": "Gloves"} }
+                searchOptions["name"] = { "$regex": request.values["deleteweaponskins"], "$options": "i" }
+                foundSkins = skinColl.find(searchOptions).sort("rarity_precedence", -1)
+                return render_template("components/delete-skin.html", foundSkins=foundSkins)
 
 
             if "searchknifes" in request.args and request.values["searchknifes"] != None and request.values["searchknifes"] != '':
