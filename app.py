@@ -476,6 +476,21 @@ def dislike():
     if request.method == "GET":
         return render_template("error-pages/404.html")
 
+
+@app.route("/api/unlike-skin", methods=["POST", "GET"])
+def unlike():
+    if request.method == "POST":
+        reqJson = request.json
+        return "unliked"
+
+
+@app.route("/api/undislike-skin", methods=["POST", "GET"])
+def undislike():
+    if request.method == "POST":
+        reqJson = request.json
+        return "undisliked"
+
+
 if __name__ == '__main__':
     app.run(
         host=os.environ.get("IP", "0.0.0.0"),
