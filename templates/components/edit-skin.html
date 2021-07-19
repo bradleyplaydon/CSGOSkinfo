@@ -17,7 +17,7 @@
             aria-labelledby="Edit-weapon" data-bs-parent="#Edit-weapon">
             <div class="accordion-body row">
                 <div class="input-group">
-                    <form class="form-control d-flex bg-dark p-3" action="/get/skin?weaponSkins" method="GET">
+                    <form class="form-control d-flex bg-dark p-3" action="/get/skin" method="GET">
                         <input class="form-control" id="searchWeaponSkin" name="searchweaponskin" placeholder="Enter the Skin Name"
                             aria-label="Example select with button addon">
                         <button class="btn btn-orange px-5 pt-3 pb-3" type="submit"><i
@@ -64,13 +64,56 @@
     <div class="accordion-item bg-dark text-white mt-5">
         <h2 class="accordion-header">
             <button class="accordion-button collapsed bg-dark text-white border" type="button" data-bs-toggle="collapse"
-                data-bs-target="#Edit-knife" aria-expanded="false" aria-controls="Edit-knife">
+                data-bs-target="#edit-knife" {% if foundKnifes %} aria-expanded="false" {% else %} aria-expanded="true"
+                {% endif %} aria-controls="edit-knife">
                 Edit Knife
             </button>
         </h2>
-        <div id="Edit-knife" class="accordion-collapse collapse" aria-labelledby="Edit-knife"
-            data-bs-parent="#Edit-knife">
-            <div class="accordion-body">
+        <div id="edit-knife" class="accordion-collapse collapse {% if foundKnifes %} show {% endif %}"
+            aria-labelledby="edit-knife" data-bs-parent="#edit-knife">
+            <div class="accordion-body row">
+                <div class="input-group">
+                    <form class="form-control d-flex bg-dark p-3" action="/get/skin" method="GET">
+                        <input class="form-control" id="searchknifes" name="searchknifes" placeholder="Enter the Knife Name"
+                            aria-label="Example select with button addon">
+                        <button class="btn btn-orange px-5 pt-3 pb-3" type="submit"><i
+                                class="fas fa-search text-white fs-4"></i></button>
+                    </form>
+                </div>
+                {% if foundKnifes %}
+                <div class="col-12">
+                   Skins Found:
+                </div>
+                {% for skin in foundKnifes %}
+                {% set skin_id = skin._id %}
+                <div class="col-lg-3 col-sm-6 mb-2">
+                    <div class="card border bg-dark">
+                        <a href="{{ url_for('edit_selected_skin', skin_id=skin_id )}}">
+                            {% if skin.image_urls.factory_new is not none %}
+                            <img src="{{ skin.image_urls.factory_new }}" class="card-img-top"
+                                alt="{{ skin.name }} image">
+                            {% else %}
+                            <img src="{{ skin.image_urls.min_wear }}" class="card-img-top" alt="{{ skin.name }} image">
+                            {% endif %}
+                        </a>
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item text-white border bg-dark">
+                                    {{ skin.name }}
+                                </li>
+                                <li class="list-group-item text-white bg-dark">
+                                    <p class="{{ skin.rarity | replace(' ', '-') | lower }} text-center p-2">{{
+                                        skin.rarity }}</p>
+                                </li>
+                                <li class="list-group-item text-white bg-dark">
+                                    <p>{{ skin.skin_description }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>
