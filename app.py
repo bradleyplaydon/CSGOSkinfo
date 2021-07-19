@@ -154,6 +154,12 @@ def admin():
         "error-pages/404.html", page_title="404 Page Not Found")
 
 
+@app.route('/view/skins', methods=["GET", "POST"])
+def view_skins():
+    if session and session["user"]["is_admin"]:
+        return render_template("pages/view-skins.html")
+
+
 @app.route('/add/skin', methods=["GET", "POST"])
 def add_skin():
     if session and session["user"]["is_admin"]:
@@ -254,7 +260,6 @@ def edit_selected_skin(skin_id):
             skinColl.update({"_id": ObjectId(skin_id)}, submit)
             flash("The {} has been successfully updated".format(
                         request.form.get("name")))
-
 
         weaponTypes = skinColl.distinct('weapon_type')
         weaponRarities = skinColl.distinct('rarity')
