@@ -27,6 +27,7 @@ skinColl = mongo.db.skins
 def index():
     latest_skins = skinColl.find().sort(
         ([("release_date", -1), ("rarity_precedence", -1)])).limit(17)
+    print(session["user"]["skins_liked"])
     return render_template(
         "pages/index.html", page_title="Latest Skins", skins=latest_skins)
 
@@ -388,10 +389,8 @@ def pistols():
 
     pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
 
-    if session:
-        return render_template("pages/pistols.html", page_title="Pistols",  pistols=pistols_paginated, pagination=pagination)
+    return render_template("pages/pistols.html", page_title="Pistols",  pistols=pistols_paginated, pagination=pagination)
 
-    return render_template("pages/pistols.html", page_title="Pistols", pistols=pistols_paginated)
 
 
 @app.route("/rifles")
@@ -443,17 +442,28 @@ def cases():
 def like():
     if request.method == "POST":
         reqJson = request.json
-        skin_id = ObjectId(reqJson["__id"])
         collection = str(reqJson["collection"])
 
         mongo.db.users.update(
-        {"username": session["user"]}, {"$push": {"skins_liked": ObjectId(reqJson["_id"])}})
+        {"username": session["user"]["username"]}, {"$push": {"skins_liked": ObjectId(reqJson["_id"])}})
+
+        existing_user = mongo.db.users.find_one(
+                 {"username": session["user"]["username"]})
+
+        skins_liked = list(map(str, existing_user["skins_liked"]))
+        skins_disliked = list(map(str, existing_user["skins_disliked"]))
+        
+        session["user"] = {
+                        "username": existing_user["username"],
+                        "is_admin": existing_user["is_admin"],
+                        "skins_liked": skins_liked,
+                        "skins_disliked": skins_disliked}
 
         skin_upvotes = mongo.db[collection].find_one({"_id": ObjectId(reqJson["_id"])})["up_votes"] + 1
 
         mongo.db[collection].update(
             {"_id": ObjectId(reqJson["_id"])}, {"$set": {"up_votes": skin_upvotes}})
-            
+
         return "liked"
     if request.method == "GET":
         return render_template("error-pages/404.html")
@@ -462,7 +472,6 @@ def like():
 @app.route("/api/dislike-skin", methods=["POST", "GET"])
 def dislike():
     if request.method == "POST":
-        print("disliked")
         return "disliked"
     if request.method == "GET":
         return render_template("error-pages/404.html")
