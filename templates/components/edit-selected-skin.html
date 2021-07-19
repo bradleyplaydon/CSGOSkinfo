@@ -5,6 +5,13 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h2 class="h2">Edit {{ skin.name }}</h2>
 </div>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+  {% for message in messages %}
+    <h4 class='text-center bg-success p-3'>{{ message }}</h4>
+  {% endfor %}
+{% endif %}
+{% endwith %}
 <form id="edit-skin-form" class="container-fluid mb-5" method="POST" action="{{ url_for('edit_selected_skin', skin_id=skin._id) }}" validate>
     <div class="row">
       <div class="col-md-9 col-sm-12">
