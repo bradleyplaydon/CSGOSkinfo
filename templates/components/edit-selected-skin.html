@@ -1,22 +1,22 @@
 {% extends 'layout/dashboard-base.html' %}
+{% set active_page = 'edit-selected-skin' %}
 {% block content %}
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h2 class="h2">Edit {{ skin.name }}</h2>
 </div>
-<form id="edit-skin-form" class="container-fluid mb-5" method="post" validate>
+<form id="edit-skin-form" class="container-fluid mb-5" method="POST" action="{{ url_for('edit_selected_skin', skin_id=skin._id) }}" validate>
     <div class="row">
-
       <div class="col-md-9 col-sm-12">
         <label for="skin_name" class="label">Skin Name</label>
         <input type="text" placeholder="Skin Name" value="{{ skin.name }}" class="form-control bg-dark text-white rounded-0 mb-3"
           name="name" minlength="10" maxlength="35" required>
         <input type="text" placeholder="Skin Description" value="{{ skin.skin_description }}" class="form-control bg-dark text-white rounded-0 mb-3"
-          name="skin_description" minlength="20" maxlength="100" required>
+          name="skin_description" minlength="20" maxlength="200" required>
         <select id="skin-weapon-type" class="form-select bg-dark text-white rounded-0 mb-3"
           placeholder="Weapon Type" name="weapon_type">
           {% for type in weaponTypes %}
           {% if type == skin.weapon_type %}
-          <option value="{{ type }}" selected>{{ type }}</option>
+          <option value="{{ type | replace(' ', '-') }}" selected>{{ type }}</option>
           {% else %}
           {% if not type == "Knife" %}
           {% if type == 'Machinegun' %}
@@ -31,13 +31,16 @@
           {% endif %}
           {% endfor %}
         </select>
+        <select id="skin-weapon-name" class="form-select bg-dark text-white rounded-0 mb-3"
+                placeholder="Weapon Name" name="weapon_name">
+              </select>
         <select placeholder="Rarity" class="form-select bg-dark text-white rounded-0 mb-3" name="rarity" required>
           {% for rarity in weaponRarities %}
           {% if not rarity == "Extraordinary" %}
           {% if rarity == skin.rarity %}
-          <option value="{{ rarity }}" selected>{{ rarity }}</option>
+          <option value="{{ rarity }}" class="{{ rarity.lower() | replace(' ', ('-')) }}-text" selected>{{ rarity }}</option>
           {% else %}
-          <option value="{{ rarity }}">{{ rarity }}</option>
+          <option value="{{ rarity }}" class="{{ rarity.lower() | replace(' ', ('-')) }}-text">{{ rarity }}</option>
           {% endif %}
           {% endif %}
           {% endfor %}
@@ -164,7 +167,7 @@
                       id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
                       {% if skin.image_urls.battle_scarred %}
                       <input class="form-control bg-dark text-white" id="bsurl"
-                      placeholder="Battle Scarred Icon URL" value="{{ skin.image_urls.battle_scarred }}" name="bsimage" type="text">   
+                      placeholder="Battle Scarred Icon URL" value="{{ skin.image_urls.battle_scarred[59:] }}" name="bsimage" type="text">   
                       {% else %}
                       <input class="form-control bg-dark input-bg-disabled text-white" id="bsurl"
                       placeholder="Battle Scarred Icon URL" name="bsimage" type="text" disabled>
