@@ -70,7 +70,7 @@ def signup():
                         "skins_liked": skins_liked,
                         "skins_disliked": skins_disliked}
         flash("Registration Succesful")
-        return redirect(url_for("account", user=session["user"]))
+        return redirect(url_for("account", user=session["user"]["username"]))
 
     return render_template(
         "components/auth.html", login=False, page_title="Sign Up")
@@ -501,7 +501,7 @@ def unlike():
                         "is_admin": existing_user["is_admin"],
                         "skins_liked": skins_liked,
                         "skins_disliked": skins_disliked}
-                        
+
         # Total number of upvotes for this skin
         skin_upvotes = mongo.db[collection].find_one({
             "_id": skin_id
