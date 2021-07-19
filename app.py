@@ -1,13 +1,12 @@
-from datetime import date
 import os
 import dateutil
 from flask import (Flask, render_template,
                    request, redirect, url_for, flash, session)
 from flask_pymongo import PyMongo
+from flask_paginate import Pagination, get_page_args
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 from dateutil import parser
-from datetime import date 
 import json
 if os.path.exists("env.py"):
     import env
