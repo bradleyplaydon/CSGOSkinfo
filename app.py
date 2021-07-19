@@ -344,16 +344,23 @@ def get_skin_by_name():
 
         if request.method == "GET":
             searchOptions = {}
-            foundSkins = skinColl.find(searchOptions).sort("rarity_precedence", -1)
-
             if "searchweaponskin" in request.args and request.values["searchweaponskin"] != None and request.values["searchweaponskin"] != '':
                 searchOptions = { "weapon_type": { "$ne": "Knife" }, "type": { "$ne": "Gloves"} }
                 searchOptions["name"] = { "$regex": request.values["searchweaponskin"], "$options": "i" }
+                foundSkins = skinColl.find(searchOptions).sort("rarity_precedence", -1)
                 return render_template("components/edit-skin.html", foundSkins=foundSkins)
+
+
+            if "searchknifes" in request.args and request.values["searchknifes"] != None and request.values["searchknifes"] != '':
+                searchOptions = { "weapon_type": { "$eq": "Knife" } }
+                searchOptions["name"] = { "$regex": request.values["searchknifes"], "$options": "i" }
+                foundKnifes = skinColl.find(searchOptions).sort("rarity_precedence", -1)
+                return render_template("components/edit-skin.html", foundKnifes=foundKnifes)
 
 
             if "searchallskins" in request.args and request.values["searchallskins"] != None and request.values["searchallskins"] != '':
                 searchOptions["name"] = { "$regex": request.values["searchallskins"], "$options": "i" }
+                foundSkins = skinColl.find(searchOptions).sort("rarity_precedence", -1)
                 cases = mongo.db.cases.find(searchOptions).sort("rarity_precedence", -1)
                 stickers = mongo.db.stickers.find(searchOptions).sort("rarity_precedence", -1)
                 return render_template("pages/view-skins.html", foundSkins=foundSkins, cases=cases, stickers=stickers)
