@@ -17,8 +17,8 @@
             </ul>
         </div>
         <ul class="list-group list-group-horizontal justify-content-center flex-wrap">
-            <li class="list-group-item p-3"><a href="{{ url_for('index') }}" class="active">HOME</a></li>
-            <li class="list-group-item p-3"><a href="#">PISTOLS</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('index') }}" {% if active_page == "index" %} class="active"{% endif %}>HOME</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('pistols') }}" {% if active_page == "pistols" %} class="active"{% endif %}>PISTOLS</a></li>
             <li class="list-group-item p-3"><a href="#">RIFLES</a></li>
             <li class="list-group-item p-3"><a href="#">SMGs</a></li>
             <li class="list-group-item p-3"><a href="#">SHOTGUNS</a></li>
