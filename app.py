@@ -1,4 +1,6 @@
+from datetime import date
 import os
+import dateutil
 from flask import (Flask, render_template,
                    request, redirect, url_for, flash, session)
 from flask_pymongo import PyMongo
@@ -178,6 +180,16 @@ def add_skin():
     return render_template("error-pages/404.html")
 
 
+@app.route('/insert/weapon', methods=["GET", "POST"])
+def insert_weapon_skin():
+    if session and session["user"]["is_admin"]:
+        if request.method == "POST":
+            reqJson = request.json
+            reqJson["release_date"] = parser.parse(reqJson["release_date"])
+            skinColl.insert_one(reqJson)
+            return redirect(url_for('add_skin'))
+
+
 @app.route('/edit/skin', methods=["GET", "POST"])
 def edit_skin():
     if session and session["user"]["is_admin"]:
@@ -188,25 +200,15 @@ def edit_skin():
     return render_template("error-pages/404.html")
 
 
-@app.route('/edit/skin/<skinname>', methods=["GET", "POST"])
-def edit_selected_skin(skinname):
+@app.route('/edit/skin/<skin_id>', methods=["GET", "POST"])
+def edit_selected_skin(skin_id):
     if session and session["user"]["is_admin"]:
-        skin = skinColl.find_one({ "name": skinname })
         weaponTypes = skinColl.distinct('weapon_type')
         weaponRarities = skinColl.distinct('rarity')
-
-        return render_template("components/edit-selected-skin.html", skin=skin, weaponTypes=weaponTypes, weaponRarities=weaponRarities)
+        
+        skin = skinColl.find_one({"_id": ObjectId(skin_id)})
+        return render_template("components/edit-selected-skin.html", skin=skin, weaponTypes=weaponTypes, weapons=json.dumps(weapons), weaponRarities=weaponRarities)
     return render_template("error-pages/404.html")
-
-
-@app.route('/insert/weapon', methods=["GET", "POST"])
-def insert_weapon_skin():
-    if session and session["user"]["is_admin"]:
-        if request.method == "POST":
-            reqJson = request.json
-            reqJson["release_date"] = parser.parse(reqJson["release_date"])
-            skinColl.insert_one(reqJson)
-            return redirect(url_for('add_skin'))
 
 
 @app.route('/insert/knife', methods=["GET", "POST"])
