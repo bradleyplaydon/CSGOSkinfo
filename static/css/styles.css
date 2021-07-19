@@ -133,3 +133,11 @@ nav>ul.list-group.list-group-horizontal.justify-content-center>li, .mobile-nav >
 .btn-orange:hover {
   background: var(--orange-hover);
 }
+
+[already-liked=true] {
+  background-color: var(--site-orange);
+}
+
+[disliked=true] {
+  background-color: var(--site-orange);
+}
