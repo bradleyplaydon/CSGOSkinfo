@@ -3,6 +3,10 @@
 <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 {% if active_page == 'addskin' %}
-    <script src="{{ url_for('static', filename='js/addskin.js') }}"></script>
-    <script src="{{ url_for('static', filename='datepicker/mc-calendar.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/addskin.js') }}"></script>
+<script src="{{ url_for('static', filename='datepicker/mc-calendar.min.js') }}"></script>
+{% endif %}
+{% if active_page == 'edit-selected-skin' %}
+<script src="{{ url_for('static', filename='js/editskin.js') }}"></script>
+<script src="{{ url_for('static', filename='datepicker/mc-calendar.min.js') }}"></script>
 {% endif %}

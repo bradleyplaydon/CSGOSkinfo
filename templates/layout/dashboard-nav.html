@@ -77,7 +77,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white {% if active_page == "editskin" %} active {% endif %}" href="{{ url_for('edit_skin') }}">
+                <a class="nav-link text-white {% if active_page == "editskin" or active_page == "edit-selected-skin" %} active {% endif %}" href="{{ url_for('edit_skin') }}">
                     <i class="fas fa-pencil-alt"></i>
                     Edit A Skin
                 </a>
