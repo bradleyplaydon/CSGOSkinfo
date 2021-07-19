@@ -39,7 +39,9 @@ function like(thisObj) {
                 "collection": thisObj.attr("data-collection")
             })
         }).then(res => {
-            thisObj.find("strong").text(thisObj.find("strong").val() + 1)
+            let currentUpVotes = parseInt(thisObj.find("strong").text());
+            currentUpVotes++;
+            thisObj.find("strong").text(currentUpVotes)
             thisObj.attr("already-liked", true)
         })
         .catch(err => console.log(err))
@@ -56,8 +58,9 @@ function unlike(thisObj) {
                 "collection": thisObj.attr("data-collection")
             })
         }).then(res => {
-            let currentUpVotes = thisObj.find("strong").val();
-            thisObj.find("strong").text(currentUpVotes--)
+            let currentUpVotes = parseInt(thisObj.find("strong").text());
+            currentUpVotes--;
+            thisObj.find("strong").text(currentUpVotes)
             thisObj.removeAttr("already-liked")
         })
         .catch(err => console.log(err))
