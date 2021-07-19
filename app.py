@@ -439,6 +439,21 @@ def cases():
     return render_template("pages/cases.html")
 
 
+@app.route("/api/like-skin", methods=["POST", "GET"])
+def like():
+    if request.method == "POST":
+        print("liked")
+    if request.method == "GET":
+        return render_template("error-pages/404.html")
+
+
+@app.route("/api/dislike-skin", methods=["POST", "GET"])
+def dislike():
+    if request.method == "POST":
+        print("disliked")
+    if request.method == "GET":
+        return render_template("error-pages/404.html")
+
 if __name__ == '__main__':
     app.run(
         host=os.environ.get("IP", "0.0.0.0"),
