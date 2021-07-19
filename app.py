@@ -377,7 +377,13 @@ def get_skin_by_name():
                   
 @app.route("/pistols")
 def pistols():
-    return render_template("pages/pistols.html")
+    total = skinColl.find({"weapon_type": "Pistol"}).sort("rarity_precedence", -1).count()
+    pistols = skinColl.find({"weapon_type": "Pistol"}).sort("rarity_precedence", -1)
+
+    if session:
+        return render_template("pages/pistols.html", page_title="Pistols",  pistols=pistols)
+
+    return render_template("pages/pistols.html", page_title="Pistols", pistols=pistols)
 
 
 @app.route("/rifles")
