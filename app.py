@@ -203,6 +203,57 @@ def edit_skin():
 @app.route('/edit/skin/<skin_id>', methods=["GET", "POST"])
 def edit_selected_skin(skin_id):
     if session and session["user"]["is_admin"]:
+        if request.method == "POST":
+            rarity = request.form.get("rarity") 
+            rarity_precedence = (
+                5 if rarity == "Covert" 
+                else 4 if rarity == "Classified"
+                else 3 if rarity == "Restricted" 
+                else 2 if rarity == "Mil-Spec Grade" 
+                else 1 if rarity == "Industrial Grade" 
+                else 0 if rarity == "Consumer Grade" 
+                else "")
+            
+            submit = {
+                "name": request.form.get("name"),
+                "skin_description": request.form.get("skin_description"),
+                "type": "Weapon",
+                "weapon_type": request.form.get("weapon_type"),
+                "weapon_name": request.form.get("weapon_name"),
+                "rarity": rarity,
+                "rarity_precedence": rarity_precedence, 
+                "souvenir_available": True if request.form.get("souvenir") else False,
+                "stattrak_available": True if request.form.get("stattrak") else False,
+                "stattrak_conditions": {
+                    "factory_new": True if request.form.get("fn") and request.form.get("stattrak") else False,
+                    "min_wear": True if request.form.get("mw") and request.form.get("stattrak") else False,
+                    "field_tested": True if request.form.get("ft") and request.form.get("stattrak") else False,
+                    "well_worn": True if request.form.get("ww") and request.form.get("stattrak") else False,
+                    "battle_scarred": True if request.form.get("bs") and request.form.get("stattrak") else False
+                },
+                "conditions": {
+                    "factory_new": True if request.form.get("fn") else False,
+                    "min_wear": True if request.form.get("ww") else False,
+                    "field_tested": True if request.form.get("ft") else False,
+                    "well_worn": True if request.form.get("ww") else False,
+                    "battle_scarred": True if request.form.get("bs") else False
+                },
+                "release_date": parser.parse(request.form.get("release-date")),
+                "image_urls": {
+                    "factory_new": request.form.get("fnimage") if request.form.get("fnimage") else None,
+                    "min_wear": request.form.get("mwimage") if request.form.get("mwimage") else None,
+                    "field_tested": request.form.get("ftimage") if request.form.get("ftimage") else None,
+                    "well_worn": request.form.get("ftimage") if request.form.get("wwimage") else None,
+                    "battle_scarred": request.form.get("bsimage") if request.form.get("bsimage") else None
+                },
+                "up_votes": 0,
+                "down_votes": 0
+            }
+            skinColl.update({"_id": ObjectId(skin_id)}, submit)
+            flash("The {} has been successfully updated".format(
+                        request.form.get("name")))
+
+
         weaponTypes = skinColl.distinct('weapon_type')
         weaponRarities = skinColl.distinct('rarity')
         weapons = {
