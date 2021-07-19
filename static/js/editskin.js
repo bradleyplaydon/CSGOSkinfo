@@ -16,4 +16,18 @@ $(document).ready(function ($) {
             $(weaponNameSelectEl).append(o);
         });
     }
+
+    $('body').delegate('.myradio', 'click', function (e) {
+        var $element = $(this)[0];
+    
+        if ($(this).prop('checked') == false) {
+            $(this).prop('checked', true);
+            return;
+        }
+    
+        $('.radio').each(function () {
+            if ($(this)[0] !== $element)
+                $(this).prop('checked', false);
+        });
+    });
 });
