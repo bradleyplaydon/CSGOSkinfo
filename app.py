@@ -375,14 +375,7 @@ def get_skin_by_name():
                 stickers = mongo.db.stickers.find(searchOptions).sort("rarity_precedence", -1)
                 return render_template("pages/view-skins.html", foundSkins=foundSkins, cases=cases, stickers=stickers)
 
-            
-        
-
-@app.route('/add/user', methods=["GET", "POST"])
-def add_user():
-    return render_template("components/add-user.html")
-
-
+                  
 @app.route("/pistols")
 def pistols():
     return render_template("pages/pistols.html")
