@@ -2,6 +2,7 @@ $(document).ready(function () {
     let weaponTypeSelectEl = $("#skin-weapon-type");
     let weaponNameSelectEl = $("#skin-weapon-name");
     var weapons = JSON.parse($("#weapons").attr("data-weapons"));
+    var checkedCount = 0;
 
     $(weaponTypeSelectEl).change(function () {
         $(weaponNameSelectEl).empty();
@@ -42,8 +43,17 @@ $(document).ready(function () {
     $("#edit-skin-form").on("change", function () {
         if ($(this).serialize() === preForm) {
             $(this).find("#edit-skin").attr("disabled", "disabled")
+            if(checkedCount >= 2){
+                $('#invalid-error').hide();
+            } 
         } else {
-            $(this).find("#edit-skin").removeAttr("disabled")
+            if(checkedCount >= 2){
+                $(this).find("#edit-skin").removeAttr("disabled")
+                $('#invalid-error').hide();
+            } else {
+                $("#invalid-error").text("Please tick 2 conditions in order to add the skin and add atleast 2 Steam icon URLs");
+                $('#invalid-error').show();
+            }
         }
     });
     editSkinDp.onSelect((date, formatedDate) => {
@@ -53,4 +63,32 @@ $(document).ready(function () {
             $(this).find("#edit-skin").removeAttr("disabled")
         }
     });
+
+    var conditionEls = $('#factory_new, #min_wear, #field_tested, #well_worn, #battle_scarred');
+    var imageEls = $('input[name=fnimage], input[name=mwimage], input[name=ftimage], input[name=wwimage], input[name=bsimage]');
+    
+    conditionEls.each(function (i) {
+        if (conditionEls[i].checked) {
+            checkedCount += 1;
+        }
+    });
+
+    conditionEls.on('input', function () {
+        if (this.checked == true) {
+            checkedCount += 1;
+        } else {
+            checkedCount -= 1;
+        }
+        conditionEls.each(function (i) {
+            if (conditionEls[i].checked) {
+                $(imageEls[i]).removeAttr("disabled");
+                $(imageEls[i]).removeClass("input-bg-disabled");
+                $(imageEls[i]).attr("required", "required");
+            } else {
+                $(imageEls[i]).removeAttr("required");
+                $(imageEls[i]).addClass("input-bg-disabled");
+                $(imageEls[i]).attr("disabled", "disabled");
+            }
+        });
+    })
 });
