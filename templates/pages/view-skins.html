@@ -1,9 +1,11 @@
 {% extends 'layout/dashboard-base.html' %}
 {% set active_page = "view_skins" %}
+{% block content %}
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h2 class="h2">{{ page_title }}</h2>
 </div>
 <form class="form-control d-flex bg-dark p-3" action="/get/skin" method="GET">
-    <input class="form-control" id="searchSkin" name="searchskin" placeholder="Enter the Skin Name">
+    <input class="form-control" id="searchSkin" name="searchallskins" placeholder="Enter the Skin Name">
     <button class="btn btn-orange px-5 pt-3 pb-3" type="submit"><i class="fas fa-search text-white fs-4"></i></button>
 </form>
+{% endblock %}
