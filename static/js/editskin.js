@@ -17,7 +17,7 @@ $(document).ready(function ($) {
         });
     }
 
-    $('body').delegate('.myradio', 'click', function (e) {
+    $('body').delegate('.radio', 'click', function (e) {
         var $element = $(this)[0];
     
         if ($(this).prop('checked') == false) {
@@ -25,7 +25,7 @@ $(document).ready(function ($) {
             return;
         }
     
-        $('.myradio').each(function () {
+        $('.radio').each(function () {
             if ($(this)[0] !== $element)
                 $(this).prop('checked', false);
         });

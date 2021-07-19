@@ -8,7 +8,9 @@
 {% with messages = get_flashed_messages() %}
 {% if messages %}
   {% for message in messages %}
-    <h4 class='text-center bg-success p-3'>{{ message }}</h4>
+    {% if not "Welcome" in message %}
+      <h4 class='text-center bg-success p-3'>{{ message }}</h4>
+    {% endif %}
   {% endfor %}
 {% endif %}
 {% endwith %}
@@ -189,19 +191,19 @@
         <div class="d-flex flex-wrap justfiy-content-center mt-3 mb-3 border p-3">
           <strong>StatTrak / Souvenir</strong>
           <div class="form-check mx-3">
-            <input class="form-check-input radio" type="checkbox" name="neither" id="neither" {% if not skin.stattrak_available and not skin.souvenir_available %} checked {% endif %}>
+            <input class="form-check-input myradio" type="checkbox" name="neither" id="neither" {% if not skin.stattrak_available and not skin.souvenir_available %} checked {% endif %}>
             <label class="form-check-label" for="flexRadioDefault2">
               Neither
             </label>
           </div>
           <div class="form-check mx-3">
-            <input class="form-check-input radio" type="checkbox" name="stattrak" id="stattrak" {% if skin.stattrak_available %} checked {% endif %}>
+            <input class="form-check-input myradio" type="checkbox" name="stattrak" id="stattrak" {% if skin.stattrak_available %} checked {% endif %}>
             <label class="form-check-label" for="statTrak">
               StatTrak
             </label>
           </div>
           <div class="form-check mx-3">
-            <input class="form-check-input radio" type="checkbox" name="souvenir" id="souvenir" {% if skin.souvenir_available %} checked {% endif %}>
+            <input class="form-check-input myradio" type="checkbox" name="souvenir" id="souvenir" {% if skin.souvenir_available %} checked {% endif %}>
             <label class="form-check-label" for="souvenir">
               Souvenir
             </label>
