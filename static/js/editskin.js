@@ -25,9 +25,34 @@ $(document).ready(function ($) {
             return;
         }
     
-        $('.radio').each(function () {
+        $('.myradio').each(function () {
             if ($(this)[0] !== $element)
                 $(this).prop('checked', false);
         });
+    });
+
+
+    preReleaseDate = new Date($("#release-date").val());
+    const editSkinDp = MCDatepicker.create({
+        el: '#release-date',
+        dateFormat: 'YYYY-MM-DD',
+        selectedDate: preReleaseDate
+    });
+    preForm = $("#edit-skin-form").serialize();
+    
+    $("#edit-skin-form").on("change", function () {
+        console.log($(this).serialize(), preForm)
+        if ($(this).serialize() === preForm) {
+            $(this).find("#edit-skin").attr("disabled", "disabled")
+        } else {
+            $(this).find("#edit-skin").removeAttr("disabled")
+        }
+    });
+    editSkinDp.onSelect((date, formatedDate) => {
+        if(date.getTime() === preReleaseDate.getTime()){
+            $(this).find("#edit-skin").attr("disabled", "disabled")
+        } else {
+            $(this).find("#edit-skin").removeAttr("disabled")
+        }
     });
 });
