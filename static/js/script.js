@@ -56,8 +56,9 @@ function unlike(thisObj) {
                 "collection": thisObj.attr("data-collection")
             })
         }).then(res => {
-            thisObj.find("strong").text(thisObj.find("strong").val() + 1)
-            thisObj.attr("already-liked", true)
+            let currentUpVotes = thisObj.find("strong").val();
+            thisObj.find("strong").text(currentUpVotes--)
+            thisObj.removeAttr("already-liked")
         })
         .catch(err => console.log(err))
 }
