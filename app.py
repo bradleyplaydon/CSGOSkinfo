@@ -27,7 +27,6 @@ skinColl = mongo.db.skins
 def index():
     latest_skins = skinColl.find().sort(
         ([("release_date", -1), ("rarity_precedence", -1)])).limit(17)
-    print(session["user"]["skins_liked"])
     return render_template(
         "pages/index.html", page_title="Latest Skins", skins=latest_skins)
 
