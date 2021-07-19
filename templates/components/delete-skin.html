@@ -8,8 +8,8 @@
     <div class="accordion-item bg-dark text-white">
         <h2 class="accordion-header">
             <button class="accordion-button collapsed bg-dark text-white border" type="button" data-bs-toggle="collapse"
-                data-bs-target="#Delete-weapon" {% if foundSkins %} aria-expanded="false" {% else %} aria-expanded="true"
-                {% endif %} aria-controls="Delete-weapon">
+                data-bs-target="#Delete-weapon" {% if foundSkins %} aria-expanded="false" {% else %}
+                aria-expanded="true" {% endif %} aria-controls="Delete-weapon">
                 Delete Weapon
             </button>
         </h2>
@@ -18,28 +18,25 @@
             <div class="accordion-body row">
                 <div class="input-group">
                     <form class="form-control d-flex bg-dark p-3" action="/get/skin" method="GET">
-                        <input class="form-control" id="searchSkin" name="searchskin" placeholder="Enter the Skin Name"
-                            aria-label="Example select with button addon">
+                        <input class="form-control" id="deleteweaponskins" name="deleteweaponskins"
+                            placeholder="Enter the Skin Name" aria-label="Example select with button addon">
                         <button class="btn btn-orange px-5 pt-3 pb-3" type="submit"><i
                                 class="fas fa-search text-white fs-4"></i></button>
                     </form>
                 </div>
                 {% if foundSkins %}
                 <div class="col-12">
-                   Skins Found:
+                    Skins Found:
                 </div>
                 {% for skin in foundSkins %}
                 {% set skin_id = skin._id %}
                 <div class="col-lg-3 col-sm-6 mb-2">
                     <div class="card border bg-dark">
-                        <a href="{{ url_for('delete_selected_skin', skin_id=skin_id )}}">
-                            {% if skin.image_urls.factory_new is not none %}
-                            <img src="{{ skin.image_urls.factory_new }}" class="card-img-top"
-                                alt="{{ skin.name }} image">
-                            {% else %}
-                            <img src="{{ skin.image_urls.min_wear }}" class="card-img-top" alt="{{ skin.name }} image">
-                            {% endif %}
-                        </a>
+                        {% if skin.image_urls.factory_new is not none %}
+                        <img src="{{ skin.image_urls.factory_new }}" class="card-img-top" alt="{{ skin.name }} image">
+                        {% else %}
+                        <img src="{{ skin.image_urls.min_wear }}" class="card-img-top" alt="{{ skin.name }} image">
+                        {% endif %}
                         <div class="card-body p-0">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item text-white border bg-dark">
@@ -51,6 +48,32 @@
                                 </li>
                                 <li class="list-group-item text-white bg-dark">
                                     <p>{{ skin.skin_description }}</p>
+                                </li>
+                                <li class="list-group-item text-white bg-dark">
+                                    <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal"
+                                        data-bs-target="#modal--{{ loop.index }}">
+                                        Delete
+                                    </button>
+                                    <div class="modal fade" id="modal--{{ loop.index }}" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content bg-dark">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Delete {{ skin.name }}</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p class="bg-danger p-3">Are you sure you want to delete this skin?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="{{ url_for('delete_selected_skin', skin_id=skin._id) }}" type="button" class="btn btn-danger">Confirm Deletion</a>
+                                                    <button type="button" class="btn btn-primary" 
+                                                    data-bs-dismiss="modal">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -94,11 +117,11 @@
                 Delete Case
             </button>
         </h2>
-        <div id="Delete-case" class="accordion-collapse collapse" aria-labelledby="Delete-case" data-bs-parent="#Delete-case">
+        <div id="Delete-case" class="accordion-collapse collapse" aria-labelledby="Delete-case"
+            data-bs-parent="#Delete-case">
             <div class="accordion-body">
             </div>
         </div>
     </div>
-</div>
 </div>
 {% endblock %}
