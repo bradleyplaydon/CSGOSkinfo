@@ -26,7 +26,7 @@
                 </div>
                 {% if foundSkins %}
                 <div class="col-12">
-                   Skins Found:
+                   {{ foundSkins.count() }} Skins Found:
                 </div>
                 {% for skin in foundSkins %}
                 {% set skin_id = skin._id %}
