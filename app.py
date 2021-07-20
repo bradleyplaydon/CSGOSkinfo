@@ -209,10 +209,45 @@ def add_skin(skin_type):
 def insert_skin(skin):
     if session and session["user"]["is_admin"]:
         if request.method == "POST":
-            reqJson = request.json
-            reqJson["release_date"] = parser.parse(reqJson["release_date"])
-            skinColl.insert_one(reqJson)
-            return redirect(url_for('add_skin'))
+            if skin == "knife":
+                submit = {
+                    "name": request.form.get("name"),
+                    "skin_description": request.form.get("knife_description"),
+                    "type": "Weapon",
+                    "weapon_type": "knife",
+                    "knife_type": request.form.get("knife_type"),
+                    "rarity": "Covert",
+                    "stattrak_available": True if request.form.get("stattrak") else False,
+                    "stattrak_conditions": {
+                        "factory_new": True if request.form.get("fn") and request.form.get("stattrak") else False,
+                        "min_wear": True if request.form.get("mw") and request.form.get("stattrak") else False,
+                        "field_tested": True if request.form.get("ft") and request.form.get("stattrak") else False,
+                        "well_worn": True if request.form.get("ww") and request.form.get("stattrak") else False,
+                        "battle_scarred": True if request.form.get("bs") and request.form.get("stattrak") else False
+                    },
+                    "conditions": {
+                        "factory_new": True if request.form.get("fn") else False,
+                        "min_wear": True if request.form.get("mw") else False,
+                        "field_tested": True if request.form.get("ft") else False,
+                        "well_worn": True if request.form.get("ww") else False,
+                        "battle_scarred": True if request.form.get("bs") else False
+                    },
+                    "image_urls": {
+                        "factory_new": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("fnimage") if request.form.get("fnimage") else None,
+                        "min_wear": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("mwimage") if request.form.get("mwimage") else None,
+                        "field_tested": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("ftimage") if request.form.get("ftimage") else None,
+                        "well_worn": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("ftimage") if request.form.get("wwimage") else None,
+                        "battle_scarred": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("bsimage") if request.form.get("bsimage") else None
+                    },
+                    "up_votes": 0,
+                    "down_votes": 0
+                }
+                submit["release_date"] = parser.parse(request.form.get("release-date"))
+                skinColl.insert_one(submit)
+                flash("Successfully Added")
+                return redirect(url_for('add_skin', skin_type=skin))
+        
+        return redirect(url_for('add_skin'))
 
 
 @app.route('/edit/skin', methods=["GET", "POST"])
