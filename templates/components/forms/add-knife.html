@@ -1,173 +1,167 @@
 {% extends 'layout/dashboard-base.html' %}
-{% set active_page = "addKnife" %}
+{% set active_page = "addknife" %}
 {% block content %}
 <meta id="weapons" data-weapons="{{ weapons }}">
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h2 class="h2">{{ page_title }}</h2>
 </div>
-<div id="add-weapon" aria-labelledby="add-weapon"">
-    <form id=" weapon-Knife-form" class="container-fluid" method="post" validate>
-    <div class="row">
-        <div class="col-md-9 col-sm-12">
-            <label for="name" class="label">Knife Name</label>
-            <input type="text" placeholder="Knife Name" class="form-control bg-dark text-white rounded-0 mb-3"
-                name="name" minlength="10" maxlength="35" required>
-            <input type="text" placeholder="Knife Description" class="form-control bg-dark text-white rounded-0 mb-3"
-                name="Knife_description" minlength="20" maxlength="100" required>
-            <select id="Knife-weapon-type" class="form-select bg-dark text-white rounded-0 mb-3"
-                placeholder="Weapon Type" name="weapon_type">
-                {% for type in weaponTypes %}
-                <option value="{{ type }}">{{ type }}</option>
-                {% endfor %}
-            </select>
-            <div class="invalid-feedback border border-danger p-3 fs-5 mb-2" id="invalid-error">
-
-            </div>
-            <div class="table-responsive">
-                <table class="table table-dark table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col" colspan="1">Conditions</th>
-                            <th scope="col" colspan="1">Images</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" autocomplete="off" name="fn"
-                                        id="factory_new">
-                                    <label class="form-check-label" for="factory_new">
-                                        Factory New
-                                    </label>
-                                </div>
-                            </th>
-                            <td>
-                                <label for="fnurl" class="form-label float-end">Icon URL</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text w-25 overflow-auto"
-                                        id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image/</span>
-                                    <input class="form-control bg-dark text-white input-bg-disabled"
-                                        placeholder="Factory New Icon URL" name="fnimage" id="fnurl" type="text"
-                                        aria-describedby="steamimageurl" disabled>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" autocomplete="off" name="mw"
-                                        id="min_wear">
-                                    <label class="form-check-label" for="min_wear">
-                                        Minimal Wear
-                                    </label>
-                                </div>
-                            </th>
-                            </th>
-                            <td>
-                                <label for="mwurl" class="form-label float-end">Icon URL</label>
-                                <div class="input-group mb-3"><span class="input-group-text w-25 overflow-auto"
-                                        id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image/</span><input
-                                        class="form-control bg-dark text-white input-bg-disabled" id="mwurl"
-                                        placeholder="Minimal Wear Icon URL" name="mwimage" type="text" disabled>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" autocomplete="off" name="ft"
-                                        id="field_tested">
-                                    <label class="form-check-label" for="field_tested">
-                                        Field-Tested
-                                    </label>
-                                </div>
-                            </th>
-                            <td>
-                                <label for="fturl" class="form-label float-end">Icon URL</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text w-25 overflow-auto"
-                                        id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image/</span><input
-                                        class="form-control bg-dark text-white input-bg-disabled" id="fturl"
-                                        placeholder="Field Tested Icon URL" name="ftimage" type="text" disabled>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" autocomplete="off" name="ww"
-                                        id="well_worn">
-                                    <label class="form-check-label" for="well_worn">
-                                        Well-Worn
-                                    </label>
-                                </div>
-                            </th>
-                            <td>
-                                <label for="wwurl" class="form-label float-end">Icon URL</label>
-                                <div class="input-group mb-3 fs-5"><span class="input-group-text w-25 overflow-auto"
-                                        id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image/</span><input
-                                        class="form-control bg-dark text-white input-bg-disabled" id="wwurl"
-                                        placeholder="Well-Worn Icon URL" name="wwimage" type="text" disabled>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" autocomplete="off" name="bs"
-                                        id="battle_scarred">
-                                    <label class="form-check-label" for="battle_scarred">
-                                        Battle-Scarred
-                                    </label>
-                                </div>
-                            </th>
-                            <td>
-                                <label for="bsurl" class="form-label float-end">Icon URL</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text w-25 overflow-auto"
-                                        id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image/</span><input
-                                        class="form-control bg-dark text-white input-bg-disabled" id="bsurl"
-                                        placeholder="Battle-Scarred Icon URL" name="bsimage" type="text" disabled>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="d-flex flex-wrap justfiy-content-center mt-3 mb-3 border p-3">
-                <strong>StatTrak / Souvenir</strong>
-                <div class="form-check mx-3">
-                    <input class="form-check-input" type="radio" name="stat_or_souv">
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        Neither
-                    </label>
+<div id="add-knife" aria-labelledby="add-knife">
+    <form id="knife-form" class="container-fluid" method="post" validate>
+        <div class="row">
+            <div class="col-md-9 col-sm-12">
+                <label for="name" class="label">Knife Name</label>
+                <input type="text" placeholder="Knife Name" class="form-control bg-dark text-white rounded-0 mb-3"
+                    name="name" minlength="10" maxlength="35" required>
+                <label for="knife_description" class="label">Knife Description</label>
+                <input type="text" placeholder="Knife Description"
+                    class="form-control bg-dark text-white rounded-0 mb-3" name="knife_description" minlength="20"
+                    maxlength="100" required>
+                <select id="knife-weapon-type" class="form-select bg-dark text-white rounded-0 mb-3"
+                    placeholder="Knife Type" name="knife_type">
+                    {% for type in knifeTypes %}
+                    <option value="{{ type }}">{{ type }}</option>
+                    {% endfor %}
+                </select>
+                <p class="border border-info p-3 fs-5 mb-2">Note: Atleast two conditions need to be checked</p>
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col" colspan="1">Conditions</th>
+                                <th scope="col" colspan="1">Images</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" autocomplete="off" name="fn"
+                                            id="factory_new">
+                                        <label class="form-check-label" for="factory_new">
+                                            Factory New
+                                        </label>
+                                    </div>
+                                </th>
+                                <td>
+                                    <label for="fnurl" class="form-label float-end">Icon URL</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text w-25 overflow-auto"
+                                            id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image/</span>
+                                        <input class="form-control bg-dark text-white input-bg-disabled"
+                                            placeholder="Factory New Icon URL" name="fnimage" id="fnurl" type="text"
+                                            aria-describedby="steamimageurl" disabled>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" autocomplete="off" name="mw"
+                                            id="min_wear">
+                                        <label class="form-check-label" for="min_wear">
+                                            Minimal Wear
+                                        </label>
+                                    </div>
+                                </th>
+                                </th>
+                                <td>
+                                    <label for="mwurl" class="form-label float-end">Icon URL</label>
+                                    <div class="input-group mb-3"><span class="input-group-text w-25 overflow-auto"
+                                            id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image/</span><input
+                                            class="form-control bg-dark text-white input-bg-disabled" id="mwurl"
+                                            placeholder="Minimal Wear Icon URL" name="mwimage" type="text" disabled>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" autocomplete="off" name="ft"
+                                            id="field_tested">
+                                        <label class="form-check-label" for="field_tested">
+                                            Field-Tested
+                                        </label>
+                                    </div>
+                                </th>
+                                <td>
+                                    <label for="fturl" class="form-label float-end">Icon URL</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text w-25 overflow-auto"
+                                            id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image/</span><input
+                                            class="form-control bg-dark text-white input-bg-disabled" id="fturl"
+                                            placeholder="Field Tested Icon URL" name="ftimage" type="text" disabled>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" autocomplete="off" name="ww"
+                                            id="well_worn">
+                                        <label class="form-check-label" for="well_worn">
+                                            Well-Worn
+                                        </label>
+                                    </div>
+                                </th>
+                                <td>
+                                    <label for="wwurl" class="form-label float-end">Icon URL</label>
+                                    <div class="input-group mb-3 fs-5"><span class="input-group-text w-25 overflow-auto"
+                                            id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image/</span><input
+                                            class="form-control bg-dark text-white input-bg-disabled" id="wwurl"
+                                            placeholder="Well-Worn Icon URL" name="wwimage" type="text" disabled>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" autocomplete="off" name="bs"
+                                            id="battle_scarred">
+                                        <label class="form-check-label" for="battle_scarred">
+                                            Battle-Scarred
+                                        </label>
+                                    </div>
+                                </th>
+                                <td>
+                                    <label for="bsurl" class="form-label float-end">Icon URL</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text w-25 overflow-auto"
+                                            id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image/</span><input
+                                            class="form-control bg-dark text-white input-bg-disabled" id="bsurl"
+                                            placeholder="Battle-Scarred Icon URL" name="bsimage" type="text" disabled>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="form-check mx-3">
-                    <input class="form-check-input" type="radio" name="stat_or_souv" id="statTrak">
-                    <label class="form-check-label" for="statTrak">
-                        StatTrak
-                    </label>
+                <div class="d-flex flex-wrap justfiy-content-center mt-3 mb-3 border p-3">
+                    <strong>StatTrak?</strong>
+                    <div class="form-check mx-3">
+                        <input class="form-check-input" type="radio" name="stat_or_souv">
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Doesn't have StatTrak
+                        </label>
+                    </div>
+                    <div class="form-check mx-3">
+                        <input class="form-check-input" type="radio" name="stat_or_souv" id="statTrak">
+                        <label class="form-check-label" for="statTrak">
+                            StatTrak
+                        </label>
+                    </div>
                 </div>
-                <div class="form-check mx-3">
-                    <input class="form-check-input" type="radio" name="stat_or_souv" id="souvenir">
-                    <label class="form-check-label" for="souvenir">
-                        Souvenir
-                    </label>
+                <label for="release-date" class="label">Knife Release Date (Click)</label>
+                <div class="input-group flex-nowrap">
+                    <span class="input-group-text" id="addon-wrapping"><i class="fas fa-calendar-alt"></i></span>
+                    <input class="form-select" role="button" id="release-date" placeholder="Pick A Date"
+                        name="release-date">
                 </div>
             </div>
-            <label for="release-date" class="label">Knife Release Date (Click)</label>
-            <div class="input-group flex-nowrap">
-                <span class="input-group-text" id="addon-wrapping"><i class="fas fa-calendar-alt"></i></span>
-                <input class="form-select" role="button" id="release-date" placeholder="Pick A Date"
-                    name="release-date">
+            <div class="col-md-3 col-sm-12 text-center">
+                <button type="submit" class="btn btn-orange p-5 h-75 mt-4" disabled>
+                    <i class="far fa-plus-square fs-4 align-middle"></i> Add Knife
+                </button>
             </div>
         </div>
-        <div class="col-md-3 col-sm-12 text-center">
-            <button type="submit" class="btn btn-orange p-5 h-75 mt-4" disabled>
-                <i class="far fa-plus-square fs-4 align-middle"></i> Add Knife
-            </button>
-        </div>
-    </div>
     </form>
 </div>
 {% endblock %}
