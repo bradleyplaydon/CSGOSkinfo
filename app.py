@@ -506,14 +506,26 @@ def gloves():
     return render_template("pages/gloves.html", page_title="Gloves",  gloves=gloves_paginated, pagination=pagination)
 
 
-@app.route("/stickers")
-def stickers():
-    return render_template("pages/stickers.html")
-
 
 @app.route("/cases")
 def cases():
-    return render_template("pages/cases.html")
+    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
+    per_page = 20
+    offset = (page - 1) * per_page
+
+    total = mongo.db.cases.find().sort("rarity_precedence", -1).count()
+    cases = mongo.db.cases.find().sort("rarity_precedence", -1)
+
+    cases_paginated = cases[offset: offset + per_page]
+
+    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+
+    return render_template("pages/cases.html", page_title="Cases",  cases=cases_paginated, pagination=pagination)
+
+
+@app.route("/stickers")
+def stickers():
+    return render_template("pages/stickers.html")
 
 
 @app.route("/api/like-skin", methods=["POST", "GET"])
