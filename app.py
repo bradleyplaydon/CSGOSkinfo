@@ -144,7 +144,7 @@ def admin():
             totSkinDownVotes = totSkinDownVotes + skin["down_votes"]
 
         return render_template(
-            "pages/dashboard.html", page_title="Admin Dashboard",
+            "admin-pages/dashboard.html", page_title="Admin Dashboard",
             totalUsers=totalUsers, totalSkins=totalSkins,
             totalAdmins=totalAdmins, skinUpVotes=totSkinUpVotes,
             skinDownVotes=totSkinDownVotes, mostLikedSkin=mostLikedSkin)
@@ -156,7 +156,7 @@ def admin():
 @app.route('/view/skins', methods=["GET", "POST"])
 def view_skins():
     if session and session["user"]["is_admin"]:
-        return render_template("pages/view-skins.html", page_title="View Skins")
+        return render_template("admin-pages/view-skins.html", page_title="View Skins")
     return render_template("error-pages/404.html")
 
 @app.route('/add/skin', methods=["GET", "POST"])
