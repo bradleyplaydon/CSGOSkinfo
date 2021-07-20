@@ -471,6 +471,28 @@ def like():
 @app.route("/api/dislike-skin", methods=["POST", "GET"])
 def dislike():
     if request.method == "POST":
+        reqJson = request.json
+        collection = str(reqJson["collection"])
+
+        mongo.db.users.update(
+        {"username": session["user"]["username"]}, {"$push": {"skins_disliked": ObjectId(reqJson["_id"])}})
+
+        existing_user = mongo.db.users.find_one(
+                 {"username": session["user"]["username"]})
+
+        skins_liked = list(map(str, existing_user["skins_liked"]))
+        skins_disliked = list(map(str, existing_user["skins_disliked"]))
+        
+        session["user"] = {
+                        "username": existing_user["username"],
+                        "is_admin": existing_user["is_admin"],
+                        "skins_liked": skins_liked,
+                        "skins_disliked": skins_disliked}
+
+        skin_downvotes = mongo.db[collection].find_one({"_id": ObjectId(reqJson["_id"])})["down_votes"] + 1
+
+        mongo.db[collection].update(
+            {"_id": ObjectId(reqJson["_id"])}, {"$set": {"down_votes": skin_downvotes}})
         return "disliked"
     if request.method == "GET":
         return render_template("error-pages/404.html")
