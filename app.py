@@ -313,11 +313,11 @@ def delete_skin():
 @app.route('/delete/skin/<skin_id>', methods=["GET", "POST"])
 def delete_selected_skin(skin_id):
     if session and session["user"]["is_admin"]:
-        skinColl.remove({"_id": ObjectId(skin_id)}) if skinColl.find_one({"_id": ObjectId(skin_id)}) != None else False
-        mongo.db.cases.remove({"_id": ObjectId(skin_id)}) if mongo.db.cases.find_one({"_id": ObjectId(skin_id)}) != None else False
-        mongo.db.stickers.remove({"_id": ObjectId(skin_id)}) if mongo.db.stickers.find_one({"_id": ObjectId(skin_id)}) != None else False
-
-        return redirect(url_for("view_skins"))
+        skinColl.remove({"_id": ObjectId(skin_id)}), flash("Skin has been successfully removed") if skinColl.find_one({"_id": ObjectId(skin_id)}) != None else False
+        mongo.db.cases.remove({"_id": ObjectId(skin_id)}), flash("Skin has been successfully removed") if mongo.db.cases.find_one({"_id": ObjectId(skin_id)}) != None else False
+        mongo.db.stickers.remove({"_id": ObjectId(skin_id)}), flash("Skin has been successfully removed")  if mongo.db.stickers.find_one({"_id": ObjectId(skin_id)}) != None else False
+        
+        return redirect(url_for("admin"))
     return render_template("error-pages/404.html")
     
 
