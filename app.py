@@ -485,6 +485,7 @@ def knives():
     knives_paginated = knives[offset: offset + per_page]
     pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
     knifeTypes = skinColl.distinct('knife_type')
+    
     if request.method == "POST":
         print(request.form.get("sortby"))
         total = skinColl.find({"weapon_type": "Knife", "knife_type": request.form.get("sortby")}).count()

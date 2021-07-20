@@ -5,7 +5,7 @@
     <h2 class="bg-dark h2 d-inline-block m-0 p-4">{{ page_title }}</h2>
     <div class="d-flex justify-content-center flex-wrap">
         <div class="col-lg-6 col-sm-12 bg-dark text-center">
-            <p class="{{ skin.rarity | lower }} p-2 w-50 mx-auto">{{ skin.rarity }}</p>
+            <p class="{{ skin.rarity | lower }} p-2 w-50 mx-auto mt-5">{{ skin.rarity }}</p>
             {% if skin.souvenir_available %}
             <p class="souvenir p-2 w-50 mx-auto">Souvenir Available</p>
             {% endif %}
@@ -33,6 +33,30 @@
             {% if skin.skin_description != "" %}
                 <p class="text-center fs-3 mt-4">{{ skin.skin_description }}</p>
             {% endif %}
+            <div class="d-flex justify-content-around mt-5">
+                {% if skin.stattrak_available %}
+                    <ul class="list-group">
+                        <p class="">StatTrak Options</p>
+                        {% for condition in skin.statrak_conditions %}
+                            {% if condition %}
+                                <li class="bg-secondary mb-1 mx-auto w-100 list-group-item text-white"><span class="stattrak">StatTrak </span>{{ condition | replace('_', ' ') }}</li>
+                            {% else %}
+                                <li class="bg-danger list-group-item text-decoration-line-through"><span class="stattrak">StatTrak </span>{{ condition | replace('_', ' ') }}</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <ul class="list-group list-group-flush">
+                    <p class="">Options</p>
+                    {% for condition in skin.conditions %}
+                        {% if condition %}
+                            <li class="bg-secondary mb-1 w-100 mx-auto list-group-item text-white">{{ condition | replace('_', ' ') }}</li>
+                        {% else %}
+                            <li class="bg-danger list-group-item text-decoration-line-through">{{ condition | replace('_', ' ') }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 </div>
