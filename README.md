@@ -184,3 +184,19 @@ If there are any improvements, questions or anything at all then please get in t
   image_urls | Object of 5 Strings |
   up_votes | Int |
   down_votes | Int |
+
+
+  ## Features
+  ---
+  ### **Live Features**
+  * Sign up for an account functionality
+  * Sign in and sign out functionality
+  * Like and dislike functionality of all skins
+  * Paginated pages on pages with more than 20 skins
+  * CRUD Functionalities
+    * Create - Ability to create a skin and choose different options based upon what you would like to add
+    * Read 
+      * Ability to search through all skins in the view skins page to see the name, image, description and rarity based upon your search term.
+      * Dashboard displays a few analytical pieces on the data from mongodb such as a visual most liked skin slider or still image, number of skins within the db and a few more.
+    * Update - Ability to update a skin's details but with validation around certain fields such as conditions as 2 conditions are required at all times for CSGO
+    * Delete - Ability to delete a skin through searching for the skin you want to remove and clicking delete and confirm delete in a modal
