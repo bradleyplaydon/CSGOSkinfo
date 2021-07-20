@@ -57,6 +57,20 @@
                     {% endfor %}
                 </ul>
             </div>
+            {% if session.user %}
+                <div class="like-buttons text-center mb-3 mt-5">
+                    <button id="{{ skin._id }}" {{ 'already-liked=true' if skin._id in session.user.skins_liked }}
+                        class="like-btn btn btn-light fs-2 p-3 mx-5" name="like-btn" type="submit">
+                        <i class="fas fa-thumbs-up"></i>
+                        <strong id="up_votes">{{ skin.up_votes }}</strong>
+                    </button>
+                    <button id="{{ skin._id }}" {{ 'disliked=true' if skin._id in session.user.skins_liked }}
+                        class="dislike-btn btn btn-light fs-2 p-3" name="dislike-btn" type="submit">
+                        <i class="fas fa-thumbs-down"></i>
+                        <strong id="down_votes">{{ skin.down_votes }}</strong>
+                    </button>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>
