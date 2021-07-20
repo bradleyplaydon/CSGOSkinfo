@@ -22,12 +22,12 @@
             <li class="list-group-item p-3"><a href="{{ url_for('rifles') }}" {% if active_page == "rifles" %} class="active"{% endif %}>RIFLES</a></li>
             <li class="list-group-item p-3"><a href="{{ url_for('sniper_rifles') }}" {% if active_page == "snipers" %} class="active"{% endif %}>SNIPERS</a></li>
             <li class="list-group-item p-3"><a href="{{ url_for('smgs') }}" {% if active_page == "smgs" %} class="active"{% endif %}>SMGs</a></li>
-            <li class="list-group-item p-3"><a href="#">SHOTGUNS</a></li>
-            <li class="list-group-item p-3"><a href="#">HEAVY</a></li>
-            <li class="list-group-item p-3"><a href="#">KNIVES</a></li>
-            <li class="list-group-item p-3"><a href="#">GLOVES</a></li>
-            <li class="list-group-item p-3"><a href="#">CASES</a></li>
-            <li class="list-group-item p-3"><a href="#">STICKERS</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('shotguns') }}" {% if active_page == "shotguns" %} class="active"{% endif %}>SHOTGUNS</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('heavies') }}" {% if active_page == "heavies" %} class="active"{% endif %}>HEAVY</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('knives') }}" {% if active_page == "knives" %} class="active"{% endif %}>KNIVES</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('gloves') }}" {% if active_page == "gloves" %} class="active"{% endif %}>GLOVES</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('cases') }}" {% if active_page == "cases" %} class="active"{% endif %}>CASES</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('stickers') }}" {% if active_page == "stickers" %} class="active"{% endif %}>STICKERS</a></li>
         </ul>
     </nav>
     <nav class="navbar d-lg-none d-md-block bg-dark mobile-nav">
@@ -56,11 +56,11 @@
             <li class="list-group-item p-3"><a href="{{ url_for('rifles') }}" {% if active_page == "rifles" %} class="active"{% endif %}>RIFLES</a></li>
             <li class="list-group-item p-3"><a href="{{ url_for('sniper_rifles') }}" {% if active_page == "snipers" %} class="active"{% endif %}>SNIPERS</a></li>
             <li class="list-group-item p-3"><a href="{{ url_for('smgs') }}" {% if active_page == "smgs" %} class="active"{% endif %}>SMGs</a></li>
-            <li class="list-group-item p-3"><a href="{{ url_for('shotguns') }}">SHOTGUNS</a></li>
-            <li class="list-group-item p-3"><a href="{{ url_for('heavies') }}">HEAVY</a></li>
-            <li class="list-group-item p-3"><a href="{{ url_for('knives') }}">KNIVES</a></li>
-            <li class="list-group-item p-3"><a href="{{ url_for('cases') }}">CASES</a></li>
-            <li class="list-group-item p-3"><a href="{{ url_for('stickers') }}">STICKERS</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('shotguns') }}" {% if active_page == "shotguns" %} class="active"{% endif %}>SHOTGUNS</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('heavies') }}" {% if active_page == "heavies" %} class="active"{% endif %}>HEAVY</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('knives') }}" {% if active_page == "knives" %} class="active"{% endif %}>KNIVES</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('cases') }}" {% if active_page == "cases" %} class="active"{% endif %}>CASES</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('stickers') }}" {% if active_page == "stickers" %} class="active"{% endif %}>STICKERS</a></li>
         </ul>
     </div>
     {% if session.user %}
