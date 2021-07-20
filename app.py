@@ -163,6 +163,7 @@ def view_skins():
 def add_skin():
     if session and session["user"]["is_admin"]:
         weaponTypes = skinColl.distinct('weapon_type')
+        knifeTypes = skinColl.distinct('knife_type')
         weapons = {
             "pistol": skinColl.distinct("weapon_name",
                                         {"weapon_type": "Pistol"}),
@@ -179,7 +180,7 @@ def add_skin():
         }
         weaponRarities = skinColl.distinct('rarity')
         return render_template(
-            "components/add-skin.html", page_title="Add A Skin",
+            "components/forms/add-skin.html", page_title="Add A Skin",
             weaponTypes=weaponTypes, weapons=json.dumps(weapons),
             weaponRarities=weaponRarities, knifeTypes=knifeTypes)
     return render_template("error-pages/404.html")
