@@ -200,3 +200,12 @@ If there are any improvements, questions or anything at all then please get in t
       * Dashboard displays a few analytical pieces on the data from mongodb such as a visual most liked skin slider or still image, number of skins within the db and a few more.
     * Update - Ability to update a skin's details but with validation around certain fields such as conditions as 2 conditions are required at all times for CSGO
     * Delete - Ability to delete a skin through searching for the skin you want to remove and clicking delete and confirm delete in a modal
+
+    ### **Future Features**
+    * To change how images are added to a skin as currently you are required to insert a icon url, I would change this so you upload images from wherever.
+    * Currently the user signs up and logs in from creating a username and a password with a few extra details I would like to change this so you can signup/login with [Steam](https://steamcommunity.com/) so that it is easy to work. with that users Steam account for future features.
+    * Sorting a paginated page by a certain skin field.
+    * To have a forget password button on log in page.
+    * Have the ability to add collections which are linked to skins so you can show what collections some skins are apart of.
+    * To have a search bar across the website so you can search for skins easily.
+    * To be able to list and buy skins from other users in a marketplace section.
