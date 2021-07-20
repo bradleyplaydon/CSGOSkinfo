@@ -10,7 +10,7 @@
         {% set skinname = skin.name %}
         <div class="col-lg-3 col-sm-6 mb-2">
             <div class="card border bg-dark">
-                <a href="#">
+                <a href="{{ url_for('skin', skinname=skinname )}}">
                     {% if skin.image_url is not none %}
                     <img src="{{ skin.image_url }}" class="card-img-top" alt="{{ skin.name }} image">
                     {% endif %}
