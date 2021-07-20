@@ -5,8 +5,8 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h2 class="h2">{{ page_title }}</h2>
 </div>
-<div id="add-weapon" aria-labelledby="add-weapon"">
-    <form id="weapon-skin-form" class="container-fluid" method="post" validate>
+<div id="add-weapon" aria-labelledby="add-weapon">
+    <form id="weapon-skin-form" class="container-fluid" method="post" action="{{ url_for('insert_skin', skin='weapon') }}" validate>
       <div class="row">
         <div class="col-md-9 col-sm-12">
           <label for="name" class="label">Skin Name</label>
@@ -37,9 +37,7 @@
             {% endif %}
             {% endfor %}
           </select>
-          <div class="invalid-feedback border border-danger p-3 fs-5 mb-2" id="invalid-error">
-
-          </div>
+          <p class="border border-info p-3 fs-5 mb-2">Note: Atleast two conditions need to be checked.</p>
           <div class="table-responsive">
             <table class="table table-dark table-striped">
               <thead>
@@ -174,7 +172,7 @@
           </div>
         </div>
         <div class="col-md-3 col-sm-12 text-center">
-          <button type="submit" class="btn btn-orange p-5 h-75 mt-4">
+          <button type="submit" class="btn btn-orange p-5 h-75 mt-4" disabled>
             <i class="far fa-plus-square fs-4 align-middle"></i> Add Skin
           </button>
         </div>

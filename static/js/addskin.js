@@ -37,6 +37,7 @@ $(document).ready(function () {
             }
         });
         if (checkedCount >= 2) {
+            $('[type=submit]').removeAttr("disabled");
             $('[name=stat_or_souv]').each(function (index, element) {
                 $(element).attr("required", "required")
                 $(element).on("input", function () {
@@ -44,6 +45,7 @@ $(document).ready(function () {
                 })
             })
         } else {
+            $('[type=submit]').attr("disabled", "disabled");
             $('[name=stat_or_souv]').each(function (index, element) {
                 $(element).removeAttr("required")
             })
@@ -58,102 +60,4 @@ $(document).ready(function () {
         el: '#release-date',
         dateFormat: 'YYYY-MM-DD'
     })
-
-    $("#weapon-skin-form").submit(function (e) {
-        e.preventDefault();
-        if (checkedCount < 2) {
-            $("#invalid-error").text("Please tick 2 conditions in order to add the skin and add atleast 2 Steam icon URLs");
-            $('#invalid-error').fadeIn('slow', function () {
-                $('#invalid-error').delay(2000).fadeOut();
-            });
-        } else {
-            $("#invalid-error").addClass("d-none");
-            checkSkinInsert($(this), weaponDatePicker.getFullDate())
-        }
-    })
-
 });
-
-function checkSkinInsert(thisObj, reldate) {
-    var skinName = thisObj.find("[name=name]").val()
-    fetch("/get/skin", {
-            headers: {
-                "Content-Type": "application/json"
-            },
-            method: "POST",
-            body: JSON.stringify({
-                name: skinName
-            })
-        }).then(res => res.text())
-        .then(data => {
-            if (data == "False") {
-                insertSkin(thisObj, reldate)
-            } else {
-                alert("Sorry this couldn't be added as a search was made and this skin has already been added.")
-            }
-        })
-
-        .catch(err => console.log(err))
-}
-
-
-
-function insertSkin(thisObj, reldate) {
-
-    var rarity = thisObj.find("[name=rarity]").val();
-    var rariryPrecedence = rarity == "Contraband" ? 6 :
-        rarity == "Covert" ? 5 :
-        rarity == "Classified" ? 4 :
-        rarity == "Restricted" ? 3 :
-        rarity == "Mil-Spec Grade" ? 2 :
-        rarity == "Industrial Grade" ? 1 :
-        "Consumer Grade"
-
-    fetch("/insert/weapon", {
-            headers: {
-                "Content-Type": "application/json"
-            },
-            method: "POST",
-            body: JSON.stringify({
-                name: thisObj.find("[name=name]").val(),
-                skin_description: thisObj.find("[name=skin_description]").val(),
-                type: "Weapon",
-                weapon_type: thisObj.find("[name=weapon_type]").val(),
-                weapon_name: thisObj.find("[name=weapon_name]").val(),
-                rarity: rarity,
-                rarity_precedence: rariryPrecedence,
-                souvenir_available: thisObj.find("#souvenir").prop("checked") == true ? true : false,
-                stattrak_available: thisObj.find("#statTrak").prop("checked") == true ? true : false,
-                statrak_conditions: {
-                    factory_new: thisObj.find("[name=fn]").prop("checked") == true ? true : false,
-                    min_wear: thisObj.find("[name=mw]").prop("checked") == true ? true : false,
-                    field_tested: thisObj.find("[name=ft]").prop("checked") == true ? true : false,
-                    well_worn: thisObj.find("[name=ww]").prop("checked") == true ? true : false,
-                    battle_scarred: thisObj.find("[name=bs]").prop("checked") == true ? true : false
-                },
-                conditions: {
-                    factory_new: thisObj.find("[name=fn]").prop("checked") == true ? true : false,
-                    min_wear: thisObj.find("[name=mw]").prop("checked") == true ? true : false,
-                    field_tested: thisObj.find("[name=ft]").prop("checked") == true ? true : false,
-                    well_worn: thisObj.find("[name=ww]").prop("checked") == true ? true : false,
-                    battle_scarred: thisObj.find("[name=bs]").prop("checked") == true ? true : false
-                },
-                release_date: reldate,
-                image_urls: {
-                    factory_new: thisObj.find('input[name=fnimage]').val() == "" ? null : "https://community.cloudflare.steamstatic.com/economy/image/" + thisObj.find('input[name=fnimage]').val(),
-                    min_wear: thisObj.find('input[name=mwimage]').val() == "" ? null : "https://community.cloudflare.steamstatic.com/economy/image/" + thisObj.find('input[name=mwimage]').val(),
-                    field_tested: thisObj.find('input[name=ftimage]').val() == "" ? null : "https://community.cloudflare.steamstatic.com/economy/image/" + thisObj.find('input[name=ftimage]').val(),
-                    well_worn: thisObj.find('input[name=wwimage]').val() == "" ? null : "https://community.cloudflare.steamstatic.com/economy/image/" + thisObj.find('input[name=wwimage]').val(),
-                    battle_scarred: thisObj.find('input[name=bsimage]').val() == "" ? null : "https://community.cloudflare.steamstatic.com/economy/image/" + thisObj.find('input[name=bsimage]').val()
-                },
-                up_votes: 0,
-                down_votes: 0
-            })
-        }).then(res => {
-            var formSubmitted = thisObj;
-            var successMessage = formSubmitted.before(`<h4 class='text-center bg-success p-3'>The ${thisObj.find("[name=name]").val()} has been succesfully added</h4>`)
-            formSubmitted.trigger("reset")
-        })
-        .catch(err => console.log(err))
-
-}
