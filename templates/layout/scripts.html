@@ -5,6 +5,9 @@
 {% if active_page == 'addweapon' %}
 <script src="{{ url_for('static', filename='js/addskin.js') }}"></script>
 {% endif %}
+{% if active_page == 'addknife' %}
+<script src="{{ url_for('static', filename='js/addknife.js') }}"></script>
+{% endif %}
 {% if active_page == 'addweapon' or active_page == 'addknife' or active_page == 'addcase' or active_page == 'addsticker' %}
 <script src="{{ url_for('static', filename='datepicker/mc-calendar.min.js') }}"></script>
 {% endif %}
