@@ -411,7 +411,18 @@ def rifles():
 
 @app.route("/sniper-rifles")
 def sniper_rifles():
-    return render_template("pages/sniper-rifles.html")
+    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
+    per_page = 20
+    offset = (page - 1) * per_page
+
+    total = skinColl.find({"weapon_type": "Sniper Rifle"}).sort("rarity_precedence", -1).count()
+    snipers = skinColl.find({"weapon_type": "Sniper Rifle"}).sort("rarity_precedence", -1)
+
+    snipers_paginated = snipers[offset: offset + per_page]
+
+    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+
+    return render_template("pages/sniper-rifles.html", page_title="Sniper Rifles",  snipers=snipers_paginated, pagination=pagination)
 
 
 @app.route("/smgs")
