@@ -219,7 +219,8 @@ def edit_selected_skin(skin_id):
                 else 1 if rarity == "Industrial Grade" 
                 else 0 if rarity == "Consumer Grade" 
                 else "")
-            
+            up_votes = skinColl.find_one({"_id": ObjectId(skin_id)})["up_votes"]
+            down_votes = skinColl.find_one({"_id": ObjectId(skin_id)})["down_votes"]
             submit = {
                 "name": request.form.get("name"),
                 "skin_description": request.form.get("skin_description"),
@@ -251,8 +252,8 @@ def edit_selected_skin(skin_id):
                     "well_worn": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("ftimage") if request.form.get("wwimage") else None,
                     "battle_scarred": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("bsimage") if request.form.get("bsimage") else None
                 },
-                "up_votes": skinColl.find_one("_id", ObjectId(skin_id))["up_votes"],
-                "down_votes": skinColl.find_one("_id", ObjectId(skin_id))["down_votes"]
+                "up_votes": up_votes,
+                "down_votes": down_votes
             }
             submit["release_date"] = parser.parse(request.form.get("release-date"))
          
