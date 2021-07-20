@@ -70,7 +70,7 @@ def signup():
                         "skins_liked": skins_liked,
                         "skins_disliked": skins_disliked}
         flash("Registration Succesful")
-        return redirect(url_for("account", user=session["user"]["username"]))
+        return redirect(url_for("account", username=session["user"]["username"]))
 
     return render_template(
         "components/auth.html", login=False, page_title="Sign Up")
