@@ -20,8 +20,14 @@
             <div class="card border bg-dark">
                 {% if skin.image_urls.factory_new is not none %}
                 <img src="{{ skin.image_urls.factory_new }}" class="card-img-top" alt="{{ skin.name }} image">
-                {% else %}
+                {% elif skin.image_urls.min_wear is not none %}
                 <img src="{{ skin.image_urls.min_wear }}" class="card-img-top" alt="{{ skin.name }} image">
+                {% elif skin.image_urls.field_tested is not none %}
+                <img src="{{ skin.image_urls.field_tested }}" class="card-img-top" alt="{{ skin.name }} image">
+                {% elif skin.image_urls.well_worn is not none %}
+                <img src="{{ skin.image_urls.well_worn }}" class="img-fluid" alt="{{ skin.name }} image">
+                {% elif skin.image_urls.battle_scarred is not none %}
+                <img src="{{ skin.image_urls.battle_scarred }}" class="img-fluid" alt="{{ skin.name }} image">
                 {% endif %}
                 <div class="card-body p-0">
                     <ul class="list-group list-group-flush">
