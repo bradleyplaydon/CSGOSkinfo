@@ -28,6 +28,8 @@
                 <img src="{{ skin.image_urls.well_worn }}" class="img-fluid" alt="{{ skin.name }} image">
                 {% elif skin.image_urls.battle_scarred is not none %}
                 <img src="{{ skin.image_urls.battle_scarred }}" class="img-fluid" alt="{{ skin.name }} image">
+                {% else %}
+                <img src="{{ url_for('static', filename='images/image_placeholder.png') }}" class="img-fluid" alt="Image Placeholder">
                 {% endif %}
                 <div class="card-body p-0">
                     <ul class="list-group list-group-flush">
