@@ -476,7 +476,18 @@ def heavies():
 
 @app.route("/knives")
 def knives():
-    return render_template("pages/knives.html")
+    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
+    per_page = 20
+    offset = (page - 1) * per_page
+
+    total = skinColl.find({"weapon_type": "Knife"}).sort("rarity_precedence", -1).count()
+    knives = skinColl.find({"weapon_type": "Knife"}).sort("rarity_precedence", -1)
+
+    knives_paginated = knives[offset: offset + per_page]
+
+    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+
+    return render_template("pages/knives.html", page_title="Knives",  knives=knives_paginated, pagination=pagination)
 
 
 @app.route("/gloves")
