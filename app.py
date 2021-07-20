@@ -540,6 +540,37 @@ def unlike():
 def undislike():
     if request.method == "POST":
         reqJson = request.json
+
+        skin_id = ObjectId(reqJson["_id"])
+        collection = str(reqJson["collection"])
+
+        # Pull's the skin id from the users_liked field array so it's not in there list of liked skins.
+        mongo.db.users.update(
+        {"username": session["user"]["username"]}, {"$pull": {"skins_disliked": skin_id}})
+
+
+        existing_user = mongo.db.users.find_one(
+                 {"username": session["user"]["username"]})
+
+        skins_liked = list(map(str, existing_user["skins_liked"]))
+        skins_disliked = list(map(str, existing_user["skins_disliked"]))
+
+
+        session["user"] = {
+                        "username": existing_user["username"],
+                        "is_admin": existing_user["is_admin"],
+                        "skins_liked": skins_liked,
+                        "skins_disliked": skins_disliked}
+
+        # Total number of upvotes for this skin
+        skin_downvotes = mongo.db[collection].find_one({
+            "_id": skin_id
+        })["down_votes"]
+
+        # Sets the number of up votes to -1
+        mongo.db[collection].update(
+            {"_id": skin_id}, {"$set": {"down_votes": skin_downvotes - 1}})
+       
         return "undisliked"
 
 
