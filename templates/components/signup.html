@@ -1,11 +1,11 @@
 <div class="container">
     <form method="POST" class="bg-dark mt-4 p-5" id="contactForm">
-        <input type="text" class="form-control mb-3" placeholder="First Name" name="firstName" required>
-        <input type="text" class="form-control mb-3" placeholder="Last Name" name="lastName" required>
-        <input type="text" class="form-control mb-3" minlength="4" placeholder="Username" name="username" required>
+        <input type="text" class="form-control mb-3" placeholder="First Name" name="firstName" pattern="[A-Za-z]{1,32}" required>
+        <input type="text" class="form-control mb-3" placeholder="Last Name" name="lastName" pattern="[A-Za-z]{1,32}" required>
+        <input type="text" class="form-control mb-3" minlength="4" maxlength="20" placeholder="Username" name="username" pattern="[a-zA-Z0-9]+" required>
         <input type="email" class="form-control mb-3" placeholder="Email Address" name="email" required>
-        <input type="password" class="form-control mb-3" placeholder="Password" name="password" required>
-        <input type="password" class="form-control mb-3" placeholder="Confirm Password" name="confirmpassword" required>
+        <input type="password" class="form-control mb-3" placeholder="Password" name="password" pattern=".{6,}" required>
+        <input type="password" class="form-control mb-3" placeholder="Confirm Password" name="confirmpassword" pattern=".{6,}" required>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
             {% if "Password doesn't match" in messages %}
