@@ -307,8 +307,10 @@ def delete_selected_skin(skin_id):
 def insert_knife_skin():
     if session and session["user"]["is_admin"]:
         if request.method == "POST":
-            print(request.data)
-            return render_template("components/add_skin.html")
+            reqJson = request.json
+            reqJson["release_date"] = parser.parse(reqJson["release_date"])
+            skinColl.insert_one(reqJson)
+            return redirect(url_for('add_skin'))
 
 
 @app.route('/insert/gloves', methods=["GET", "POST"])
@@ -538,6 +540,14 @@ def stickers():
 
     return render_template("pages/stickers.html", page_title="Stickers",  stickers=stickers_paginated, pagination=pagination)
 
+
+@app.route("/skin/<skinname>", methods=["POST", "GET"])
+def skin(skinname):
+    skin=skinColl.find_one({"name": skinname})
+    if request.method == "GET":
+        if skin:
+            return render_template("pages/skin.html", page_title=skin["name"], skin=skin)
+            
 
 @app.route("/api/like-skin", methods=["POST", "GET"])
 def like():
