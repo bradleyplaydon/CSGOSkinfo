@@ -59,6 +59,14 @@ nav>ul.list-group.list-group-horizontal.justify-content-center>li, .mobile-nav >
   font-family: gameovercre1;
 }
 
+.souvenir {
+  background: gold;
+}
+
+.stattrak {
+  color: #f89406 !important;
+}
+
 .contraband {
   background: #e4ae39;
 }
