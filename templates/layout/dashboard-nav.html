@@ -82,10 +82,20 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white {% if active_page == "addskin" %} active {% endif %}" href="{{ url_for('add_skin') }}">
+                <a class="nav-link text-white dropdown-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample">
                     <i class="far fa-plus-square"></i>
                     Create A Skin
                 </a>
+                <div class="collapse" id="collapseExample">
+                    <ul class="list-group list-group-flush border-white">
+                          <a class="nav-item list-group-item bg-dark text-white" role="button" href="{{ url_for('add_skin') }}">Add a Weapon</a>
+                          <a class="nav-item list-group-item bg-dark text-white" role="button">Add Gloves</a>
+                          <a class="nav-item list-group-item bg-dark text-white" role="button">Add a Knife</a>
+                          <a class="nav-item list-group-item bg-dark text-white" role="button">Add a Case</a>
+                          <a class="nav-item list-group-item bg-dark text-white" role="button">Add a Sticker</a>
+                      </ul>
+                </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white {% if active_page == "editskin" or active_page == "edit-selected-skin" %} active {% endif %}" href="{{ url_for('edit_skin') }}">
