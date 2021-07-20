@@ -1,17 +1,14 @@
 <script src="{{ url_for('static', filename='jquery/jquery.js') }}"></script>
 <script src="{{ url_for('static', filename='slick/slick.min.js') }}"></script>
 <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
-{% if active_page == 'addweapon' %}
+{% if active_page == 'addweapon' or active_page == 'addknife'  %}
 <script src="{{ url_for('static', filename='js/addskin.js') }}"></script>
 {% endif %}
-{% if active_page == 'addknife' %}
-<script src="{{ url_for('static', filename='js/addknife.js') }}"></script>
-{% endif %}
-{% if active_page == 'addweapon' or active_page == 'addknife' or active_page == 'addcase' or active_page == 'addsticker' %}
+{% if active_page == 'addweapon' or active_page == 'addknife' or active_page == 'addgloves' or active_page == 'addcase' or active_page == 'addsticker' %}
 <script src="{{ url_for('static', filename='datepicker/mc-calendar.min.js') }}"></script>
 {% endif %}
 {% if active_page == 'edit-selected-skin' %}
 <script src="{{ url_for('static', filename='js/editskin.js') }}"></script>
 <script src="{{ url_for('static', filename='datepicker/mc-calendar.min.js') }}"></script>
 {% endif %}
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
