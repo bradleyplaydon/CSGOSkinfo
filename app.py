@@ -186,8 +186,9 @@ def add_skin(skin_type):
                 weaponRarities=weaponRarities)
 
         if skin_type == "knife":
+            knifeTypes = skinColl.distinct('knife_type')
             return render_template(
-                "components/forms/add-knife.html", page_title="Add A Knife")   
+                "components/forms/add-knife.html", page_title="Add A Knife", knifeTypes=knifeTypes)   
 
         if skin_type == "gloves":
             return render_template(
@@ -204,8 +205,8 @@ def add_skin(skin_type):
     return render_template("error-pages/404.html")
 
 
-@app.route('/insert/weapon', methods=["GET", "POST"])
-def insert_weapon_skin():
+@app.route('/insert/<skin>', methods=["GET", "POST"])
+def insert_skin(skin):
     if session and session["user"]["is_admin"]:
         if request.method == "POST":
             reqJson = request.json
@@ -320,16 +321,6 @@ def delete_selected_skin(skin_id):
         return redirect(url_for("admin"))
     return render_template("error-pages/404.html")
     
-
-@app.route('/insert/knife', methods=["GET", "POST"])
-def insert_knife_skin():
-    if session and session["user"]["is_admin"]:
-        if request.method == "POST":
-            reqJson = request.json
-            reqJson["release_date"] = parser.parse(reqJson["release_date"])
-            skinColl.insert_one(reqJson)
-            return redirect(url_for('add_skin'))
-
 
 @app.route('/insert/gloves', methods=["GET", "POST"])
 def insert_gloves_skin():
