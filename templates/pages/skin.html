@@ -2,15 +2,26 @@
 {% set active_page = "skin" %}
 {% block content %}
 <div class="container-fluid mt-5 text-md-start text-center">
-    <h2 class="bg-dark h2 d-inline-block">{{ page_title }}</h2>
+    <h2 class="bg-dark h2 d-inline-block m-0 p-4">{{ page_title }}</h2>
     <div class="d-flex justify-content-center flex-wrap">
         <div class="col-lg-6 col-sm-12 bg-dark text-center">
-            <p class="{{ skin.rarity | lower }} p-2 mx-auto">{{ skin.rarity }}</p>
+            <p class="{{ skin.rarity | lower }} p-2 w-50 mx-auto">{{ skin.rarity }}</p>
             {% if skin.souvenir_available %}
-            <p class="souvenir p-2">Souvenir Available</p>
+            <p class="souvenir p-2 w-50 mx-auto">Souvenir Available</p>
             {% endif %}
             {% if skin.stattrak_available %}
-            <p class="bg-secondary stattrak p-2">StatTrak Available</p>
+            <p class="bg-secondary stattrak p-2 w-50 mx-auto">StatTrak Available</p>
+            {% endif %}
+            {% if skin.conditions.factory_new %}
+            <a href="https://steamcommunity.com/market/listings/730/{{ skin.name }}(Factory New)" target="_blank" rel="nofollow" class="btn-orange rounded-0 btn w-50 mx-auto mb-2">View on Steam</a>
+            {% elif skin.conditions.min_wear %}
+            <a href="https://steamcommunity.com/market/listings/730/{{ skin.name }}(Minimal Wear)" target="_blank" rel="nofollow" class="btn-orange rounded-0 btn w-50 mx-auto mb-2">View on Steam</a>
+            {% elif skin.conditions.field_tested %}
+            <a href="https://steamcommunity.com/market/listings/730/{{ skin.name }}(Field Tested)" target="_blank" rel="nofollow" class="btn-orange rounded-0 btn w-50 mx-auto mb-2">View on Steam</a>
+            {% elif skin.conditions.well_worn %}
+            <a href="https://steamcommunity.com/market/listings/730/{{ skin.name }}(Well Worn)" target="_blank" rel="nofollow" class="btn-orange rounded-0 btn w-50 mx-auto mb-2">View on Steam</a>
+            {% elif skin.conditions.battle_scarred %}
+            <a href="https://steamcommunity.com/market/listings/730/{{ skin.name }}(Battle Scarred)" target="_blank" rel="nofollow" class="btn-orange rounded-0 btn w-50 mx-auto mb-2">View on Steam</a>
             {% endif %}
             <img class="img-fluid border p-4" src="{{ skin.image_urls.factory_new }}">
         </div>
