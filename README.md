@@ -209,3 +209,32 @@ If there are any improvements, questions or anything at all then please get in t
     * Have the ability to add collections which are linked to skins so you can show what collections some skins are apart of.
     * To have a search bar across the website so you can search for skins easily.
     * To be able to list and buy skins from other users in a marketplace section.
+
+    ## Technologies used
+    ---
+    ### Coding languages
+    * [HTML](https://en.wikipedia.org/wiki/HTML)
+    * [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
+    * [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+    * [Python](https://www.python.org/)
+
+    ### Libraries and Frameworks
+    * [Bootstrap5](https://getbootstrap.com/)
+    * [Font Awesome](https://fontawesome.com/)
+    * [jQuery](https://jquery.com/)
+    * [Slick Slider](https://kenwheeler.github.io/slick/)
+    * [MC Date Picker](https://www.cssscript.com/mc-datepicker/)
+
+    ### Tools
+    * [Git](https://git-scm.com/)
+    * [Visual Studio Code](https://code.visualstudio.com/)
+    * [Heroku](https://www.heroku.com/)
+    * [Balsamiq](https://balsamiq.com/wireframes/)
+    * [W3C HTML Validation Service](https://validator.w3.org/)
+    * [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/)
+    * [MongoDB](https://www.mongodb.com/)
+    * [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+    * [PyMongo](https://api.mongodb.com/python/current/tutorial.html)
+    * [Jinja](https://jinja.palletsprojects.com/en/2.11.x/)
+    * [CSGO Backpack API for Data](http://csgobackpack.net/api/)
+    * [Virtual Env](https://docs.python.org/3/library/venv.html)
