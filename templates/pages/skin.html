@@ -14,18 +14,25 @@
             {% endif %}
             {% if skin.conditions.factory_new %}
             <a href="https://steamcommunity.com/market/listings/730/{{ skin.name }}(Factory New)" target="_blank" rel="nofollow" class="btn-orange rounded-0 btn w-50 mx-auto mb-2">View on Steam</a>
+            <img class="img-fluid border p-4" src="{{ skin.image_urls.factory_new }}">
             {% elif skin.conditions.min_wear %}
             <a href="https://steamcommunity.com/market/listings/730/{{ skin.name }}(Minimal Wear)" target="_blank" rel="nofollow" class="btn-orange rounded-0 btn w-50 mx-auto mb-2">View on Steam</a>
+            <img class="img-fluid border p-4" src="{{ skin.image_urls.min_wear }}">
             {% elif skin.conditions.field_tested %}
             <a href="https://steamcommunity.com/market/listings/730/{{ skin.name }}(Field Tested)" target="_blank" rel="nofollow" class="btn-orange rounded-0 btn w-50 mx-auto mb-2">View on Steam</a>
+            <img class="img-fluid border p-4" src="{{ skin.image_urls.field_tested }}">
             {% elif skin.conditions.well_worn %}
             <a href="https://steamcommunity.com/market/listings/730/{{ skin.name }}(Well Worn)" target="_blank" rel="nofollow" class="btn-orange rounded-0 btn w-50 mx-auto mb-2">View on Steam</a>
+            <img class="img-fluid border p-4" src="{{ skin.image_urls.well_worn }}">
             {% elif skin.conditions.battle_scarred %}
             <a href="https://steamcommunity.com/market/listings/730/{{ skin.name }}(Battle Scarred)" target="_blank" rel="nofollow" class="btn-orange rounded-0 btn w-50 mx-auto mb-2">View on Steam</a>
+            <img class="img-fluid border p-4" src="{{ skin.image_urls.battle_scarred }}">
             {% endif %}
-            <img class="img-fluid border p-4" src="{{ skin.image_urls.factory_new }}">
         </div>
         <div class="col-lg-6 col-sm-12 bg-dark text-center">
+            {% if skin.skin_description != "" %}
+                <p class="text-center fs-3 mt-4">{{ skin.skin_description }}</p>
+            {% endif %}
         </div>
     </div>
 </div>
