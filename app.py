@@ -159,11 +159,10 @@ def view_skins():
         return render_template("admin-pages/view-skins.html", page_title="View Skins")
     return render_template("error-pages/404.html")
 
-@app.route('/add/skin', methods=["GET", "POST"])
-def add_skin():
+@app.route('/add/<skin_type>', methods=["GET", "POST"])
+def add_skin(skin_type):
     if session and session["user"]["is_admin"]:
         weaponTypes = skinColl.distinct('weapon_type')
-        knifeTypes = skinColl.distinct('knife_type')
         weapons = {
             "pistol": skinColl.distinct("weapon_name",
                                         {"weapon_type": "Pistol"}),
@@ -179,10 +178,29 @@ def add_skin():
                                               {"weapon_type": "Sniper Rifle"})
         }
         weaponRarities = skinColl.distinct('rarity')
-        return render_template(
-            "components/forms/add-skin.html", page_title="Add A Skin",
-            weaponTypes=weaponTypes, weapons=json.dumps(weapons),
-            weaponRarities=weaponRarities, knifeTypes=knifeTypes)
+
+        if skin_type == "weapon":
+            return render_template(
+                "components/forms/add-weapon.html", page_title="Add A Weapon",
+                weaponTypes=weaponTypes, weapons=json.dumps(weapons),
+                weaponRarities=weaponRarities)
+
+        if skin_type == "knife":
+            return render_template(
+                "components/forms/add-knife.html", page_title="Add A Knife")   
+
+        if skin_type == "gloves":
+            return render_template(
+                "components/forms/add-gloves.html", page_title="Add Gloves")        
+
+        if skin_type == "case":
+            return render_template(
+                "components/forms/add-cases.html", page_title="Add A Case")  
+
+        if skin_type == "sticker":
+            return render_template(
+                "components/forms/add-stickers.html", page_title="Add A Sticker")             
+    
     return render_template("error-pages/404.html")
 
 
