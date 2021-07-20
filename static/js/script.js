@@ -39,9 +39,9 @@ function like(thisObj) {
                 "collection": thisObj.attr("data-collection")
             })
         }).then(res => {
-            let currentUpVotes = parseInt(thisObj.find("strong").text());
+            let currentUpVotes = parseInt(thisObj.parent().find("#up_votes").text());
             currentUpVotes++;
-            thisObj.find("strong").text(currentUpVotes)
+            thisObj.parent().find("#up_votes").text(currentUpVotes)
             thisObj.attr("already-liked", true)
         })
         .catch(err => console.log(err))
@@ -58,10 +58,10 @@ function unlike(thisObj) {
                 "collection": thisObj.attr("data-collection")
             })
         }).then(res => {
-            let currentUpVotes = parseInt(thisObj.find("strong").text());
+            let currentUpVotes = parseInt(thisObj.parent().find("#up_votes").text());
             currentUpVotes--;
-            thisObj.find("strong").text(currentUpVotes)
-            thisObj.removeAttr("already-liked")
+            thisObj.parent().find("#up_votes").text(currentUpVotes)
+            thisObj.parent().find(".like-btn").removeAttr("already-liked")
         })
         .catch(err => console.log(err))
 }
@@ -76,8 +76,12 @@ function dislike(thisObj) {
                 _id: thisObj[0].id,
                 "collection": thisObj.attr("data-collection")
             })
-        }).then(res => res.json())
-        .then(data => console.log(data))
+        }).then(res => {
+            let currentDownVotes = parseInt(thisObj.parent().find("#down_votes").text());
+            currentDownVotes++;
+            thisObj.find("strong").text(currentDownVotes)
+            thisObj.attr("disliked", true)
+        })
         .catch(err => console.log(err))
 }
 
