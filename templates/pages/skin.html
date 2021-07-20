@@ -2,6 +2,20 @@
 {% set active_page = "skin" %}
 {% block content %}
 <div class="container-fluid mt-5 text-md-start text-center">
-    <h2 class="bg-dark h2 d-inline-block m-0 p-4" style="border-radius: 10px 10px 0px 0px;">{{ page_title }}</h2>
+    <h2 class="bg-dark h2 d-inline-block">{{ page_title }}</h2>
+    <div class="d-flex justify-content-center flex-wrap">
+        <div class="col-lg-6 col-sm-12 bg-dark text-center">
+            <p class="{{ skin.rarity | lower }} p-2 mx-auto">{{ skin.rarity }}</p>
+            {% if skin.souvenir_available %}
+            <p class="souvenir p-2">Souvenir Available</p>
+            {% endif %}
+            {% if skin.stattrak_available %}
+            <p class="bg-secondary stattrak p-2">StatTrak Available</p>
+            {% endif %}
+            <img class="img-fluid border p-4" src="{{ skin.image_urls.factory_new }}">
+        </div>
+        <div class="col-lg-6 col-sm-12 bg-dark text-center">
+        </div>
+    </div>
 </div>
 {% endblock content %}
