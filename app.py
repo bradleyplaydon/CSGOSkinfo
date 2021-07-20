@@ -163,7 +163,6 @@ def view_skins():
 def add_skin():
     if session and session["user"]["is_admin"]:
         weaponTypes = skinColl.distinct('weapon_type')
-        knifeTypes = skinColl.distinct('knife_type')
         weapons = {
             "pistol": skinColl.distinct("weapon_name",
                                         {"weapon_type": "Pistol"}),
@@ -476,20 +475,25 @@ def heavies():
     return render_template("pages/heavies.html", page_title="Heavies",  heavies=heavies_paginated, pagination=pagination)
 
 
-@app.route("/knives")
+@app.route("/knives", methods=["GET", "POST"])
 def knives():
     page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
     per_page = 20
     offset = (page - 1) * per_page
-
-    total = skinColl.find({"weapon_type": "Knife"}).sort("rarity_precedence", -1).count()
-    knives = skinColl.find({"weapon_type": "Knife"}).sort("rarity_precedence", -1)
-
+    total = skinColl.find({"weapon_type": "Knife"}).count()
+    knives = skinColl.find({"weapon_type": "Knife"}).sort("release_date", -1)
     knives_paginated = knives[offset: offset + per_page]
-
     pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+    knifeTypes = skinColl.distinct('knife_type')
+    if request.method == "POST":
+        print(request.form.get("sortby"))
+        total = skinColl.find({"weapon_type": "Knife", "knife_type": request.form.get("sortby")}).count()
+        knives = skinColl.find({"weapon_type": "Knife", "knife_type": request.form.get("sortby")}).sort("release_date", -1)
+        knives_paginated = knives[offset: offset + per_page]
+        pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+        return render_template("pages/knives.html", page_title="Knives",  knives=knives_paginated, pagination=pagination, knifeTypes=knifeTypes)
 
-    return render_template("pages/knives.html", page_title="Knives",  knives=knives_paginated, pagination=pagination)
+    return render_template("pages/knives.html", page_title="Knives",  knives=knives_paginated, pagination=pagination, knifeTypes=knifeTypes)
 
 
 @app.route("/gloves")

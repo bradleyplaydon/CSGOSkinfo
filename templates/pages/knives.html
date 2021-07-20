@@ -4,6 +4,14 @@
 <h2>{{ page_title }}</h2>
 {% endblock %}
 {% block content %}
+<form action="/knives" method="POST">
+    <select class="form-select bg-dark text-white" name="sortby" aria-label="Sort By Knife Type" onchange="this.form.submit()">
+        <option selected disabled>Filter</option>
+        {% for type in knifeTypes %}
+            <option value="{{ type }}">{{ type }}</option>
+        {% endfor %}
+      </select>
+</form>
 <div class="col-lg-12 bg-dark mx-auto p-3 mt-4">
     <div class="row">
         {% for skin in knives %}
