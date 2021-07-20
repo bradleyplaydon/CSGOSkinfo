@@ -82,7 +82,22 @@ function dislike(thisObj) {
 }
 
 function undislike(thisObj) {
-
+    fetch("/api/undislike-skin", {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            method: "POST",
+            body: JSON.stringify({
+                _id: thisObj[0].id,
+                "collection": thisObj.attr("data-collection")
+            })
+        }).then(res => {
+            let currentDownVotes = parseInt(thisObj.parent().find("#down_votes").text());
+            currentDownVotes--;
+            thisObj.parent().find("#down_votes").text(currentDownVotes)
+            thisObj.parent().find(".dislike-btn").removeAttr("disliked")
+        })
+        .catch(err => console.log(err))
 }
 
 
