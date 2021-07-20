@@ -1,5 +1,6 @@
 # **CSGO Skinfo**
-
+![CSGO:Skinfo](/wireframes/csgo-skinfo-amiresponsive.PNG "CSGO Skin info website")
+*Browse around CSGO Skins*
 ## **Goal for this project**
 
 If you're a CSGO player then you will know that when it comes to new released skins it's not very easy to find all the information regarding that skin.
@@ -201,29 +202,29 @@ If there are any improvements, questions or anything at all then please get in t
     * Update - Ability to update a skin's details but with validation around certain fields such as conditions as 2 conditions are required at all times for CSGO
     * Delete - Ability to delete a skin through searching for the skin you want to remove and clicking delete and confirm delete in a modal
 
-    ### **Future Features**
-    * To change how images are added to a skin as currently you are required to insert a icon url, I would change this so you upload images from wherever.
-    * Currently the user signs up and logs in from creating a username and a password with a few extra details I would like to change this so you can signup/login with [Steam](https://steamcommunity.com/) so that it is easy to work. with that users Steam account for future features.
-    * Sorting a paginated page by a certain skin field.
-    * To have a forget password button on log in page.
-    * Have the ability to add collections which are linked to skins so you can show what collections some skins are apart of.
-    * To have a search bar across the website so you can search for skins easily.
-    * To be able to list and buy skins from other users in a marketplace section.
+  ### **Future Features**
+  * To change how images are added to a skin as currently you are required to insert a icon url, I would change this so you upload images from wherever.
+  * Currently the user signs up and logs in from creating a username and a password with a few extra details I would like to change this so you can signup/login with [Steam](https://steamcommunity.com/) so that it is easy to work. with that users Steam account for future features.
+  * Sorting a paginated page by a certain skin field.
+  * To have a forget password button on log in page.
+  * Have the ability to add collections which are linked to skins so you can show what collections some skins are apart of.
+  * To have a search bar across the website so you can search for skins easily.
+  * To be able to list and buy skins from other users in a marketplace section.
 
-    ## Technologies used
-    ---
-    ### Coding languages
-    * [HTML](https://en.wikipedia.org/wiki/HTML)
-    * [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
-    * [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
-    * [Python](https://www.python.org/)
+  ## Technologies used
+  ---
+  ### Coding languages
+  * [HTML](https://en.wikipedia.org/wiki/HTML)
+  * [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
+  * [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+  * [Python](https://www.python.org/)
 
-    ### Libraries and Frameworks
-    * [Bootstrap5](https://getbootstrap.com/)
-    * [Font Awesome](https://fontawesome.com/)
-    * [jQuery](https://jquery.com/)
-    * [Slick Slider](https://kenwheeler.github.io/slick/)
-    * [MC Date Picker](https://www.cssscript.com/mc-datepicker/)
+  ### Libraries and Frameworks
+  * [Bootstrap5](https://getbootstrap.com/)
+  * [Font Awesome](https://fontawesome.com/)
+  * [jQuery](https://jquery.com/)
+  * [Slick Slider](https://kenwheeler.github.io/slick/)
+  * [MC Date Picker](https://www.cssscript.com/mc-datepicker/)
 
     ### Tools
     * [Git](https://git-scm.com/)
@@ -238,3 +239,14 @@ If there are any improvements, questions or anything at all then please get in t
     * [Jinja](https://jinja.palletsprojects.com/en/2.11.x/)
     * [CSGO Backpack API for Data](http://csgobackpack.net/api/)
     * [Virtual Env](https://docs.python.org/3/library/venv.html)
+
+    ## Testing
+    ---
+    **User Story: As a user, I would like to be able to register for the website so I can create, read, update and delete skins.**
+    * **Plan**
+      I want to create a page on the website where the user can signup for a personal account which only that user can access. I planned out that I would take the user to there account page once signed up so that they can see that they haven't liked any skins yet this is to help give incentive to liking or disliking a skin. I first planned it out so once they sign up and are redirected that on every page where you can see skins the page would use a find on the database to see what skins they had liked I then found a better way which was to store the skins they liked and disliked inside of a list in the session that way there doesn't need to be a find on every page for the skins they liked and disliked.
+    
+    * Implementation
+      I created a form on the /signup page where the user can enter there first name, last name, username, email and then password, I decided to create two password inputs one to confirm there password incase the user accidentally mistypes there password a message is shown if they do not match. I also added some HTML attributes for more validation using the pattern attribute, minlength and maxlength attribute. There is backend validation against username too.
+
+    
