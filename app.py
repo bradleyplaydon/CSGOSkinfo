@@ -373,7 +373,7 @@ def get_skin_by_name():
                 foundSkins = skinColl.find(searchOptions).sort("rarity_precedence", -1)
                 cases = mongo.db.cases.find(searchOptions).sort("rarity_precedence", -1)
                 stickers = mongo.db.stickers.find(searchOptions).sort("rarity_precedence", -1)
-                return render_template("pages/view-skins.html", foundSkins=foundSkins, cases=cases, stickers=stickers)
+                return render_template("admin-pages/view-skins.html", foundSkins=foundSkins, cases=cases, stickers=stickers)
 
                   
 @app.route("/pistols")
@@ -428,7 +428,18 @@ def sniper_rifles():
 
 @app.route("/smgs")
 def smgs():
-    return render_template("pages/smgs.html")
+    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
+    per_page = 20
+    offset = (page - 1) * per_page
+
+    total = skinColl.find({"weapon_type": "SMG"}).sort("rarity_precedence", -1).count()
+    smgs = skinColl.find({"weapon_type": "SMG"}).sort("rarity_precedence", -1)
+
+    smgs_paginated = smgs[offset: offset + per_page]
+
+    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+
+    return render_template("pages/smgs.html", page_title="SMGs",  smgs=smgs_paginated, pagination=pagination)
 
 
 @app.route("/shotguns")
