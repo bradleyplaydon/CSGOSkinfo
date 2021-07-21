@@ -21,4 +21,18 @@ $(document).ready(function() {
     data.template_params.contact_reason = $("#reason").val();
     data.template_params.message = $("#message").val();
   });
+
+  $("#contactForm").submit(function(event) {
+    $.ajax('https://api.emailjs.com/api/v1.0/email/send', {
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json'
+    }).done(function() {
+        alert("Your message has successfully sent :)")
+      $("#contactForm").trigger("reset");
+    }).fail(function(error) {
+      alert('Oops... ' + JSON.stringify(error));
+    });
+    event.preventDefault();
+  });
 });
