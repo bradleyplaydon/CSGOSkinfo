@@ -115,9 +115,4 @@ $('.most-popular').slick({
     slidesToScroll: 1
 });
 
-const releaseDatePicker = MCDatepicker.create({
-    el: '#release-date',
-    dateFormat: 'YYYY-MM-DD'
-})
-
 $("#copyright").text(new Date().getFullYear())
