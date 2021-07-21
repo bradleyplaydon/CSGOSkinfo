@@ -685,6 +685,142 @@ def get_skin_by_name():
                     cases=cases, stickers=stickers)
 
 
+def get_skin_schema(skin_type):
+    imgDom = "https://community.cloudflare.steamstatic.com/economy/image/"
+    standard_schema = {
+                "name": request.form.get("name"),
+                "skin_description": request.form.get("skin_description"),
+                "type": "Weapon",
+                "weapon_type": request.form.get("weapon_type"),
+                "weapon_name": request.form.get("weapon_name"),
+                "rarity": request.form.get("rarity"),
+                "rarity_precedence": (
+                    6 if request.form.get("rarity") == "Contraband"
+                    else 5 if request.form.get("rarity") == "Covert"
+                    else 4 if request.form.get("rarity") == "Classified"
+                    else 3 if request.form.get("rarity") == "Restricted"
+                    else 2 if request.form.get("rarity") == "Mil-Spec Grade"
+                    else 1 if request.form.get("rarity") == "Industrial Grade"
+                    else 0 if request.form.get("rarity") == "Consumer Grade"
+                    else ""),
+                "souvenir_available": True if
+                request.form.get("souvenir")
+                else False,
+                "stattrak_available": True if
+                request.form.get("stattrak")
+                else False,
+                "stattrak_conditions": {
+                    "factory_new": True if
+                    request.form.get("fn") and
+                    request.form.get("stattrak") else False,
+                    "min_wear": True if
+                    request.form.get("mw") and
+                    request.form.get("stattrak") else False,
+                    "field_tested": True if
+                    request.form.get("ft") and
+                    request.form.get("stattrak") else False,
+                    "well_worn": True if
+                    request.form.get("ww") and
+                    request.form.get("stattrak") else False,
+                    "battle_scarred": True if
+                    request.form.get("bs") and
+                    request.form.get("stattrak") else False
+                },
+                "conditions": {
+                    "factory_new": True if
+                    request.form.get("fn")
+                    else False,
+                    "min_wear": True if
+                    request.form.get("mw")
+                    else False,
+                    "field_tested": True if
+                    request.form.get("ft")
+                    else False,
+                    "well_worn": True if
+                    request.form.get("ww")
+                    else False,
+                    "battle_scarred": True if
+                    request.form.get("bs")
+                    else False
+                },
+                "image_urls": {
+                    "factory_new": imgDom +
+                    request.form.get("fnimage") if
+                    request.form.get("fnimage") else None,
+                    "min_wear": imgDom +
+                    request.form.get("mwimage") if
+                    request.form.get("mwimage") else None,
+                    "field_tested": imgDom +
+                    request.form.get("ftimage") if
+                    request.form.get("ftimage") else None,
+                    "well_worn": imgDom +
+                    request.form.get("ftimage") if
+                    request.form.get("wwimage") else None,
+                    "battle_scarred": imgDom +
+                    request.form.get("bsimage") if
+                    request.form.get("bsimage") else None
+                },
+                "up_votes": 0,
+                "down_votes": 0
+    }
+    if skin_type == "weapon":
+        return standard_schema
+    if skin_type == "knife":
+        keys_to_remove = [
+            "weapon_name", "rarity_precedence", "souvenir_available"]
+        for key in keys_to_remove:
+            standard_schema.pop(key)
+
+        knife_schema = standard_schema
+        knife_schema["weapon_type"] = "Knife"
+        knife_schema["rarity"] = "Covert"
+        return knife_schema
+    if skin_type == "gloves":
+        keys_to_remove = [
+            "weapon_name", "rarity_precedence",
+            "souvenir_available", "weapon_type",
+            "stattrak_available", "stattrak_conditions"]
+        for key in keys_to_remove:
+            standard_schema.pop(key)
+
+        gloves_schema = standard_schema
+        gloves_schema["rarity"] = "Extraordinary"
+        gloves_schema["type"] = "Gloves"
+        return gloves_schema
+
+    if skin_type == "case":
+        keys_to_remove = [
+            "weapon_name", "weapon_type", "rarity",
+            "rarity_precedence", "stattrak_available", "souvenir_available",
+            "image_urls", "conditions", "stattrak_conditions"]
+        for key in keys_to_remove:
+            standard_schema.pop(key)
+
+        case_schema = standard_schema
+        case_schema["type"] = "Container"
+        return case_schema
+
+    if skin_type == "sticker":
+        keys_to_remove = [
+            "weapon_name", "weapon_type", "rarity_precedence",
+            "stattrak_available", "souvenir_available",
+            "image_urls", "conditions", "stattrak_conditions"]
+        for key in keys_to_remove:
+            standard_schema.pop(key)
+
+        sticker_schema = standard_schema
+        sticker_schema["type"] = "Sticker"
+        sticker_schema["rarity_precedence"] = (
+                    6 if request.form.get("rarity") == "Contraband"
+                    else 5 if request.form.get("rarity") == "Extraordinary"
+                    else 4 if request.form.get("rarity") == "Exotic"
+                    else 3 if request.form.get("rarity") == "Remarkable"
+                    else 2 if request.form.get("rarity") == "High Grade"
+                    else "")
+
+        return sticker_schema
+
+
 @app.route("/pistols")
 def pistols():
     page, per_page, offset = get_page_args(
