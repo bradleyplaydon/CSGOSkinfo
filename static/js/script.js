@@ -167,4 +167,10 @@ btn.on('click', function(e) {
   $('html, body').animate({scrollTop:0}, '500');
 });
 
+if ($("#release-date").length > 0) {
+    const releaseDatePicker = MCDatepicker.create({
+        el: '#release-date'
+    })
+}
+
 $("#copyright").text(new Date().getFullYear())
