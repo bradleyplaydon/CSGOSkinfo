@@ -242,7 +242,7 @@ def insert_skin(skin_type):
             if skin_type == "knife":
                 schema["release_date"] = parser.parse(
                     request.form.get("release-date"))
-                skinColl.insert_one(submit)
+                skinColl.insert_one(schema)
                 flash(f'{request.form.get("name")} Successfully Added')
                 return redirect(url_for('add_skin', skin_type=skin))
             if skin_type == "weapon":
@@ -251,7 +251,7 @@ def insert_skin(skin_type):
                 skinColl.insert_one(schema)
                 flash(f'{request.form.get("name")} Successfully Added')
                 return redirect(url_for('add_skin', skin_type=skin))
-            if skin == "gloves":
+            if skin_type == "gloves":
                 submit = {
                     "name": request.form.get("name"),
                     "skin_description": request.form.get("gloves_description"),
@@ -294,7 +294,7 @@ def insert_skin(skin_type):
                 skinColl.insert_one(submit)
                 flash(f'{request.form.get("name")} Successfully Added')
                 return redirect(url_for('add_skin', skin_type=skin))
-            if skin == "case":
+            if skin_type == "case":
                 submit = {
                     "name": request.form.get("name"),
                     "skin_description": request.form.get("case_description"),
@@ -308,7 +308,7 @@ def insert_skin(skin_type):
                     request.form.get("release-date"))
                 mongo.db.cases.insert_one(submit)
                 flash(f'{request.form.get("name")} Successfully Added')
-            if skin == "sticker":
+            if skin_type == "sticker":
                 submit = {
                     "name": request.form.get("name"),
                     "skin_description":
@@ -324,6 +324,7 @@ def insert_skin(skin_type):
                 mongo.db.stickers.insert_one(submit)
                 flash(f'{request.form.get("name")} Successfully Added')
         return redirect(url_for('add_skin'))
+    return render_template("error-pages/404.html")
 
 
 @app.route('/edit/skin', methods=["GET", "POST"])
