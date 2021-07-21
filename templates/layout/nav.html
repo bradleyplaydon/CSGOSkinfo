@@ -3,7 +3,7 @@
         <div class="container-fluid px-4 bg-dark p-1">
             <a href="{{ url_for('index') }}" class="navbar-brand bg-dark">CSGO:Skinfo</a>
             <ul class="list-group list-group-horizontal justify-content-center">
-                <li class="list-group p-3"><a href="#">About</a></li>
+                <li class="list-group p-3"><a href="{{ url_for('about') }}">About</a></li>
                 <li class="list-group p-3"><a href="#">Contact</a></li>
                 {% if session.user %}
                 <li class="list-group p-3"><a href="{{ url_for('account', username=session['user'].username) }}">Account</a></li>
