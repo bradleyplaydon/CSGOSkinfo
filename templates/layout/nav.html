@@ -6,13 +6,13 @@
                 <li class="list-group p-3"><a href="{{ url_for('about') }}" {% if active_page == "about" %} class="active"{% endif %}>About</a></li>
                 <li class="list-group p-3"><a href="{{ url_for('contact') }}" {% if active_page == "contact" %} class="active"{% endif %}>Contact</a></li>
                 {% if session.user %}
-                <li class="list-group p-3"><a href="{{ url_for('account', username=session['user'].username) }}">Account</a></li>
+                <li class="list-group p-3"><a href="{{ url_for('account', username=session['user'].username) }}" {% if active_page == "account" %} class="active" {% endif %}>Account</a></li>
                 {% if session.user["is_admin"] %}
                 <li class="list-group p-3"><a href="{{ url_for('admin', username=session['user'].username) }}">Admin</a></li>
                 {% endif %}
                 <li class="list-group p-3"><a href="{{ url_for('logout') }}">Log Out</a></li>
                 {% else %}
-                <li class="list-group p-3"><a href="{{ url_for('login') }}">Sign In</a></li>
+                <li class="list-group p-3"><a href="{{ url_for('login') }}" >Sign In</a></li>
                 {% endif %}
             </ul>
         </div>
@@ -68,7 +68,7 @@
     <div id="mobile-nav-account" class="mobile-nav collapse position-absolute w-100 bg-dark">
         <ul class="list-unstyled list-group text-center">
             {% if session.user %}
-            <li class="list-group-item p-3"><a href="{{ url_for('account', username=session['user'].username) }}" class="active"><i class="fas fa-user-alt fs-5 mx-1"></i>Account</a></li>
+            <li class="list-group-item p-3"><a href="{{ url_for('account', username=session['user'].username) }}" {% if active_page == "account" %} class="active" {% endif %}><i class="fas fa-user-alt fs-5 mx-1"></i>Account</a></li>
             {% if session.user["is_admin"] %}
             <li class="list-group-item p-3"><a href="{{ url_for('admin', username=session['user'].username) }}"><i class="fas fa-users-cog fs-5 mx-1"></i>Admin Dashboard</a></li>
             {% endif %}
