@@ -114,15 +114,17 @@
     action="{{ url_for('edit_selected_skin',  skin_type='knife', skin_id=skin._id) }}" validate>
     <div class="row">
       <div class="col-md-9 col-sm-12">
-        <label for="skin_name" class="label">Skin Name</label>
-        <input type="text" placeholder="Skin Name" value="{{ skin.name }}" class="form-control bg-dark text-white rounded-0 mb-3"
-          name="name" minlength="10" maxlength="35" required>
-        <input type="text" placeholder="Skin Description" value="{{ skin.skin_description }}" class="form-control bg-dark text-white rounded-0 mb-3"
-          name="skin_description" minlength="20" maxlength="200" required>
-        <select id="skin-weapon-type" class="form-select bg-dark text-white rounded-0 mb-3"
-          placeholder="Weapon Type" name="weapon_type">
-          {% for type in weaponTypes %}
-          {% if type == skin.weapon_type %}
+        <label for="name" class="label">Knife Name</label>
+        <input type="text" placeholder="Knife Name" value="{{ skin.name }}"
+          class="form-control bg-dark text-white rounded-0 mb-3" name="name" minlength="10" maxlength="35" required>
+        <label for="skin_description" class="label">Knife Description</label>
+        <input type="text" placeholder="Knife Description" value="{{ skin.skin_description }}"
+          class="form-control bg-dark text-white rounded-0 mb-3" name="skin_description" minlength="20" maxlength="100"
+          required>
+        <select id="knife-weapon-type" class="form-select bg-dark text-white rounded-0 mb-3" placeholder="Knife Type"
+          name="knife_type">
+          {% for type in knifeTypes %}
+          {% if type == skin.knife_type %}
           <option value="{{ type }}" selected>{{ type }}</option>
           {% else %}
           {% if not type == "Knife" %}
