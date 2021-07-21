@@ -1,9 +1,9 @@
 $(document).ready(function () {
     let weaponTypeSelectEl = $("#skin-weapon-type");
     let weaponNameSelectEl = $("#skin-weapon-name");
-    var weapons = JSON.parse($("#weapons").attr("data-weapons"));
+    var weapons = $("#weapons").attr("data-weapons") ? JSON.parse($("#weapons").attr("data-weapons")) : null;
     var checkedCount = 0;
-
+    if(weaponTypeSelectEl.length > 0) {
     $(weaponTypeSelectEl).change(function () {
         $(weaponNameSelectEl).empty();
         setWeaponSelectOptions(weaponTypeSelectEl.val().toLowerCase());
@@ -16,7 +16,7 @@ $(document).ready(function () {
             $(weaponNameSelectEl).append(o);
         });
     }
-
+    }
     $('body').delegate('.radio', 'click', function (e) {
         var $element = $(this)[0];
     
@@ -41,6 +41,7 @@ $(document).ready(function () {
     preForm = $("#edit-skin-form").serialize();
     
     $("#edit-skin-form").on("change", function () {
+        if(conditionEls.length > 0) {
         if ($(this).serialize() === preForm) {
             $(this).find("#edit-skin").attr("disabled", "disabled")
             if(checkedCount >= 2){
@@ -56,6 +57,13 @@ $(document).ready(function () {
                 $('#invalid-error').show();
             }
         }
+    } else {
+        if ($(this).serialize() === preForm) {
+            $(this).find("#edit-skin").attr("disabled", "disabled")
+        } else {
+            $(this).find("#edit-skin").removeAttr("disabled")
+        }
+    }
     });
     editSkinDp.onSelect((date, formatedDate) => {
         if(date.getTime() === preReleaseDate.getTime()){
@@ -67,7 +75,7 @@ $(document).ready(function () {
 
     var conditionEls = $('#factory_new, #min_wear, #field_tested, #well_worn, #battle_scarred');
     var imageEls = $('input[name=fnimage], input[name=mwimage], input[name=ftimage], input[name=wwimage], input[name=bsimage]');
-    
+    if(conditionEls.length > 0){
     conditionEls.each(function (i) {
         if (conditionEls[i].checked) {
             checkedCount += 1;
@@ -92,4 +100,5 @@ $(document).ready(function () {
             }
         });
     })
+    }
 });
