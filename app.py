@@ -121,7 +121,14 @@ def logout():
 @app.route("/account/<username>", methods=["POST", "GET"])
 def account(username):
     if session:
-        return render_template("pages/account.html", username=username)
+        skins_liked = list(map(ObjectId, session["user"]["skins_liked"]))
+        skins_disliked = list(map(ObjectId, session["user"]["skins_liked"]))
+
+        weaponskins_liked_info = list(skinColl.find({"_id": {"$in": skins_liked}}));
+        weaponskins_disliked_info = list(skinColl.find({"_id": {"$in": skins_disliked}}));
+
+        return render_template("pages/account.html", username=username, weaponskins_liked_info=weaponskins_liked_info, 
+                                weaponskins_disliked_info=weaponskins_disliked_info)
 
     return redirect(url_for("index"))
 
