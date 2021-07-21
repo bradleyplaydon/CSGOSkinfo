@@ -1,5 +1,5 @@
 const serivceID = "service_irmiak4";
-const templateID = "service_irmiak4";
+const templateID = "template_3uzwyg6";
 const userID = "user_IZexurD0xkQkoR2UK3flk";
 
 $(document).ready(function() {
@@ -31,7 +31,8 @@ $(document).ready(function() {
         alert("Your message has successfully sent :)")
       $("#contactForm").trigger("reset");
     }).fail(function(error) {
-      alert('Oops... ' + JSON.stringify(error));
+      alert(JSON.stringify(error));
+      $("#contactForm").trigger("reset");
     });
     event.preventDefault();
   });
