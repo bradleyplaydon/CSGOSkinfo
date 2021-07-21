@@ -138,9 +138,56 @@
                 Edit Gloves
             </button>
         </h2>
-        <div id="Edit-gloves" class="accordion-collapse collapse" aria-labelledby="Edit-gloves"
-            data-bs-parent="#Edit-gloves">
-            <div class="accordion-body">
+        <div id="edit-gloves" class="accordion-collapse collapse {% if foundGloves %} show {% endif %}" aria-labelledby="edit-gloves"
+            data-bs-parent="#edit-gloves">
+            <div class="accordion-body row">
+                <form class="form-control d-flex bg-dark p-3" action="/get/skin" method="GET">
+                    <input class="form-control" id="searchgloves" name="searchgloves" placeholder="Enter the Gloves Name"
+                        aria-label="Example select with button addon">
+                    <button class="btn btn-orange px-5 pt-3 pb-3" type="submit"><i
+                            class="fas fa-search text-white fs-4"></i></button>
+                </form>
+                {% if foundGloves %}
+                <div class="col-12">
+                    {{ foundGloves.count() }} Skins Found:
+                </div>
+                {% for skin in foundGloves %}
+                {% set skin_id = skin._id %}
+                <div class="col-lg-3 col-sm-6 mb-2">
+                    <div class="card border bg-dark">
+                        <a href="{{ url_for('edit_selected_skin', skin_type='gloves', skin_id=skin_id )}}" class="btn btn-secondary">
+                            {% if skin.image_urls.factory_new is not none %}
+                            <img src="{{ skin.image_urls.factory_new }}" class="card-img-top" alt="{{ skin.name }} image">
+                            {% elif skin.image_urls.min_wear is not none %}
+                            <img src="{{ skin.image_urls.min_wear }}" class="card-img-top" alt="{{ skin.name }} image">
+                            {% elif skin.image_urls.field_tested is not none %}
+                            <img src="{{ skin.image_urls.field_tested }}" class="card-img-top" alt="{{ skin.name }} image">
+                            {% elif skin.image_urls.well_worn is not none %}
+                            <img src="{{ skin.image_urls.well_worn }}" class="img-fluid" alt="{{ skin.name }} image">
+                            {% elif skin.image_urls.battle_scarred is not none %}
+                            <img src="{{ skin.image_urls.battle_scarred }}" class="img-fluid" alt="{{ skin.name }} image">
+                            {% else %}
+                            Edit Skin
+                            {% endif %}
+                        </a>
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item text-white border bg-dark">
+                                    {{ skin.name }}
+                                </li>
+                                <li class="list-group-item text-white bg-dark">
+                                    <p class="{{ skin.rarity | replace(' ', '-') | lower }} text-center p-2">{{
+                                        skin.rarity }}</p>
+                                </li>
+                                <li class="list-group-item text-white bg-dark">
+                                    <p>{{ skin.skin_description }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>
