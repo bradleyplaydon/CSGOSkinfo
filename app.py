@@ -237,67 +237,10 @@ def insert_skin(skin_type):
     if session and session["user"]["is_admin"]:
         imgDom = "https://community.cloudflare.steamstatic.com/economy/image/"
         if request.method == "POST":
-            if skin == "knife":
-                submit = {
-                    "name": request.form.get("name"),
-                    "skin_description": request.form.get("knife_description"),
-                    "type": "Weapon",
-                    "weapon_type": "knife",
-                    "knife_type": request.form.get("knife_type"),
-                    "rarity": "Covert",
-                    "stattrak_available": True
-                            if request.form.get("stattrak") else False,
-                    "stattrak_conditions": {
-                        "factory_new": True
-                                if request.form.get("fn") and
-                                request.form.get("stattrak") else False,
-                        "min_wear": True
-                                if request.form.get("mw") and
-                                request.form.get("stattrak") else False,
-                        "field_tested": True
-                                if request.form.get("ft") and
-                                request.form.get("stattrak") else False,
-                        "well_worn": True
-                                if request.form.get("ww") and
-                                request.form.get("stattrak") else False,
-                        "battle_scarred": True
-                                if request.form.get("bs") and
-                                request.form.get("stattrak") else False
-                    },
-                    "conditions": {
-                        "factory_new": True
-                                if request.form.get("fn") else False,
-                        "min_wear": True
-                                if request.form.get("mw") else False,
-                        "field_tested": True
-                                if request.form.get("ft") else False,
-                        "well_worn": True
-                                if request.form.get("ww") else False,
-                        "battle_scarred": True
-                                if request.form.get("bs") else False
-                    },
-                    "image_urls": {
-                        "factory_new":
-                                imgDom +
-                                request.form.get("fnimage")
-                                if request.form.get("fnimage") else None,
-                        "min_wear": imgDom +
-                                request.form.get("mwimage")
-                                if request.form.get("mwimage") else None,
-                        "field_tested": imgDom +
-                                request.form.get("ftimage")
-                                if request.form.get("ftimage") else None,
-                        "well_worn": imgDom +
-                                request.form.get("ftimage")
-                                if request.form.get("wwimage") else None,
-                        "battle_scarred": imgDom +
-                                request.form.get("bsimage")
-                                if request.form.get("bsimage") else None
-                    },
-                    "up_votes": 0,
-                    "down_votes": 0
-                }
-                submit["release_date"] = parser.parse(
+            schema = get_skin_schema(skin_type)
+
+            if skin_type == "knife":
+                schema["release_date"] = parser.parse(
                     request.form.get("release-date"))
                 skinColl.insert_one(submit)
                 flash(f'{request.form.get("name")} Successfully Added')
