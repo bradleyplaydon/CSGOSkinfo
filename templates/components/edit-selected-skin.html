@@ -166,6 +166,20 @@
     </div>
   </form>
 </div>
+{% elif skin_type == 'gloves' %}
+<div id="add-gloves" aria-labelledby="add-gloves">
+  <form id="edit-skin-form" class="container-fluid" method="post"
+    action="{{ url_for('edit_selected_skin',  skin_type='gloves', skin_id=skin._id) }}" validate>
+    <div class="row">
+      <div class="col-md-9 col-sm-12">
+        <label for="name" class="label">Gloves Name</label>
+        <input type="text" placeholder="Gloves Name" value="{{ skin.name }}"
+          class="form-control bg-dark text-white rounded-0 mb-3" name="name" minlength="10" maxlength="35" required>
+        <label for="skin_description" class="label">Gloves Description</label>
+        <input type="text" placeholder="Gloves Description" value="{{ skin.skin_description }}"
+          class="form-control bg-dark text-white rounded-0 mb-3" name="skin_description" minlength="20" maxlength="100"
+          required>
+        <p class="border border-info p-3 fs-5 mb-2">Note: All need to be checked.</p>
         <div class="table-responsive">
           <table class="table table-dark table-striped">
             <thead>
@@ -191,10 +205,10 @@
                       id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
                     {% if skin.conditions.factory_new %}
                     <input class="form-control bg-dark text-white" id="fnurl"
-                      placeholder="Factory New Icon URL" value="{{ skin.image_urls.factory_new[59:] }}" name="fnimage" type="text">   
+                      placeholder="Factory New Icon URL" value="{{ skin.image_urls.factory_new[59:] }}" name="fnimage" type="text" required>   
                     {% else %}
-                    <input class="form-control bg-dark input-bg-disabled text-white" id="mwurl"
-                      placeholder="Factory New Icon URL" name="fnimage" type="text" disabled>
+                    <input class="form-control bg-dark text-white" id="mwurl"
+                      placeholder="Factory New Icon URL" name="fnimage" type="text" required>
                     {% endif %}
                   </div>
                 </td>
@@ -215,10 +229,10 @@
                       id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image/</span>
                       {% if skin.conditions.min_wear %}
                       <input class="form-control bg-dark text-white" id="mwurl"
-                      placeholder="Minimal Wear Icon URL" value="{{ skin.image_urls.min_wear[59:] }}" name="mwimage" type="text">   
+                      placeholder="Minimal Wear Icon URL" value="{{ skin.image_urls.min_wear[59:] }}" name="mwimage" type="text" required>   
                       {% else %}
-                      <input class="form-control bg-dark input-bg-disabled text-white" id="mwurl"
-                      placeholder="Minimal Wear Icon URL" name="mwimage" type="text" disabled>
+                      <input class="form-control bg-dark  text-white" id="mwurl"
+                      placeholder="Minimal Wear Icon URL" name="mwimage" type="text" required>
                       {% endif %}
                 </td>
               </tr>
@@ -238,10 +252,10 @@
                       id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
                       {% if skin.conditions.field_tested %}
                       <input class="form-control bg-dark text-white" id="wwurl"
-                      placeholder="Field Tested Icon URL" value="{{ skin.image_urls.field_tested[59:] }}" name="ftimage" type="text">   
+                      placeholder="Field Tested Icon URL" value="{{ skin.image_urls.field_tested[59:] }}" name="ftimage" type="text" required>   
                       {% else %}
-                      <input class="form-control input-bg-disabled bg-dark text-white" id="wwurl"
-                      placeholder="Field Tested Icon URL" name="ftimage" type="text" disabled>
+                      <input class="form-control bg-dark text-white" id="wwurl"
+                      placeholder="Field Tested Icon URL" name="ftimage" type="text" required>
                       {% endif %}
                   </div>
                 </td>
@@ -261,10 +275,10 @@
                       id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
                       {% if skin.conditions.well_worn %}
                       <input class="form-control bg-dark text-white" id="wwurl"
-                      placeholder="Well-Worn Icon URL" value="{{ skin.image_urls.well_worn[59:] }}" name="wwimage" type="text">   
+                      placeholder="Well-Worn Icon URL" value="{{ skin.image_urls.well_worn[59:] }}" name="wwimage" type="text" required>   
                       {% else %}
-                      <input class="form-control bg-dark input-bg-disabled text-white" id="wwurl"
-                      placeholder="Well-Worn Icon URL" name="wwimage" type="text" disabled>
+                      <input class="form-control bg-dark text-white" id="wwurl"
+                      placeholder="Well-Worn Icon URL" name="wwimage" type="text" required>
                       {% endif %}
                   </div>
                 </td>
@@ -285,10 +299,10 @@
                       id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
                       {% if skin.conditions.battle_scarred %}
                       <input class="form-control bg-dark text-white" id="bsurl"
-                      placeholder="Battle Scarred Icon URL" value="{{ skin.image_urls.battle_scarred[59:] }}" name="bsimage" type="text">   
+                      placeholder="Battle Scarred Icon URL" value="{{ skin.image_urls.battle_scarred[59:] }}" name="bsimage" type="text" required>   
                       {% else %}
-                      <input class="form-control bg-dark input-bg-disabled text-white" id="bsurl"
-                      placeholder="Battle Scarred Icon URL" name="bsimage" type="text" disabled>
+                      <input class="form-control bg-dark text-white" id="bsurl"
+                      placeholder="Battle Scarred Icon URL" name="bsimage" type="text" required>
                       {% endif %}
                   </div>
                 </td>
@@ -296,27 +310,21 @@
             </tbody>
           </table>
         </div>
-        <div class="d-flex flex-wrap justfiy-content-center mt-3 mb-3 border p-3">
-          <strong>StatTrak / Souvenir</strong>
-          <div class="form-check mx-3">
-            <input class="form-check-input myradio" type="checkbox" name="neither" id="neither" {% if not skin.stattrak_available and not skin.souvenir_available %} checked {% endif %}>
-            <label class="form-check-label" for="flexRadioDefault2">
-              Neither
-            </label>
-          </div>
-          <div class="form-check mx-3">
-            <input class="form-check-input myradio" type="checkbox" name="stattrak" id="stattrak" {% if skin.stattrak_available %} checked {% endif %}>
-            <label class="form-check-label" for="statTrak">
-              StatTrak
-            </label>
-          </div>
-          <div class="form-check mx-3">
-            <input class="form-check-input myradio" type="checkbox" name="souvenir" id="souvenir" {% if skin.souvenir_available %} checked {% endif %}>
-            <label class="form-check-label" for="souvenir">
-              Souvenir
-            </label>
-          </div>
+        <label for="release-date" class="label">Skin Release Date (Click)</label>
+        <div class="input-group flex-nowrap">
+          <span class="input-group-text" id="addon-wrapping"><i class="fas fa-calendar-alt"></i></span>
+          <input class="form-select" role="button" value="{{ skin.release_date }}" id="release-date"
+            placeholder="Pick A Date" name="release-date">
         </div>
+      </div>
+      <div class="col-md-3 col-sm-12 text-center">
+        <button type="submit" class="btn btn-orange p-5 h-75 mt-4" id="edit-skin" disabled>
+          <i class="far fa-plus-square fs-4 align-middle"></i> Edit Gloves
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
         <label for="release-date" class="label">Skin Release Date (Click)</label>
         <div class="input-group flex-nowrap">
           <span class="input-group-text" id="addon-wrapping"><i class="fas fa-calendar-alt"></i></span>
