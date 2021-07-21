@@ -360,18 +360,50 @@
     </div>
   </form>
 </div>
+{% elif skin_type == 'sticker' %}
+<div id="add-sticker" aria-labelledby="add-sticker">
+  <form id="edit-skin-form" class="container-fluid" method="post"
+    action="{{ url_for('edit_selected_skin',  skin_type='sticker', skin_id=skin._id) }}" validate>
+    <div class="row">
+      <div class="col-md-9 col-sm-12">
+        <label for="name" class="label">Sticker Name</label>
+        <input type="text" placeholder="Sticker Name" value="{{ skin.name }}"
+          class="form-control bg-dark text-white rounded-0 mb-3" name="name" minlength="10" maxlength="35" required>
+        <label for="skin_description" class="label">Sticker Description</label>
+        <input type="text" placeholder="Sticker Description" value="{{ skin.skin_description }}"
+          class="form-control bg-dark text-white rounded-0 mb-3" name="skin_description" minlength="20" maxlength="100"
+          required>
+        <select placeholder="Rarity" class="form-select bg-dark text-white rounded-0 mb-3" name="rarity" required>
+            {% for rarity in stickerRarities %}
+            {% if rarity == skin.rarity %}
+            <option value="{{ rarity }}" class="{{ rarity.lower() | replace(' ', ('-')) }}-text" selected>{{ rarity }}
+            </option>
+            {% else %}
+            <option value="{{ rarity }}" class="{{ rarity.lower() | replace(' ', ('-')) }}-text">{{ rarity }}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        <div class="d-flex mb-3">
+          <span class="input-group-text w-50 overflow-auto"
+          id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image/</span>
+        <input class="form-control bg-dark text-white"
+          placeholder="Image Url" name="image" id="image" type="text"
+          aria-describedby="steamimageurl" value="{{ skin.image_url[59:] }}" required>
+      </div>
         <label for="release-date" class="label">Skin Release Date (Click)</label>
         <div class="input-group flex-nowrap">
           <span class="input-group-text" id="addon-wrapping"><i class="fas fa-calendar-alt"></i></span>
-          <input class="form-select" role="button" value="{{ skin.release_date }}" id="release-date" placeholder="Pick A Date"
-            name="release-date">
+          <input class="form-select" role="button" value="{{ skin.release_date }}" id="release-date"
+            placeholder="Pick A Date" name="release-date">
         </div>
       </div>
       <div class="col-md-3 col-sm-12 text-center">
         <button type="submit" class="btn btn-orange p-5 h-75 mt-4" id="edit-skin" disabled>
-          <i class="far fa-plus-square fs-4 align-middle"></i> Edit Skin
+          <i class="far fa-plus-square fs-4 align-middle"></i> Edit Sticker
         </button>
       </div>
     </div>
   </form>
+</div>
+{% endif %}
 {% endblock %}
