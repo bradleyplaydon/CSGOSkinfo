@@ -28,7 +28,7 @@ $(document).ready(function() {
       data: JSON.stringify(data),
       contentType: 'application/json'
     }).done(function() {
-        alert("Your message has successfully sent :)")
+      $("#success-msg").removeClass("d-none").delay(2000).fadeOut();
       $("#contactForm").trigger("reset");
     }).fail(function(error) {
       alert(JSON.stringify(error));

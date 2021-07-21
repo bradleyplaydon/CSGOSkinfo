@@ -6,8 +6,9 @@
 
 {% block content %}
 <div class="row bg-dark p-3">
+    <h4 id="success-msg" class="bg-success p-3 text-center d-none">Your message has been sent sucessfully</h4>
     <div class="col-lg-8 col-md-10 mx-auto">
-        <p>Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as
+        <p class="bg-secondary p-3">Want to get in touch? Fill out the form below to send me a message and I will get back to you as soon as
             possible!</p>
         <form name="sentMessage" id="contactForm">
             <div class="control-group">
@@ -31,6 +32,7 @@
             <div class="form-group floating-label-form-group controls">
                 <label for="reason" class="label">Contact Reason</label>
                 <select class="form-select mb-4 mt-4" id="reason" name="reason" required>
+                    <option value="">Contact Reason</option>
                     <option value="collaborate">Collaborate</option>
                     <option value="bug">Bug/Glitch found</option>
                     <option value="admin">Become An Admin</option>
@@ -40,7 +42,7 @@
             <div class="control-group mb-4 mt-4">
                 <div class="form-group floating-label-form-group controls">
                     <label for="message" class="label">Message</label>
-                    <textarea rows="5" class="form-control" placeholder="Message" id="message" name="message" minlength="10" maxlength="30" pattern="[A-Za-z]" required></textarea>
+                    <textarea rows="5" class="form-control" placeholder="Message" id="message" name="message" minlength="20" maxlength="180" pattern="[A-Za-z]" required></textarea>
                 </div>
             </div>
             <div class="form-group mb-4 mt-4 text-center">
