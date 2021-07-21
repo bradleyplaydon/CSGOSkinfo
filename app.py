@@ -489,6 +489,42 @@ def get_skin_by_name():
                 return render_template(
                     "components/edit-skin.html", foundKnifes=foundKnifes)
 
+            if ("searchcases" in request.args and
+                request.values["searchcases"] is not None and
+                    request.values["searchcases"] != ''):
+                searchOptions = {"type": {"$eq": "Container"}}
+                searchOptions["name"] = (
+                    {"$regex": request.values["searchcases"],
+                     "$options": "i"})
+                foundCases = mongo.db.cases.find(searchOptions).sort(
+                    "release_date", -1)
+                return render_template(
+                    "components/edit-skin.html", foundCases=foundCases)
+
+            if ("searchstickers" in request.args and
+                request.values["searchstickers"] is not None and
+                    request.values["searchstickers"] != ''):
+                searchOptions = {"type": {"$eq": "Sticker"}}
+                searchOptions["name"] = (
+                    {"$regex": request.values["searchstickers"],
+                     "$options": "i"})
+                foundStickers = mongo.db.stickers.find(searchOptions).sort(
+                    "rarity_precedence", -1)
+                return render_template(
+                    "components/edit-skin.html", foundStickers=foundStickers)
+
+            if ("searchgloves" in request.args and
+                request.values["searchgloves"] is not None and
+                    request.values["searchgloves"] != ''):
+                searchOptions = {"type": {"$eq": "Gloves"}}
+                searchOptions["name"] = (
+                    {"$regex": request.values["searchgloves"],
+                     "$options": "i"})
+                foundGloves = skinColl.find(searchOptions).sort(
+                    "release_date", -1)
+                return render_template(
+                    "components/edit-skin.html", foundGloves=foundGloves)
+
             if ("searchallskins" in request.args and
                 request.values["searchallskins"] is not None and
                     request.values["searchallskins"] != ''):
