@@ -14,6 +14,7 @@
             <label for="sticker_description" class="label">Sticker Description</label>
             <input type="text" placeholder="Sticker Description" class="form-control bg-dark text-white rounded-0 mb-3"
                 name="sticker_description" minlength="20" maxlength="100" required>
+            <label for="rarity" class="label">Sticker Rarity</label>
             <select placeholder="Rarity" class="form-select bg-dark text-white rounded-0 mb-3" name="rarity" required>
                 {% for rarity in stickerRarities %}
                     <option value="{{ rarity }}">{{ rarity }}</option>
@@ -24,7 +25,7 @@
                 id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image/</span>
               <input class="form-control bg-dark text-white"
                 placeholder="Image Url" name="image" id="image" type="text"
-                aria-describedby="steamimageurl">
+                aria-describedby="steamimageurl" required>
             </div>
             <label for="release-date" class="label">Case Release Date (Click)</label>
             <div class="input-group flex-nowrap">
