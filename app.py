@@ -490,15 +490,19 @@ def get_skin_by_name():
             if ("deleteweaponskins" in request.args and
                 request.values["deleteweaponskins"] is not None and
                     request.values["deleteweaponskins"] != ''):
-                searchOptions = {"weapon_type": {"$ne": "Knife"},
-                                 "type": {"$ne": "Gloves"}}
                 searchOptions["name"] = (
                     {"$regex": request.values["deleteweaponskins"],
                      "$options": "i"})
                 foundSkins = skinColl.find(searchOptions).sort(
                     "rarity_precedence", -1)
+                cases = mongo.db.cases.find(searchOptions).sort(
+                    "release_date", -1)
+                stickers = mongo.db.stickers.find(searchOptions).sort(
+                    "rarity_precedence", -1)
                 return render_template(
-                    "components/delete-skin.html", foundSkins=foundSkins)
+                    "components/delete-skin.html", page_title="Delete Skins",
+                    foundSkins=foundSkins, cases=cases, stickers=stickers)
+
 
             if ("searchknifes" in request.args and
                 request.values["searchknifes"] is not None and
@@ -561,8 +565,8 @@ def get_skin_by_name():
                 stickers = mongo.db.stickers.find(searchOptions).sort(
                     "rarity_precedence", -1)
                 return render_template(
-                    "admin-pages/view-skins.html", foundSkins=foundSkins,
-                    cases=cases, stickers=stickers)
+                    "admin-pages/view-skins.html", page_title="View Skins",
+                    foundSkins=foundSkins, cases=cases, stickers=stickers)
 
 
 def get_skin_schema(skin_type):
