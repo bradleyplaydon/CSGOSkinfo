@@ -32,7 +32,7 @@
                 {% set skin_id = skin._id %}
                 <div class="col-lg-3 col-sm-6 mb-2">
                     <div class="card border bg-dark">
-                        <a href="{{ url_for('edit_selected_skin', skin_id=skin_id )}}" class="btn btn-secondary">
+                        <a href="{{ url_for('edit_selected_skin', skin_type='weapon', skin_id=skin_id )}}" class="btn btn-secondary">
                             {% if skin.image_urls.factory_new is not none %}
                             <img src="{{ skin.image_urls.factory_new }}" class="card-img-top" alt="{{ skin.name }} image">
                             {% elif skin.image_urls.min_wear is not none %}
@@ -95,7 +95,7 @@
                 {% set skin_id = skin._id %}
                 <div class="col-lg-3 col-sm-6 mb-2">
                     <div class="card border bg-dark">
-                        <a href="{{ url_for('edit_selected_skin', skin_id=skin_id )}}" class="btn btn-secondary">
+                        <a href="{{ url_for('edit_selected_skin', skin_type='knife', skin_id=skin_id )}}" class="btn btn-secondary">
                             {% if skin.image_urls.factory_new is not none %}
                             <img src="{{ skin.image_urls.factory_new }}" class="card-img-top" alt="{{ skin.name }} image">
                             {% elif skin.image_urls.min_wear is not none %}
