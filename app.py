@@ -71,7 +71,8 @@ def signup():
                         "skins_liked": skins_liked,
                         "skins_disliked": skins_disliked}
         flash("Registration Succesful")
-        return redirect(url_for("account", username=session["user"]["username"]))
+        return redirect(url_for("account",
+                        username=session["user"]["username"]))
 
     return render_template(
         "components/auth.html", login=False, page_title="Sign Up")
@@ -124,11 +125,14 @@ def account(username):
         skins_liked = list(map(ObjectId, session["user"]["skins_liked"]))
         skins_disliked = list(map(ObjectId, session["user"]["skins_disliked"]))
 
-        weaponskins_liked_info = list(skinColl.find({"_id": {"$in": skins_liked}}));
-        weaponskins_disliked_info = list(skinColl.find({"_id": {"$in": skins_disliked}}));
+        weapon_liked = list(
+            skinColl.find({"_id": {"$in": skins_liked}}))
+        weapon_disliked = list(
+            skinColl.find({"_id": {"$in": skins_disliked}}))
 
-        return render_template("pages/account.html", username=username, weaponskins_liked_info=weaponskins_liked_info, 
-                                weaponskins_disliked_info=weaponskins_disliked_info)
+        return render_template(
+            "pages/account.html", username=username,
+            weapon_liked=weapon_liked, weapon_disliked=weapon_disliked)
 
     return redirect(url_for("index"))
 
@@ -174,8 +178,10 @@ def admin():
 @app.route('/view/skins', methods=["GET", "POST"])
 def view_skins():
     if session and session["user"]["is_admin"]:
-        return render_template("admin-pages/view-skins.html", page_title="View Skins")
+        return render_template(
+            "admin-pages/view-skins.html", page_title="View Skins")
     return render_template("error-pages/404.html")
+
 
 @app.route('/add/<skin_type>', methods=["GET", "POST"])
 def add_skin(skin_type):
@@ -206,27 +212,30 @@ def add_skin(skin_type):
         if skin_type == "knife":
             knifeTypes = skinColl.distinct('knife_type')
             return render_template(
-                "components/forms/add-knife.html", page_title="Add A Knife", knifeTypes=knifeTypes)   
+                "components/forms/add-knife.html",
+                page_title="Add A Knife", knifeTypes=knifeTypes)
 
         if skin_type == "gloves":
             return render_template(
-                "components/forms/add-gloves.html", page_title="Add Gloves")        
+                "components/forms/add-gloves.html", page_title="Add Gloves")
 
         if skin_type == "case":
             return render_template(
-                "components/forms/add-cases.html", page_title="Add A Case")  
+                "components/forms/add-cases.html", page_title="Add A Case")
 
         if skin_type == "sticker":
             stickerRarities = mongo.db.stickers.distinct('rarity')
             return render_template(
-                "components/forms/add-stickers.html", page_title="Add A Sticker", stickerRarities=stickerRarities)             
-    
+                "components/forms/add-stickers.html",
+                page_title="Add A Sticker", stickerRarities=stickerRarities)
+
     return render_template("error-pages/404.html")
 
 
 @app.route('/insert/<skin>', methods=["GET", "POST"])
 def insert_skin(skin):
     if session and session["user"]["is_admin"]:
+        imgDom = "https://community.cloudflare.steamstatic.com/economy/image/"
         if request.method == "POST":
             if skin == "knife":
                 submit = {
@@ -236,44 +245,72 @@ def insert_skin(skin):
                     "weapon_type": "knife",
                     "knife_type": request.form.get("knife_type"),
                     "rarity": "Covert",
-                    "stattrak_available": True if request.form.get("stattrak") else False,
+                    "stattrak_available": True
+                            if request.form.get("stattrak") else False,
                     "stattrak_conditions": {
-                        "factory_new": True if request.form.get("fn") and request.form.get("stattrak") else False,
-                        "min_wear": True if request.form.get("mw") and request.form.get("stattrak") else False,
-                        "field_tested": True if request.form.get("ft") and request.form.get("stattrak") else False,
-                        "well_worn": True if request.form.get("ww") and request.form.get("stattrak") else False,
-                        "battle_scarred": True if request.form.get("bs") and request.form.get("stattrak") else False
+                        "factory_new": True
+                                if request.form.get("fn") and
+                                request.form.get("stattrak") else False,
+                        "min_wear": True
+                                if request.form.get("mw") and
+                                request.form.get("stattrak") else False,
+                        "field_tested": True
+                                if request.form.get("ft") and
+                                request.form.get("stattrak") else False,
+                        "well_worn": True
+                                if request.form.get("ww") and
+                                request.form.get("stattrak") else False,
+                        "battle_scarred": True
+                                if request.form.get("bs") and
+                                request.form.get("stattrak") else False
                     },
                     "conditions": {
-                        "factory_new": True if request.form.get("fn") else False,
-                        "min_wear": True if request.form.get("mw") else False,
-                        "field_tested": True if request.form.get("ft") else False,
-                        "well_worn": True if request.form.get("ww") else False,
-                        "battle_scarred": True if request.form.get("bs") else False
+                        "factory_new": True
+                                if request.form.get("fn") else False,
+                        "min_wear": True
+                                if request.form.get("mw") else False,
+                        "field_tested": True
+                                if request.form.get("ft") else False,
+                        "well_worn": True
+                                if request.form.get("ww") else False,
+                        "battle_scarred": True
+                                if request.form.get("bs") else False
                     },
                     "image_urls": {
-                        "factory_new": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("fnimage") if request.form.get("fnimage") else None,
-                        "min_wear": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("mwimage") if request.form.get("mwimage") else None,
-                        "field_tested": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("ftimage") if request.form.get("ftimage") else None,
-                        "well_worn": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("ftimage") if request.form.get("wwimage") else None,
-                        "battle_scarred": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("bsimage") if request.form.get("bsimage") else None
+                        "factory_new":
+                                imgDom +
+                                request.form.get("fnimage")
+                                if request.form.get("fnimage") else None,
+                        "min_wear": imgDom +
+                                request.form.get("mwimage")
+                                if request.form.get("mwimage") else None,
+                        "field_tested": imgDom +
+                                request.form.get("ftimage")
+                                if request.form.get("ftimage") else None,
+                        "well_worn": imgDom +
+                                request.form.get("ftimage")
+                                if request.form.get("wwimage") else None,
+                        "battle_scarred": imgDom +
+                                request.form.get("bsimage")
+                                if request.form.get("bsimage") else None
                     },
                     "up_votes": 0,
                     "down_votes": 0
                 }
-                submit["release_date"] = parser.parse(request.form.get("release-date"))
+                submit["release_date"] = parser.parse(
+                    request.form.get("release-date"))
                 skinColl.insert_one(submit)
                 flash(f'{request.form.get("name")} Successfully Added')
                 return redirect(url_for('add_skin', skin_type=skin))
             if skin == "weapon":
-                rarity = request.form.get("rarity") 
+                rarity = request.form.get("rarity")
                 rarity_precedence = (
-                    5 if rarity == "Covert" 
+                    5 if rarity == "Covert"
                     else 4 if rarity == "Classified"
-                    else 3 if rarity == "Restricted" 
-                    else 2 if rarity == "Mil-Spec Grade" 
-                    else 1 if rarity == "Industrial Grade" 
-                    else 0 if rarity == "Consumer Grade" 
+                    else 3 if rarity == "Restricted"
+                    else 2 if rarity == "Mil-Spec Grade"
+                    else 1 if rarity == "Industrial Grade"
+                    else 0 if rarity == "Consumer Grade"
                     else "")
                 submit = {
                     "name": request.form.get("name"),
@@ -283,33 +320,61 @@ def insert_skin(skin):
                     "weapon_name": request.form.get("weapon_name"),
                     "rarity": rarity,
                     "rarity_precedence": rarity_precedence,
-                    "stattrak_available": True if request.form.get("stattrak") else False,
-                    "souvenir_available": True if request.form.get("souvenir") else False,
+                    "stattrak_available": True
+                            if request.form.get("stattrak") else False,
+                    "souvenir_available": True
+                            if request.form.get("souvenir") else False,
                     "stattrak_conditions": {
-                        "factory_new": True if request.form.get("fn") and request.form.get("stattrak") else False,
-                        "min_wear": True if request.form.get("mw") and request.form.get("stattrak") else False,
-                        "field_tested": True if request.form.get("ft") and request.form.get("stattrak") else False,
-                        "well_worn": True if request.form.get("ww") and request.form.get("stattrak") else False,
-                        "battle_scarred": True if request.form.get("bs") and request.form.get("stattrak") else False
+                        "factory_new": True
+                            if request.form.get("fn") and
+                            request.form.get("stattrak") else False,
+                        "min_wear": True
+                            if request.form.get("mw") and
+                            request.form.get("stattrak") else False,
+                        "field_tested": True
+                            if request.form.get("ft") and
+                            request.form.get("stattrak") else False,
+                        "well_worn": True
+                            if request.form.get("ww") and
+                            request.form.get("stattrak") else False,
+                        "battle_scarred": True
+                            if request.form.get("bs") and
+                            request.form.get("stattrak") else False
                     },
                     "conditions": {
-                        "factory_new": True if request.form.get("fn") else False,
-                        "min_wear": True if request.form.get("mw") else False,
-                        "field_tested": True if request.form.get("ft") else False,
-                        "well_worn": True if request.form.get("ww") else False,
-                        "battle_scarred": True if request.form.get("bs") else False
+                        "factory_new": True
+                                if request.form.get("fn") else False,
+                        "min_wear": True
+                                if request.form.get("mw") else False,
+                        "field_tested": True
+                                if request.form.get("ft") else False,
+                        "well_worn": True
+                                if request.form.get("ww") else False,
+                        "battle_scarred": True
+                                if request.form.get("bs") else False
                     },
                     "image_urls": {
-                        "factory_new": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("fnimage") if request.form.get("fnimage") else None,
-                        "min_wear": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("mwimage") if request.form.get("mwimage") else None,
-                        "field_tested": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("ftimage") if request.form.get("ftimage") else None,
-                        "well_worn": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("ftimage") if request.form.get("wwimage") else None,
-                        "battle_scarred": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("bsimage") if request.form.get("bsimage") else None
+                        "factory_new": imgDom +
+                                request.form.get("fnimage")
+                                if request.form.get("fnimage") else None,
+                        "min_wear": imgDom +
+                                request.form.get("mwimage")
+                                if request.form.get("mwimage") else None,
+                        "field_tested": imgDom +
+                                request.form.get("ftimage")
+                                if request.form.get("ftimage") else None,
+                        "well_worn": imgDom +
+                                request.form.get("ftimage")
+                                if request.form.get("wwimage") else None,
+                        "battle_scarred": imgDom +
+                                request.form.get("bsimage")
+                                if request.form.get("bsimage") else None
                     },
                     "up_votes": 0,
                     "down_votes": 0
                 }
-                submit["release_date"] = parser.parse(request.form.get("release-date"))
+                submit["release_date"] = parser.parse(
+                    request.form.get("release-date"))
                 skinColl.insert_one(submit)
                 flash(f'{request.form.get("name")} Successfully Added')
                 return redirect(url_for('add_skin', skin_type=skin))
@@ -320,23 +385,39 @@ def insert_skin(skin):
                     "type": "Gloves",
                     "rarity": "Extraordinary",
                     "conditions": {
-                        "factory_new": True if request.form.get("fn") else False,
-                        "min_wear": True if request.form.get("mw") else False,
-                        "field_tested": True if request.form.get("ft") else False,
-                        "well_worn": True if request.form.get("ww") else False,
-                        "battle_scarred": True if request.form.get("bs") else False
+                        "factory_new": True
+                            if request.form.get("fn") else False,
+                        "min_wear": True
+                            if request.form.get("mw") else False,
+                        "field_tested": True
+                            if request.form.get("ft") else False,
+                        "well_worn": True
+                            if request.form.get("ww") else False,
+                        "battle_scarred": True
+                            if request.form.get("bs") else False
                     },
                     "image_urls": {
-                        "factory_new": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("fnimage") if request.form.get("fnimage") else None,
-                        "min_wear": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("mwimage") if request.form.get("mwimage") else None,
-                        "field_tested": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("ftimage") if request.form.get("ftimage") else None,
-                        "well_worn": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("ftimage") if request.form.get("wwimage") else None,
-                        "battle_scarred": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("bsimage") if request.form.get("bsimage") else None
+                        "factory_new": imgDom +
+                        request.form.get("fnimage")
+                        if request.form.get("fnimage") else None,
+                        "min_wear": imgDom +
+                        request.form.get("mwimage")
+                        if request.form.get("mwimage") else None,
+                        "field_tested": imgDom +
+                        request.form.get("ftimage")
+                        if request.form.get("ftimage") else None,
+                        "well_worn": imgDom +
+                        request.form.get("ftimage")
+                        if request.form.get("wwimage") else None,
+                        "battle_scarred": imgDom +
+                        request.form.get("bsimage")
+                        if request.form.get("bsimage") else None
                     },
                     "up_votes": 0,
                     "down_votes": 0
                 }
-                submit["release_date"] = parser.parse(request.form.get("release-date"))
+                submit["release_date"] = parser.parse(
+                    request.form.get("release-date"))
                 skinColl.insert_one(submit)
                 flash(f'{request.form.get("name")} Successfully Added')
                 return redirect(url_for('add_skin', skin_type=skin))
@@ -350,20 +431,23 @@ def insert_skin(skin):
                     "up_votes": 0,
                     "down_votes": 0
                 }
-                submit["release_date"] = parser.parse(request.form.get("release-date"))
+                submit["release_date"] = parser.parse(
+                    request.form.get("release-date"))
                 mongo.db.cases.insert_one(submit)
                 flash(f'{request.form.get("name")} Successfully Added')
             if skin == "sticker":
                 submit = {
                     "name": request.form.get("name"),
-                    "skin_description": request.form.get("sticker_description"),
+                    "skin_description":
+                    request.form.get("sticker_description"),
                     "type": "Sticker",
                     "rarity": request.form.get("rarity"),
                     "image_url": request.form.get("image"),
                     "up_votes": 0,
                     "down_votes": 0
                 }
-                submit["release_date"] = parser.parse(request.form.get("release-date"))
+                submit["release_date"] = parser.parse(
+                    request.form.get("release-date"))
                 mongo.db.stickers.insert_one(submit)
                 flash(f'{request.form.get("name")} Successfully Added')
         return redirect(url_for('add_skin'))
@@ -372,7 +456,8 @@ def insert_skin(skin):
 @app.route('/edit/skin', methods=["GET", "POST"])
 def edit_skin():
     if session and session["user"]["is_admin"]:
-        skins = list(skinColl.find( { "weapon_type": { "$ne": "Knife" }, "type": { "$ne": "Gloves"} }))
+        skins = list(skinColl.find({"weapon_type": {"$ne": "Knife"},
+                     "type": {"$ne": "Gloves"}}))
         return render_template(
             "components/edit-skin.html", page_title="Edit A Skin",
             skins=skins)
@@ -382,18 +467,21 @@ def edit_skin():
 @app.route('/edit/skin/<skin_id>', methods=["GET", "POST"])
 def edit_selected_skin(skin_id):
     if session and session["user"]["is_admin"]:
+        imgDom = "https://community.cloudflare.steamstatic.com/economy/image/"
         if request.method == "POST":
-            rarity = request.form.get("rarity") 
+            rarity = request.form.get("rarity")
             rarity_precedence = (
-                5 if rarity == "Covert" 
+                5 if rarity == "Covert"
                 else 4 if rarity == "Classified"
-                else 3 if rarity == "Restricted" 
-                else 2 if rarity == "Mil-Spec Grade" 
-                else 1 if rarity == "Industrial Grade" 
-                else 0 if rarity == "Consumer Grade" 
+                else 3 if rarity == "Restricted"
+                else 2 if rarity == "Mil-Spec Grade"
+                else 1 if rarity == "Industrial Grade"
+                else 0 if rarity == "Consumer Grade"
                 else "")
-            up_votes = skinColl.find_one({"_id": ObjectId(skin_id)})["up_votes"]
-            down_votes = skinColl.find_one({"_id": ObjectId(skin_id)})["down_votes"]
+            up_votes = skinColl.find_one(
+                {"_id": ObjectId(skin_id)})["up_votes"]
+            down_votes = skinColl.find_one(
+                {"_id": ObjectId(skin_id)})["down_votes"]
             submit = {
                 "name": request.form.get("name"),
                 "skin_description": request.form.get("skin_description"),
@@ -401,35 +489,70 @@ def edit_selected_skin(skin_id):
                 "weapon_type": request.form.get("weapon_type"),
                 "weapon_name": request.form.get("weapon_name"),
                 "rarity": rarity,
-                "rarity_precedence": rarity_precedence, 
-                "souvenir_available": True if request.form.get("souvenir") else False,
-                "stattrak_available": True if request.form.get("stattrak") else False,
+                "rarity_precedence": rarity_precedence,
+                "souvenir_available": True if
+                request.form.get("souvenir")
+                else False,
+                "stattrak_available": True if
+                request.form.get("stattrak")
+                else False,
                 "stattrak_conditions": {
-                    "factory_new": True if request.form.get("fn") and request.form.get("stattrak") else False,
-                    "min_wear": True if request.form.get("mw") and request.form.get("stattrak") else False,
-                    "field_tested": True if request.form.get("ft") and request.form.get("stattrak") else False,
-                    "well_worn": True if request.form.get("ww") and request.form.get("stattrak") else False,
-                    "battle_scarred": True if request.form.get("bs") and request.form.get("stattrak") else False
+                    "factory_new": True if
+                    request.form.get("fn") and
+                    request.form.get("stattrak") else False,
+                    "min_wear": True if
+                    request.form.get("mw") and
+                    request.form.get("stattrak") else False,
+                    "field_tested": True if
+                    request.form.get("ft") and
+                    request.form.get("stattrak") else False,
+                    "well_worn": True if
+                    request.form.get("ww") and
+                    request.form.get("stattrak") else False,
+                    "battle_scarred": True if
+                    request.form.get("bs") and
+                    request.form.get("stattrak") else False
                 },
                 "conditions": {
-                    "factory_new": True if request.form.get("fn") else False,
-                    "min_wear": True if request.form.get("mw") else False,
-                    "field_tested": True if request.form.get("ft") else False,
-                    "well_worn": True if request.form.get("ww") else False,
-                    "battle_scarred": True if request.form.get("bs") else False
+                    "factory_new": True if
+                    request.form.get("fn")
+                    else False,
+                    "min_wear": True if
+                    request.form.get("mw")
+                    else False,
+                    "field_tested": True if
+                    request.form.get("ft")
+                    else False,
+                    "well_worn": True if
+                    request.form.get("ww")
+                    else False,
+                    "battle_scarred": True if
+                    request.form.get("bs")
+                    else False
                 },
                 "image_urls": {
-                    "factory_new": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("fnimage") if request.form.get("fnimage") else None,
-                    "min_wear": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("mwimage") if request.form.get("mwimage") else None,
-                    "field_tested": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("ftimage") if request.form.get("ftimage") else None,
-                    "well_worn": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("ftimage") if request.form.get("wwimage") else None,
-                    "battle_scarred": "https://community.cloudflare.steamstatic.com/economy/image/" + request.form.get("bsimage") if request.form.get("bsimage") else None
+                    "factory_new": imgDom +
+                    request.form.get("fnimage") if
+                    request.form.get("fnimage") else None,
+                    "min_wear": imgDom +
+                    request.form.get("mwimage") if
+                    request.form.get("mwimage") else None,
+                    "field_tested": imgDom +
+                    request.form.get("ftimage") if
+                    request.form.get("ftimage") else None,
+                    "well_worn": imgDom +
+                    request.form.get("ftimage") if
+                    request.form.get("wwimage") else None,
+                    "battle_scarred": imgDom +
+                    request.form.get("bsimage") if
+                    request.form.get("bsimage") else None
                 },
                 "up_votes": up_votes,
                 "down_votes": down_votes
             }
-            submit["release_date"] = parser.parse(request.form.get("release-date"))
-         
+            submit["release_date"] = parser.parse(
+                request.form.get("release-date"))
+
             skinColl.update({"_id": ObjectId(skin_id)}, submit)
             flash("The {} has been successfully updated".format(
                         request.form.get("name")))
@@ -451,14 +574,18 @@ def edit_selected_skin(skin_id):
                                               {"weapon_type": "Sniper Rifle"})
         }
         skin = skinColl.find_one({"_id": ObjectId(skin_id)})
-        return render_template("components/edit-selected-skin.html", skin=skin, weaponTypes=weaponTypes, weapons=weapons, jsonweapons=json.dumps(weapons), weaponRarities=weaponRarities)
+        return render_template("components/edit-selected-skin.html", skin=skin,
+                               weaponTypes=weaponTypes, weapons=weapons,
+                               jsonweapons=json.dumps(weapons),
+                               weaponRarities=weaponRarities)
     return render_template("error-pages/404.html")
 
 
 @app.route('/delete/skin', methods=["GET", "POST"])
 def delete_skin():
     if session and session["user"]["is_admin"]:
-        skins = list(skinColl.find( { "weapon_type": { "$ne": "Knife" }, "type": { "$ne": "Gloves"} }))
+        skins = list(skinColl.find({"weapon_type": {"$ne": "Knife"},
+                     "type": {"$ne": "Gloves"}}))
         return render_template(
             "components/delete-skin.html", page_title="Delete A Skin",
             skins=skins)
@@ -468,231 +595,350 @@ def delete_skin():
 @app.route('/delete/skin/<skin_id>', methods=["GET", "POST"])
 def delete_selected_skin(skin_id):
     if session and session["user"]["is_admin"]:
-        skinColl.remove({"_id": ObjectId(skin_id)}), flash("Skin has been successfully removed") if skinColl.find_one({"_id": ObjectId(skin_id)}) != None else False
-        mongo.db.cases.remove({"_id": ObjectId(skin_id)}), flash("Skin has been successfully removed") if mongo.db.cases.find_one({"_id": ObjectId(skin_id)}) != None else False
-        mongo.db.stickers.remove({"_id": ObjectId(skin_id)}), flash("Skin has been successfully removed")  if mongo.db.stickers.find_one({"_id": ObjectId(skin_id)}) != None else False
-        
+        skinColl.remove({"_id": ObjectId(skin_id)}
+                        ), flash("Skin has been successfully removed"
+                                 ) if skinColl.find_one(
+                                     {"_id": ObjectId(skin_id)}
+                                     ) is not None else False
+        mongo.db.cases.remove({"_id": ObjectId(skin_id)}
+                              ), flash("Skin has been successfully removed"
+                                       ) if mongo.db.cases.find_one(
+                                           {"_id": ObjectId(skin_id)}
+                                           ) is not None else False
+        mongo.db.stickers.remove({"_id": ObjectId(skin_id)}
+                                 ), flash("Skin has been successfully removed"
+                                          ) if mongo.db.stickers.find_one(
+                                              {"_id": ObjectId(skin_id)}
+                                              ) is not None else False
+
         return redirect(url_for("admin"))
     return render_template("error-pages/404.html")
-    
+
 
 @app.route('/get/skin', methods=["GET", "POST"])
 def get_skin_by_name():
-    if session and session["user"]["is_admin"]:  
+    if session and session["user"]["is_admin"]:
         if request.method == "POST":
             reqJson = request.json
-            skin_name = str(f'{reqJson["name"]} ')
+            skin_name = str(f'{reqJson["name"]}')
 
             skinExists = skinColl.find({"name": skin_name}).count()
             if skinExists > 0:
                 return "True"
-            else: 
+            else:
                 return "False"
 
         if request.method == "GET":
             searchOptions = {}
-            if "searchweaponskin" in request.args and request.values["searchweaponskin"] != None and request.values["searchweaponskin"] != '':
-                searchOptions = { "weapon_type": { "$ne": "Knife" }, "type": { "$ne": "Gloves"} }
-                searchOptions["name"] = { "$regex": request.values["searchweaponskin"], "$options": "i" }
-                foundSkins = skinColl.find(searchOptions).sort("rarity_precedence", -1)
-                return render_template("components/edit-skin.html", foundSkins=foundSkins)
+            if ("searchweaponskin" in request.args and
+                request.values["searchweaponskin"] is not None and
+                    request.values["searchweaponskin"] != ''):
+                searchOptions = {"weapon_type": {"$ne": "Knife"},
+                                 "type": {"$ne": "Gloves"}}
+                searchOptions["name"] = (
+                    {"$regex": request.values["searchweaponskin"],
+                     "$options": "i"})
+                foundSkins = skinColl.find(
+                    searchOptions).sort("rarity_precedence", -1)
+                return render_template(
+                    "components/edit-skin.html", foundSkins=foundSkins)
+
+            if ("deleteweaponskins" in request.args and
+                request.values["deleteweaponskins"] is not None and
+                    request.values["deleteweaponskins"] != ''):
+                searchOptions = {"weapon_type": {"$ne": "Knife"},
+                                 "type": {"$ne": "Gloves"}}
+                searchOptions["name"] = (
+                    {"$regex": request.values["deleteweaponskins"],
+                     "$options": "i"})
+                foundSkins = skinColl.find(searchOptions).sort(
+                    "rarity_precedence", -1)
+                return render_template(
+                    "components/delete-skin.html", foundSkins=foundSkins)
+
+            if ("searchknifes" in request.args and
+                request.values["searchknifes"] is not None and
+                    request.values["searchknifes"] != ''):
+                searchOptions = {"weapon_type": {"$eq": "Knife"}}
+                searchOptions["name"] = (
+                    {"$regex": request.values["searchknifes"],
+                     "$options": "i"})
+                foundKnifes = skinColl.find(searchOptions).sort(
+                    "rarity_precedence", -1)
+                return render_template(
+                    "components/edit-skin.html", foundKnifes=foundKnifes)
+
+            if ("searchallskins" in request.args and
+                request.values["searchallskins"] is not None and
+                    request.values["searchallskins"] != ''):
+                searchOptions["name"] = (
+                    {"$regex": request.values["searchallskins"],
+                     "$options": "i"})
+                foundSkins = skinColl.find(searchOptions).sort(
+                    "rarity_precedence", -1)
+                cases = mongo.db.cases.find(searchOptions).sort(
+                    "rarity_precedence", -1)
+                stickers = mongo.db.stickers.find(searchOptions).sort(
+                    "rarity_precedence", -1)
+                return render_template(
+                    "admin-pages/view-skins.html", foundSkins=foundSkins,
+                    cases=cases, stickers=stickers)
 
 
-            if "deleteweaponskins" in request.args and request.values["deleteweaponskins"] != None and request.values["deleteweaponskins"] != '':
-                searchOptions = { "weapon_type": { "$ne": "Knife" }, "type": { "$ne": "Gloves"} }
-                searchOptions["name"] = { "$regex": request.values["deleteweaponskins"], "$options": "i" }
-                foundSkins = skinColl.find(searchOptions).sort("rarity_precedence", -1)
-                return render_template("components/delete-skin.html", foundSkins=foundSkins)
-
-
-            if "searchknifes" in request.args and request.values["searchknifes"] != None and request.values["searchknifes"] != '':
-                searchOptions = { "weapon_type": { "$eq": "Knife" } }
-                searchOptions["name"] = { "$regex": request.values["searchknifes"], "$options": "i" }
-                foundKnifes = skinColl.find(searchOptions).sort("rarity_precedence", -1)
-                return render_template("components/edit-skin.html", foundKnifes=foundKnifes)
-
-
-            if "searchallskins" in request.args and request.values["searchallskins"] != None and request.values["searchallskins"] != '':
-                searchOptions["name"] = { "$regex": request.values["searchallskins"], "$options": "i" }
-                foundSkins = skinColl.find(searchOptions).sort("rarity_precedence", -1)
-                cases = mongo.db.cases.find(searchOptions).sort("rarity_precedence", -1)
-                stickers = mongo.db.stickers.find(searchOptions).sort("rarity_precedence", -1)
-                return render_template("admin-pages/view-skins.html", foundSkins=foundSkins, cases=cases, stickers=stickers)
-
-                  
 @app.route("/pistols")
 def pistols():
-    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
+    page, per_page, offset = get_page_args(
+        page_parameter='page', per_page_parameter='per_page',
+        offset_parameter='offset')
     per_page = 20
     offset = (page - 1) * per_page
 
-    total = skinColl.find({"weapon_type": "Pistol"}).sort("rarity_precedence", -1).count()
-    pistols = skinColl.find({"weapon_type": "Pistol"}).sort("rarity_precedence", -1)
+    total = skinColl.find({"weapon_type": "Pistol"}).sort(
+        "rarity_precedence", -1).count()
+    pistols = skinColl.find({"weapon_type": "Pistol"}).sort(
+        "rarity_precedence", -1)
 
     pistols_paginated = pistols[offset: offset + per_page]
 
-    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+    pagination = Pagination(
+        page=page, per_page=per_page, total=total, css_framework='bootstrap4')
 
-    return render_template("pages/pistols.html", page_title="Pistols",  pistols=pistols_paginated, pagination=pagination)
+    return render_template(
+        "pages/pistols.html", page_title="Pistols",
+        pistols=pistols_paginated, pagination=pagination)
 
 
 @app.route("/rifles")
 def rifles():
-    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
+    page, per_page, offset = get_page_args(
+        page_parameter='page', per_page_parameter='per_page',
+        offset_parameter='offset')
     per_page = 20
     offset = (page - 1) * per_page
 
-    total = skinColl.find({"weapon_type": "Rifle"}).sort("rarity_precedence", -1).count()
-    rifles = skinColl.find({"weapon_type": "Rifle"}).sort("rarity_precedence", -1)
+    total = skinColl.find({"weapon_type": "Rifle"}).sort(
+        "rarity_precedence", -1).count()
+    rifles = skinColl.find({"weapon_type": "Rifle"}).sort(
+        "rarity_precedence", -1)
 
     rifles_paginated = rifles[offset: offset + per_page]
 
-    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+    pagination = Pagination(
+        page=page, per_page=per_page, total=total, css_framework='bootstrap4')
 
-    return render_template("pages/rifles.html", page_title="Rifles",  rifles=rifles_paginated, pagination=pagination)
+    return render_template(
+        "pages/rifles.html", page_title="Rifles",
+        rifles=rifles_paginated, pagination=pagination)
 
 
 @app.route("/sniper-rifles")
 def sniper_rifles():
-    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
+    page, per_page, offset = get_page_args(
+        page_parameter='page', per_page_parameter='per_page',
+        offset_parameter='offset')
     per_page = 20
     offset = (page - 1) * per_page
 
-    total = skinColl.find({"weapon_type": "Sniper Rifle"}).sort("rarity_precedence", -1).count()
-    snipers = skinColl.find({"weapon_type": "Sniper Rifle"}).sort("rarity_precedence", -1)
+    total = skinColl.find({"weapon_type": "Sniper Rifle"}).sort(
+        "rarity_precedence", -1).count()
+    snipers = skinColl.find({"weapon_type": "Sniper Rifle"}).sort(
+        "rarity_precedence", -1)
 
     snipers_paginated = snipers[offset: offset + per_page]
 
-    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+    pagination = Pagination(
+        page=page, per_page=per_page, total=total, css_framework='bootstrap4')
 
-    return render_template("pages/sniper-rifles.html", page_title="Sniper Rifles",  snipers=snipers_paginated, pagination=pagination)
+    return render_template(
+        "pages/sniper-rifles.html", page_title="Sniper Rifles",
+        snipers=snipers_paginated, pagination=pagination)
 
 
 @app.route("/smgs")
 def smgs():
-    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
+    page, per_page, offset = get_page_args(
+        page_parameter='page', per_page_parameter='per_page',
+        offset_parameter='offset')
     per_page = 20
     offset = (page - 1) * per_page
 
-    total = skinColl.find({"weapon_type": "SMG"}).sort("rarity_precedence", -1).count()
-    smgs = skinColl.find({"weapon_type": "SMG"}).sort("rarity_precedence", -1)
+    total = skinColl.find({"weapon_type": "SMG"}).sort(
+        "rarity_precedence", -1).count()
+    smgs = skinColl.find({"weapon_type": "SMG"}).sort(
+        "rarity_precedence", -1)
 
     smgs_paginated = smgs[offset: offset + per_page]
 
-    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+    pagination = Pagination(
+        page=page, per_page=per_page, total=total, css_framework='bootstrap4')
 
-    return render_template("pages/smgs.html", page_title="SMGs",  smgs=smgs_paginated, pagination=pagination)
+    return render_template(
+        "pages/smgs.html", page_title="SMGs",
+        smgs=smgs_paginated, pagination=pagination)
 
 
 @app.route("/shotguns")
 def shotguns():
-    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
+    page, per_page, offset = get_page_args(
+        page_parameter='page', per_page_parameter='per_page',
+        offset_parameter='offset')
     per_page = 20
     offset = (page - 1) * per_page
 
-    total = skinColl.find({"weapon_type": "Shotgun"}).sort("rarity_precedence", -1).count()
-    shotguns = skinColl.find({"weapon_type": "Shotgun"}).sort("rarity_precedence", -1)
+    total = skinColl.find({"weapon_type": "Shotgun"}).sort(
+        "rarity_precedence", -1).count()
+    shotguns = skinColl.find({"weapon_type": "Shotgun"}).sort(
+        "rarity_precedence", -1)
 
     shotguns_paginated = shotguns[offset: offset + per_page]
 
-    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+    pagination = Pagination(
+        page=page, per_page=per_page, total=total, css_framework='bootstrap4')
 
-    return render_template("pages/shotguns.html", page_title="Shotguns",  shotguns=shotguns_paginated, pagination=pagination)
+    return render_template(
+        "pages/shotguns.html", page_title="Shotguns",
+        shotguns=shotguns_paginated, pagination=pagination)
 
 
 @app.route("/heavies")
 def heavies():
-    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
+    page, per_page, offset = get_page_args(
+        page_parameter='page', per_page_parameter='per_page',
+        offset_parameter='offset')
     per_page = 20
     offset = (page - 1) * per_page
 
-    total = skinColl.find({"weapon_type": "Machinegun"}).sort("rarity_precedence", -1).count()
-    heavies = skinColl.find({"weapon_type": "Machinegun"}).sort("rarity_precedence", -1)
+    total = skinColl.find({"weapon_type": "Machinegun"}).sort(
+        "rarity_precedence", -1).count()
+    heavies = skinColl.find({"weapon_type": "Machinegun"}).sort(
+        "rarity_precedence", -1)
 
     heavies_paginated = heavies[offset: offset + per_page]
 
-    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+    pagination = Pagination(
+        page=page, per_page=per_page, total=total, css_framework='bootstrap4')
 
-    return render_template("pages/heavies.html", page_title="Heavies",  heavies=heavies_paginated, pagination=pagination)
+    return render_template(
+        "pages/heavies.html", page_title="Heavies",
+        heavies=heavies_paginated, pagination=pagination)
 
 
 @app.route("/knives", methods=["GET", "POST"])
 def knives():
-    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
+    page, per_page, offset = get_page_args(
+        page_parameter='page', per_page_parameter='per_page',
+        offset_parameter='offset')
     per_page = 20
     offset = (page - 1) * per_page
+
     total = skinColl.find({"weapon_type": "Knife"}).count()
     knives = skinColl.find({"weapon_type": "Knife"}).sort("release_date", -1)
+
     knives_paginated = knives[offset: offset + per_page]
-    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+    pagination = Pagination(
+        page=page, per_page=per_page, total=total, css_framework='bootstrap4')
     knifeTypes = skinColl.distinct('knife_type')
-    
+
     if request.method == "POST":
         print(request.form.get("sortby"))
-        total = skinColl.find({"weapon_type": "Knife", "knife_type": request.form.get("sortby")}).count()
-        knives = skinColl.find({"weapon_type": "Knife", "knife_type": request.form.get("sortby")}).sort("release_date", -1)
+        total = skinColl.find({
+            "weapon_type": "Knife", "knife_type": request.form.get("sortby")
+            }).count()
+        knives = skinColl.find({
+            "weapon_type": "Knife", "knife_type": request.form.get("sortby")
+            }).sort("release_date", -1)
         knives_paginated = knives[offset: offset + per_page]
-        pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
-        return render_template("pages/knives.html", page_title="Knives",  knives=knives_paginated, pagination=pagination, knifeTypes=knifeTypes)
+        pagination = Pagination(
+            page=page, per_page=per_page,
+            total=total, css_framework='bootstrap4')
+        return render_template(
+            "pages/knives.html", page_title="Knives",
+            knives=knives_paginated, pagination=pagination,
+            knifeTypes=knifeTypes)
 
-    return render_template("pages/knives.html", page_title="Knives",  knives=knives_paginated, pagination=pagination, knifeTypes=knifeTypes)
+    return render_template(
+        "pages/knives.html", page_title="Knives",
+        knives=knives_paginated, pagination=pagination,
+        knifeTypes=knifeTypes)
 
 
 @app.route("/gloves")
 def gloves():
-    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
+    page, per_page, offset = get_page_args(
+        page_parameter='page', per_page_parameter='per_page',
+        offset_parameter='offset')
     per_page = 20
     offset = (page - 1) * per_page
 
-    total = skinColl.find({"type": "Gloves"}).sort("rarity_precedence", -1).count()
-    gloves = skinColl.find({"type": "Gloves"}).sort("rarity_precedence", -1)
+    total = skinColl.find({"type": "Gloves"}).sort(
+        "rarity_precedence", -1).count()
+    gloves = skinColl.find({"type": "Gloves"}).sort(
+        "rarity_precedence", -1)
 
     gloves_paginated = gloves[offset: offset + per_page]
 
-    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+    pagination = Pagination(
+        page=page, per_page=per_page, total=total, css_framework='bootstrap4')
 
-    return render_template("pages/gloves.html", page_title="Gloves",  gloves=gloves_paginated, pagination=pagination)
+    return render_template(
+        "pages/gloves.html", page_title="Gloves",
+        gloves=gloves_paginated, pagination=pagination)
 
 
 @app.route("/cases")
 def cases():
-    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
+    page, per_page, offset = get_page_args(
+        page_parameter='page', per_page_parameter='per_page',
+        offset_parameter='offset')
     per_page = 20
     offset = (page - 1) * per_page
 
-    total = mongo.db.cases.find().sort("rarity_precedence", -1).count()
-    cases = mongo.db.cases.find().sort("rarity_precedence", -1)
+    total = mongo.db.cases.find().sort(
+        "rarity_precedence", -1).count()
+    cases = mongo.db.cases.find().sort(
+        "rarity_precedence", -1)
 
     cases_paginated = cases[offset: offset + per_page]
 
-    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+    pagination = Pagination(
+        page=page, per_page=per_page, total=total, css_framework='bootstrap4')
 
-    return render_template("pages/cases.html", page_title="Cases",  cases=cases_paginated, pagination=pagination)
+    return render_template(
+        "pages/cases.html", page_title="Cases",
+        cases=cases_paginated, pagination=pagination)
 
 
 @app.route("/stickers")
 def stickers():
-    page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
+    page, per_page, offset = get_page_args(
+        page_parameter='page', per_page_parameter='per_page',
+        offset_parameter='offset')
     per_page = 20
     offset = (page - 1) * per_page
 
-    total = mongo.db.stickers.find().sort("rarity_precedence", -1).count()
-    stickers = mongo.db.stickers.find().sort("rarity_precedence", -1)
+    total = mongo.db.stickers.find().sort(
+        "rarity_precedence", -1).count()
+    stickers = mongo.db.stickers.find().sort(
+        "rarity_precedence", -1)
 
     stickers_paginated = stickers[offset: offset + per_page]
 
-    pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
+    pagination = Pagination(
+        page=page, per_page=per_page, total=total, css_framework='bootstrap4')
 
-    return render_template("pages/stickers.html", page_title="Stickers",  stickers=stickers_paginated, pagination=pagination)
+    return render_template(
+        "pages/stickers.html", page_title="Stickers",
+        stickers=stickers_paginated, pagination=pagination)
 
 
 @app.route("/skin/<skinname>", methods=["POST", "GET"])
 def skin(skinname):
-    skin=skinColl.find_one({"name": skinname})
+    skin = skinColl.find_one({"name": skinname})
     if request.method == "GET":
         if skin:
-            return render_template("pages/skin.html", page_title=skin["name"], skin=skin)
-            
+            return render_template(
+                "pages/skin.html", page_title=skin["name"], skin=skin)
+
 
 @app.route("/api/like-skin", methods=["POST", "GET"])
 def like():
@@ -701,24 +947,28 @@ def like():
         collection = str(reqJson["collection"])
 
         mongo.db.users.update(
-        {"username": session["user"]["username"]}, {"$push": {"skins_liked": ObjectId(reqJson["_id"])}})
+            {"username": session["user"]["username"]},
+            {"$push": {"skins_liked": ObjectId(reqJson["_id"])}}
+            )
 
         existing_user = mongo.db.users.find_one(
                  {"username": session["user"]["username"]})
 
         skins_liked = list(map(str, existing_user["skins_liked"]))
         skins_disliked = list(map(str, existing_user["skins_disliked"]))
-        
+
         session["user"] = {
                         "username": existing_user["username"],
                         "is_admin": existing_user["is_admin"],
                         "skins_liked": skins_liked,
                         "skins_disliked": skins_disliked}
 
-        skin_upvotes = mongo.db[collection].find_one({"_id": ObjectId(reqJson["_id"])})["up_votes"] + 1
+        skin_upvotes = mongo.db[collection].find_one(
+            {"_id": ObjectId(reqJson["_id"])})["up_votes"] + 1
 
         mongo.db[collection].update(
-            {"_id": ObjectId(reqJson["_id"])}, {"$set": {"up_votes": skin_upvotes}})
+            {"_id": ObjectId(reqJson["_id"])},
+            {"$set": {"up_votes": skin_upvotes}})
 
         return "liked"
     if request.method == "GET":
@@ -732,24 +982,27 @@ def dislike():
         collection = str(reqJson["collection"])
 
         mongo.db.users.update(
-        {"username": session["user"]["username"]}, {"$push": {"skins_disliked": ObjectId(reqJson["_id"])}})
+            {"username": session["user"]["username"]},
+            {"$push": {"skins_disliked": ObjectId(reqJson["_id"])}})
 
         existing_user = mongo.db.users.find_one(
                  {"username": session["user"]["username"]})
 
         skins_liked = list(map(str, existing_user["skins_liked"]))
         skins_disliked = list(map(str, existing_user["skins_disliked"]))
-        
+
         session["user"] = {
                         "username": existing_user["username"],
                         "is_admin": existing_user["is_admin"],
                         "skins_liked": skins_liked,
                         "skins_disliked": skins_disliked}
 
-        skin_downvotes = mongo.db[collection].find_one({"_id": ObjectId(reqJson["_id"])})["down_votes"] + 1
+        skin_downvotes = mongo.db[collection].find_one(
+            {"_id": ObjectId(reqJson["_id"])})["down_votes"] + 1
 
         mongo.db[collection].update(
-            {"_id": ObjectId(reqJson["_id"])}, {"$set": {"down_votes": skin_downvotes}})
+            {"_id": ObjectId(reqJson["_id"])},
+            {"$set": {"down_votes": skin_downvotes}})
         return "disliked"
     if request.method == "GET":
         return render_template("error-pages/404.html")
@@ -763,10 +1016,9 @@ def unlike():
         skin_id = ObjectId(reqJson["_id"])
         collection = str(reqJson["collection"])
 
-        # Pull's the skin id from the users_liked field array so it's not in there list of liked skins.
         mongo.db.users.update(
-        {"username": session["user"]["username"]}, {"$pull": {"skins_liked": skin_id}})
-
+            {"username": session["user"]["username"]},
+            {"$pull": {"skins_liked": skin_id}})
 
         existing_user = mongo.db.users.find_one(
                  {"username": session["user"]["username"]})
@@ -774,22 +1026,19 @@ def unlike():
         skins_liked = list(map(str, existing_user["skins_liked"]))
         skins_disliked = list(map(str, existing_user["skins_disliked"]))
 
-
         session["user"] = {
                         "username": existing_user["username"],
                         "is_admin": existing_user["is_admin"],
                         "skins_liked": skins_liked,
                         "skins_disliked": skins_disliked}
 
-        # Total number of upvotes for this skin
         skin_upvotes = mongo.db[collection].find_one({
             "_id": skin_id
         })["up_votes"]
 
-        # Sets the number of up votes to -1
         mongo.db[collection].update(
             {"_id": skin_id}, {"$set": {"up_votes": skin_upvotes - 1}})
-       
+
     return "Unliked"
 
 
@@ -801,10 +1050,9 @@ def undislike():
         skin_id = ObjectId(reqJson["_id"])
         collection = str(reqJson["collection"])
 
-        # Pull's the skin id from the users_liked field array so it's not in there list of liked skins.
         mongo.db.users.update(
-        {"username": session["user"]["username"]}, {"$pull": {"skins_disliked": skin_id}})
-
+            {"username": session["user"]["username"]},
+            {"$pull": {"skins_disliked": skin_id}})
 
         existing_user = mongo.db.users.find_one(
                  {"username": session["user"]["username"]})
@@ -812,22 +1060,19 @@ def undislike():
         skins_liked = list(map(str, existing_user["skins_liked"]))
         skins_disliked = list(map(str, existing_user["skins_disliked"]))
 
-
         session["user"] = {
                         "username": existing_user["username"],
                         "is_admin": existing_user["is_admin"],
                         "skins_liked": skins_liked,
                         "skins_disliked": skins_disliked}
 
-        # Total number of upvotes for this skin
         skin_downvotes = mongo.db[collection].find_one({
             "_id": skin_id
         })["down_votes"]
 
-        # Sets the number of up votes to -1
         mongo.db[collection].update(
             {"_id": skin_id}, {"$set": {"down_votes": skin_downvotes - 1}})
-       
+
         return "undisliked"
 
 
