@@ -56,4 +56,8 @@ $(document).ready(function () {
     conditionEls.on('input', function () {
         conditionEls.not(this).prop('required', !$(this).val().length);
     });
+
+    const myDatePicker = MCDatepicker.create({ 
+        el: '#release-date' 
+  })
 });

@@ -299,7 +299,6 @@ def insert_skin(skin_type):
                     "name": request.form.get("name"),
                     "skin_description": request.form.get("case_description"),
                     "type": "Container",
-                    "rarity": "Base Grade",
                     "image_url": request.form.get("image"),
                     "up_votes": 0,
                     "down_votes": 0
