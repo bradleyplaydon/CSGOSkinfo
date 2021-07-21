@@ -232,8 +232,8 @@ def add_skin(skin_type):
     return render_template("error-pages/404.html")
 
 
-@app.route('/insert/<skin>', methods=["GET", "POST"])
-def insert_skin(skin):
+@app.route('/insert/<skin_type>', methods=["GET", "POST"])
+def insert_skin(skin_type):
     if session and session["user"]["is_admin"]:
         imgDom = "https://community.cloudflare.steamstatic.com/economy/image/"
         if request.method == "POST":
@@ -464,8 +464,8 @@ def edit_skin():
     return render_template("error-pages/404.html")
 
 
-@app.route('/edit/skin/<skin_id>', methods=["GET", "POST"])
-def edit_selected_skin(skin_id):
+@app.route('/edit/<skin_type>/<skin_id>', methods=["GET", "POST"])
+def edit_selected_skin(skin_type, skin_id):
     if session and session["user"]["is_admin"]:
         imgDom = "https://community.cloudflare.steamstatic.com/economy/image/"
         if request.method == "POST":
