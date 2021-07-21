@@ -16,35 +16,33 @@
                     <input type="text" class="form-control" placeholder="First Name" id="fname" name="fname" pattern="[A-Za-z]{1,32}" required>
                 </div>
             </div>
-            <div class="control-group">
+            <div class="control-group mb-4 mt-4">
                 <div class="form-group floating-label-form-group controls">
                     <label>Last Name</label>
                     <input type="text" class="form-control" placeholder="Last Name" id="lname" name="lname" pattern="[A-Za-z]{1,32}" required>
                 </div>
             </div>
-            <div class="control-group">
+            <div class="control-group mb-4 mt-4">
                 <div class="form-group floating-label-form-group controls">
                     <label>Email Address</label>
                     <input type="email" class="form-control" placeholder="Email Address" id="email" name="email" required>
                 </div>
             </div>
-            <select class="form-select" id="reason" required>
+            <select class="form-select mb-4 mt-4" id="reason" required>
                 <option selected disabled>Contact Reason</option>
                 <option value="collaborate">Collaborate</option>
                 <option value="bug">Bug/Glitch found</option>
                 <option value="admin">Become An Admin</option>
                 <option value="login">Login Issues</option>
             </select>
-            <div class="control-group mt-2">
+            <div class="control-group mb-4 mt-4">
                 <div class="form-group floating-label-form-group controls">
                     <label>Message</label>
                     <textarea rows="5" class="form-control" placeholder="Message" id="message" name="message" minlength="10" maxlength="30" pattern="[A-Za-z]" required></textarea>
                 </div>
             </div>
-            <br>
-            <div id="success"></div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+            <div class="form-group mb-4 mt-4 text-center">
+                <button type="submit" class="btn btn-orange p-4" id="sendMessageButton">Send Message</button>
             </div>
         </form>
     </div>
