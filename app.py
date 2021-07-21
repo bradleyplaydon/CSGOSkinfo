@@ -130,6 +130,12 @@ def account(username):
 def about():
     return render_template("pages/about.html", page_title="About")
 
+
+@app.route("/contact")
+def contact():
+    return render_template("pages/contact.html", page_title="Contact")
+
+
 @app.route("/admin")
 def admin():
     if session and session["user"]["is_admin"]:
