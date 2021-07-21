@@ -28,13 +28,15 @@
                     <input type="email" class="form-control" placeholder="Email Address" id="email" name="email" required>
                 </div>
             </div>
-            <select class="form-select mb-4 mt-4" id="reason" name="reason" required>
-                <option selected disabled>Contact Reason</option>
-                <option value="collaborate">Collaborate</option>
-                <option value="bug">Bug/Glitch found</option>
-                <option value="admin">Become An Admin</option>
-                <option value="login">Login Issues</option>
-            </select>
+            <div class="form-group floating-label-form-group controls">
+                <label for="reason" class="label">Contact Reason</label>
+                <select class="form-select mb-4 mt-4" id="reason" name="reason" required>
+                    <option value="collaborate">Collaborate</option>
+                    <option value="bug">Bug/Glitch found</option>
+                    <option value="admin">Become An Admin</option>
+                    <option value="login">Login Issues</option>
+                </select>
+            </div>
             <div class="control-group mb-4 mt-4">
                 <div class="form-group floating-label-form-group controls">
                     <label for="message" class="label">Message</label>
