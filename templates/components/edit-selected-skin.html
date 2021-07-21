@@ -126,42 +126,9 @@
           {% for type in knifeTypes %}
           {% if type == skin.knife_type %}
           <option value="{{ type }}" selected>{{ type }}</option>
-          {% else %}
-          {% if not type == "Knife" %}
-          {% if type == 'Machinegun' %}
-          <option value="{{ type | replace('Machinegun', 'Heavy') }}">{{ type | replace('Machinegun', 'Heavy') |
-            capitalize }}</option>
-          {% else %}
-          <option value="{{ type }}">{{ type }}</option>
-          {% endif %}
-          {% endif %}
           {% endif %}
           {% endfor %}
         </select>
-        <select id="skin-weapon-name" class="form-select bg-dark text-white rounded-0 mb-3" placeholder="Weapon Name"
-          name="weapon_name">
-          {% set weaponType = skin.weapon_type.lower() %}
-          {% for name in weapons[weaponType] %}
-          {% if name == skin.weapon_name %}
-          <option value="{{ name }}" selected>{{ name }}</option>
-          {% else %}
-          <option value="{{ name }}">{{ name }}</option>
-          {% endif %}
-          {% endfor %}
-        </select>
-        <select placeholder="Rarity" class="form-select bg-dark text-white rounded-0 mb-3" name="rarity" required>
-          {% for rarity in weaponRarities %}
-          {% if not rarity == "Extraordinary" %}
-          {% if rarity == skin.rarity %}
-          <option value="{{ rarity }}" class="{{ rarity.lower() | replace(' ', ('-')) }}-text" selected>{{ rarity }}</option>
-          {% else %}
-          <option value="{{ rarity }}" class="{{ rarity.lower() | replace(' ', ('-')) }}-text">{{ rarity }}</option>
-          {% endif %}
-          {% endif %}
-          {% endfor %}
-        </select>
-        <div class="invalid-feedback border border-danger p-3 fs-5 mb-2" id="invalid-error">
-
         </div>
         <div class="table-responsive">
           <table class="table table-dark table-striped">
