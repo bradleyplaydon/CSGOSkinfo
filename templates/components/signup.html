@@ -3,13 +3,13 @@
         <div class="control-group">
             <div class="form-group floating-label-form-group controls">
                 <label for="firstName" class="label">First Name</label>
-                <input type="text" class="form-control mb-3" placeholder="First Name" name="firstName" pattern="[A-Za-z]{1,32}" required>
+                <input type="text" id="firstName" class="form-control mb-3" placeholder="First Name" name="firstName" pattern="[A-Za-z]{1,32}" required>
             </div>
         </div>
         <div class="control-group">
             <div class="form-group floating-label-form-group controls">
                 <label for="lastName" class="label">Last Name</label>
-                <input type="text" class="form-control mb-3" placeholder="Last Name" name="lastName" pattern="[A-Za-z]{1,32}" required>
+                <input type="text" id="lastName" class="form-control mb-3" placeholder="Last Name" name="lastName" pattern="[A-Za-z]{1,32}" required>
             </div>
         </div>
         <div class="control-group">
@@ -21,7 +21,7 @@
         <div class="control-group">
             <div class="form-group floating-label-form-group controls">
                 <label for="email" class="label">Email Address</label>
-                <input type="email" class="form-control mb-3" placeholder="Email Address" name="email" required>
+                <input type="email" id="email" class="form-control mb-3" placeholder="Email Address" name="email" required>
             </div>
         </div>
         <div class="control-group">
@@ -33,20 +33,9 @@
         <div class="control-group">
             <div class="form-group floating-label-form-group controls">
                 <label for="confirmpassword" class="label">Confirm Password</label>
-                <input type="password" class="form-control mb-3" placeholder="Confirm Password" name="confirmpassword" pattern=".{6,}" required>
+                <input type="password" id="confirmpassword" class="form-control mb-3" placeholder="Confirm Password" name="confirmpassword" pattern=".{6,}" required>
             </div>
         </div>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% if "Password doesn't match" in messages %}
-            <div class="error-message bg-danger p-4 text-center">
-                <div class="alert alert-danger" role="alert">
-                    A simple danger alert—check it out!
-                </div>
-            </div>
-            {% endif %}
-        {% endif %}
-        {% endwith %}
         <button type="submit" name="button" class="btn btn-orange mt-4 p-3 w-100" id="formSubmit">Sign Up</button>
     </form>
 </div>
