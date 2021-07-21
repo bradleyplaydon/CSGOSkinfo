@@ -5,7 +5,7 @@
     <h2 class="bg-dark h2 d-inline-block m-0 p-4">{{ page_title }}</h2>
     <div class="d-flex justify-content-center flex-wrap">
         <div class="col-lg-6 col-sm-12 bg-dark p-5 border-end text-center">
-            <p class="{{ skin.rarity | lower }} p-2 w-50 mx-auto mt-5">{{ skin.rarity }}</p>
+            <p class="{{ skin.rarity | lower | replace(' ', '-')) }} p-2 w-50 mx-auto mt-5">{{ skin.rarity }}</p>
             {% if skin.souvenir_available %}
             <p class="souvenir p-2 w-50 mx-auto">Souvenir Available</p>
             {% endif %}
