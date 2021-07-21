@@ -11,9 +11,9 @@
 </div>
 <div class="container bg-dark mb-5 mt-5 pb-4">
   <h4 class="text-center p-3">Liked Weapon/Glove Skins</h2>
-      {% if weaponskins_liked_info | length > 0 %}
+      {% if weapon_liked | length > 0 %}
       <div class="slider">
-        {% for skin in weaponskins_liked_info %}
+        {% for skin in weapon_liked %}
           <div class="card border bg-dark me-1 h-100">
             <a href="{{ url_for('skin', skinname=skinname )}}">
               {% if skin.image_urls.factory_new is not none %}
@@ -47,9 +47,9 @@
 </div>
 <div class="container bg-dark mb-5 mt-5 pb-4">
   <h4 class="text-center p-3">Disliked Weapon/Glove Skins</h2>
-      {% if weaponskins_disliked_info | length > 0 %}
+      {% if weapon_disliked | length > 0 %}
       <div class="slider">
-        {% for skin in weaponskins_disliked_info %}
+        {% for skin in weapon_disliked %}
           <div class="card border bg-dark me-1 h-100">
             <a href="{{ url_for('skin', skinname=skinname )}}">
               {% if skin.image_urls.factory_new is not none %}
