@@ -503,7 +503,6 @@ def get_skin_by_name():
                     "components/delete-skin.html", page_title="Delete Skins",
                     foundSkins=foundSkins, cases=cases, stickers=stickers)
 
-
             if ("searchknifes" in request.args and
                 request.values["searchknifes"] is not None and
                     request.values["searchknifes"] != ''):
