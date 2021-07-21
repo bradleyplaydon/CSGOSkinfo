@@ -534,7 +534,7 @@ def get_skin_by_name():
                 foundSkins = skinColl.find(searchOptions).sort(
                     "rarity_precedence", -1)
                 cases = mongo.db.cases.find(searchOptions).sort(
-                    "rarity_precedence", -1)
+                    "release_date", -1)
                 stickers = mongo.db.stickers.find(searchOptions).sort(
                     "rarity_precedence", -1)
                 return render_template(
