@@ -5,7 +5,7 @@
     <h2 class="h2">{{ page_title }}</h2>
 </div>
 <div id="add-case" aria-labelledby="add-case">
-    <form id="case-form" class="container-fluid" method="post" action="{{ url_for('insert_skin', skin='case') }}" validate>
+    <form id="case-form" class="container-fluid" method="post" action="{{ url_for('insert_skin', skin_type='case') }}" validate>
     <div class="row">
         <div class="col-md-9 col-sm-12">
             <label for="name" class="label">Case Name</label>
