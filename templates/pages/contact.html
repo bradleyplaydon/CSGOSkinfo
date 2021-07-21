@@ -12,23 +12,23 @@
         <form name="sentMessage" id="contactForm">
             <div class="control-group">
                 <div class="form-group floating-label-form-group controls">
-                    <label>First Name</label>
+                    <label for="fname" class="label">First Name</label>
                     <input type="text" class="form-control" placeholder="First Name" id="fname" name="fname" pattern="[A-Za-z]{1,32}" required>
                 </div>
             </div>
             <div class="control-group mb-4 mt-4">
                 <div class="form-group floating-label-form-group controls">
-                    <label>Last Name</label>
+                    <label for="lname" class="label">Last Name</label>
                     <input type="text" class="form-control" placeholder="Last Name" id="lname" name="lname" pattern="[A-Za-z]{1,32}" required>
                 </div>
             </div>
             <div class="control-group mb-4 mt-4">
                 <div class="form-group floating-label-form-group controls">
-                    <label>Email Address</label>
+                    <label for="email" class="label">Email Address</label>
                     <input type="email" class="form-control" placeholder="Email Address" id="email" name="email" required>
                 </div>
             </div>
-            <select class="form-select mb-4 mt-4" id="reason" required>
+            <select class="form-select mb-4 mt-4" id="reason" name="reason" required>
                 <option selected disabled>Contact Reason</option>
                 <option value="collaborate">Collaborate</option>
                 <option value="bug">Bug/Glitch found</option>
@@ -37,7 +37,7 @@
             </select>
             <div class="control-group mb-4 mt-4">
                 <div class="form-group floating-label-form-group controls">
-                    <label>Message</label>
+                    <label for="message" class="label">Message</label>
                     <textarea rows="5" class="form-control" placeholder="Message" id="message" name="message" minlength="10" maxlength="30" pattern="[A-Za-z]" required></textarea>
                 </div>
             </div>
