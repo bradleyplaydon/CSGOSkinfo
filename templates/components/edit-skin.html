@@ -134,7 +134,8 @@
     <div class="accordion-item bg-dark text-white mt-5">
         <h2 class="accordion-header">
             <button class="accordion-button collapsed bg-dark text-white border" type="button" data-bs-toggle="collapse"
-                data-bs-target="#Edit-gloves" aria-expanded="false" aria-controls="Edit-gloves">
+                data-bs-target="#Edit-gloves" {% if foundGloves %} aria-expanded="false" {% else %} aria-expanded="true"
+                {% endif %} aria-controls="Edit-gloves">
                 Edit Gloves
             </button>
         </h2>
