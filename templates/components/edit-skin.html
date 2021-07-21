@@ -243,6 +243,55 @@
             </div>
         </div>
     </div>
+    <div class="accordion-item bg-dark text-white mt-5">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed bg-dark text-white border" type="button" data-bs-toggle="collapse"
+                data-bs-target="#edit-sticker" {% if foundStickers %} aria-expanded="false" {% else %} aria-expanded="true"
+                {% endif %} aria-controls="edit-sticker">
+                Edit Sticker
+            </button>
+        </h2>
+        <div id="edit-sticker" class="accordion-collapse collapse {% if foundStickers %} show {% endif %}" aria-labelledby="edit-sticker" data-bs-parent="#edit-sticker">
+            <div class="accordion-body row">
+                <form class="form-control d-flex bg-dark p-3" action="/get/skin" method="GET">
+                    <input class="form-control" id="searchstickers" name="searchstickers" placeholder="Enter the Sticker Name"
+                        aria-label="Example select with button addon">
+                    <button class="btn btn-orange px-5 pt-3 pb-3" type="submit"><i
+                            class="fas fa-search text-white fs-4"></i></button>
+                </form>
+                {% if foundStickers %}
+                <div class="col-12">
+                    {{ foundStickers.count() }} Skins Found:
+                </div>
+                {% for skin in foundStickers %}
+                {% set skin_id = skin._id %}
+                <div class="col-lg-3 col-sm-6 mb-2">
+                    <div class="card border bg-dark">
+                        <a href="{{ url_for('edit_selected_skin', skin_type='sticker', skin_id=skin_id )}}" class="btn btn-secondary">
+                            {% if skin.image_url is not none %}
+                            <img src="{{ skin.image_url }}" class="card-img-top" alt="{{ skin.name }} image">
+                            {% else %}
+                            Edit Skin
+                            {% endif %}
+                        </a>
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item text-white border bg-dark">
+                                    {{ skin.name }}
+                                </li>
+                                <li class="list-group-item text-white bg-dark">
+                                    <p class="{{ skin.rarity | replace(' ', '-') | lower }} text-center p-2">{{
+                                        skin.rarity }}</p>
+                                </li>
+                                <li class="list-group-item text-white bg-dark">
+                                    <p>{{ skin.skin_description }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>
