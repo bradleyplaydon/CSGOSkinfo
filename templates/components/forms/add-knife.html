@@ -1,6 +1,7 @@
 {% extends 'layout/dashboard-base.html' %}
 {% set active_page = "addknife" %}
 {% block content %}
+<meta id="knifes" data-page="{{ active_page }}">
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
     <h2 class="h2">{{ page_title }}</h2>
 </div>
@@ -30,7 +31,7 @@
                     <option value="{{ type }}">{{ type }}</option>
                     {% endfor %}
                 </select>
-                <p class="border border-info p-3 fs-5 mb-2">Note: Atleast two conditions need to be checked</p>
+                <p class="border border-info p-3 fs-5 mb-2">Note: Atleast two conditions need to be checked.</p>
                 <div class="table-responsive">
                     <table class="table table-dark table-striped">
                         <thead>
