@@ -15,4 +15,10 @@ $(document).ready(function() {
     }
   };
   
+  $("#contactForm").on("change", function() {
+    data.template_params.from_name = $("#fname").val() + " " + $("#lname").val();
+    data.template_params.from_email = $("#email").val();
+    data.template_params.contact_reason = $("#reason").val();
+    data.template_params.message = $("#message").val();
+  });
 });
