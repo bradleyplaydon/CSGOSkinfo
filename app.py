@@ -467,93 +467,41 @@ def edit_skin():
 @app.route('/edit/<skin_type>/<skin_id>', methods=["GET", "POST"])
 def edit_selected_skin(skin_type, skin_id):
     if session and session["user"]["is_admin"]:
-        imgDom = "https://community.cloudflare.steamstatic.com/economy/image/"
         if request.method == "POST":
-            rarity = request.form.get("rarity")
-            rarity_precedence = (
-                5 if rarity == "Covert"
-                else 4 if rarity == "Classified"
-                else 3 if rarity == "Restricted"
-                else 2 if rarity == "Mil-Spec Grade"
-                else 1 if rarity == "Industrial Grade"
-                else 0 if rarity == "Consumer Grade"
-                else "")
-            up_votes = skinColl.find_one(
-                {"_id": ObjectId(skin_id)})["up_votes"]
-            down_votes = skinColl.find_one(
-                {"_id": ObjectId(skin_id)})["down_votes"]
-            submit = {
-                "name": request.form.get("name"),
-                "skin_description": request.form.get("skin_description"),
-                "type": "Weapon",
-                "weapon_type": request.form.get("weapon_type"),
-                "weapon_name": request.form.get("weapon_name"),
-                "rarity": rarity,
-                "rarity_precedence": rarity_precedence,
-                "souvenir_available": True if
-                request.form.get("souvenir")
-                else False,
-                "stattrak_available": True if
-                request.form.get("stattrak")
-                else False,
-                "stattrak_conditions": {
-                    "factory_new": True if
-                    request.form.get("fn") and
-                    request.form.get("stattrak") else False,
-                    "min_wear": True if
-                    request.form.get("mw") and
-                    request.form.get("stattrak") else False,
-                    "field_tested": True if
-                    request.form.get("ft") and
-                    request.form.get("stattrak") else False,
-                    "well_worn": True if
-                    request.form.get("ww") and
-                    request.form.get("stattrak") else False,
-                    "battle_scarred": True if
-                    request.form.get("bs") and
-                    request.form.get("stattrak") else False
-                },
-                "conditions": {
-                    "factory_new": True if
-                    request.form.get("fn")
-                    else False,
-                    "min_wear": True if
-                    request.form.get("mw")
-                    else False,
-                    "field_tested": True if
-                    request.form.get("ft")
-                    else False,
-                    "well_worn": True if
-                    request.form.get("ww")
-                    else False,
-                    "battle_scarred": True if
-                    request.form.get("bs")
-                    else False
-                },
-                "image_urls": {
-                    "factory_new": imgDom +
-                    request.form.get("fnimage") if
-                    request.form.get("fnimage") else None,
-                    "min_wear": imgDom +
-                    request.form.get("mwimage") if
-                    request.form.get("mwimage") else None,
-                    "field_tested": imgDom +
-                    request.form.get("ftimage") if
-                    request.form.get("ftimage") else None,
-                    "well_worn": imgDom +
-                    request.form.get("ftimage") if
-                    request.form.get("wwimage") else None,
-                    "battle_scarred": imgDom +
-                    request.form.get("bsimage") if
-                    request.form.get("bsimage") else None
-                },
-                "up_votes": up_votes,
-                "down_votes": down_votes
-            }
-            submit["release_date"] = parser.parse(
+            schema = get_skin_schema(skin_type)
+
+            schema["release_date"] = parser.parse(
                 request.form.get("release-date"))
 
-            skinColl.update({"_id": ObjectId(skin_id)}, submit)
+            submit = schema
+            if (skin_type == "weapon" or
+               skin_type == "knife" or skin_type == "gloves"):
+                up_votes = skinColl.find_one(
+                    {"_id": ObjectId(skin_id)})["up_votes"]
+                down_votes = skinColl.find_one(
+                    {"_id": ObjectId(skin_id)})["down_votes"]
+                schema["up_votes"] = up_votes
+                schema["down_votes"] = down_votes
+                skinColl.update({"_id": ObjectId(skin_id)}, submit)
+
+            elif skin_type == "case":
+                up_votes = mongo.db.cases.find_one(
+                    {"_id": ObjectId(skin_id)})["up_votes"]
+                down_votes = mongo.db.cases.find_one(
+                    {"_id": ObjectId(skin_id)})["down_votes"]
+                schema["type"] = "Container"
+                schema["up_votes"] = up_votes
+                schema["down_votes"] = down_votes
+                mongo.db.cases.update({"_id": ObjectId(skin_id)}, submit)
+            elif skin_type == "sticker":
+                up_votes = mongo.db.stickers.find_one(
+                    {"_id": ObjectId(skin_id)})["up_votes"]
+                down_votes = mongo.db.stickers.find_one(
+                    {"_id": ObjectId(skin_id)})["down_votes"]
+                schema["up_votes"] = up_votes
+                schema["down_votes"] = down_votes
+                mongo.db.stickers.update({"_id": ObjectId(skin_id)}, submit)
+
             flash("The {} has been successfully updated".format(
                         request.form.get("name")))
 
