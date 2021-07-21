@@ -325,6 +325,41 @@
     </div>
   </form>
 </div>
+{% elif skin_type == 'case' %}
+<div id="add-case" aria-labelledby="add-case">
+  <form id="edit-skin-form" class="container-fluid" method="post"
+    action="{{ url_for('edit_selected_skin',  skin_type='case', skin_id=skin._id) }}" validate>
+    <div class="row">
+      <div class="col-md-9 col-sm-12">
+        <label for="name" class="label">Case Name</label>
+        <input type="text" placeholder="Case Name" value="{{ skin.name }}"
+          class="form-control bg-dark text-white rounded-0 mb-3" name="name" minlength="10" maxlength="35" required>
+        <label for="skin_description" class="label">Case Description</label>
+        <input type="text" placeholder="Case Description" value="{{ skin.skin_description }}"
+          class="form-control bg-dark text-white rounded-0 mb-3" name="skin_description" minlength="20" maxlength="100"
+          required>
+        <div class="d-flex mb-3">
+                <span class="input-group-text w-50 overflow-auto"
+                id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image/</span>
+              <input class="form-control bg-dark text-white"
+                placeholder="Image Url" name="image" id="image" type="text"
+                aria-describedby="steamimageurl" value="{{ skin.image_url[59:] }}" required>
+        </div>  
+        <label for="release-date" class="label">Skin Release Date (Click)</label>
+        <div class="input-group flex-nowrap">
+          <span class="input-group-text" id="addon-wrapping"><i class="fas fa-calendar-alt"></i></span>
+          <input class="form-select" role="button" value="{{ skin.release_date }}" id="release-date"
+            placeholder="Pick A Date" name="release-date">
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-12 text-center">
+        <button type="submit" class="btn btn-orange p-5 h-75 mt-4" id="edit-skin" disabled>
+          <i class="far fa-plus-square fs-4 align-middle"></i> Edit Case
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
         <label for="release-date" class="label">Skin Release Date (Click)</label>
         <div class="input-group flex-nowrap">
           <span class="input-group-text" id="addon-wrapping"><i class="fas fa-calendar-alt"></i></span>
