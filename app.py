@@ -122,7 +122,7 @@ def logout():
 def account(username):
     if session:
         skins_liked = list(map(ObjectId, session["user"]["skins_liked"]))
-        skins_disliked = list(map(ObjectId, session["user"]["skins_liked"]))
+        skins_disliked = list(map(ObjectId, session["user"]["skins_disliked"]))
 
         weaponskins_liked_info = list(skinColl.find({"_id": {"$in": skins_liked}}));
         weaponskins_disliked_info = list(skinColl.find({"_id": {"$in": skins_disliked}}));
