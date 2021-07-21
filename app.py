@@ -126,6 +126,10 @@ def account(username):
     return redirect(url_for("index"))
 
 
+@app.route("/about")
+def about():
+    return render_template("pages/about.html", page_title="About")
+
 @app.route("/admin")
 def admin():
     if session and session["user"]["is_admin"]:
@@ -519,7 +523,6 @@ def pistols():
     return render_template("pages/pistols.html", page_title="Pistols",  pistols=pistols_paginated, pagination=pagination)
 
 
-
 @app.route("/rifles")
 def rifles():
     page, per_page, offset = get_page_args(page_parameter='page', per_page_parameter='per_page', offset_parameter='offset')
@@ -534,7 +537,6 @@ def rifles():
     pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
 
     return render_template("pages/rifles.html", page_title="Rifles",  rifles=rifles_paginated, pagination=pagination)
-
 
 
 @app.route("/sniper-rifles")
@@ -637,7 +639,6 @@ def gloves():
     pagination = Pagination(page=page, per_page=per_page, total=total, css_framework='bootstrap4')
 
     return render_template("pages/gloves.html", page_title="Gloves",  gloves=gloves_paginated, pagination=pagination)
-
 
 
 @app.route("/cases")
