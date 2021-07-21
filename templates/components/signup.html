@@ -27,13 +27,13 @@
         <div class="control-group">
             <div class="form-group floating-label-form-group controls">
                 <label for="password" class="label">Password</label>
-                <input id="password" type="password" class="form-control mb-3" placeholder="Password" name="password" pattern=".{6,}" required>
+                <input id="password" type="password" class="form-control mb-3" placeholder="Password" name="password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" required>
             </div>
         </div>
         <div class="control-group">
             <div class="form-group floating-label-form-group controls">
                 <label for="confirmpassword" class="label">Confirm Password</label>
-                <input type="password" id="confirmpassword" class="form-control mb-3" placeholder="Confirm Password" name="confirmpassword" pattern=".{6,}" required>
+                <input type="password" id="confirmpassword" class="form-control mb-3" placeholder="Confirm Password" name="confirmpassword" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" required>
             </div>
         </div>
         <button type="submit" name="button" class="btn btn-orange mt-4 p-3 w-100" id="formSubmit">Sign Up</button>
