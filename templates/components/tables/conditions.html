@@ -1,0 +1,128 @@
+    <table class="table table-dark table-striped">
+      <thead>
+        <tr>
+          <th scope="col" colspan="1">Conditions</th>
+          <th scope="col" colspan="1">Images</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" autocomplete="off" name="fn" id="factory_new" {% if skin.conditions.factory_new %} checked {% endif %}>
+              <label class="form-check-label" for="factory_new">
+                Factory New
+              </label>
+            </div>
+          </th>
+          <td>
+            <label for="fnurl" class="form-label float-end">Icon URL</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text"
+                id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
+              {% if skin.conditions.factory_new %}
+              <input class="form-control bg-dark text-white" id="fnurl"
+                placeholder="Factory New Icon URL" value="{{ skin.image_urls.factory_new[59:] }}" name="fnimage" type="text">   
+              {% else %}
+              <input class="form-control bg-dark input-bg-disabled text-white" id="mwurl"
+                placeholder="Factory New Icon URL" name="fnimage" type="text" disabled>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" autocomplete="off" name="mw" id="min_wear" {% if skin.conditions.min_wear %} checked {% endif %}>
+              <label class="form-check-label" for="min_wear">
+                Minimal Wear
+              </label>
+            </div>
+          </th>
+          </th>
+          <td>
+            <label for="mwurl" class="form-label float-end">Icon URL</label>
+            <div class="input-group mb-3"><span class="input-group-text"
+                id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image/</span>
+                {% if skin.conditions.min_wear %}
+                <input class="form-control bg-dark text-white" id="mwurl"
+                placeholder="Minimal Wear Icon URL" value="{{ skin.image_urls.min_wear[59:] }}" name="mwimage" type="text">   
+                {% else %}
+                <input class="form-control bg-dark input-bg-disabled text-white" id="mwurl"
+                placeholder="Minimal Wear Icon URL" name="mwimage" type="text" disabled>
+                {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" autocomplete="off" name="ft" id="field_tested" {% if skin.conditions.field_tested %} checked {% endif %}>
+              <label class="form-check-label" for="field_tested">
+                Field-Tested
+              </label>
+            </div>
+          </th>
+          <td>
+            <label for="fturl" class="form-label float-end">Icon URL</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text"
+                id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
+                {% if skin.conditions.field_tested %}
+                <input class="form-control bg-dark text-white" id="wwurl"
+                placeholder="Field Tested Icon URL" value="{{ skin.image_urls.field_tested[59:] }}" name="ftimage" type="text">   
+                {% else %}
+                <input class="form-control input-bg-disabled bg-dark text-white" id="wwurl"
+                placeholder="Field Tested Icon URL" name="ftimage" type="text" disabled>
+                {% endif %}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" autocomplete="off" name="ww" id="well_worn" {% if skin.conditions.well_worn %} checked {% endif %}>
+              <label class="form-check-label" for="well_worn">
+                Well-Worn
+              </label>
+            </div>
+          </th>
+          <td>
+            <label for="wwurl" class="form-label float-end">Icon URL</label>
+            <div class="input-group mb-3"><span class="input-group-text"
+                id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
+                {% if skin.conditions.well_worn %}
+                <input class="form-control bg-dark text-white" id="wwurl"
+                placeholder="Well-Worn Icon URL" value="{{ skin.image_urls.well_worn[59:] }}" name="wwimage" type="text">   
+                {% else %}
+                <input class="form-control bg-dark input-bg-disabled text-white" id="wwurl"
+                placeholder="Well-Worn Icon URL" name="wwimage" type="text" disabled>
+                {% endif %}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" autocomplete="off" name="bs" id="battle_scarred" {% if skin.conditions.battle_scarred %} checked {% endif %}>
+              <label class="form-check-label" for="battle_scarred">
+                Battle-Scarred
+              </label>
+            </div>
+          </th>
+          <td>
+            <label for="bsurl" class="form-label float-end">Icon URL</label>
+            <div class="input-group mb-3">
+              <span class="input-group-text"
+                id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image</span>
+                {% if skin.conditions.battle_scarred %}
+                <input class="form-control bg-dark text-white" id="bsurl"
+                placeholder="Battle Scarred Icon URL" value="{{ skin.image_urls.battle_scarred[59:] }}" name="bsimage" type="text">   
+                {% else %}
+                <input class="form-control bg-dark input-bg-disabled text-white" id="bsurl"
+                placeholder="Battle Scarred Icon URL" name="bsimage" type="text" disabled>
+                {% endif %}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>

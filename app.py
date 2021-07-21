@@ -378,27 +378,50 @@ def edit_selected_skin(skin_type, skin_id):
             flash("The {} has been successfully updated".format(
                         request.form.get("name")))
 
-        weaponTypes = skinColl.distinct('weapon_type')
-        weaponRarities = skinColl.distinct('rarity')
-        weapons = {
-            "pistol": skinColl.distinct("weapon_name",
-                                        {"weapon_type": "Pistol"}),
-            "rifle": skinColl.distinct("weapon_name",
-                                       {"weapon_type": "Rifle"}),
-            "heavy": skinColl.distinct("weapon_name",
-                                       {"weapon_type": "Machinegun"}),
-            "smg": skinColl.distinct("weapon_name",
-                                     {"weapon_type": "SMG"}),
-            "shotgun": skinColl.distinct("weapon_name",
-                                         {"weapon_type": "Shotgun"}),
-            "sniper rifle": skinColl.distinct("weapon_name",
-                                              {"weapon_type": "Sniper Rifle"})
-        }
         skin = skinColl.find_one({"_id": ObjectId(skin_id)})
-        return render_template("components/edit-selected-skin.html", skin=skin,
-                               weaponTypes=weaponTypes, weapons=weapons,
-                               jsonweapons=json.dumps(weapons),
-                               weaponRarities=weaponRarities)
+        if skin_type == 'weapon':
+            weaponTypes = skinColl.distinct('weapon_type')
+            weaponRarities = skinColl.distinct('rarity')
+            weapons = {
+                "pistol": skinColl.distinct(
+                    "weapon_name", {"weapon_type": "Pistol"}),
+                "rifle": skinColl.distinct(
+                    "weapon_name", {"weapon_type": "Rifle"}),
+                "heavy": skinColl.distinct(
+                    "weapon_name", {"weapon_type": "Machinegun"}),
+                "smg": skinColl.distinct(
+                    "weapon_name", {"weapon_type": "SMG"}),
+                "shotgun": skinColl.distinct(
+                    "weapon_name", {"weapon_type": "Shotgun"}),
+                "sniper rifle": skinColl.distinct(
+                    "weapon_name", {"weapon_type": "Sniper Rifle"})
+            }
+            return render_template(
+                "components/edit-selected-skin.html", skin=skin,
+                skin_type=skin_type, weaponTypes=weaponTypes,
+                weapons=weapons, jsonweapons=json.dumps(weapons),
+                weaponRarities=weaponRarities)
+        elif skin_type == 'knife':
+            knifeTypes = skinColl.distinct('knife_type')
+            return render_template(
+                "components/edit-selected-skin.html", skin=skin,
+                skin_type=skin_type, knifeTypes=knifeTypes)
+        elif skin_type == 'gloves':
+            return render_template(
+                "components/edit-selected-skin.html",
+                skin=skin, skin_type=skin_type)
+        elif skin_type == 'case':
+            skin = mongo.db.cases.find_one({"_id": ObjectId(skin_id)})
+            return render_template(
+                "components/edit-selected-skin.html",
+                skin=skin, skin_type=skin_type)
+        elif skin_type == 'sticker':
+            skin = mongo.db.stickers.find_one({"_id": ObjectId(skin_id)})
+            stickerRarities = mongo.db.stickers.distinct('rarity')
+            return render_template(
+                "components/edit-selected-skin.html",
+                skin=skin, skin_type=skin_type,
+                stickerRarities=stickerRarities)
     return render_template("error-pages/404.html")
 
 
