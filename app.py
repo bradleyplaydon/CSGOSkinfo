@@ -322,7 +322,19 @@ def insert_skin(skin):
                 skinColl.insert_one(submit)
                 flash(f'{request.form.get("name")} Successfully Added')
                 return redirect(url_for('add_skin', skin_type=skin))
-
+            if skin == "case":
+                submit = {
+                    "name": request.form.get("name"),
+                    "skin_description": request.form.get("gloves_description"),
+                    "type": "Container",
+                    "rarity": "Base Grade",
+                    "image_url": request.form.get("image"),
+                    "up_votes": 0,
+                    "down_votes": 0
+                }
+                submit["release_date"] = parser.parse(request.form.get("release-date"))
+                skinColl.insert_one(submit)
+                flash(f'{request.form.get("name")} Successfully Added')
         return redirect(url_for('add_skin'))
 
 
@@ -432,7 +444,7 @@ def delete_selected_skin(skin_id):
         return redirect(url_for("admin"))
     return render_template("error-pages/404.html")
     
-    
+
 @app.route('/get/skin', methods=["GET", "POST"])
 def get_skin_by_name():
     if session and session["user"]["is_admin"]:  

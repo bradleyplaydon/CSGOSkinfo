@@ -14,7 +14,13 @@
             <label for="case_description" class="label">Case Name</label>
             <input type="text" placeholder="Case Description" class="form-control bg-dark text-white rounded-0 mb-3"
                 name="case_description" minlength="20" maxlength="100" required>
-
+            <div class="d-flex mb-3">
+                <span class="input-group-text w-50 overflow-auto"
+                id="steamimageurl">https://community.cloudflare.steamstatic.com/economy/image/</span>
+              <input class="form-control bg-dark text-white"
+                placeholder="Image Url" name="image" id="image" type="text"
+                aria-describedby="steamimageurl">
+            </div>
             <label for="release-date" class="label">Case Release Date (Click)</label>
             <div class="input-group flex-nowrap">
                 <span class="input-group-text" id="addon-wrapping"><i class="fas fa-calendar-alt"></i></span>
