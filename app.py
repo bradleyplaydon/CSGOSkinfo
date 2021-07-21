@@ -200,8 +200,9 @@ def add_skin(skin_type):
                 "components/forms/add-cases.html", page_title="Add A Case")  
 
         if skin_type == "sticker":
+            stickerRarities = mongo.db.stickers.distinct('rarity')
             return render_template(
-                "components/forms/add-stickers.html", page_title="Add A Sticker")             
+                "components/forms/add-stickers.html", page_title="Add A Sticker", stickerRarities=stickerRarities)             
     
     return render_template("error-pages/404.html")
 
@@ -325,7 +326,7 @@ def insert_skin(skin):
             if skin == "case":
                 submit = {
                     "name": request.form.get("name"),
-                    "skin_description": request.form.get("gloves_description"),
+                    "skin_description": request.form.get("case_description"),
                     "type": "Container",
                     "rarity": "Base Grade",
                     "image_url": request.form.get("image"),
@@ -333,7 +334,20 @@ def insert_skin(skin):
                     "down_votes": 0
                 }
                 submit["release_date"] = parser.parse(request.form.get("release-date"))
-                skinColl.insert_one(submit)
+                mongo.db.cases.insert_one(submit)
+                flash(f'{request.form.get("name")} Successfully Added')
+            if skin == "sticker":
+                submit = {
+                    "name": request.form.get("name"),
+                    "skin_description": request.form.get("sticker_description"),
+                    "type": "Sticker",
+                    "rarity": request.form.get("rarity"),
+                    "image_url": request.form.get("image"),
+                    "up_votes": 0,
+                    "down_votes": 0
+                }
+                submit["release_date"] = parser.parse(request.form.get("release-date"))
+                mongo.db.stickers.insert_one(submit)
                 flash(f'{request.form.get("name")} Successfully Added')
         return redirect(url_for('add_skin'))
 
