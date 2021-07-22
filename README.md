@@ -208,7 +208,7 @@ If there are any improvements, questions or anything at all then please get in t
   * Sorting a paginated page by a certain skin field.
   * To have a forget password button on log in page.
   * Have the ability to add collections which are linked to skins so you can show what collections some skins are apart of.
-  * To have a search bar across the website so you can search for skins easily currently this is only accessible by being an admin.
+  * To have the search bar across the website accept spaces and other terms to provide better results.
   * To be able to list and buy skins from other users in a marketplace section.
 
   ## Technologies used
@@ -246,12 +246,15 @@ If there are any improvements, questions or anything at all then please get in t
     ### **Registration**
     **User Story: As a user, I would like to be able to register for the website so I can create, read, update and delete skins.**
     * **Plan**
+
       I want to create a page on the website where the user can signup for a personal account which only that user can access. I planned out that I would take the user to there account page once signed up so that they can see that they haven't liked any skins yet this is to help give incentive to liking or disliking a skin. I first planned it out so once they sign up and are redirected that on every page where you can see skins the page would use a find on the database to see what skins they had liked I then found a better way which was to store the skins they liked and disliked inside of a list in the session that way there doesn't need to be a find on every page for the skins they liked and disliked. I also planned out how a user would become an admin so that user could create, read, update and delete there for I wanted a way for a user to request to be admin so I planned for there to a button the user could press to send them to a contact form to request.
     
     * **Implementation**
+
       I created a form on the /signup page where the user can enter there first name, last name, username, email and then password, I decided to create two password inputs one to confirm there password incase the user accidentally mistypes there password a message is shown if they do not match. I also added some HTML attributes for more validation using the pattern attribute, minlength and maxlength attribute. There is backend validation against username too. Furthermore I increased the security on passwords by adding a pattern attribute to the password input which means that a minimum of eight characters, at least one letter, one number and one special character are required. There is a variable which I created called login to determine whether the user is trying to login or signup this helps differentiate which form to show.
 
     * **Test**
+
       To test my signing up proccess I have created accounts more than once when changing backend routes and functions to make sure that the form works perfectly. However there was bugs and issues that I ran into for example incorrect feedback displays at incorrect locations. In addition I also ran into an issue when I decided to change and add keys to the session such as skins liked and skins disliked I initally only added the user's username into the session this meant that when I added and changed this to store multiple key value pairs I needed to update the return redirect to account as the username was the only value stored.
 
       I also gave access to family to try out the siging up process to see whether there were issues and to see how they found the proccess this helped fix the account bug I mentioned above.
@@ -259,7 +262,32 @@ If there are any improvements, questions or anything at all then please get in t
       Adding to that I also tested the request to be admin function for opening a modal and taking the user to the contact page.
 
     * **Result**
+
       My Registration proccess is now fully functional and in working order with the pattern attributes helping towards security, I did notice that the standard required input feedback on the pattern attribute wasn't informative therefore I decided to add a text box with the information for the required pattern. Fixing the account redirect bug means that the users details are safely stored into the users collection inside my csgo-skinfo db and they are correctly redirected to there account page. I have made sure that the form is responsive across different browsers and devices by using my mobile phone, chrome dev tools for different screen sizes and different browsers. I made the request to be admin button redirect to the contact page as this makes more sense as it is an enquiry.
 
     * **Verdict**
+
       The test is complete and it works as I planned.
+
+    ### **Signing In**
+    **User Story: As a **user**, I want to be able to see my account information.**
+
+    * **Plan**
+    
+      My plan for a user to see/access there account information was to create a login form which sets a session cookie that holds user information such as there username, if they're an admin or not, skins liked and also skins disliked this way this information is easily accessible across the site without reusing variables. After the user is to login the user will be redirected to there account page that displays account information such as skins liked, skins disliked and the users username. My plan is to also show and hide links within the website based upon the users admin status or not.
+    
+    * **Implementation**
+
+      I created a login form which asks for the username and password which is validated by HTML input attributes and backend validation which checks my users collection to see if that user exists and if it does then does the password match the user in the db password. Feedback is provided by a message to display the neccessary information to the user. The user can navigate between sign in and signup with a link that I provided above the form. The user is redirected to there account page once the form submitted is validated successfully.
+
+    * **Test**
+      The login form when information is incorrectly inputted the correct message for the reason is displayed.
+
+      The login form when information is correctly inputted the correct message is also shown but on there account page after the redirect is made.
+    
+    * **Result**
+      Overall the login functionality works as intended and works well with the current signup system the form is being validated correctly and the correct messages are shown with the account redirect also working in full order.
+
+    * **Verdict**
+      The test is complete and it works as I planned.
+
