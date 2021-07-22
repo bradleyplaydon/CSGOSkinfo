@@ -953,12 +953,12 @@ def stickers():
 @app.route("/skin/<skinname>", methods=["POST", "GET"])
 def skin(skinname):
     if skinColl.find_one({"name": skinname}):
-        skin = skinColl.find_one({"name": skinname}) 
+        skin = skinColl.find_one({"name": skinname})
     elif mongo.db.cases.find_one({"name": skinname}):
         skin = mongo.db.cases.find_one({"name": skinname})
-    else: 
+    else:
         skin = mongo.db.stickers.find_one({"name": skinname})
-        
+
     if request.method == "GET":
         if skin:
             return render_template(
