@@ -291,3 +291,42 @@ If there are any improvements, questions or anything at all then please get in t
     * **Verdict**
       The test is complete and it works as I planned.
 
+    ### **View Skin Types**
+    **User Story: As a **user**, I want to be able to see what skins there are for different gun types.**
+
+    * **Plan**
+
+      The user should be able to navigate the site by weapon type / skin types and see what skins there are for them. To give the user visualisation of the gun types and what skins them guns have I want to display an image of the best version of that skin. 
+      The user should be able to see a list of all skins within that gun type.
+
+    * **Implementation**
+
+      I created all gun/skin type links within the nav bar both for desktop and mobile which allows the user to breakdown by gun type or skin type for example whether it's a Rifle or Knife or even Sniper Rifle the links in the nav bar provide a clear visual sign of what weapons/skins are inside that page. There is also a search bar navigation option which allows the user to search for a skin by name there are improvements that could be made to this however by increasing functionality to accept spaces and other characters this will be implemented later on.
+
+      To display the images of the skins with the best version of that skin I decided the best way to achieve it was through a URL this is because I don't have the knowledge or skils to be able to implement an uploading skin option to the admin area, so the way I display skins is by taking the skins name and prefixing it with the steam image URL and by asking for all images for that condition.
+
+      When navigating to a gun type page I load the page with skins sorted by rarity so that the highest rarity skins are shown first I also added pagination at the bottom of the page so you can click through all the skins for that gun type.
+    
+    * **Test**
+
+      I have tested the navigation links and tested which gun types are pulling into those specific pages to make sure all pages show the correct gun types/skins.
+
+      I have also tested adding a paginated sort feature which I decided to add to [Future Features](#future-features) this is because I don't have the required knowledge and skills to implement this feature perfectly.
+
+      I have tested the pagination buttons by going through multiple links and checking that the skins appear correclty and no errors are shown.
+
+      I did notice through testing on mobile that because of number of skins within some pages on mobile it created a frustrating scenario where you scroll down the page very far and if you want to go back up to the top you have to scroll alot therefore I decided to add a back to top button which appears when you scroll past a certain point. I also made sure through testing that on mobile it wasn't conflicting or blocking any content.
+
+    * **Result**
+
+      Navigating to a gun type page correctly displays the correct guns and also clearly see what guns and skins there are by looking at the images and names of the skin.
+
+      Pressing back to top button works in order and scrolls you back to the top on click and hides when at the top and doesn't construct or block content.
+
+      Scrolling to the bottom of the page shows the other page links to paginate the skins pressing a link takes you to that page of skins correctly.
+
+    * **Verdict**
+
+      The test has passed and works like planned.
+
+    
