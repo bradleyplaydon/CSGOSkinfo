@@ -496,3 +496,117 @@ If there are any improvements, questions or anything at all then please get in t
   
   Bug fixed and date picker works as intended on edit skin and add skin.
 
+### Local Deployment / Development
+
+I have created CSGO:SKINFO project using Github, from there I used [Visual Studio Code](https://code.visualstudio.com/) to write my code using custom packages to help me code. 
+Then I used commits to git followed by "git push" to my GitHub repository. 
+I deployed this project to Heroku by using "git push heroku" to make sure my pushes to GitHub were also made to Heroku.
+I also attached automated developments through connecting my GitHub repository to heroku.
+
+This project can be ran locally by following the following steps: (
+Make sure to create a virtual environment activate the virtual environment and then use pip3 install -r requirements.txt to install dependencies.
+You can find more information about installing packages using pip and virtual environments [here](https://code.visualstudio.com/docs/python/environments)
+
+To clone the project: 
+
+1. From the application's repository, click the "code" button and download the zip of the repository.
+    Alternatively, you can clone the repository using the following line in your terminal:
+
+    ``` 
+    git clone https://github.com/bradleyplaydon/CSGOSkinfo.git
+    ``` 
+
+1. Access the cloned folder in your terminal/command prompt and install the application's [Dependencies](https://github.com/bradleyplaydon/CSGOSkinfo/blob/master/requirements.txt) using the following command:
+
+    ```
+    pip3 install -r requirements.txt
+    ```
+
+1. Sign-in or sign-up to [MongoDB](https://www.mongodb.com/) and create a new cluster
+    * Within the Sandbox, click the collections button and after click Create Database (Add My Own Data) called csgo_skinfo
+    * Set up the following collections: users, stickers, skins, cases
+    * The image_urls, conditions, stattrak_conditions consist of factory_new, min_wear, field_tested, well_worn, battle_scarred
+    * The **skins** collection is setup with the following structure; the rest of the collections follow same format but some have missing fields [See the Database Structure](#database-structure): 
+        ```
+        __id | ObjectId | 
+        name | String |
+        skin_description | String | 
+        type | String | 
+        weapon_type | String |
+        weapon_name | String |
+        rarity | String |
+        rarity_precedence | Int32 |
+        souvenir_available | Boolean |
+        stattrak_available | Boolean |
+        stattrak_conditions | Object |
+        conditions | Object |
+        release_date | Date |
+        image_urls | Object |
+        up_votes | Int |
+        down_votes | Int | 
+        ```
+
+    * Under the Security Menu on the left, select Database Access.
+    * Add a new database user, and keep the credentials secure
+    * Within the Network Access option, add IP Address 0.0.0.0
+
+1. In your Code Editor, create a file containing your environmental variables called env.py at the root level of the application. 
+    It will need to contain the following lines and variables:
+    ```
+    import os
+
+    os.environ["IP"] = "0.0.0.0"
+    os.environ["PORT"] = "5000"
+    os.environ["SECRET_KEY"] = "YOUR_SECRET_KEY"
+    os.environ["DEBUG"] = "True"
+    os.environ["MONGO_URI"] = "YOUR_MONGODB_URI"
+    os.environ["MONGO_DBNAME"]= "DATABASE_NAME" 
+    ```
+
+    Please note that you will need to update the **SECRET_KEY** with your own secret key, as well as the **MONGO_URI** and **MONGO_DBNAME** variables with those provided by MongoDB.
+    Tip for your SECRET_KEY, you can use a [Password Generator](https://passwordsgenerator.net/) in order to have a secure secret key. 
+    I personlly recommend a length of 24 characters and exclude Symbols.
+    To find your MONGO_URI, go to your clusters and click on connect. Choose connect your application and copy the link provided. 
+    Don't forget to update the necessary fields like password and database name. 
+
+    If you plan on pushing this application to a public repository, ensure that env.py is added to your .gitignore file.
+
+1. The application can now be run locally. In your terminal, type the following command 
+    ```
+    python3 app.py. 
+    ```
+    
+### To deploy your project on Heroku, use the following steps: 
+
+1. Login to your Heroku account and create a new app. Choose your region. 
+1. Ensure the Procfile and requirements.txt files exist are present and updated in your local repository.  
+    Requirements:
+    ```
+    pip3 freeze --local > requirements.txt
+    ```
+    Procfile:
+    ```
+    echo web: python app.py > Procfile
+    ```
+1. The Procfile should contain the following line:
+    ```
+    web: python app.py
+    ```
+
+1. Scroll down to "deployment method"-section. Choose "Github" for automatic deployment.
+1. From the inputs below, make sure your github user is selected, and then enter the name for your repo. Click "search". When it finds the repo, click the "connect" button.
+1. Scroll back up and click "settings". Scroll down and click "Reveal config vars". Set up the same variables as in your env.py (IP, PORT, SECRET_KEY, MONGO_URI and MONGODB_NAME):
+    !You shouldn't set the DEBUG variable in under config vars, only in your env.py to prevent DEBUG being active on live website. 
+
+    ```
+    IP = 0.0.0.0
+    PORT = 5000
+    SECRET_KEY = YOUR_SECRET_KEY
+    MONGO_URI = YOUR_MONGODB_URI
+    MONGO_DBNAME = DATABASE_NAME
+    ```
+
+1. Scroll back up and click "Deploy". Scroll down and click "Enable automatic deployment".
+1. Just beneath, click "Deploy branch". Heroku will now start building the app. When the build is complete, click "view app" to open it.
+1. In order to commit your changes to the branch, use git push to push your changes. 
+    
