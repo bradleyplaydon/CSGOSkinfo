@@ -1,0 +1,108 @@
+{% extends 'layout/base.html' %}
+{% block pagetitle %}
+    <h2 class="h2">{{ page_title }}</h2>
+{% endblock %}
+{% block content %}
+{% if foundSkins %}
+<div class="container bg-dark">
+    <div class="col-12 p-4">
+        Skins Found:
+    </div>
+    <div class="row">
+        {% for skin in foundSkins %}
+        <div class="col-lg-3 col-sm-6 mb-2">
+            <div class="card border bg-dark">
+                <a href="{{ url_for('skin', skinname=skin.name ) }}">
+                {% if skin.image_urls.factory_new is not none %}
+                <img src="{{ skin.image_urls.factory_new }}" class="card-img-top" alt="{{ skin.name }} image">
+                {% elif skin.image_urls.min_wear is not none %}
+                <img src="{{ skin.image_urls.min_wear }}" class="card-img-top" alt="{{ skin.name }} image">
+                {% elif skin.image_urls.field_tested is not none %}
+                <img src="{{ skin.image_urls.field_tested }}" class="card-img-top" alt="{{ skin.name }} image">
+                {% elif skin.image_urls.well_worn is not none %}
+                <img src="{{ skin.image_urls.well_worn }}" class="img-fluid" alt="{{ skin.name }} image">
+                {% elif skin.image_urls.battle_scarred is not none %}
+                <img src="{{ skin.image_urls.battle_scarred }}" class="img-fluid" alt="{{ skin.name }} image">
+                {% else %}
+                <img src="{{ url_for('static', filename='images/image_placeholder.png') }}" class="img-fluid" alt="Image Placeholder">
+                {% endif %}
+                </a>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-white border bg-dark">
+                            {{ skin.name }}
+                        </li>
+                        <li class="list-group-item text-white bg-dark">
+                            <p class="{{ skin.rarity | replace(' ', '-') | lower }} text-center p-2">{{
+                                skin.rarity }}</p>
+                        </li>
+                        <li class="list-group-item text-white bg-dark">
+                            <p>{{ skin.skin_description }}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% if cases %}
+<div class="container-fluid">
+    <div class="row">
+        {% for skin in cases %}
+        <div class="col-lg-3 col-sm-6 mb-2">
+            <div class="card border bg-dark">
+                <a href="{{ url_for('skin', skinname=skin.name ) }}">
+                <img src="{{ skin.image_url }}" class="card-img-top" alt="{{ skin.name }} image">
+                </a>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-white border bg-dark">
+                            {{ skin.name }}
+                        </li>
+                        <li class="list-group-item text-white bg-dark">
+                            <p class="{{ skin.rarity | replace(' ', '-') | lower }} text-center p-2">{{
+                                skin.rarity }}</p>
+                        </li>
+                        <li class="list-group-item text-white bg-dark">
+                            <p>{{ skin.skin_description }}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% if stickers %}
+<div class="container-fluid">
+    <div class="row">
+        {% for skin in stickers %}
+        <div class="col-lg-3 col-sm-6 mb-2">
+            <div class="card border bg-dark">
+                <a href="{{ url_for('skin', skinname=skin.name ) }}">
+                <img src="{{ skin.image_url }}" class="card-img-top" alt="{{ skin.name }} image">
+                </a>
+                <div class="card-body p-0">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item text-white border bg-dark">
+                            {{ skin.name }}
+                        </li>
+                        <li class="list-group-item text-white bg-dark">
+                            <p class="{{ skin.rarity | replace(' ', '-') | lower }} text-center p-2">{{
+                                skin.rarity }}</p>
+                        </li>
+                        <li class="list-group-item text-white bg-dark">
+                            <p>{{ skin.skin_description }}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}
