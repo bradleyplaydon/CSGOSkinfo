@@ -485,7 +485,8 @@ def get_skin_by_name():
                 foundSkins = skinColl.find(
                     searchOptions).sort("rarity_precedence", -1)
                 return render_template(
-                    "components/edit-skin.html", foundSkins=foundSkins)
+                    "components/edit-skin.html", page_title="Search Results",
+                    foundSkins=foundSkins)
 
             if ("deleteweaponskins" in request.args and
                 request.values["deleteweaponskins"] is not None and
@@ -513,7 +514,8 @@ def get_skin_by_name():
                 foundKnifes = skinColl.find(searchOptions).sort(
                     "rarity_precedence", -1)
                 return render_template(
-                    "components/edit-skin.html", foundKnifes=foundKnifes)
+                    "components/edit-skin.html", page_title="Knife Results",
+                    foundKnifes=foundKnifes)
 
             if ("searchcases" in request.args and
                 request.values["searchcases"] is not None and
@@ -525,7 +527,8 @@ def get_skin_by_name():
                 foundCases = mongo.db.cases.find(searchOptions).sort(
                     "release_date", -1)
                 return render_template(
-                    "components/edit-skin.html", foundCases=foundCases)
+                    "components/edit-skin.html", page_title="Edit Skin",
+                    foundCases=foundCases)
 
             if ("searchstickers" in request.args and
                 request.values["searchstickers"] is not None and
@@ -537,7 +540,8 @@ def get_skin_by_name():
                 foundStickers = mongo.db.stickers.find(searchOptions).sort(
                     "rarity_precedence", -1)
                 return render_template(
-                    "components/edit-skin.html", foundStickers=foundStickers)
+                    "components/edit-skin.html", page_title="Sticker Results",
+                    foundStickers=foundStickers)
 
             if ("searchgloves" in request.args and
                 request.values["searchgloves"] is not None and
@@ -549,7 +553,8 @@ def get_skin_by_name():
                 foundGloves = skinColl.find(searchOptions).sort(
                     "release_date", -1)
                 return render_template(
-                    "components/edit-skin.html", foundGloves=foundGloves)
+                    "components/edit-skin.html", page_title="Gloves Results",
+                    foundGloves=foundGloves)
 
             if ("searchallskins" in request.args and
                 request.values["searchallskins"] is not None and
