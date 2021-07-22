@@ -563,9 +563,29 @@ def get_skin_by_name():
                     "release_date", -1)
                 stickers = mongo.db.stickers.find(searchOptions).sort(
                     "rarity_precedence", -1)
-                return render_template(
-                    "admin-pages/view-skins.html", page_title="View Skins",
-                    foundSkins=foundSkins, cases=cases, stickers=stickers)
+                if session and session["user"]["is_admin"]:
+                    return render_template(
+                        "admin-pages/view-skins.html",
+                        page_title="View Skins", foundSkins=foundSkins,
+                        cases=cases, stickers=stickers)
+    searchOptions = {}
+
+    if ("searchallskins" in request.args and
+        request.values["searchallskins"] is not None and
+            request.values["searchallskins"] != ''):
+        searchOptions["name"] = (
+                    {"$regex": request.values["searchallskins"],
+                     "$options": "i"})
+        foundSkins = skinColl.find(searchOptions).sort(
+                    "rarity_precedence", -1)
+        cases = mongo.db.cases.find(searchOptions).sort(
+                    "release_date", -1)
+        stickers = mongo.db.stickers.find(searchOptions).sort(
+                    "rarity_precedence", -1)
+
+    return render_template("pages/search-results.html",
+                           page_title="Search Results", foundSkins=foundSkins,
+                           cases=cases, stickers=stickers)
 
 
 def get_skin_schema(skin_type):
