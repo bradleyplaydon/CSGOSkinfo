@@ -47,6 +47,8 @@
                                 {% set imgUrl = conditionPretty.replace(' ', '-') %}
                             {% elif condition == "min_wear" %}
                                 {% set imgUrl = "Minimal Wear"  %}
+                            {% else %}
+                                {% set imgUrl = "Factory New" %}
                             {% endif %}
                             {% if skin.stattrak_conditions[condition] == true %}
                             <a class="btn btn-secondary w-100 mb-1 mx-auto text-white mt-2"
@@ -77,6 +79,8 @@
                                 {% set imgUrl = conditionPretty.replace(' ', '-') %}
                             {% elif condition == "min_wear" %}
                                 {% set imgUrl = "Minimal Wear"  %}
+                            {% else %}
+                                {% set imgUrl = "Factory New" %}
                             {% endif %}
                             {% if skin.conditions[condition] == true %}
                             <a class="btn btn-secondary w-100 mb-1 mx-auto text-white mt-2"
