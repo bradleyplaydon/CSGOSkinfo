@@ -52,12 +52,12 @@ $(document).ready(function () {
     const myDatePicker = MCDatepicker.create({
         el: '#release-date'
     });
+    
+    function setWeaponSelectOptions(selectVal) {
+        weapons[selectVal].map((w, index) => {
+            o = new Option(w, w);
+            $(o).html(w);
+            $(weaponNameSelectEl).append(o);
+        });
+    }
 });
-
-function setWeaponSelectOptions(selectVal) {
-    weapons[selectVal].map((w, index) => {
-        o = new Option(w, w);
-        $(o).html(w);
-        $(weaponNameSelectEl).append(o);
-    });
-}
