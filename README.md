@@ -329,4 +329,122 @@ If there are any improvements, questions or anything at all then please get in t
 
       The test has passed and works like planned.
 
+    ### **Searching Skins**
+    **User Story: As a **user**, I want to be able to search for skins.**
+
+    * **Plan**
+
+      When planning the search functionality I first thought it would be good way to help find the skins if an admin **user** wanted to read, edit or delete a skin to implement searches so they could pick the skin that they either want to read, edit or delete I then thought it would come in handy to have the read functionality site wide with a search that any user could use.
+
+      Therefore the user should be able to search for skins and then be presented results from that search which was perfomed they then should be able to view that specific skin by selecting it.
+
+    * **Implementation**
+
+      I first created a search input form for admins where a user can search by the name of the skin to find what they're looking for and then read, update or delete that skin depending on the area they search this allows for me to prefil information on edit forms and visually display to the user what the skin looks like. 
+
+      To return accurate results I used a regular expression with the mongodb find method in order to drill down results the search results are returned from a function which renders templates based upon the request arguments and then checks to see if there is a value for that argument **searchallskins** name attribute on a form element returns all skins dependening on the search term.
     
+      There are multiple search inputs in the admin area so the user knows exactly what results will show up within the search they perform I also implemented the search into the nav bar on the whole site so any user can search for a partciular skin.
+    
+    * **Test**
+
+      When testing the search functionality there was a few bugs that I ran into when trying to return the correct results from my database for example searching for nothing would return in an missing key error as I have a condition which checks the request values which takes a key to access the value this would not return anything as no value had been specified within the search I managed this by adding required attributes onto the search inputs so that something has to be entered before you can press search.
+
+      With testing the search I noticed that as I was rerendering templates that a page title variable which I passed was no longer being passed so I re-added these into the rerendering.
+
+      Other testing also made me aware of the limitations my regex search currently offers with the results which are shown back after a search this is something I would like to improve on but don't currently have that much knowledge on regular expressions.
+
+    * **Result**
+      
+      Searching by skin name is in 3 separate locations within the website 1. is in the nav bar which attempts to return all skins in my database and the other two are in the admin area 5 search inputs for editing skins and 1 search input for finding the skin you want to delete. 
+
+      Overall the search works well but could be improved with a better regular expression.
+
+    * **Verdict**
+      The test has passed and works in a manor, however could be improved with better regular expression.
+
+  ### **Rarity**
+  **User Story: As a **user**, I want to be able to see what rarity a skin is.**
+
+    * **Plan**
+      
+      The user has to be able to see what rarity the gun/knife/gloves/ or sticker rarity that skin is and be given a visual identification on what colour that rarity is. It is also important that the user when viewing, editing, creating or deleting what the rarity colour or rarity options are for that particular skin as Stickers have slightly different rarity names than other skins this is important to users who aren't famillar with CSGO so that they can go off colours rather than rarity names.
+    
+  * **Implementation**
+
+    For this visual identification I decided to add background colours for the specific skins so Covert is #eb4b4b but also the name of the rarity is also shown. I also decided that users would like to see the highest rarity skins first over the lower rarity therefore I created a int32 field on skin types that have more than one rarity called "rarity_precedence" this helps to sort skins by rarity and makes sorting by a specific rarity if needed easy.
+
+  * **Test**
+
+    I have tested the rarity showing on all pages that require it such as skin pages, add skin, edit skin, view skins, liked and disliked skins within the account page.
+
+    I did have one issue with rarities being different between weapons and gloves as on the add skin page where you select which rarity a weapon has a rarity which is only possible for Gloves was pulling in from the collection I managed this by adding a ecluding condition for the rarity select options.
+
+  * **Result**
+
+    The rarity and rarity precedence works well so I can show the user the exact rarity of that specific skin.
+
+    It also works well within the select options for editing and adding as I add the rarity as a class on the options and have CSS which colours the text of those options so you can also visually see what rarities there are.
+
+  * **Verdict**
+
+    The test is complete and it works as I planned.
+
+  ### **Skin Images**
+  **User Story: **As a **user**, I want to be able to see an image of the skin.**
+
+  * **Plan**
+
+    When planning on adding the skin images to the website I decided to look for API's to pull the image url from it and use it as there are so many skins I thought it would be easier to get from an API.
+
+    I also wanted to show the images next to other information about that skin to help give identity to that skin and to also make it feel like there's lots of information about the skin and to entice the user to either press like or disliked.
+
+    In addition I would also like the user to be able to view images of there liked and disliked skins and also images inside search results, on that exact skin page and more as it helps confirm to that user what they're viewing or editing.
+
+  * **Implementation**
+
+    When implementing I decided to use a CSGO skin API to grab the icon urls so that I could prefix them with the right domain to pull the images into my database once I had the image urls within the database I had to structure code around 2 different types of skin types as Cases and Stickers share only having one image within the API and then Guns, knifes and gloves have a few based upon the weapon skin criteria therefore images are pulled in surrounding conditions around the type of skin that it is I attempt to show the highest/least scratched skin first starting with Factory New down to Battle Scarred. Images are shown an most pages across the website.
+  
+  * **Test**
+  
+    When testing I made sure that all skins had an image or all skins where I could get the image from the API if there isn't an image in my database I created a placeholder image which can be shown instead. I came into lots of issues when trying to add images to my website this is because of the way the API I used handled data of the same skin but a different condition I had issues on Sticker and case images where the standard icon url was too small therefore I had to reinject data into my database but using the large icon url if it wasn't null.
+
+    There was also issues with gun conditions and cases and stickers this is because guns have multiple image urls where has cases and stickers only have one I had issues when testing that because they had diffent fields key errors became prominent this was fixed by adding conditions and passing skin type as a variable in the route.
+
+  * **Result**
+
+    All skins now display an image and the image urls are sat within a object that has factory new, minimal wear, field tested, well worn and battle scarred even just one image url if it's a sticker or case.
+
+    Images are displayed on all pages where needed.
+
+  * **Verdict**
+    The test has passed all the criteria.
+
+
+  ### **Steam URLs**
+  **User Story: As a **user**, I want to see if that skin is on the steam marketplace.**
+
+  * **Plan**
+    When planning on how I would get the skin Steam url I decided to take a look at the urls within the community market that is hosted by Steam I noticed a similarity between all CSGO skins that all market URL's have a domain prefix such as: https://steamcommunity.com/market/listings/730/ and then following the last / the name of the skin but URL encoded this helped me to plan how I would incorporate the steam URL.
+
+  * **Implementation**
+    
+    When implementing the steam URLs there was a few variables that i had to take into account such as whether the skin is a gun, knife, glove, sticker or case. As those 5 skin types have different naming conventions but also with guns and knifes there are StatRak options this meant that I had to had conditions to check if the condition is StatTrak and also if the skin that you are on is a knife or not as knifes and gloves have a ★ icon before them this means that to get the correct url this icon needs to be inside the url for knfies and gloves.
+
+    So with conditions and Jinja string filters I append the conditions I store inside my database to a longer string which is prefixed with the Steam url domain.
+  
+* **Tests**
+
+  When testing these options and steam urls I ran into errors and missing image links this was due to formatting with either an icon inside the url or something else maybe symbol related for example when trying to link to the factory new version of a gun skin it needs to include the condition inside the URL which follows this exact match: (Factory New) this meant that I could not just fill a string in with the condition that I store in my databases so I had to use the replace method to remove underscores with spaces and to make the whole string capitialized using the title method.
+
+  Once I added conditions to give me the correct URL all links worked perfectly.
+
+* **Result**
+
+  All gun skins and knifes now have links to the correct condition on the skin page.
+
+* **Verdict**
+
+  The test has passed for gun skins and knife skins but doesn't for gloves, cases and stickers.
+
+## **Bugs**
