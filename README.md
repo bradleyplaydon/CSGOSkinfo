@@ -448,3 +448,51 @@ If there are any improvements, questions or anything at all then please get in t
   The test has passed for gun skins and knife skins but doesn't for gloves, cases and stickers.
 
 ## **Bugs**
+
+### **Like Dislike Bug**
+
+* **Bug**
+
+ *  When the user would login to like and dislike a skin the    POST requests to update the up votes wouldn't correlate to the amount of times liked, it would also not show on the frontend correctly until refresh. 
+  * I also came into the issue that even on page refresh the skin wouldn't show as liked this was because of how I show the like and dislike buttons actively liked based on the session cookie
+
+* **Fix**
+  * Updated the values sent to backend from the frontend post request
+  * Using the find_one method helped so that I got returned a value rather cursor object this meant I could access the skins up votes and down votes without having to loop through the cursor.
+
+  * I fixed the like and dislike buttons from not showing the right state by resetting the session cookie when a user clicks like or dislike a POST request is made to a route in my app which returns a string but when a request is made it adds that skin they liked or disliked into the session cookie and databases this way when the page is refreshed the cookie is up to date with the skin they just liked.
+
+* **Verdict**
+  Like and dislike buttons now work as intentional and update both backend and front end correctly there is a clear indication the skin has been liked and also shows you the correct ammount front as soon as you like.
+
+### **Updating Selected Skin Bug**
+
+* **Bug**
+
+  When trying to update the currently selected skin I attempted to make the request to the backend through Javascript I made a fetch request which formatted all the data from the fields and then was going to then update that selected skin in mongodb the bug I came into was although I was sending a POST request and although print statements where printing for whatever reason it wouldn't allow me to redirect the user this was even with trying things such as allow redirects on the form and with redirect url for and render templates none of them would work when I was posting the request through JS.
+    
+  
+* **Fix**
+
+   I thought it may of been to do with event preventDefault so I decided to alter the edit selected skin form and to remove the fetch request and put it on the form it's self so now there is an action method which use url_for to define where to send the data to and that way the redirect from the backend works when there is a POST request it also allowed me to create a flash message.
+
+* **Verdict**
+  
+  Bug fixed and edit skin now working as intended.
+
+
+### **Date Picker Bug**
+
+* **Bug**
+
+  When trying to add a skin as some fields aren't made required through native HTML and they were made required by my custom jQuery when you tried to submit a form it would bring the date picker up before you had selected a checkbox or two. I also had issues with iniatlizing the JS as I have multiple forms that use the date picker so I tried to use it in my global script file and I got date picker undefined.
+    
+  
+* **Fix**
+
+   I fixed this by removing the fetch to add a skin and changing the action into the form attribute and then also adding conditions around when to make the date picker required so that the date picker doesn't pop up before it's needed to popup.
+
+* **Verdict**
+  
+  Bug fixed and date picker works as intended on edit skin and add skin.
+
