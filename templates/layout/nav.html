@@ -2,6 +2,10 @@
     <nav class="navbar d-none d-lg-block p-0">
         <div class="container-fluid px-4 bg-dark p-1">
             <a href="{{ url_for('index') }}" class="navbar-brand bg-dark">CSGO:Skinfo</a>
+            <form class="d-flex w-50" action="/get/skin" method="GET">
+                <input class="form-control me-2" type="search" name="searchallskins" placeholder="Search a skin" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
             <ul class="list-group list-group-horizontal justify-content-center">
                 <li class="list-group p-3"><a href="{{ url_for('about') }}" {% if active_page == "about" %} class="active"{% endif %}>About</a></li>
                 <li class="list-group p-3"><a href="{{ url_for('contact') }}" {% if active_page == "contact" %} class="active"{% endif %}>Contact</a></li>
