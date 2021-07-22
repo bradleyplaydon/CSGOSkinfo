@@ -610,3 +610,12 @@ To clone the project:
 1. Just beneath, click "Deploy branch". Heroku will now start building the app. When the build is complete, click "view app" to open it.
 1. In order to commit your changes to the branch, use git push to push your changes. 
     
+## **Credits**
+
+* I want to thank [CSGO Backpack API](http://csgobackpack.net/api/) for all the data I needed to set this project up.
+
+* While I was developing this website, I had plenty of I am stuck what do I do moments. [Stackoverflow](https://stackoverflow.com/) came to the rescue and the develepers on there.
+
+* I want to thank [Slick Slider](https://kenwheeler.github.io/slick/) and [MC Date Picker](https://www.cssscript.com/mc-datepicker/) for giving dashboard and CRUD functionality.
+
+* I want to say cheer to my mentor Simen [Eventyret_mentor](https://github.com/Eventyret) for setting my venvs up and showing me some cool tricky :P
