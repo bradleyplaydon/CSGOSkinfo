@@ -1,77 +1,115 @@
 {% extends 'layout/base.html' %}
 {% set active_page = "skin" %}
 {% block content %}
-<div class="container-fluid mt-5 text-md-start text-center">
-    <h2 class="bg-dark h2 d-inline-block m-0 p-4">{{ page_title }}</h2>
-    <div class="d-flex justify-content-center flex-wrap">
-        <div class="col-lg-6 col-sm-12 bg-dark p-5 border-end text-center">
-            <p class="{{ skin.rarity | lower | replace(' ', '-') }} p-2 w-50 mx-auto mt-5">{{ skin.rarity }}</p>
-            {% if skin.souvenir_available %}
-            <p class="souvenir p-2 w-50 mx-auto">Souvenir Available</p>
-            {% endif %}
-            {% if skin.stattrak_available %}
-            <p class="bg-secondary stattrak p-2 w-50 mx-auto">StatTrak Available</p>
-            {% endif %}
-            {% if skin.conditions.factory_new %}
-            <a href="https://steamcommunity.com/market/listings/730/{{ skin.name }}(Factory New)" target="_blank" rel="nofollow" class="btn-orange rounded-0 btn w-50 mx-auto mb-2">View on Steam</a>
-            <img class="img-fluid border p-4" src="{{ skin.image_urls.factory_new }}">
-            {% elif skin.conditions.min_wear %}
-            <a href="https://steamcommunity.com/market/listings/730/{{ skin.name }}(Minimal Wear)" target="_blank" rel="nofollow" class="btn-orange rounded-0 btn w-50 mx-auto mb-2">View on Steam</a>
-            <img class="img-fluid border p-4" src="{{ skin.image_urls.min_wear }}">
-            {% elif skin.conditions.field_tested %}
-            <a href="https://steamcommunity.com/market/listings/730/{{ skin.name }}(Field Tested)" target="_blank" rel="nofollow" class="btn-orange rounded-0 btn w-50 mx-auto mb-2">View on Steam</a>
-            <img class="img-fluid border p-4" src="{{ skin.image_urls.field_tested }}">
-            {% elif skin.conditions.well_worn %}
-            <a href="https://steamcommunity.com/market/listings/730/{{ skin.name }}(Well Worn)" target="_blank" rel="nofollow" class="btn-orange rounded-0 btn w-50 mx-auto mb-2">View on Steam</a>
-            <img class="img-fluid border p-4" src="{{ skin.image_urls.well_worn }}">
-            {% elif skin.conditions.battle_scarred %}
-            <a href="https://steamcommunity.com/market/listings/730/{{ skin.name }}(Battle Scarred)" target="_blank" rel="nofollow" class="btn-orange rounded-0 btn w-50 mx-auto mb-2">View on Steam</a>
-            <img class="img-fluid border p-4" src="{{ skin.image_urls.battle_scarred }}">
-            {% endif %}
-        </div>
-        <div class="col-lg-6 col-sm-12 bg-dark text-center">
-            {% if skin.skin_description != "" %}
-                <p class="text-center fs-3 mt-4">{{ skin.skin_description }}</p>
-            {% endif %}
-            <div class="d-flex justify-content-around mt-5">
-                {% if skin.stattrak_available %}
-                    <ul class="list-group">
-                        <p class="">StatTrak Options</p>
-                        {% for condition in skin.statrak_conditions %}
-                            {% if condition %}
-                                <li class="bg-secondary mb-1 mx-auto w-100 list-group-item text-white"><span class="stattrak">StatTrak </span>{{ condition | replace('_', ' ') }}</li>
-                            {% else %}
-                                <li class="bg-danger list-group-item text-decoration-line-through"><span class="stattrak">StatTrak </span>{{ condition | replace('_', ' ') }}</li>
+<h2 class="bg-dark h2 d-inline-block m-0 p-4">{{ page_title }}</h2>
+<div class="d-flex justify-content-center flex-wrap">
+    <div class="col-lg-6 col-sm-12 bg-dark p-md-4 border-end text-center">
+        {% if skin.type == 'Weapon' or skin.type == 'Gloves' %}
+        {% if skin.conditions.factory_new %}
+        <img class="img-fluid border p-4" src="{{ skin.image_urls.factory_new }}">
+        {% elif skin.conditions.min_wear %}
+        <img class="img-fluid border p-4" src="{{ skin.image_urls.min_wear }}">
+        {% elif skin.conditions.field_tested %}
+        <img class="img-fluid border p-4" src="{{ skin.image_urls.field_tested }}">
+        {% elif skin.conditions.well_worn %}
+        <img class="img-fluid border p-4" src="{{ skin.image_urls.well_worn }}">
+        {% elif skin.conditions.battle_scarred %}
+        <img class="img-fluid border p-4" src="{{ skin.image_urls.battle_scarred }}">
+        {% endif %}
+        {% else %}
+        <img class="img-fluid border p-4" src="{{ skin.image_url }}" alt="{{ skin.name }} | Image">
+        {% endif %}
+        <p class="{{ skin.rarity | lower | replace(' ', '-') }} p-2 mx-auto mt-md-5">{{ skin.rarity }}</p>
+        {% if skin.souvenir_available %}
+        <p class="souvenir p-2 mx-auto">Souvenir Available</p>
+        {% endif %}
+        {% if skin.stattrak_available %}
+        <p class="bg-secondary stattrak p-2 mx-auto">StatTrak Available</p>
+        {% endif %}
+    </div>
+    <div class="col-lg-6 col-sm-12 bg-dark text-center">
+        {% if skin.skin_description != "" %}
+        <p class="text-center fs-3 mt-4">{{ skin.skin_description }}</p>
+        {% endif %}
+        <p class="text-center fs-3 mt-4">Released on: {{ skin.release_date }}</p>
+        {% if skin.type == 'Weapon' %}
+        <div class="row mx-2">
+            <div class="col-sm-6">
+                <div class="card bg-dark border">
+                    <div class="card-body">
+                        <h5 class="card-title">StatTrak Conditions</h5>
+                        <p>View On Steam:</p>
+                        {% if skin.stattrak_available %}
+                        <ul class="list-group">
+                            {% for condition in skin.stattrak_conditions %}
+                            {% set conditionPretty = condition | replace('_', ' ') %}
+                            {% if condition == "battle_scarred" or condition == "field_tested" or condition == "well_worn" %}
+                                {% set imgUrl = conditionPretty.replace(' ', '-') %}
+                            {% elif condition == "min_wear" %}
+                                {% set imgUrl = "Minimal Wear"  %}
                             {% endif %}
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-                <ul class="list-group list-group-flush">
-                    <p class="">Options</p>
-                    {% for condition in skin.conditions %}
-                        {% if condition %}
-                            <li class="bg-secondary mb-1 w-100 mx-auto list-group-item text-white">{{ condition | replace('_', ' ') }}</li>
-                        {% else %}
-                            <li class="bg-danger list-group-item text-decoration-line-through">{{ condition | replace('_', ' ') }}</li>
+                            {% if skin.stattrak_conditions[condition] == true %}
+                            <a class="btn btn-secondary w-100 mb-1 mx-auto text-white mt-2"
+                                href="https://steamcommunity.com/market/listings/730/StatTrak™ {{ skin.name }}({{ imgUrl | title }})" rel="nofollow" target="_blank">
+                                <span class="stattrak">StatTrak</span>
+                                {{ conditionPretty | title }}
+                            </a>
+                            {% else %}
+                            <li class="bg-secondary list-group-item text-decoration-line-through mt-2"><span
+                                    class="stattrak">StatTrak
+                                </span>{{ conditionPretty | title }}</li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
                         {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
-            {% if session.user %}
-                <div class="like-buttons text-center mb-3 mt-5">
-                    <button id="{{ skin._id }}" {{ 'already-liked=true' if skin._id in session.user.skins_liked }}
-                        class="like-btn btn btn-light fs-2 p-3 mx-5" name="like-btn" type="submit">
-                        <i class="fas fa-thumbs-up"></i>
-                        <strong id="up_votes">{{ skin.up_votes }}</strong>
-                    </button>
-                    <button id="{{ skin._id }}" {{ 'disliked=true' if skin._id in session.user.skins_liked }}
-                        class="dislike-btn btn btn-light fs-2 p-3" name="dislike-btn" type="submit">
-                        <i class="fas fa-thumbs-down"></i>
-                        <strong id="down_votes">{{ skin.down_votes }}</strong>
-                    </button>
+                    </div>
                 </div>
-            {% endif %}
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body bg-dark border">
+                        <h5 class="card-title">Conditions</h5>
+                        <p>View On Steam:</p>
+                        <ul class="list-group">
+                            {% for condition in skin.conditions %}
+                            {% set conditionPretty = condition | replace('_', ' ') %}
+                            {% if condition == "battle_scarred" or condition == "field_tested" or condition == "well_worn" %}
+                                {% set imgUrl = conditionPretty.replace(' ', '-') %}
+                            {% elif condition == "min_wear" %}
+                                {% set imgUrl = "Minimal Wear"  %}
+                            {% endif %}
+                            {% if skin.conditions[condition] == true %}
+                            <a class="btn btn-secondary w-100 mb-1 mx-auto text-white mt-2"
+                                href="https://steamcommunity.com/market/listings/730/{{ skin.name }}({{ imgUrl | title }})" rel="nofollow" target="_blank">
+                                {{ conditionPretty | title }}
+                            </a>
+                            {% else %}
+                            <li class="bg-secondary list-group-item text-decoration-line-through mt-2">
+                                {{ conditionPretty | title }}
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
+        {% endif %}
+        {% if session.user %}
+        <div class="like-buttons text-center mb-3 mt-5">
+            <button id="{{ skin._id }}" {{ 'already-liked=true' if skin._id in session.user.skins_liked }}
+                class="like-btn btn btn-light fs-2 p-3 mx-3" name="like-btn" type="submit">
+                <i class="fas fa-thumbs-up"></i>
+                <strong id="up_votes">{{ skin.up_votes }}</strong>
+            </button>
+            <button id="{{ skin._id }}" {{ 'disliked=true' if skin._id in session.user.skins_liked }}
+                class="dislike-btn btn btn-light fs-2 p-3 mx-3" name="dislike-btn" type="submit">
+                <i class="fas fa-thumbs-down"></i>
+                <strong id="down_votes">{{ skin.down_votes }}</strong>
+            </button>
+        </div>
+        {% endif %}
     </div>
 </div>
+
 {% endblock content %}
