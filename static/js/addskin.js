@@ -2,20 +2,12 @@ $(document).ready(function () {
     let weaponTypeSelectEl = $("#skin-weapon-type");
     let weaponNameSelectEl = $("#skin-weapon-name");
     var weapons = $("#weapons").attr("data-weapons") ? JSON.parse($("#weapons").attr("data-weapons")) : null;
-    if(weaponTypeSelectEl.length > 0) {
-    setWeaponSelectOptions(weaponTypeSelectEl.val().toLowerCase());
-    $(weaponTypeSelectEl).change(function () {
-        $(weaponNameSelectEl).empty();
+    if (weaponTypeSelectEl.length > 0) {
         setWeaponSelectOptions(weaponTypeSelectEl.val().toLowerCase());
-    });
-
-    function setWeaponSelectOptions(selectVal) {
-        weapons[selectVal].map((w, index) => {
-            o = new Option(w, w);
-            $(o).html(w);
-            $(weaponNameSelectEl).append(o);
+        $(weaponTypeSelectEl).change(function () {
+            $(weaponNameSelectEl).empty();
+            setWeaponSelectOptions(weaponTypeSelectEl.val().toLowerCase());
         });
-    }
     }
     var conditionEls = $('#factory_new, #min_wear, #field_tested, #well_worn, #battle_scarred');
     var imageEls = $('input[name=fnimage], input[name=mwimage], input[name=ftimage], input[name=wwimage], input[name=bsimage]');
@@ -40,16 +32,16 @@ $(document).ready(function () {
         if (checkedCount >= 2) {
             $('[type=submit]').removeAttr("disabled");
             $('[name=stat_or_souv]').each(function (index, element) {
-                $(element).attr("required", "required")
+                $(element).attr("required", "required");
                 $(element).on("input", function () {
-                    $("#release-date").attr("required", "required")
-                })
-            })
+                    $("#release-date").attr("required", "required");
+                });
+            });
         } else {
             $('[type=submit]').attr("disabled", "disabled");
             $('[name=stat_or_souv]').each(function (index, element) {
-                $(element).removeAttr("required")
-            })
+                $(element).removeAttr("required");
+            });
         }
     });
 
@@ -57,7 +49,15 @@ $(document).ready(function () {
         conditionEls.not(this).prop('required', !$(this).val().length);
     });
 
-    const myDatePicker = MCDatepicker.create({ 
-        el: '#release-date' 
-  })
+    const myDatePicker = MCDatepicker.create({
+        el: '#release-date'
+    });
 });
+
+function setWeaponSelectOptions(selectVal) {
+    weapons[selectVal].map((w, index) => {
+        o = new Option(w, w);
+        $(o).html(w);
+        $(weaponNameSelectEl).append(o);
+    });
+}

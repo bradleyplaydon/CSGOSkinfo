@@ -4,10 +4,10 @@ $(".like-btn").on("click", function (e) {
         unlike($(this));
     } else {
         if (!$(this).next().attr("disliked")) {
-            like($(this))
+            like($(this));
         } else {
-            undislike($(this))
-            like($(this))
+            undislike($(this));
+            like($(this));
         }
     }
 });
@@ -16,13 +16,13 @@ $(".like-btn").on("click", function (e) {
 $(".dislike-btn").on("click", function (e) {
     e.preventDefault();
     if ($(this).attr("disliked")) {
-        undislike($(this))
+        undislike($(this));
     } else {
         if (!$(this).prev().attr("already-liked")) {
-            dislike($(this))
+            dislike($(this));
         } else {
             unlike($(this));
-            dislike($(this))
+            dislike($(this));
         }
     }
 });
@@ -36,15 +36,15 @@ function like(thisObj) {
             method: "POST",
             body: JSON.stringify({
                 _id: thisObj[0].id,
-                "collection": thisObj.attr("data-collection")
+                collection: thisObj.attr("data-collection")
             })
         }).then(res => {
             let currentUpVotes = parseInt(thisObj.parent().find("#up_votes").text());
             currentUpVotes++;
-            thisObj.parent().find("#up_votes").text(currentUpVotes)
-            thisObj.attr("already-liked", true)
+            thisObj.parent().find("#up_votes").text(currentUpVotes);
+            thisObj.attr("already-liked", true);
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
 }
 
 function unlike(thisObj) {
@@ -55,15 +55,15 @@ function unlike(thisObj) {
             method: "POST",
             body: JSON.stringify({
                 _id: thisObj[0].id,
-                "collection": thisObj.attr("data-collection")
+                collection: thisObj.attr("data-collection")
             })
         }).then(res => {
             let currentUpVotes = parseInt(thisObj.parent().find("#up_votes").text());
             currentUpVotes--;
-            thisObj.parent().find("#up_votes").text(currentUpVotes)
-            thisObj.parent().find(".like-btn").removeAttr("already-liked")
+            thisObj.parent().find("#up_votes").text(currentUpVotes);
+            thisObj.parent().find(".like-btn").removeAttr("already-liked");
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
 }
 
 function dislike(thisObj) {
@@ -74,13 +74,13 @@ function dislike(thisObj) {
             method: "POST",
             body: JSON.stringify({
                 _id: thisObj[0].id,
-                "collection": thisObj.attr("data-collection")
+                collection: thisObj.attr("data-collection")
             })
         }).then(res => {
             let currentDownVotes = parseInt(thisObj.parent().find("#down_votes").text());
             currentDownVotes++;
-            thisObj.find("strong").text(currentDownVotes)
-            thisObj.attr("disliked", true)
+            thisObj.find("strong").text(currentDownVotes);
+            thisObj.attr("disliked", true);
         })
         .catch(err => console.log(err))
 }
@@ -93,15 +93,15 @@ function undislike(thisObj) {
             method: "POST",
             body: JSON.stringify({
                 _id: thisObj[0].id,
-                "collection": thisObj.attr("data-collection")
+                collection: thisObj.attr("data-collection")
             })
         }).then(res => {
             let currentDownVotes = parseInt(thisObj.parent().find("#down_votes").text());
             currentDownVotes--;
-            thisObj.parent().find("#down_votes").text(currentDownVotes)
-            thisObj.parent().find(".dislike-btn").removeAttr("disliked")
+            thisObj.parent().find("#down_votes").text(currentDownVotes);
+            thisObj.parent().find(".dislike-btn").removeAttr("disliked");
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
 }
 
 
@@ -170,7 +170,7 @@ btn.on('click', function(e) {
 if ($("#release-date").length > 0 && $("#release-date").val() == "") {
     const releaseDatePicker = MCDatepicker.create({
         el: '#release-date'
-    })
+    });
 } 
 
-$("#copyright").text(new Date().getFullYear())
+$("#copyright").text(new Date().getFullYear());
