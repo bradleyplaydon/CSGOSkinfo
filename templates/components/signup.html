@@ -1,42 +1,47 @@
-<div class="container">
-    <form method="POST" class="bg-dark mt-4 p-5" id="contactForm">
-        <div class="control-group">
-            <div class="form-group floating-label-form-group controls">
-                <label for="firstName" class="label">First Name</label>
-                <input type="text" id="firstName" class="form-control mb-3" placeholder="First Name" name="firstName" pattern="[A-Za-z]{1,32}" required>
-            </div>
+<form method="POST" class="bg-dark mt-4 px-3 px-md-5 mb-5 pb-5" id="contactForm">
+    <div class="control-group">
+        <div class="form-group floating-label-form-group controls">
+            <label for="firstName" class="label">First Name</label>
+            <input type="text" id="firstName" class="form-control mb-3" placeholder="First Name" name="firstName"
+                pattern="[A-Za-z]{1,32}" required>
         </div>
-        <div class="control-group">
-            <div class="form-group floating-label-form-group controls">
-                <label for="lastName" class="label">Last Name</label>
-                <input type="text" id="lastName" class="form-control mb-3" placeholder="Last Name" name="lastName" pattern="[A-Za-z]{1,32}" required>
-            </div>
+    </div>
+    <div class="control-group">
+        <div class="form-group floating-label-form-group controls">
+            <label for="lastName" class="label">Last Name</label>
+            <input type="text" id="lastName" class="form-control mb-3" placeholder="Last Name" name="lastName"
+                pattern="[A-Za-z]{1,32}" required>
         </div>
-        <div class="control-group">
-            <div class="form-group floating-label-form-group controls">
-                <label for="username" class="label">Username</label>
-                <input id="username" type="text" class="form-control mb-3" minlength="4" maxlength="20" placeholder="Username" name="username" pattern="[a-zA-Z0-9]+" required>
-            </div>
+    </div>
+    <div class="control-group">
+        <div class="form-group floating-label-form-group controls">
+            <label for="username" class="label">Username</label>
+            <input id="username" type="text" class="form-control mb-3" minlength="4" maxlength="20"
+                placeholder="Username" name="username" pattern="[a-zA-Z0-9]+" required>
         </div>
-        <div class="control-group">
-            <div class="form-group floating-label-form-group controls">
-                <label for="email" class="label">Email Address</label>
-                <input type="email" id="email" class="form-control mb-3" placeholder="Email Address" name="email" required>
-            </div>
+    </div>
+    <div class="control-group">
+        <div class="form-group floating-label-form-group controls">
+            <label for="email" class="label">Email Address</label>
+            <input type="email" id="email" class="form-control mb-3" placeholder="Email Address" name="email" required>
         </div>
-        <p class="border border-info p-3 fs-5 mb-2">Note: Minimum eight characters, at least one letter, one number and one special character are required.</p>
-        <div class="control-group">
-            <div class="form-group floating-label-form-group controls">
-                <label for="password" class="label">Password</label>
-                <input id="password" type="password" class="form-control mb-3" placeholder="Password" name="password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" required>
-            </div>
+    </div>
+    <p class="border border-info p-3 mb-2 text-decoration-underline">Note: Minimum eight characters, at least one letter, one number and one
+        special character are required.</p>
+    <div class="control-group">
+        <div class="form-group floating-label-form-group controls">
+            <label for="password" class="label">Password</label>
+            <input id="password" type="password" class="form-control mb-3" placeholder="Password" name="password"
+                pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" required>
         </div>
-        <div class="control-group">
-            <div class="form-group floating-label-form-group controls">
-                <label for="confirmpassword" class="label">Confirm Password</label>
-                <input type="password" id="confirmpassword" class="form-control mb-3" placeholder="Confirm Password" name="confirmpassword" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" required>
-            </div>
+    </div>
+    <div class="control-group">
+        <div class="form-group floating-label-form-group controls">
+            <label for="confirmpassword" class="label">Confirm Password</label>
+            <input type="password" id="confirmpassword" class="form-control mb-3" placeholder="Confirm Password"
+                name="confirmpassword" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+                required>
         </div>
-        <button type="submit" name="button" class="btn btn-orange mt-4 p-3 w-100" id="formSubmit">Sign Up</button>
-    </form>
-</div>
+    </div>
+    <button type="submit" name="button" class="btn btn-orange mt-4 p-3 w-100" id="formSubmit">Sign Up</button>
+</form>

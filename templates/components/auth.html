@@ -12,12 +12,12 @@
             </div>
 		{% endif %}
 	{% endwith %}
-    <div class="container p-4 bg-dark">
+    <div class="bg-dark">
         {% if login %}
-            <p class="text-center">Not Registered? <a href="{{ url_for('signup') }}">Sign Up</a></p>
+            <p class="text-center pt-3 fs-3">Not Registered? <a href="{{ url_for('signup') }}">Sign Up</a></p>
             {% include 'components/login.html' %}
         {% else %}
-            <p class="text-center">Already Registered? <a href="{{ url_for('login') }}">Login</a></p>
+            <p class="text-center pt-3 fs-5">Already Registered? <a href="{{ url_for('login') }}">Login</a></p>
             {% include 'components/signup.html' %}
         {% endif %}
     </div>
