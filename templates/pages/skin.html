@@ -52,7 +52,7 @@
                             {% endif %}
                             {% if skin.stattrak_conditions[condition] == true %}
                             <a class="btn btn-secondary w-100 mb-1 mx-auto text-white mt-2"
-                                href="https://steamcommunity.com/market/listings/730/StatTrak™ {{ skin.name }}({{ imgUrl | title }})" rel="nofollow" target="_blank">
+                                href="https://steamcommunity.com/market/listings/730/{{ '★ ' if skin.weapon_type == 'Knife' }}StatTrak™ {{ skin.name }}({{ imgUrl | title }})" rel="nofollow" target="_blank">
                                 <span class="stattrak">StatTrak</span>
                                 {{ conditionPretty | title }}
                             </a>
@@ -84,7 +84,7 @@
                             {% endif %}
                             {% if skin.conditions[condition] == true %}
                             <a class="btn btn-secondary w-100 mb-1 mx-auto text-white mt-2"
-                                href="https://steamcommunity.com/market/listings/730/{{ skin.name }}({{ imgUrl | title }})" rel="nofollow" target="_blank">
+                                href="https://steamcommunity.com/market/listings/730/{{ '★ ' if skin.weapon_type == 'Knife' }}{{ skin.name }}({{ imgUrl | title }})" rel="nofollow" target="_blank">
                                 {{ conditionPretty | title }}
                             </a>
                             {% else %}
