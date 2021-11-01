@@ -11,74 +11,76 @@
 </div>
 <div class="container bg-dark mb-5 mt-5 pb-4">
   <h4 class="text-center p-3">Liked Weapon/Glove Skins</h2>
-      {% if weapon_liked | length > 0 %}
-      <div class="slider">
-        {% for skin in weapon_liked %}
-          <div class="card border bg-dark me-1 h-100">
-            <a href="{{ url_for('skin', skinname=skinname )}}">
-              {% if skin.image_urls.factory_new is not none %}
-              <img src="{{ skin.image_urls.factory_new }}" class="card-img-top" alt="{{ skin.name }} image">
-              {% elif skin.image_urls.min_wear is not none %}
-              <img src="{{ skin.image_urls.min_wear }}" class="card-img-top" alt="{{ skin.name }} image">
-              {% elif skin.image_urls.field_tested is not none %}
-              <img src="{{ skin.image_urls.field_tested }}" class="card-img-top" alt="{{ skin.name }} image">
-              {% elif skin.image_urls.well_worn is not none %}
-              <img src="{{ skin.image_urls.well_worn }}" class="img-fluid" alt="{{ skin.name }} image">
-              {% elif skin.image_urls.battle_scarred is not none %}
-              <img src="{{ skin.image_urls.battle_scarred }}" class="img-fluid" alt="{{ skin.name }} image">
-              {% endif %}
-            </a>
-            <div class="card-body p-0 h-100">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item text-white border bg-dark">
-                  {{ skin.name }}
-                </li>
-                <li class="list-group-item text-white bg-dark">
-                  <p class="{{ skin.rarity | replace(' ', '-') | lower }} text-center p-2">{{ skin.rarity }}</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-        {% endfor %}
+    {% if weapon_liked | length > 0 %}
+    <div class="slider">
+      {% for skin in weapon_liked %}
+      {% set skinname = skin.name %}
+      <div class="card border bg-dark me-1 h-100">
+        <a href="{{ url_for('skin', skinname=skinname )}}">
+          {% if skin.image_urls.factory_new is not none %}
+          <img src="{{ skin.image_urls.factory_new }}" class="card-img-top" alt="{{ skin.name }} image">
+          {% elif skin.image_urls.min_wear is not none %}
+          <img src="{{ skin.image_urls.min_wear }}" class="card-img-top" alt="{{ skin.name }} image">
+          {% elif skin.image_urls.field_tested is not none %}
+          <img src="{{ skin.image_urls.field_tested }}" class="card-img-top" alt="{{ skin.name }} image">
+          {% elif skin.image_urls.well_worn is not none %}
+          <img src="{{ skin.image_urls.well_worn }}" class="img-fluid" alt="{{ skin.name }} image">
+          {% elif skin.image_urls.battle_scarred is not none %}
+          <img src="{{ skin.image_urls.battle_scarred }}" class="img-fluid" alt="{{ skin.name }} image">
+          {% endif %}
+        </a>
+        <div class="card-body p-0 h-100">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item text-white border bg-dark">
+              {{ skin.name }}
+            </li>
+            <li class="list-group-item text-white bg-dark">
+              <p class="{{ skin.rarity | replace(' ', '-') | lower }} text-center p-2">{{ skin.rarity }}</p>
+            </li>
+          </ul>
+        </div>
       </div>
-      {% else %}
-      <h4 class="text-center p-3">You have no liked skins.</h4>
-      {% endif %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <h4 class="text-center p-3">You have no liked skins.</h4>
+    {% endif %}
 </div>
 <div class="container bg-dark mb-5 mt-5 pb-4">
   <h4 class="text-center p-3">Disliked Weapon/Glove Skins</h2>
-      {% if weapon_disliked | length > 0 %}
-      <div class="slider">
-        {% for skin in weapon_disliked %}
-          <div class="card border bg-dark me-1 h-100">
-            <a href="{{ url_for('skin', skinname=skinname )}}">
-              {% if skin.image_urls.factory_new is not none %}
-              <img src="{{ skin.image_urls.factory_new }}" class="card-img-top" alt="{{ skin.name }} image">
-              {% elif skin.image_urls.min_wear is not none %}
-              <img src="{{ skin.image_urls.min_wear }}" class="card-img-top" alt="{{ skin.name }} image">
-              {% elif skin.image_urls.field_tested is not none %}
-              <img src="{{ skin.image_urls.field_tested }}" class="card-img-top" alt="{{ skin.name }} image">
-              {% elif skin.image_urls.well_worn is not none %}
-              <img src="{{ skin.image_urls.well_worn }}" class="img-fluid" alt="{{ skin.name }} image">
-              {% elif skin.image_urls.battle_scarred is not none %}
-              <img src="{{ skin.image_urls.battle_scarred }}" class="img-fluid" alt="{{ skin.name }} image">
-              {% endif %}
-            </a>
-            <div class="card-body p-0 h-100">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item text-white border bg-dark">
-                  {{ skin.name }}
-                </li>
-                <li class="list-group-item text-white bg-dark">
-                  <p class="{{ skin.rarity | replace(' ', '-') | lower }} text-center p-2">{{ skin.rarity }}</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-        {% endfor %}
+    {% if weapon_disliked | length > 0 %}
+    <div class="slider">
+      {% for skin in weapon_disliked %}
+      {% set skinname = skin.name %}
+      <div class="card border bg-dark me-1 h-100">
+        <a href="{{ url_for('skin', skinname=skinname )}}">
+          {% if skin.image_urls.factory_new is not none %}
+          <img src="{{ skin.image_urls.factory_new }}" class="card-img-top" alt="{{ skin.name }} image">
+          {% elif skin.image_urls.min_wear is not none %}
+          <img src="{{ skin.image_urls.min_wear }}" class="card-img-top" alt="{{ skin.name }} image">
+          {% elif skin.image_urls.field_tested is not none %}
+          <img src="{{ skin.image_urls.field_tested }}" class="card-img-top" alt="{{ skin.name }} image">
+          {% elif skin.image_urls.well_worn is not none %}
+          <img src="{{ skin.image_urls.well_worn }}" class="img-fluid" alt="{{ skin.name }} image">
+          {% elif skin.image_urls.battle_scarred is not none %}
+          <img src="{{ skin.image_urls.battle_scarred }}" class="img-fluid" alt="{{ skin.name }} image">
+          {% endif %}
+        </a>
+        <div class="card-body p-0 h-100">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item text-white border bg-dark">
+              {{ skin.name }}
+            </li>
+            <li class="list-group-item text-white bg-dark">
+              <p class="{{ skin.rarity | replace(' ', '-') | lower }} text-center p-2">{{ skin.rarity }}</p>
+            </li>
+          </ul>
+        </div>
       </div>
-      {% else %}
-      <h4 class="text-center p-3">You have no disliked skins.</h4>
-      {% endif %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <h4 class="text-center p-3">You have no disliked skins.</h4>
+    {% endif %}
 </div>
 {% endblock %}
