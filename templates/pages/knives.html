@@ -22,7 +22,8 @@
                     {% elif skin.image_urls.battle_scarred is not none %}
                     <img src="{{ skin.image_urls.battle_scarred }}" class="img-fluid" alt="{{ skin.name }} image">
                     {% else %}
-                    <img src="{{ url_for('static', filename='images/image_placeholder.png" alt="{{ skin.name }} placeholder image">
+                    <img src="{{ url_for('static', filename='images/image_placeholder.png') }}" alt=" {{ skin.name }}
+                        placeholder image">
                     {% endif %}
                 </a>
                 <div class="card-body p-0">
@@ -41,8 +42,8 @@
 
                     {% if session.user %}
                     <div class="like-buttons text-center mb-3">
-                        <button id="{{ skin._id }}" data-collection="skins" {{ 'already-liked=true' if skin._id | string in
-                            session.user.skins_liked }} class="like-btn btn btn-light fs-2 p-3" name="like-btn"
+                        <button id="{{ skin._id }}" data-collection="skins" {{ 'already-liked=true' if skin._id | string
+                            in session.user.skins_liked }} class="like-btn btn btn-light fs-2 p-3" name="like-btn"
                             type="submit">
                             <i class="fas fa-thumbs-up"></i>
                             <strong id="up_votes">{{ skin.up_votes }}</strong>
