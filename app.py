@@ -244,13 +244,13 @@ def insert_skin(skin_type):
                     request.form.get("release-date"))
                 skinColl.insert_one(schema)
                 flash(f'{request.form.get("name")} Successfully Added')
-                return redirect(url_for('add_skin', skin_type=skin))
+                return redirect(url_for('add_skin', skin_type=skin_type))
             if skin_type == "weapon":
                 schema["release_date"] = parser.parse(
                     request.form.get("release-date"))
                 skinColl.insert_one(schema)
                 flash(f'{request.form.get("name")} Successfully Added')
-                return redirect(url_for('add_skin', skin_type=skin))
+                return redirect(url_for('add_skin', skin_type=skin_type))
             if skin_type == "gloves":
                 submit = {
                     "name": request.form.get("name"),
@@ -293,7 +293,7 @@ def insert_skin(skin_type):
                     request.form.get("release-date"))
                 skinColl.insert_one(submit)
                 flash(f'{request.form.get("name")} Successfully Added')
-                return redirect(url_for('add_skin', skin_type=skin))
+                return redirect(url_for('add_skin', skin_type=skin_type))
             if skin_type == "case":
                 submit = {
                     "name": request.form.get("name"),
@@ -322,7 +322,7 @@ def insert_skin(skin_type):
                     request.form.get("release-date"))
                 mongo.db.stickers.insert_one(submit)
                 flash(f'{request.form.get("name")} Successfully Added')
-        return redirect(url_for('add_skin'))
+        return redirect(url_for('add_skin', skin_type=skin_type))
     return render_template("error-pages/404.html")
 
 
