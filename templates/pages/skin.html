@@ -15,6 +15,9 @@
         <img class="img-fluid border p-4" src="{{ skin.image_urls.well_worn }}">
         {% elif skin.conditions.battle_scarred %}
         <img class="img-fluid border p-4" src="{{ skin.image_urls.battle_scarred }}">
+        {% else %}
+        <img src="{{ url_for('static', filename='images/image_placeholder.png') }}" class="img-fluid border p-4"
+            alt="Image Placeholder">
         {% endif %}
         {% else %}
         <img class="img-fluid border p-4" src="{{ skin.image_url }}" alt="{{ skin.name }} | Image">
@@ -43,16 +46,18 @@
                         <ul class="list-group">
                             {% for condition in skin.stattrak_conditions %}
                             {% set conditionPretty = condition | replace('_', ' ') %}
-                            {% if condition == "battle_scarred" or condition == "field_tested" or condition == "well_worn" %}
-                                {% set imgUrl = conditionPretty.replace(' ', '-') %}
+                            {% if condition == "battle_scarred" or condition == "field_tested" or condition ==
+                            "well_worn" %}
+                            {% set imgUrl = conditionPretty.replace(' ', '-') %}
                             {% elif condition == "min_wear" %}
-                                {% set imgUrl = "Minimal Wear"  %}
+                            {% set imgUrl = "Minimal Wear" %}
                             {% else %}
-                                {% set imgUrl = "Factory New" %}
+                            {% set imgUrl = "Factory New" %}
                             {% endif %}
                             {% if skin.stattrak_conditions[condition] == true %}
                             <a class="btn btn-secondary w-100 mb-1 mx-auto text-white mt-2"
-                                href="https://steamcommunity.com/market/listings/730/{{ '★ ' if skin.weapon_type == 'Knife' }}StatTrak™ {{ skin.name }}({{ imgUrl | title }})" rel="nofollow" target="_blank">
+                                href="https://steamcommunity.com/market/listings/730/{{ '★ ' if skin.weapon_type == 'Knife' }}StatTrak™ {{ skin.name }}({{ imgUrl | title }})"
+                                rel="nofollow" target="_blank">
                                 <span class="stattrak">StatTrak</span>
                                 {{ conditionPretty | title }}
                             </a>
@@ -75,16 +80,18 @@
                         <ul class="list-group">
                             {% for condition in skin.conditions %}
                             {% set conditionPretty = condition | replace('_', ' ') %}
-                            {% if condition == "battle_scarred" or condition == "field_tested" or condition == "well_worn" %}
-                                {% set imgUrl = conditionPretty.replace(' ', '-') %}
+                            {% if condition == "battle_scarred" or condition == "field_tested" or condition ==
+                            "well_worn" %}
+                            {% set imgUrl = conditionPretty.replace(' ', '-') %}
                             {% elif condition == "min_wear" %}
-                                {% set imgUrl = "Minimal Wear"  %}
+                            {% set imgUrl = "Minimal Wear" %}
                             {% else %}
-                                {% set imgUrl = "Factory New" %}
+                            {% set imgUrl = "Factory New" %}
                             {% endif %}
                             {% if skin.conditions[condition] == true %}
                             <a class="btn btn-secondary w-100 mb-1 mx-auto text-white mt-2"
-                                href="https://steamcommunity.com/market/listings/730/{{ '★ ' if skin.weapon_type == 'Knife' }}{{ skin.name }}({{ imgUrl | title }})" rel="nofollow" target="_blank">
+                                href="https://steamcommunity.com/market/listings/730/{{ '★ ' if skin.weapon_type == 'Knife' }}{{ skin.name }}({{ imgUrl | title }})"
+                                rel="nofollow" target="_blank">
                                 {{ conditionPretty | title }}
                             </a>
                             {% else %}
