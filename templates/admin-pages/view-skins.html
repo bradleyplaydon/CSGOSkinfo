@@ -5,7 +5,7 @@
     <h2 class="h2">{{ page_title }}</h2>
 </div>
 <form class="form-control d-flex bg-dark p-3" action="/get/skin" method="GET">
-    <input class="form-control" id="searchSkin" name="searchallskins" placeholder="Enter the Skin Name">
+    <input class="form-control" id="searchSkin" name="searchallskins" placeholder="Enter the Skin Name" required>
     <button class="btn btn-orange px-5 pt-3 pb-3" type="submit"><i class="fas fa-search text-white fs-4"></i></button>
 </form>
 {% if foundSkins %}
@@ -29,7 +29,8 @@
                 {% elif skin.image_urls.battle_scarred is not none %}
                 <img src="{{ skin.image_urls.battle_scarred }}" class="img-fluid" alt="{{ skin.name }} image">
                 {% else %}
-                <img src="{{ url_for('static', filename='images/image_placeholder.png') }}" class="img-fluid" alt="Image Placeholder">
+                <img src="{{ url_for('static', filename='images/image_placeholder.png') }}" class="img-fluid"
+                    alt="Image Placeholder">
                 {% endif %}
                 <div class="card-body p-0">
                     <ul class="list-group list-group-flush">
